@@ -58,7 +58,16 @@ if (isset($_POST['submit'])) {
 
     <section class="form-section">
         <div class="container">
-            <h3>Register</h3>              
+            <div class="form_nav">
+                <ul class="nav">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#">Register</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="login.php">Login</a>
+                    </li>
+                </ul>
+            </div>             
             <form class="form-fillup needs-validation" method="POST" onsubmit="return validateForm()">
                 <div id="password-strength" class="alert"></div>                 
                 <input type="text" class="form" placeholder="Enter your First Name" name="firstname" required><br><br>
