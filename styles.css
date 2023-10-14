@@ -1,0 +1,155 @@
+* {
+	box-sizing: border-box;
+	padding: 0; 
+    margin: 0;
+}
+
+body {
+	background-color: #FBF4F4;
+	overflow-y: hidden;
+    overflow-x: hidden;
+}
+
+
+.form-section{
+    margin-left: 67%;
+	width: 35vw;
+	height: 100vh;
+	background-color: #FCF6F6;
+	filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25)) drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+}
+
+.form-section h3{
+	font: normal 500 24px/normal 'Poppins';
+}
+
+.form-section .form-fillup{
+	padding: 13%;
+}
+.form-section .form-fillup input[type="text"] , [type="password"]{
+	width: 25vw;
+	height: 7vh;
+	border-radius: 10px;
+	border: 1px solid #BCB4B5;
+	background: #FCF6F6;
+	padding: 3%;
+	outline: none;
+	filter: drop-shadow(0px 0px 1px rgba(0, 0, 0, 0.25));
+	margin-top: 2%;
+}
+.form-section .form-fillup input::placeholder{ 
+	color: #747473;
+	font: normal 500 12px/normal 'Poppins';
+}
+.form-section .form-fillup button{
+	border-radius: 25px;
+	border: 1px solid #000;
+	background: #1C1C1D;
+	width: 25vw;
+	height: 8vh;
+	font: normal 500 13px/normal 'Poppins';
+	color: #FCF6F6;
+	margin-top: 3%;
+}
+
+.eye-icon {
+	position: absolute;
+	right: 10px;
+	top: 20%;
+	transform: translateY(-50%);
+	cursor: pointer;
+}
+
+.alert {
+	display: none;
+	font: normal 500 13px/normal 'Poppins';
+	background-color: #f44336; /* Red background color */
+	color: white;
+	padding: 10px;
+	border-radius: 5px;
+	text-align: center;
+	margin-bottom: 20px;
+	width: 25vw;
+}
+.success {
+	background-color: #4CAF50; /* Green background color for success message */
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/***.form-signup .form-group .success input {
+	border-color: #39df7e;
+   
+	
+}
+
+.form-signup .form-group .error input {
+	border-color: #df3434;
+}
+
+.form-signup .form-group .form-control i {
+	position: absolute;
+	right: 75px;
+	visibility: hidden;
+}
+
+.form-signup .form-group small {
+	color: #df3434;
+	position: absolute;
+	left: 60px;
+	font-size: 11px;
+	display: none; /* Change visibility to display *
+	
+}
+
+.form-signup .form-group .success i.fa-check-circle {
+	color: #39df7e;
+	visibility: visible;
+}
+
+.form-signup .form-group .error i.fa-exclamation-circle {
+	color: #df3434;
+	visibility: visible;
+}
+
+.form-signup .form-group select {
+	width: 120px;
+	border: 1px solid black;
+	font-size: 14px;
+	border-radius: 5px;
+	padding: 12px;
+	display: block;
+}
+
+.form-signup .form-group .success select {
+	border-color: #39df7e;
+}
+
+.form-signup .form-group .error select {
+	border-color: #df3434;
+}***/
