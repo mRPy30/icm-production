@@ -8,6 +8,7 @@ if (isset($_POST['submit'])) {
     $email = mysqli_real_escape_string($conn, $_POST["email"]);
     $password = mysqli_real_escape_string($conn, md5($_POST["password"]));
     $confirm_password = mysqli_real_escape_string($conn, md5($_POST["confirm-password"]));
+    
 
     // Generate a 5-digit customer ID
     $clientID = sprintf("%05d", mt_rand(1, 99999));
@@ -59,13 +60,13 @@ if (isset($_POST['submit'])) {
         <div class="container">
             <h3>Register</h3>              
             <form class="form-fillup needs-validation" method="POST" onsubmit="return validateForm()">
+                <div id="password-strength" class="alert"></div>                 
                 <input type="text" class="form" placeholder="Enter your First Name" name="firstname" required><br><br>
                 <input type="text" class="form" placeholder="Enter your Last Name" name="lastname" required><br><br>
                 <input type="text" class="form" placeholder="Enter your Email" name="email" required><br><br>
                 <input type="password" class="form" placeholder="Enter your Password" name="password" id="password" required oninput="checkPasswordStrength(this)"><br><br>
                 <i class="fa-solid fa-eye-slash" id="password-toggle" onclick="togglePassword()"></i>
                 <input type="password" class="form" placeholder="Enter your Confirm Password" name="confirm-password" required><br><br>
-                <div id="password-strength" class="alert"></div>                 
                 <button class="btn btn-lg btn-block btn-success" type="submit" name="submit" value="Register">Register</button>
             </form>
         </div>
