@@ -10,7 +10,7 @@ body {
     overflow-x: hidden;
 }
 
-
+/**form**/
 .form-section{
     margin-left: 67%;
 	width: 35vw;
@@ -100,7 +100,7 @@ body {
 	transform: translateY(-50%);
 	cursor: pointer;
 }
-
+/**alert**/
 .alert {
 	display: none;
 	font: normal 500 13px/normal 'Poppins';

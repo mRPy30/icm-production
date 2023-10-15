@@ -9,6 +9,17 @@ if (isset($_POST['submit'])) {
     $password = mysqli_real_escape_string($conn, md5($_POST["password"]));
     $confirm_password = mysqli_real_escape_string($conn, md5($_POST["confirm-password"]));
     
+    // Check if the email already exists
+    $checkEmailQuery = "SELECT * FROM client WHERE email = '$email'";
+    $result = $conn->query($checkEmailQuery);
+
+    if ($result->num_rows > 0) {
+        // Email already exists
+        session_start();
+        $_SESSION['registration_status'] = 'failed';
+        header("Location: register.php");
+        exit;
+    }
 
     // Generate a 5-digit customer ID
     $clientID = sprintf("%05d", mt_rand(1, 99999));
@@ -17,23 +28,24 @@ if (isset($_POST['submit'])) {
     $sql = "INSERT INTO client (clientID, firstName, lastName, email, password, confirmPass)
             VALUES ('$clientID', '$firstname', '$lastname', '$email', '$password', '$confirm_password')";
 
-     if ($conn->query($sql) === TRUE) {
-        $clientID = $conn->insert_id; // Get the automatically generated customer ID
-        echo "Customer registered successfully with ID: " . $clientID;
+    if ($conn->query($sql) === TRUE) {
+        // Registration was successful
+        session_start();
+        $_SESSION['registration_status'] = 'success';
+        header("Location: register.php");
+        exit;
     } else {
         echo "Error: " . $sql . "<br>" . $conn->error;
     }
+    
 }
 
-// Active Sidebar Page
+    // Active Page
 
-$directoryURI = $_SERVER['REQUEST_URI'];
-
-$path = parse_url($directoryURI, PHP_URL_PATH);
-
-$components = explode('/', $path);
-
-$page = $components[2];
+    $directoryURI = $_SERVER['REQUEST_URI'];
+    $path = parse_url($directoryURI, PHP_URL_PATH);
+    $components = explode('/', $path);
+    $page = $components[2];
 
 ?>
 
@@ -77,7 +89,7 @@ $page = $components[2];
                                 } else {
                             echo "nav-link";
                                 } ?> " href="register.php">
-                            login
+                            Login
                         </a>
                     </li>                    
                     <li class="nav-item">
@@ -92,20 +104,40 @@ $page = $components[2];
                 </ul>
             </div>             
             <form class="form-fillup needs-validation" method="POST" onsubmit="return validateForm()">
-                <div id="password-strength" class="alert"></div>                 
                 <input type="text" class="form" placeholder="Enter your First Name" name="firstname" required><br><br>
                 <input type="text" class="form" placeholder="Enter your Last Name" name="lastname" required><br><br>
                 <input type="text" class="form" placeholder="Enter your Email" name="email" required><br><br>
                 <input type="password" class="form" placeholder="Enter your Password" name="password" id="password" required oninput="checkPasswordStrength(this)"><br><br>
                 <i class="fa-solid fa-eye-slash" id="password-toggle" onclick="togglePassword()"></i>
                 <input type="password" class="form" placeholder="Enter your Confirm Password" name="confirm-password" required><br><br>
+                <div id="password-strength" class="alert"></div>                 
                 <button class="btn btn-lg btn-block btn-success" type="submit" name="submit" value="Register">Register</button>
             </form>
         </div>
     </section>
 
     <script>
-        
+
+        // (alert) if successfully register
+        <?php
+        // Start the session
+        session_start();
+
+        // Check the registration status session variable and display an alert accordingly
+        if (isset($_SESSION['registration_status'])) {
+            $registrationStatus = $_SESSION['registration_status'];
+            if ($registrationStatus === 'success') {
+                echo 'alert("Register successfully!");';
+            } elseif ($registrationStatus === 'failed') {
+                echo 'alert("Registration failed. Email already exists. Please try again.");';
+            }
+
+            // Clear the session variable
+            unset($_SESSION['registration_status']);
+        }
+        ?>
+
+        // Eye view hide
         let isPasswordVisible = false;
         const passwordField = document.getElementById('password');
         const passwordToggle = document.getElementById('password-toggle');
@@ -146,37 +178,38 @@ $page = $components[2];
             switch (passwordStrength) {
                 case 1:
                     strength.textContent = 'Weak password';
-                    strength.style.backgroundColor = '#ff9b93'; // Red background for weak password
-                    strength.style.color = 'red';
-                    strength.style.border = "2px solid #ff0000";
+                    strength.style.backgroundColor = '#f8d7da'; // Red background for weak password
+                    strength.style.color = '#842029';
+                    strength.style.border = "2px solid #f5c2c7";
                     firstInput.setCustomValidity('Weak password'); // Set custom validation message
                     break;
                 case 2:
                     strength.textContent = 'Moderate password';
-                    strength.style.backgroundColor = '#ffd993'; // Orange background for moderate password
-                    strength.style.color = '#FFA500';
-                    strength.style.border = "2px solid #FFA500";
+                    strength.style.backgroundColor = '#fff3cd'; // Orange background for moderate password
+                    strength.style.color = '#664d03';
+                    strength.style.border = "2px solid #ffecb5";
                     firstInput.setCustomValidity(''); // Reset custom validation message
                     break;
                 case 3:
                     strength.textContent = 'Strong password';
-                    strength.style.backgroundColor = '#73ff78'; // Green background for strong password
-                    strength.style.color = '#00c407';
-                    strength.style.border = "2px solid #00c407";
+                    strength.style.backgroundColor = '#d1e7dd'; // Green background for strong password
+                    strength.style.color = '#0f5132';
+                    strength.style.border = "2px solid #badbcc";
                     firstInput.setCustomValidity(''); // Reset custom validation message
                     break;
                 case 4:
                 case 5:
                     strength.textContent = 'Very strong password';
-                    strength.style.backgroundColor = '#73ff78'; // Green background for very strong password
-                    strength.style.color = '#00c407';
-                    strength.style.border = "2px solid #00c407";
+                    strength.style.backgroundColor = '#ace7cd'; // Green background for very strong password
+                    strength.style.color = '#0a5331';
+                    strength.style.border = "2px solid #badbcc";
                     firstInput.setCustomValidity(''); // Reset custom validation message
                     break;
                 default:
                     strength.textContent = 'Password should contain at least 8 characters, including upper and lower case letters, numbers, and special characters.';
-                    strength.style.backgroundColor = '#ff9b93'; // Red background for invalid password
-                    strength.style.color = 'red';
+                    strength.style.backgroundColor = '#f8d7da'; // Red background for invalid password
+                    strength.style.color = '#842029';
+                    strength.style.border = "2px solid #f5c2c7";
                     firstInput.setCustomValidity('Weak password'); // Set custom validation message
                     break;
             }
