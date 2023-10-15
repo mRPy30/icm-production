@@ -155,15 +155,15 @@ if (isset($_POST['submit'])) {
             return password === confirmPassword;
         }
 
-        // Function to validate the form
+        // Function to validate 
         function validateForm() {
             if (!passwordsMatch()) {
                 const strength = document.getElementById('password-strength');
                 strength.textContent = 'Password and Confirm Password do not match.';
-                strength.style.backgroundColor = '#f8d7da'; // Red background for invalid password
+                strength.style.backgroundColor = '#f8d7da'; 
                 strength.style.color = '#842029';
                 strength.style.border = '2px solid #f5c2c7';
-                return false; // Prevent form submission
+                return false; 
             }
             return true; // Allow form submission
         }
@@ -171,7 +171,7 @@ if (isset($_POST['submit'])) {
         function checkPasswordStrength(input) {
             const password = input.value;
             const strength = document.getElementById('password-strength');
-            const firstInput = document.getElementsByName('password')[0]; // Get the first input field
+            const firstInput = document.getElementsByName('password')[0]; 
 
             let passwordStrength = 0;
 

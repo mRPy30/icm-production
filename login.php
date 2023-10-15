@@ -1,13 +1,57 @@
-<?php 
-//Connection
+<?php
+// Connection
 include 'dbcon.php';
 
-// Active Sidebar Page
+session_start(); // Start the session
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    if (isset($_POST['submit'])) {
+        $email = mysqli_real_escape_string($conn, $_POST['email']);
+        $password = mysqli_real_escape_string($conn, $_POST['password']);
+
+        // Hash the user's input password with md5
+        $hashedPassword = md5($password);
+
+        // Query the client and coordinator tables for a matching email and password
+        $query = "SELECT id, 'client' as role FROM client WHERE email = '$email' AND password = '$hashedPassword'
+            UNION
+            SELECT id, 'admin' as role FROM administrator WHERE email = '$email' AND password = '$hashedPassword'";
+        $result = mysqli_query($conn, $query);
+
+        if (!$result) {
+            die("Query failed: " . mysqli_error($conn));
+        }
+
+        $matchedRows = mysqli_num_rows($result);
+
+        if ($matchedRows > 0) {
+            $row = mysqli_fetch_assoc($result);
+            $id = $row['id'];
+            $role = $row['role'];
+
+            $_SESSION['name'] = $email;
+            $_SESSION['id'] = $id;
+
+            if ($role == 'admin') {
+                header("location: admin.php?id=$id");
+                exit();
+            } elseif ($role == 'client') {
+                header("location: user.php?id=$id");
+                exit();
+            }
+        } else {
+            // No matching user found
+            echo ("No matching user found.");
+            exit();
+        }
+    }
+}
+// Active Page
+
 $directoryURI = $_SERVER['REQUEST_URI'];
 $path = parse_url($directoryURI, PHP_URL_PATH);
 $components = explode('/', $path);
 $page = $components[2];
-
 ?>
 
 
@@ -68,7 +112,7 @@ $page = $components[2];
                 <input type="text" class="form" placeholder="Enter your Email" name="email" required><br><br>
                 <input type="password" class="form" placeholder="Enter your Password" name="password" id="password" required oninput="checkPasswordStrength(this)"><br><br>
                 <i class="fa-solid fa-eye-slash" id="password-toggle" onclick="togglePassword()"></i>
-                <button class="btn btn-lg btn-block btn-success" type="submit" name="submit" value="Register">Register</button>
+                <button class="btn btn-lg btn-block btn-success" type="submit" name="submit" value="Submit">Login</button>
             </form>
         </div>
     </section>
