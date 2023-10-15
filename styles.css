@@ -65,7 +65,7 @@ body {
   }
 
 .form-section .form-fillup{
-	padding: 13%;
+	padding: 7% 13% 0% 13%;
 }
 .form-section .form-fillup input[type="text"] , [type="password"]{
 	width: 25vw;
