@@ -3,13 +3,9 @@
 include 'dbcon.php';
 
 // Active Sidebar Page
-
 $directoryURI = $_SERVER['REQUEST_URI'];
-
 $path = parse_url($directoryURI, PHP_URL_PATH);
-
 $components = explode('/', $path);
-
 $page = $components[2];
 
 ?>
@@ -54,7 +50,7 @@ $page = $components[2];
                                 } else {
                             echo "nav-link";
                                 } ?> " href="register.php">
-                            login
+                            Login
                         </a>
                     </li>                    
                     <li class="nav-item">

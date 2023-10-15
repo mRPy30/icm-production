@@ -25,7 +25,7 @@ if (isset($_POST['submit'])) {
     $clientID = sprintf("%05d", mt_rand(1, 99999));
 
     // Insert customer data into the database
-    $sql = "INSERT INTO client (clientID, firstName, lastName, email, password, confirmPass)
+    $sql = "INSERT INTO client (id, firstName, lastName, email, password, confirmPass)
             VALUES ('$clientID', '$firstname', '$lastname', '$email', '$password', '$confirm_password')";
 
     if ($conn->query($sql) === TRUE) {
@@ -109,7 +109,7 @@ if (isset($_POST['submit'])) {
                 <input type="text" class="form" placeholder="Enter your Email" name="email" required><br><br>
                 <input type="password" class="form" placeholder="Enter your Password" name="password" id="password" required oninput="checkPasswordStrength(this)"><br><br>
                 <i class="fa-solid fa-eye-slash" id="password-toggle" onclick="togglePassword()"></i>
-                <input type="password" class="form" placeholder="Enter your Confirm Password" name="confirm-password" required><br><br>
+                <input type="text" class="form" placeholder="Enter your Confirm Password" name="confirm-password" required><br><br>
                 <div id="password-strength" class="alert"></div>                 
                 <button class="btn btn-lg btn-block btn-success" type="submit" name="submit" value="Register">Register</button>
             </form>
@@ -148,10 +148,30 @@ if (isset($_POST['submit'])) {
             passwordToggle.className = isPasswordVisible ? 'fa-solid fa-eye' : 'fa-solid fa-eye-slash';
         }
         
+        //validity if password and confirm is match
+        function passwordsMatch() {
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementsByName('confirm-password')[0].value;
+            return password === confirmPassword;
+        }
+
+        // Function to validate the form
+        function validateForm() {
+            if (!passwordsMatch()) {
+                const strength = document.getElementById('password-strength');
+                strength.textContent = 'Password and Confirm Password do not match.';
+                strength.style.backgroundColor = '#f8d7da'; // Red background for invalid password
+                strength.style.color = '#842029';
+                strength.style.border = '2px solid #f5c2c7';
+                return false; // Prevent form submission
+            }
+            return true; // Allow form submission
+        }
+        // password stregnth
         function checkPasswordStrength(input) {
             const password = input.value;
             const strength = document.getElementById('password-strength');
-            const firstInput = document.getElementsByName('firstname')[0]; // Get the first input field
+            const firstInput = document.getElementsByName('password')[0]; // Get the first input field
 
             let passwordStrength = 0;
 
