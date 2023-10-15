@@ -24,6 +24,17 @@ if (isset($_POST['submit'])) {
         echo "Error: " . $sql . "<br>" . $conn->error;
     }
 }
+
+// Active Sidebar Page
+
+$directoryURI = $_SERVER['REQUEST_URI'];
+
+$path = parse_url($directoryURI, PHP_URL_PATH);
+
+$components = explode('/', $path);
+
+$page = $components[2];
+
 ?>
 
 
@@ -61,10 +72,22 @@ if (isset($_POST['submit'])) {
             <div class="form_nav">
                 <ul class="nav">
                     <li class="nav-item">
-                        <a class="nav-link active" href="#">Register</a>
-                    </li>
+                        <a href="login.php" class="<?php if ($page == "login.php") {
+                            echo "nav-link active";
+                                } else {
+                            echo "nav-link";
+                                } ?> " href="register.php">
+                            login
+                        </a>
+                    </li>                    
                     <li class="nav-item">
-                        <a class="nav-link" href="login.php">Login</a>
+                        <a href="register.php" class="<?php if ($page == "register.php") {
+                            echo "nav-link active";
+                                } else {
+                            echo "nav-link";
+                                } ?> " href="register.php">
+                            Register
+                        </a>
                     </li>
                 </ul>
             </div>             

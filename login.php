@@ -1,7 +1,17 @@
-<?php
-    if (isset($_POST['submit'])) {
+<?php 
+//Connection
+include 'dbcon.php';
 
-    }
+// Active Sidebar Page
+
+$directoryURI = $_SERVER['REQUEST_URI'];
+
+$path = parse_url($directoryURI, PHP_URL_PATH);
+
+$components = explode('/', $path);
+
+$page = $components[2];
+
 ?>
 
 
@@ -14,14 +24,13 @@
     
     <!---WEB TITLE--->
     <link rel="short icon" href="logo.jpg" type="x-icon">
-    <title><?php echo "Icm Production | Homepage"; ?></title>
+    <title><?php echo "Icm Production | Register Account"; ?></title>
 
     <!---CSS--->
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="styles.css">
 
     <!--CSS FRAMEWORK-->
-    <link rel="stylesheet" href="css/bootstrap.css">
-    <script src="js/bootstrap.js"></script>
+   
 
     <!--ICON LINKS-->
     <script src="https://kit.fontawesome.com/11a4f2cc62.js" crossorigin="anonymous"></script>
@@ -35,80 +44,51 @@
 <body>
 
 
-<section class="form-log">
-    <div class="container" id="container">
-        <div class="box">
-            <div class="form-group">
-        <div class="form-container sign-up-container">
-            <form action="" method="post">
-                <!--<h1>Create Account</h1>
-                <div class="social-container">
-                    <a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
-                </div>
-                <span>or use your email for registration</span>
-                <input type="text" placeholder="Name" />
-                <input type="email" placeholder="Email" />
-                <input type="password" placeholder="Password" />
-                <button>Sign Up</button>-->
+    <section class="form-section">
+        <div class="container">
+            <div class="form_nav">
+                <ul class="nav">
+                    <li class="nav-item">
+                        <a href="login.php" class="<?php if ($page == "login.php") {
+                            echo "nav-link active";
+                                } else {
+                            echo "nav-link";
+                                } ?> " href="register.php">
+                            login
+                        </a>
+                    </li>                    
+                    <li class="nav-item">
+                        <a href="register.php" class="<?php if ($page == "register.php") {
+                            echo "nav-link active";
+                                } else {
+                            echo "nav-link";
+                                } ?> " href="register.php">
+                            Register
+                        </a>
+                    </li>
+                </ul>
+            </div>             
+            <form class="form-fillup needs-validation" method="POST" onsubmit="return validateForm()">
+                <input type="text" class="form" placeholder="Enter your Email" name="email" required><br><br>
+                <input type="password" class="form" placeholder="Enter your Password" name="password" id="password" required oninput="checkPasswordStrength(this)"><br><br>
+                <i class="fa-solid fa-eye-slash" id="password-toggle" onclick="togglePassword()"></i>
+                <button class="btn btn-lg btn-block btn-success" type="submit" name="submit" value="Register">Register</button>
             </form>
         </div>
-        <div class="form-container sign-in-container">
-            <form action="" method="post">
-                    <h1>Sign in</h1>
-                    <!--<div class="social-container">
-                        <a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
-                    </div>
-                    --<span>or use your account</span>-->
-                <div class="row g-3 align-items-center">
+    </section>
 
-                    <div class="col-auto">
-                        <label for="exampleInputEmail1" class="form-label">Email address</label>
-                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                        <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
-                    </div>
-                    <div class="col-auto">
-                        <label for="exampleInputPassword1" class="form-label">Password</label>
-                        <div class="col-auto">
-                            <input type="password" id="inputPassword6" class="form-control" aria-describedby="passwordHelpInline">
-                        </div>
-                    </div>
-                        <a href="#">Forgot your password?</a>
-                        <button type="submit" name="submit" class="btn btn-primary">Submit</button>
-                </div>
-            </form>
-        </div>
-        <div class="overlay-container">
-            <div class="overlay">
-                <div class="overlay-panel overlay-left">
-                    <h1>Good Day Costumer!</h1>
-                    <p>To keep connected with us please login with your personal info</p>
-                    <button class="ghost" id="signIn">Sign In</button>
-                </div>
-                <div class="overlay-panel overlay-right">
-                    <h1>Create your account now!</h1>
-                    <p>Enter your personal details and start to book a event with us</p>
-                    <button class="ghost" id="signUp">Sign Up</button>
-                </div>
-            </div>
-        </div>
-        </div>
-        </div>
-    </div>
-</section>
-<!--
-<script>
-        const signUpButton = document.getElementById('signUp');
-        const signInButton = document.getElementById('signIn');
-        const container = document.getElementById('container');
+    <script>
+        
+        let isPasswordVisible = false;
+        const passwordField = document.getElementById('password');
+        const passwordToggle = document.getElementById('password-toggle');
 
-        signUpButton.addEventListener('click', () => {
-            container.classList.add("right-panel-active");
-        });
-
-        signInButton.addEventListener('click', () => {
-            container.classList.remove("right-panel-active");
-        });
-</script>
-    -->
+        function togglePassword() {
+            isPasswordVisible = !isPasswordVisible;
+            passwordField.type = isPasswordVisible ? 'text' : 'password';
+            passwordToggle.className = isPasswordVisible ? 'fa-solid fa-eye' : 'fa-solid fa-eye-slash';
+        }
+        
+    </script>
 </body>
 </html>
