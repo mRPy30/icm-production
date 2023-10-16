@@ -1,4 +1,4 @@
-<?php 
+<?php
 //Connection
 include 'dbcon.php';
 
@@ -8,7 +8,7 @@ if (isset($_POST['submit'])) {
     $email = mysqli_real_escape_string($conn, $_POST["email"]);
     $password = mysqli_real_escape_string($conn, md5($_POST["password"]));
     $confirm_password = mysqli_real_escape_string($conn, md5($_POST["confirm-password"]));
-    
+
     // Check if the email already exists
     $checkEmailQuery = "SELECT * FROM client WHERE email = '$email'";
     $result = $conn->query($checkEmailQuery);
@@ -37,45 +37,51 @@ if (isset($_POST['submit'])) {
     } else {
         echo "Error: " . $sql . "<br>" . $conn->error;
     }
-    
+
 }
 
-    // Active Page
+// Active Page
 
-    $directoryURI = $_SERVER['REQUEST_URI'];
-    $path = parse_url($directoryURI, PHP_URL_PATH);
-    $components = explode('/', $path);
-    $page = $components[2];
+$directoryURI = $_SERVER['REQUEST_URI'];
+$path = parse_url($directoryURI, PHP_URL_PATH);
+$components = explode('/', $path);
+$page = $components[2];
 
 ?>
 
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+
     <!---WEB TITLE--->
     <link rel="short icon" href="logo.jpg" type="x-icon">
-    <title><?php echo "Icm Production | Register Account"; ?></title>
+    <title>
+        <?php echo "Icm Production | Register Account"; ?>
+    </title>
 
     <!---CSS--->
     <link rel="stylesheet" href="styles.css">
 
     <!--CSS FRAMEWORK-->
-   
+
 
     <!--ICON LINKS-->
     <script src="https://kit.fontawesome.com/11a4f2cc62.js" crossorigin="anonymous"></script>
 
     <!--FONT LINKS-->
-    <link href="https://fonts.googleapis.com/css2?family=Abel&family=Inter:wght@400;800&family=Poppins:wght@400;500&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Abel&family=Inter:wght@400;800&family=Poppins:wght@400;500&display=swap"
+        rel="stylesheet">
 
 
 
 </head>
+
 <body>
 
 
@@ -86,32 +92,35 @@ if (isset($_POST['submit'])) {
                     <li class="nav-item">
                         <a href="login.php" class="<?php if ($page == "login.php") {
                             echo "nav-link active";
-                                } else {
+                        } else {
                             echo "nav-link";
-                                } ?> " href="register.php">
+                        } ?> " href="register.php">
                             Login
                         </a>
-                    </li>                    
+                    </li>
                     <li class="nav-item">
                         <a href="register.php" class="<?php if ($page == "register.php") {
                             echo "nav-link active";
-                                } else {
+                        } else {
                             echo "nav-link";
-                                } ?> " href="register.php">
+                        } ?> " href="register.php">
                             Register
                         </a>
                     </li>
                 </ul>
-            </div>             
+            </div>
             <form class="form-fillup needs-validation" method="POST" onsubmit="return validateForm()">
                 <input type="text" class="form" placeholder="Enter your First Name" name="firstname" required><br><br>
                 <input type="text" class="form" placeholder="Enter your Last Name" name="lastname" required><br><br>
                 <input type="text" class="form" placeholder="Enter your Email" name="email" required><br><br>
-                <input type="password" class="form" placeholder="Enter your Password" name="password" id="password" required oninput="checkPasswordStrength(this)"><br><br>
+                <input type="password" class="form" placeholder="Enter your Password" name="password" id="password"
+                    required oninput="checkPasswordStrength(this)"><br><br>
                 <i class="fa-solid fa-eye-slash" id="password-toggle" onclick="togglePassword()"></i>
-                <input type="text" class="form" placeholder="Enter your Confirm Password" name="confirm-password" required><br><br>
-                <div id="password-strength" class="alert"></div>                 
-                <button class="btn btn-lg btn-block btn-success" type="submit" name="submit" value="Register">Register</button>
+                <input type="text" class="form" placeholder="Enter your Confirm Password" name="confirm-password"
+                    required><br><br>
+                <div id="password-strength" class="alert"></div>
+                <button class="btn btn-lg btn-block btn-success" type="submit" name="submit"
+                    value="Register">Register</button>
             </form>
         </div>
     </section>
@@ -147,7 +156,7 @@ if (isset($_POST['submit'])) {
             passwordField.type = isPasswordVisible ? 'text' : 'password';
             passwordToggle.className = isPasswordVisible ? 'fa-solid fa-eye' : 'fa-solid fa-eye-slash';
         }
-        
+
         //validity if password and confirm is match
         function passwordsMatch() {
             const password = document.getElementById('password').value;
@@ -160,10 +169,10 @@ if (isset($_POST['submit'])) {
             if (!passwordsMatch()) {
                 const strength = document.getElementById('password-strength');
                 strength.textContent = 'Password and Confirm Password do not match.';
-                strength.style.backgroundColor = '#f8d7da'; 
+                strength.style.backgroundColor = '#f8d7da';
                 strength.style.color = '#842029';
                 strength.style.border = '2px solid #f5c2c7';
-                return false; 
+                return false;
             }
             return true; // Allow form submission
         }
@@ -171,7 +180,7 @@ if (isset($_POST['submit'])) {
         function checkPasswordStrength(input) {
             const password = input.value;
             const strength = document.getElementById('password-strength');
-            const firstInput = document.getElementsByName('password')[0]; 
+            const firstInput = document.getElementsByName('password')[0];
 
             let passwordStrength = 0;
 
@@ -236,7 +245,8 @@ if (isset($_POST['submit'])) {
 
             strength.style.display = 'block';
         }
-        
+
     </script>
 </body>
+
 </html>
