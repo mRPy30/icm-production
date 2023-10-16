@@ -13,6 +13,14 @@ if (isset($_POST['submit'])) {
     $checkEmailQuery = "SELECT * FROM client WHERE email = '$email'";
     $result = $conn->query($checkEmailQuery);
 
+    if ($result->num_rows > 0) {
+        // Email already exists
+        session_start();
+        $_SESSION['registration_status'] = 'failed';
+        header("Location: register.php");
+        exit;
+    }
+
     // Generate a 5-digit customer ID
     $clientID = sprintf("%05d", mt_rand(1, 99999));
 
@@ -117,7 +125,22 @@ $page = $components[2];
 
     <script>
 
+        // (alert) if successfully register
+        <?php
+        // Start the session
+        session_start();
 
+        // Check the registration status session variable and display an alert accordingly
+        if (isset($_SESSION['registration_status'])) {
+            $registrationStatus = $_SESSION['registration_status'];
+            if ($registrationStatus === 'failed') {
+                echo 'alert("Registration failed. Email already exists. Please try again.");';
+            }
+
+            // Clear the session variable
+            unset($_SESSION['registration_status']);
+        }
+        ?>
 
         // Eye view hide
         let isPasswordVisible = false;
