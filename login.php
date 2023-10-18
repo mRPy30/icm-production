@@ -64,7 +64,7 @@ $page = $components[2];
     
     <!---WEB TITLE--->
     <link rel="short icon" href="logo.jpg" type="x-icon">
-    <title><?php echo "Icm Production | Register Account"; ?></title>
+    <title><?php echo "Icm Production | Login Account"; ?></title>
 
     <!---CSS--->
     <link rel="stylesheet" href="styles.css">
