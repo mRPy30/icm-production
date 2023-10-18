@@ -15,7 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         // Query the client and coordinator tables for a matching email and password
         $query = "SELECT id, 'client' as role FROM client WHERE email = '$email' AND password = '$hashedPassword'
             UNION
-            SELECT id, 'admin' as role FROM administrator WHERE email = '$email' AND password = '$hashedPassword'";
+            SELECT id, 'admin' as role FROM administrator WHERE email = '$email' AND password = '$password'";
         $result = mysqli_query($conn, $query);
 
         if (!$result) {
