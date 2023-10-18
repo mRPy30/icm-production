@@ -17,7 +17,7 @@
     }
     .sidebar .nav-link.active a{
         color: #000;
-        border-radius: 15px;
+        border-radius: 10px 0px 0px 15px;
         background-color: #FBF4F4;
     }
 
@@ -67,7 +67,7 @@
                 </li>
 
                 <li class="nav-link">
-                    <a href="admin.php" class="<?php if ($page == "admin.php") {
+                    <a href="admin-schedule.php" class="<?php if ($page == "admin-schedule.php") {
                         echo "nav-link active";
                     } else {
                         echo "nav-link";
@@ -112,7 +112,7 @@
                         echo "nav-link active";
                     } else {
                         echo "nav-link";
-                    } ?> "> Website </a>
+                    } ?> "> Website Content </a>
                 </li>
 
             </ul>
@@ -122,5 +122,4 @@
         </div>
     </div>
 </nav>
-</div>
 <!-------End Sidebar------------>
