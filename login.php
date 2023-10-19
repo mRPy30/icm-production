@@ -36,7 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 header("location: admin/dashboard.php?id=$id");
                 exit();
             } elseif ($role == 'client') {
-                header("location: user.php?id=$id");
+                header("location: client/booking.php?id=$id");
                 exit();
             }
         } else {
