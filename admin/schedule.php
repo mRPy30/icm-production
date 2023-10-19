@@ -1,6 +1,6 @@
 <?php 
 //Connection
-include 'dbcon.php';
+include '../dbcon.php';
 
 session_start(); // Start the session
 
@@ -27,7 +27,7 @@ $page = $components[2];
     </title>
 
     <!---CSS--->
-    <link rel="stylesheet" href="admin-style.css">
+    <link rel="stylesheet" href="../admin-style.css">
 
     <!--CSS FRAMEWORK-->
 

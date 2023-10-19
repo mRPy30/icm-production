@@ -33,7 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $_SESSION['id'] = $id;
 
             if ($role == 'admin') {
-                header("location: admin.php?id=$id");
+                header("location: admin/admin.php?id=$id");
                 exit();
             } elseif ($role == 'client') {
                 header("location: user.php?id=$id");
@@ -67,7 +67,7 @@ $page = $components[2];
     <title><?php echo "Icm Production | Login Account"; ?></title>
 
     <!---CSS--->
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="css/styles.css">
 
     <!--CSS FRAMEWORK-->
    

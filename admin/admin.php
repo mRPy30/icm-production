@@ -1,6 +1,6 @@
 <?php 
 //Connection
-include 'dbcon.php';
+include '../dbcon.php';
 
 session_start(); // Start the session
 
@@ -27,7 +27,7 @@ $page = $components[2];
     </title>
 
     <!---CSS--->
-    <link rel="stylesheet" href="admin-style.css">
+    <link rel="stylesheet" href="../admin-style.css">
 
     <!--CSS FRAMEWORK-->
 
@@ -40,11 +40,7 @@ $page = $components[2];
         href="https://fonts.googleapis.com/css2?family=Abel&family=Inter:wght@400;800&family=Poppins:wght@400;500&display=swap"
         rel="stylesheet">
 </head>
-    <script>
-        function goBack() {
-            window.location.href = "login.php";
-        }
-    </script>
+    
 <body>
     <?php 
         include 'admin-sidebar.php';

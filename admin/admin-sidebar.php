@@ -67,11 +67,11 @@
                 </li>
 
                 <li class="nav-link">
-                    <a href="admin-schedule.php" class="<?php if ($page == "admin-schedule.php") {
+                    <a href="schedule.php" class="<?php if ($page == "schedule.php") {
                         echo "nav-link active";
                     } else {
                         echo "nav-link";
-                    } ?> ">  Schedule </a>
+                    } ?> ">  Booking </a>
                 </li>
 
                 <li class="nav-link">
@@ -116,6 +116,11 @@
                 </li>
 
             </ul>
+            <script>
+                function goBack() {
+                    window.location.href = "../login.php";
+                }
+            </script>
             <div class="logout">
                 <button type="button" class="btn-logout" onclick="goBack()"> LOGOUT </button>
             </div>
