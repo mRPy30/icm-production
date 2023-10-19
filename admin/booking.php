@@ -21,9 +21,9 @@ $page = $components[2];
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!---WEB TITLE--->
-    <link rel="short icon" href="logo.jpg" type="x-icon">
+    <link rel="short icon" href="../logo.jpg" type="x-icon">
     <title>
-        <?php echo "Icm Production | Administrator"; ?>
+        <?php echo "Admin | Booking"; ?>
     </title>
 
     <!---CSS--->
@@ -40,14 +40,10 @@ $page = $components[2];
         href="https://fonts.googleapis.com/css2?family=Abel&family=Inter:wght@400;800&family=Poppins:wght@400;500&display=swap"
         rel="stylesheet">
 </head>
-    <script>
-        function goBack() {
-            window.location.href = "login.php";
-        }
-    </script>
+    
 <body>
     <?php 
-        include 'admin-sidebar.php';
+        include '../admin/sidebar.php';
     ?>
 
     

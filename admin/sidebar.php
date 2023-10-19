@@ -7,7 +7,7 @@
         border-radius: 0px 15px 15px 0px;
         background: #1C1C1D;
     }
-    .sidebar .nav .nav-link {
+    .sidebar .nav-link {
         padding: 10px 90px 10px 15px;
         color: #FBF4F4;
         font-size: 15px;
@@ -18,7 +18,6 @@
     .sidebar .nav-link.active a{
         color: #000;
         border-radius: 10px 0px 0px 15px;
-        background-color: #FBF4F4;
     }
 
     /*******RESPONSIVE**********/
@@ -54,12 +53,11 @@
 
 <!---------Sidebar------------>
 <nav class="sidebar">
-    <div class="navbar-nav">
-        <ul class="nav">
+    <ul class="nav">
 
 
                 <li class="nav-link active">
-                    <a href="admin.php" class="<?php if ($page == "admin.php") {
+                    <a href="dashboard.php" class="<?php if ($page == "dashboard.php") {
                         echo "nav-link active";
                     } else {
                         echo "nav-link";
@@ -67,7 +65,7 @@
                 </li>
 
                 <li class="nav-link">
-                    <a href="schedule.php" class="<?php if ($page == "schedule.php") {
+                    <a href="booking.php" class="<?php if ($page == "..admin/booking.php") {
                         echo "nav-link active";
                     } else {
                         echo "nav-link";
@@ -116,15 +114,16 @@
                 </li>
 
             </ul>
-            <script>
-                function goBack() {
-                    window.location.href = "../login.php";
-                }
-            </script>
+            
             <div class="logout">
                 <button type="button" class="btn-logout" onclick="goBack()"> LOGOUT </button>
             </div>
         </div>
     </div>
 </nav>
+            <script>
+                function goBack() {
+                    window.location.href = "../login.php";
+                }
+            </script>
 <!-------End Sidebar------------>

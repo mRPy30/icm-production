@@ -33,7 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $_SESSION['id'] = $id;
 
             if ($role == 'admin') {
-                header("location: admin/admin.php?id=$id");
+                header("location: admin/dashboard.php?id=$id");
                 exit();
             } elseif ($role == 'client') {
                 header("location: user.php?id=$id");
