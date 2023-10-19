@@ -27,7 +27,7 @@ $page = $components[2];
     </title>
 
     <!---CSS--->
-    <link rel="stylesheet" href="../admin-style.css">
+    <link rel="stylesheet" href="../css/admin-style.css">
 
     <!--CSS FRAMEWORK-->
 
