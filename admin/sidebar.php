@@ -61,7 +61,7 @@
         list-style: none;	
     }
 
-    .side_bar .side_bar_bottom ul li a{
+    .side_bar .side_bar_bottom ul .nav-link a{
         display: block;
         padding: 15px 15px 15px 50px;		
         color: #FBF4F4;
@@ -70,32 +70,34 @@
         text-decoration: none;	
     }
 
-    .side_bar .side_bar_bottom ul li.active a{
+    .side_bar .side_bar_bottom ul .nav-link.active a{
         background: #FBF4F4;
         color:  #1c1c1c;
         border-top-left-radius: 20px;
         border-bottom-left-radius: 20px;
+        font: normal 500 15px/20px 'Poppins';
     }
 
-    .side_bar .side_bar_bottom ul li.active .nav-link .top_curve,
-    .side_bar .side_bar_bottom ul li.active .nav-link .bottom_curve{
+    .side_bar .side_bar_bottom ul .nav-link.active .top_curve,
+    .side_bar .side_bar_bottom ul .nav-link.active .bottom_curve{
         position: absolute;
         left: 0;
         width: 100%;
         height: 20px;
         background: #FBF4F4;
+        transition: background-color 0.3s, color 0.3s;
     }
 
-    .side_bar .side_bar_bottom ul li.active .nav-link .top_curve{
+    .side_bar .side_bar_bottom ul .nav-link.active .top_curve{
         top: -20px;
     }
 
-    .side_bar .side_bar_bottom ul li.active .nav-link .bottom_curve{
+    .side_bar .side_bar_bottom ul .nav-link.active .bottom_curve{
         bottom: -20px;	
     }
 
-    .side_bar .side_bar_bottom ul li.active .nav-link .top_curve:before,
-    .side_bar .side_bar_bottom ul li.active .nav-link .bottom_curve:before{
+    .side_bar .side_bar_bottom ul .nav-link.active .top_curve:before,
+    .side_bar .side_bar_bottom ul .nav-link.active .bottom_curve:before{
         content: "";
         position: absolute;
         top: 0;
@@ -105,11 +107,11 @@
         background: #1C1C1D;	
     }
 
-    .side_bar .side_bar_bottom ul li.active .nav-link .top_curve:before{
+    .side_bar .side_bar_bottom ul li.active .top_curve:before{
         border-bottom-right-radius: 25px;
     }
 
-    .side_bar .side_bar_bottom ul li.active .nav-link .bottom_curve:before{
+    .side_bar .side_bar_bottom ul li.active .bottom_curve:before{
         border-top-right-radius: 25px;
     }
 
@@ -159,57 +161,57 @@
         </div>
         <div class="side_bar_bottom">
             <ul>
-                <li class="active">
+                <li class="nav-link active">
                     <span class="top_curve"></span>
                     <a href="dashboard.php" class="<?php if ($page == "dashboard.php") {
                         echo "nav-link active";
                     } else {
-                        echo "nav-link active";
+                        echo "nav-link";
                     } ?> "><span class="item">Dashboard</span></a>
                     <span class="bottom_curve"></span>
                 </li>
-                <li>
+                <li class="nav-link">
                     <span class="top_curve"></span>
                     <a href="booking.php" class="<?php if ($page == "..admin/booking.php") {
                         echo "nav-link active";
                     } else {
-                        echo "nav-link active";
+                        echo "nav-link";
                     } ?> "><span class="item">Booking</span></a>
                     <span class="bottom_curve"></span>
                 </li>
-                <li>
+                <li class="nav-link">
                     <span class="top_curve"></span>
                     <a href="client.php" class="<?php if ($page == "..admin/client.php") {
                         echo "nav-link active";
                     } else {
-                        echo "nav-link active";
+                        echo "nav-link";
                     } ?> "><span class="item">Client</span></a>
                     <span class="bottom_curve"></span>
                 </li>
-                <li>
+                <li class="nav-link">
                     <span class="top_curve"></span>
                     <a href="reports.php" class="<?php if ($page == "..admin/reports.php") {
                         echo "nav-link active";
                     } else {
-                        echo "nav-link active";
+                        echo "nav-link";
                     } ?> "><span class="item">Reports</span></a>
                     <span class="bottom_curve"></span>
                 </li>
-                <li>
+                <li class="nav-link">
                     <span class="top_curve"></span>
                     <a href="service.php" class="<?php if ($page == "..admin/service.php") {
                         echo "nav-link active";
                     } else {
-                        echo "nav-link active";
+                        echo "nav-link";
                     } ?> "><span class="item">Service</span></a>
                     <span class="bottom_curve"></span>
                 </li>
-                <li>
+                <li class="nav-link">
                     <span class="top_curve"></span>
                     <a href="website.php" class="<?php if ($page == "..admin/website.php") {
                         echo "nav-link active";
                     } else {
-                        echo "nav-link active";
+                        echo "nav-link";
                     } ?> "><span class="item">Website Management</span></a>
                     <span class="bottom_curve"></span>
                 </li>
@@ -222,18 +224,32 @@
 </div> 
 
 <script>
+    
+    // JavaScript code to set the active page
+    function setActivePage() {
+        var currentUrl = window.location.href;
+
+        // Remove any previously active links
+        var activeLinks = document.querySelectorAll(".side_bar .side_bar_bottom ul li.active");
+        for (var i = 0; i < activeLinks.length; i++) {
+            activeLinks[i].classList.remove("active");
+        }
+
+        // Find the corresponding link and set it as active
+        var links = document.querySelectorAll(".side_bar .side_bar_bottom ul li a");
+        for (var i = 0; i < links.length; i++) {
+            if (currentUrl.includes(links[i].getAttribute("href"))) {
+                links[i].parentElement.classList.add("active");
+                break; // Stop after the first match
+            }
+        }
+    }
+
+    // Call the setActivePage function when the page loads
+    window.addEventListener("load", setActivePage);
+
     function goBack() {
         window.location.href = "../login.php";
     }
-    var li_items = document.querySelectorAll(".side_bar_bottom ul li");
-
-    li_items.forEach(function(li_main){
-        li_main.addEventListener("click", function(){
-            li_items.forEach(function(li){
-                li.classList.remove("active");
-            })
-            li_main.classList.add("active");
-        })
-    })
 </script>
 <!-------End Sidebar------------>
