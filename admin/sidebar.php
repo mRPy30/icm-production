@@ -16,8 +16,7 @@
     .side_bar .side_bar_top{
         background: #1C1C1D;
         height: 250px;
-        border-top-left-radius: 15px;
-        border-top-right-radius: 15px;
+        border-radius: 0px 20px 0px 0px;
         padding: 30px;
     }
 
@@ -38,7 +37,7 @@
     .side_bar .side_bar_top .profile_info{
         text-align: center;
         color: #fff;
-        font: normal 500 12px/20px 'Poppins';
+        font: normal 500 15px/20px 'Poppins';
 
     }
 
@@ -52,8 +51,7 @@
         height: calc(100% - 250px);
         padding: 20px 0;
         padding-left: 15px;		
-        border-bottom-left-radius: 15px;
-        border-bottom-right-radius: 15px;
+        border-radius: 0px 0px 20px 0px;        
         text-decoration: none;
         list-style: none;	
     }
@@ -75,8 +73,8 @@
     .side_bar .side_bar_bottom ul li.active a{
         background: #FBF4F4;
         color:  #1c1c1c;
-        border-top-left-radius: 25px;
-        border-bottom-left-radius: 25px;
+        border-top-left-radius: 20px;
+        border-bottom-left-radius: 20px;
     }
 
     .side_bar .side_bar_bottom ul li.active .nav-link .top_curve,
@@ -155,8 +153,8 @@
                 <img src="profile.png" alt="profile">
             </div>
             <div class="profile_info">
-                <h3>Admin</h3>
-                <p>icmproduction001@gmail.com</p>
+                <h3>Gycia Moran</h3>
+                <p>Admin</p>
             </div>
         </div>
         <div class="side_bar_bottom">
@@ -190,23 +188,29 @@
                 </li>
                 <li>
                     <span class="top_curve"></span>
-                    <a href="#">
-                        <span class="icon"><i class="far fa-newspaper"></i></span>
-                        <span class="item">REPORTS</span></a>
+                    <a href="reports.php" class="<?php if ($page == "..admin/reports.php") {
+                        echo "nav-link active";
+                    } else {
+                        echo "nav-link active";
+                    } ?> "><span class="item">Reports</span></a>
                     <span class="bottom_curve"></span>
                 </li>
                 <li>
                     <span class="top_curve"></span>
-                    <a href="#">
-                        <span class="icon"><i class="fas fa-chart-pie"></i></span>
-                        <span class="item">STATISTICS</span></a>
+                    <a href="service.php" class="<?php if ($page == "..admin/service.php") {
+                        echo "nav-link active";
+                    } else {
+                        echo "nav-link active";
+                    } ?> "><span class="item">Service</span></a>
                     <span class="bottom_curve"></span>
                 </li>
                 <li>
                     <span class="top_curve"></span>
-                    <a href="#">
-                        <span class="icon"><i class="fas fa-cog"></i></span>
-                        <span class="item">SETTINGS</span></a>
+                    <a href="website.php" class="<?php if ($page == "..admin/website.php") {
+                        echo "nav-link active";
+                    } else {
+                        echo "nav-link active";
+                    } ?> "><span class="item">Website Management</span></a>
                     <span class="bottom_curve"></span>
                 </li>
                 <div class="logout">
