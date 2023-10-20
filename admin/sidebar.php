@@ -9,11 +9,12 @@
     }
     .side_bar{
 	    width: 250px;
-	    height: 107%;
+	    height: 106%;
+
     }
 
     .side_bar .side_bar_top{
-        background: #3d5654;
+        background: #1C1C1D;
         height: 250px;
         border-top-left-radius: 15px;
         border-top-right-radius: 15px;
@@ -37,36 +38,38 @@
     .side_bar .side_bar_top .profile_info{
         text-align: center;
         color: #fff;
+        font: normal 500 12px/20px 'Poppins';
+
     }
 
     .side_bar .side_bar_top .profile_info p{
         margin-top: 5px;
-        font-size: 12px;	
+        font: normal 400 11px/20px 'Poppins';	
     }
 
     .side_bar .side_bar_bottom{
-        background: #425c5a;
+        background: #1C1C1D;
         height: calc(100% - 250px);
         padding: 20px 0;
         padding-left: 15px;		
         border-bottom-left-radius: 15px;
-        border-bottom-right-radius: 15px;	
+        border-bottom-right-radius: 15px;
+        text-decoration: none;
+        list-style: none;	
     }
 
     .side_bar .side_bar_bottom ul li{
         position: relative;
+        list-style: none;	
     }
 
     .side_bar .side_bar_bottom ul li a{
         display: block;
-        padding: 15px;		
-        font-size: 14px;
-        color: #d6a217;
-        margin-bottom: 5px;				
-    }
-
-    .side_bar .side_bar_bottom ul li a .icon{
-        margin-right: 8px;
+        padding: 15px 15px 15px 50px;		
+        color: #FBF4F4;
+        font: normal 500 15px/20px 'Poppins';
+        margin-bottom: 5px;		
+        text-decoration: none;	
     }
 
     .side_bar .side_bar_bottom ul li.active a{
@@ -76,8 +79,8 @@
         border-bottom-left-radius: 25px;
     }
 
-    .side_bar .side_bar_bottom ul li.active .top_curve,
-    .side_bar .side_bar_bottom ul li.active .bottom_curve{
+    .side_bar .side_bar_bottom ul li.active .nav-link .top_curve,
+    .side_bar .side_bar_bottom ul li.active .nav-link .bottom_curve{
         position: absolute;
         left: 0;
         width: 100%;
@@ -85,50 +88,33 @@
         background: #FBF4F4;
     }
 
-    .side_bar .side_bar_bottom ul li.active .top_curve{
+    .side_bar .side_bar_bottom ul li.active .nav-link .top_curve{
         top: -20px;
     }
 
-    .side_bar .side_bar_bottom ul li.active .bottom_curve{
+    .side_bar .side_bar_bottom ul li.active .nav-link .bottom_curve{
         bottom: -20px;	
     }
 
-    .side_bar .side_bar_bottom ul li.active .top_curve:before,
-    .side_bar .side_bar_bottom ul li.active .bottom_curve:before{
+    .side_bar .side_bar_bottom ul li.active .nav-link .top_curve:before,
+    .side_bar .side_bar_bottom ul li.active .nav-link .bottom_curve:before{
         content: "";
         position: absolute;
         top: 0;
         left: 0;
         width: 100%;
         height: 100%;
-        background: #425c5a;	
+        background: #1C1C1D;	
     }
 
-    .side_bar .side_bar_bottom ul li.active .top_curve:before{
+    .side_bar .side_bar_bottom ul li.active .nav-link .top_curve:before{
         border-bottom-right-radius: 25px;
     }
 
-    .side_bar .side_bar_bottom ul li.active .bottom_curve:before{
+    .side_bar .side_bar_bottom ul li.active .nav-link .bottom_curve:before{
         border-top-right-radius: 25px;
     }
 
-    .sidebar {
-        width: 200px;
-        height: 100vh;
-        border-radius: 0px 15px 15px 0px;
-        background: #1C1C1D;
-    }
-    .sidebar .nav-link {
-        padding: 10px 90px 10px 15px;
-        color: #FBF4F4;
-        font: normal 500 15px/20px 'Poppins';
-    
-    }
-    .sidebar .nav-link.active a{
-        color: #000;
-        border-radius: 10px 0px 0px 15px;
-        background-color: #FBF4F4;
-    }
 
     /*******RESPONSIVE**********/
 
@@ -231,19 +217,19 @@
     </nav>
 </div> 
 
-            <script>
-                function goBack() {
-                    window.location.href = "../login.php";
-                }
-                var li_items = document.querySelectorAll(".side_bar_bottom ul li");
+<script>
+    function goBack() {
+        window.location.href = "../login.php";
+    }
+    var li_items = document.querySelectorAll(".side_bar_bottom ul li");
 
-                li_items.forEach(function(li_main){
-                    li_main.addEventListener("click", function(){
-                        li_items.forEach(function(li){
-                            li.classList.remove("active");
-                        })
-                        li_main.classList.add("active");
-                    })
-                })
-            </script>
+    li_items.forEach(function(li_main){
+        li_main.addEventListener("click", function(){
+            li_items.forEach(function(li){
+                li.classList.remove("active");
+            })
+            li_main.classList.add("active");
+        })
+    })
+</script>
 <!-------End Sidebar------------>
