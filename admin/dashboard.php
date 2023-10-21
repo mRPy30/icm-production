@@ -52,29 +52,29 @@ $page = $components[2];
 </head>
     
 <body>
+    <div class="background">
+        <img src="../picture/logo.png">
+    </div> 
     <!----Sidebar----->
     <?php 
         include '../admin/sidebar.php';
     ?>  
 
     <!----Main Content----->
-    <main class="admin_main">
-        <div class="background">
-            
-        </div>    
-            <div class="total-result">
-                <!---BOXES--->
-                <div class='staff'>
-                    <p>Staff</p>
-                    <h1><?php echo $total_number; ?></h1>
-                </div>
-                <div class='Client'>
-                    <p></p>
-                    <h1></h1>
-                </div>
-                <div class='events'>
-                </div>
+    <main class="admin_main">   
+        <div class="total-result">
+            <!---BOXES--->
+            <div class='staff'>
+                <p>Staff</p>
+                <h1><?php echo $total_number; ?></h1>
             </div>
+            <div class='Client'>
+                <p></p>
+                <h1></h1>
+            </div>
+            <div class='events'>
+            </div>
+        </div>
     </main>
 
     

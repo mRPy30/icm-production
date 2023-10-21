@@ -7,14 +7,16 @@
 body {
 	background-color: #FBF4F4;
 }
-
-.admin_main .background{
-  width: 400%;
-  
+.background{
+  width: 100%;
   position: absolute;
-  fill: #FFEDED;
+  height: 30%;
+  background: #FFEDED;
   filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25)) drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
-  
+}
+.background img{
+  width: 10%;
+  margin: 0% 0% 0% 18%;
 }
 .admin_main .total-result{
     margin: 10% 0% 0% 24%;

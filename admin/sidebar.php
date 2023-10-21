@@ -37,7 +37,7 @@ if ($result->num_rows > 0) {
 
     .side_bar .side_bar_top{
         background: #1C1C1D;
-        height: 250px;
+        height: 245px;
         border-radius: 0px 20px 0px 0px;
         padding: 30px;
     }
@@ -49,8 +49,8 @@ if ($result->num_rows > 0) {
     }
 
     .side_bar .side_bar_top .profile_pic img{
-        width: 130px;
-        height: 130px;
+        width: 110px;
+        height: 110px;
         padding: 5px;
         border-radius: 50%;
     }
@@ -69,8 +69,8 @@ if ($result->num_rows > 0) {
 
     .side_bar .side_bar_bottom{
         background: #1C1C1D;
-        height: calc(100% - 250px);
-        padding: 20px 0px 0px 30px;
+        height: calc(100% - 200px);
+        padding: 0px 0px 0px 30px;
         border-radius: 0px 0px 20px 0px;        
         text-decoration: none;
         list-style: none;	
@@ -85,7 +85,7 @@ if ($result->num_rows > 0) {
         display: block;
         padding: 15px 15px 15px 50px;		
         color: #FBF4F4;
-        font: normal 500 15px/20px 'Poppins';
+        font: normal 500 14px/20px 'Poppins';
         margin-bottom: 5px;		
         text-decoration: none;	
     }
@@ -95,7 +95,7 @@ if ($result->num_rows > 0) {
         color:  #1c1c1c;
         border-top-left-radius: 20px;
         border-bottom-left-radius: 20px;
-        font: normal 500 15px/20px 'Poppins';
+        font: normal 500 14px/20px 'Poppins';
     }
 
     .side_bar .side_bar_bottom ul .nav-link.active .top_curve,
@@ -136,10 +136,10 @@ if ($result->num_rows > 0) {
     }
 
     .side_bar .side_bar_bottom .logout{
-        padding: 60px 15px 15px 50px;		
+        padding: 50px 15px 15px 50px;		
     }
     .side_bar .side_bar_bottom .logout button{
-        font: normal 500 15px/20px 'Poppins';
+        font: normal 500 14px/20px 'Poppins';
         color: #FBF4F4;
         background: #1C1C1D;
         border: none;
