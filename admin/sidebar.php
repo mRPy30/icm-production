@@ -27,6 +27,7 @@ if ($result->num_rows > 0) {
 	    height: calc(100vh - 40px);
 	    border-radius: 15px;
 	    display: flex;
+        position: absolute;
     }
     .side_bar{
 	    width: 250px;

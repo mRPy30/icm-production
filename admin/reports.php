@@ -21,13 +21,13 @@ $page = $components[2];
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!---WEB TITLE--->
-    <link rel="short icon" href="../logo.jpg" type="x-icon">
+    <link rel="short icon" href="../picture/shortcut-logo.jpg" type="x-icon">
     <title>
         <?php echo "Admin | Dashboard"; ?>
     </title>
 
     <!---CSS--->
-    <link rel="stylesheet" href="../css/admin-style.css">
+    <link rel="stylesheet" href="../css/admin.css">
 
     <!--CSS FRAMEWORK-->
 

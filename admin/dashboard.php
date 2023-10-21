@@ -4,6 +4,16 @@ include '../dbcon.php';
 
 session_start(); // Start the session
 
+$sql = "SELECT COUNT(photographerID) AS total FROM staff";
+$result = $conn->query($sql);
+
+// Check if there's a result
+if ($result->num_rows > 0) {
+    $row = $result->fetch_assoc();
+    $total_number = $row['total'];
+} else {
+    $total_number = 0;
+}
 // Active Page
 
 $directoryURI = $_SERVER['REQUEST_URI'];
@@ -21,13 +31,13 @@ $page = $components[2];
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!---WEB TITLE--->
-    <link rel="short icon" href="../logo.jpg" type="x-icon">
+    <link rel="short icon" href="../picture/shortcut-logo.jpg" type="x-icon">
     <title>
         <?php echo "Admin | Dashboard"; ?>
     </title>
 
     <!---CSS--->
-    <link rel="stylesheet" href="../css/admin-style.css">
+    <link rel="stylesheet" href="../css/admin.css">
 
     <!--CSS FRAMEWORK-->
 
@@ -42,9 +52,30 @@ $page = $components[2];
 </head>
     
 <body>
+    <!----Sidebar----->
     <?php 
         include '../admin/sidebar.php';
-    ?>
+    ?>  
+
+    <!----Main Content----->
+    <main class="admin_main">
+        <div class="background">
+            
+        </div>    
+            <div class="total-result">
+                <!---BOXES--->
+                <div class='staff'>
+                    <p>Staff</p>
+                    <h1><?php echo $total_number; ?></h1>
+                </div>
+                <div class='Client'>
+                    <p></p>
+                    <h1></h1>
+                </div>
+                <div class='events'>
+                </div>
+            </div>
+    </main>
 
     
     

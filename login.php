@@ -63,7 +63,7 @@ $page = $components[2];
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <!---WEB TITLE--->
-    <link rel="short icon" href="logo.jpg" type="x-icon">
+    <link rel="short icon" href="picture/shortcut-logo.jpg" type="x-icon">
     <title><?php echo "Icm Production | Login Account"; ?></title>
 
     <!---CSS--->
@@ -83,7 +83,18 @@ $page = $components[2];
 </head>
 <body>
 
+    <!--background-->
+    <main class="body_content">
+        <div class="logo">
+            <img src="picture/logo.png" alt="logo">
+        </div>
+        <div class="text">
+            <h2>Welcome to <br>ICM Production</h2>
+            <h4>Capture the moments of the world through our lenses.</h4>
+        </div>
+    </main>
 
+    <!----FORM----->
     <section class="form-section">
         <div class="container">
             <div class="form_nav">
@@ -111,8 +122,8 @@ $page = $components[2];
             <form class="form-fillup needs-validation" method="POST" onsubmit="return validateForm()">
                 <input type="text" class="form" placeholder="Enter your Email" name="email" required><br><br>
                 <input type="password" class="form" placeholder="Enter your Password" name="password" id="password" required oninput="checkPasswordStrength(this)"><br><br>
-                <i class="fa-solid fa-eye-slash" id="password-toggle" onclick="togglePassword()" style= "right: 19%; top: 30.5%;"></i>
-                <button class="btn btn-lg btn-block btn-success" type="submit" name="submit" value="Submit">Login</button>
+                <i class="fa-solid fa-eye-slash" id="password-toggle" onclick="togglePassword()" style= "right: 17%; top: 29.5%;"></i>
+                <button class="btn btn-lg btn-block btn-success" type="submit" name="submit" value="Submit" style="height: 7vh;">Login</button>
             </form>
         </div>
     </section>

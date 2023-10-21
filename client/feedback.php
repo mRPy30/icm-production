@@ -21,13 +21,13 @@ $page = $components[2];
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!---WEB TITLE--->
-    <link rel="short icon" href="../picture/shortcut-logo.jpg" type="x-icon">
+    <link rel="short icon" href="../picture/logo.jpg" type="x-icon">
     <title>
-        <?php echo "Admin | Dashboard"; ?>
+        <?php echo "User | Feedback"; ?>
     </title>
 
     <!---CSS--->
-    <link rel="stylesheet" href="../css/admin.css">
+    <link rel="stylesheet" href="../css/client-style.css">
 
     <!--CSS FRAMEWORK-->
 
@@ -43,7 +43,7 @@ $page = $components[2];
     
 <body>
     <?php 
-        include '../admin/sidebar.php';
+        include '../client/sidebar.php';
     ?>
 
     

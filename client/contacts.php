@@ -23,11 +23,11 @@ $page = $components[2];
     <!---WEB TITLE--->
     <link rel="short icon" href="../picture/shortcut-logo.jpg" type="x-icon">
     <title>
-        <?php echo "Admin | Dashboard"; ?>
+        <?php echo "User | Conatact"; ?>
     </title>
 
     <!---CSS--->
-    <link rel="stylesheet" href="../css/admin.css">
+    <link rel="stylesheet" href="../css/client-style.css">
 
     <!--CSS FRAMEWORK-->
 
@@ -43,7 +43,7 @@ $page = $components[2];
     
 <body>
     <?php 
-        include '../admin/sidebar.php';
+        include '../client/sidebar.php';
     ?>
 
     
