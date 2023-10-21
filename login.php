@@ -111,7 +111,7 @@ $page = $components[2];
             <form class="form-fillup needs-validation" method="POST" onsubmit="return validateForm()">
                 <input type="text" class="form" placeholder="Enter your Email" name="email" required><br><br>
                 <input type="password" class="form" placeholder="Enter your Password" name="password" id="password" required oninput="checkPasswordStrength(this)"><br><br>
-                <i class="fa-solid fa-eye-slash" id="password-toggle" onclick="togglePassword()"></i>
+                <i class="fa-solid fa-eye-slash" id="password-toggle" onclick="togglePassword()" style= "right: 19%; top: 30.5%;"></i>
                 <button class="btn btn-lg btn-block btn-success" type="submit" name="submit" value="Submit">Login</button>
             </form>
         </div>

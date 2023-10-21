@@ -23,7 +23,7 @@ $page = $components[2];
     <!---WEB TITLE--->
     <link rel="short icon" href="../logo.jpg" type="x-icon">
     <title>
-        <?php echo "Admin | Dashboard"; ?>
+        <?php echo "Admin | Website Management"; ?>
     </title>
 
     <!---CSS--->

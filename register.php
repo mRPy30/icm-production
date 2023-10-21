@@ -108,14 +108,19 @@ $page = $components[2];
                 </ul>
             </div>
             <form class="form-fillup needs-validation" method="POST" onsubmit="return validateForm()">
-                <input type="text" class="form" placeholder="Enter your First Name" name="firstname" required><br><br>
-                <input type="text" class="form" placeholder="Enter your Last Name" name="lastname" required><br><br>
-                <input type="text" class="form" placeholder="Enter your Email" name="email" required><br><br>
+                <input type="text" class="form" placeholder="Enter your First Name" name="firstname" required>
+                <br><br>
+                <input type="text" class="form" placeholder="Enter your Last Name" name="lastname" required>
+                <br><br>
+                <input type="text" class="form" placeholder="Enter your Email" name="email" required>
+                <br><br>
                 <input type="password" class="form" placeholder="Enter your Password" name="password" id="password"
-                    required oninput="checkPasswordStrength(this)"><br><br>
-                <i class="fa-solid fa-eye-slash" id="password-toggle" onclick="togglePassword()"></i>
-                <input type="text" class="form" placeholder="Enter your Confirm Password" name="confirm-password"
-                    required><br><br>
+                    required oninput="checkPasswordStrength(this)">
+                    <i class="fa-solid fa-eye-slash" id="password-toggle" onclick="togglePassword()" style= "right: 19%; top: 52%;"></i>
+                <br><br>
+                <input type="password" class="form" placeholder="Enter your Confirm Password" name="confirm-password" id="confirmpassword"
+                    required>
+                <br><br>
                 <div id="password-strength" class="alert"></div>
                 <button class="btn btn-lg btn-block btn-success" type="submit" name="submit"
                     value="Register">Register</button>

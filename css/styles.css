@@ -12,8 +12,8 @@ body {
 
 /*********form************/
 .form-section{
-    margin-left: 67%;
-	width: 35vw;
+    margin-left: 63%;
+	width: 38vw;
 	height: 100vh;
 	background-color: #FCF6F6;
 	filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25)) drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
@@ -29,12 +29,12 @@ body {
 	margin: 0 0 0 13%;
 	padding: 10% 0 0 0;
 	border-bottom: 2px solid #BCB4B5;
-	width: 25vw;
+	width: 27vw;
   }
 .form_nav .nav-item {
 	display: inline-block; 
 	margin: 0 7% 0 0; 
-	font: normal 500 18px/normal 'Poppins';
+	font: normal 500 17px/normal 'Poppins';
 	position: relative;
   }
 
@@ -65,15 +65,16 @@ body {
   }
 
 .form-section .form-fillup{
-	padding: 7% 13% 0% 13%;
+	padding: 5% 13% 0% 13%;
 }
 .form-section .form-fillup input[type="text"] , [type="password"]{
-	width: 25vw;
+	width: 27vw;
 	height: 7vh;
 	border-radius: 10px;
 	border: 1px solid #BCB4B5;
 	background: #FCF6F6;
 	padding: 3%;
+	font: normal 500 13px/normal 'Poppins';	
 	outline: none;
 	filter: drop-shadow(0px 0px 1px rgba(0, 0, 0, 0.25));
 	margin-top: 2%;
@@ -86,17 +87,18 @@ body {
 	border-radius: 25px;
 	border: 1px solid #000;
 	background: #1C1C1D;
-	width: 25vw;
-	height: 8vh;
+	width: 27vw;
+	height: 7vh;
 	font: normal 500 13px/normal 'Poppins';
 	color: #FCF6F6;
 	margin-top: 3%;
 }
-
-.eye-icon {
+.form-section .form-fillup button:hover{
+	background: #282829;
+	transform: scale(1.01);
+}
+i{
 	position: absolute;
-	right: 10px;
-	top: 20%;
 	transform: translateY(-50%);
 	cursor: pointer;
 }
@@ -110,7 +112,7 @@ body {
 	border-radius: 5px;
 	text-align: center;
 	margin-bottom: 20px;
-	width: 25vw;
+	width: 27vw;
 }
 .success {
 	background-color: #4CAF50; /* Green background color for success message */

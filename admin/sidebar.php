@@ -1,3 +1,24 @@
+<?php
+//Connection
+include '../dbcon.php';
+
+$adminID = $_SESSION['id'];
+
+
+$sql = "SELECT name, profile FROM administrator WHERE id = '$adminID'";
+
+$result = $conn->query($sql);
+
+if ($result->num_rows > 0) {
+    $row = $result->fetch_assoc();
+    $name = $row["name"];
+    $profile = base64_encode($row["profile"]); // Corrected: Use base64_encode here
+} else {
+    // Handle the case where no data is found
+    $name = "Name Not Found";
+    $profile = "default_profile.jpg"; // Provide a default profile image
+}
+?>
 <style>
     /*****Sidebar*****/
 
@@ -27,10 +48,9 @@
     }
 
     .side_bar .side_bar_top .profile_pic img{
-        width: 115px;
-        height: 115px;
+        width: 130px;
+        height: 130px;
         padding: 5px;
-        border: 2px solid #FBF4F4;
         border-radius: 50%;
     }
 
@@ -49,8 +69,7 @@
     .side_bar .side_bar_bottom{
         background: #1C1C1D;
         height: calc(100% - 250px);
-        padding: 20px 0;
-        padding-left: 15px;		
+        padding: 20px 0px 0px 30px;
         border-radius: 0px 0px 20px 0px;        
         text-decoration: none;
         list-style: none;	
@@ -85,7 +104,7 @@
         width: 100%;
         height: 20px;
         background: #FBF4F4;
-        transition: background-color 0.3s, color 0.3s;
+        transition: background-color 0.6s, color 1s;
     }
 
     .side_bar .side_bar_bottom ul .nav-link.active .top_curve{
@@ -115,6 +134,15 @@
         border-top-right-radius: 25px;
     }
 
+    .side_bar .side_bar_bottom .logout{
+        padding: 60px 15px 15px 50px;		
+    }
+    .side_bar .side_bar_bottom .logout button{
+        font: normal 500 15px/20px 'Poppins';
+        color: #FBF4F4;
+        background: #1C1C1D;
+        border: none;
+    }
 
     /*******RESPONSIVE**********/
 
@@ -152,16 +180,16 @@
     <nav class="side_bar">
         <div class="side_bar_top">
             <div class="profile_pic">
-                <img src="profile.png" alt="profile">
+                <img src="data:image/jpeg;base64,<?php echo $profile; ?>" alt="admin image">
             </div>
             <div class="profile_info">
-                <h3>Gycia Moran</h3>
+                <h3><?php echo $name; ?></h3>
                 <p>Admin</p>
             </div>
         </div>
         <div class="side_bar_bottom">
             <ul>
-                <li class="nav-link active">
+                <li class="nav-link">
                     <span class="top_curve"></span>
                     <a href="dashboard.php" class="<?php if ($page == "dashboard.php") {
                         echo "nav-link active";
@@ -215,10 +243,10 @@
                     } ?> "><span class="item">Website Management</span></a>
                     <span class="bottom_curve"></span>
                 </li>
-                <div class="logout">
-                    <button type="button" class="btn-logout" onclick="goBack()"> LOGOUT </button>
-                </div>
             </ul>
+            <div class="logout">
+                <button type="text" class="btn-logout" onclick="goBack()"> Logout </button>
+            </div>
         </div>
     </nav>
 </div> 
