@@ -1,6 +1,12 @@
 *{
-    padding: 0;
     box-sizing: border-box;
+    padding: 0;
+    margin: 0;
 }
-
-/****** Topbar *******/
+.homepage_main{
+    width: 100%;
+}
+.homepage_main {
+    width: 100%;
+    
+}

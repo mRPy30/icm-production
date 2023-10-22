@@ -1,109 +1,152 @@
-<style>
-    /*****Sidebar*****/
+<!DOCTYPE html>
+<html>
 
-    * {
-        box-sizing: border-box;
-        padding: 0;
-        margin: 0;
-    }
+<head>
+    <style>
+        /***** Sidebar *****/
 
-    .header-section {
-        width: 100%;
-        background-color: #FFEDED;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 0px 10% 0px 10%;
-        position: sticky;
-    }
+        * {
+            box-sizing: border-box;
+            padding: 0;
+            margin: 0;
+        }
 
-    .header-section img {
+        .header-section {
+            width: 100%;
+            background-color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0px 5% 0px 5%;
+            position: fixed;
+        }
 
-        width: 80px;
-        height: 90px;
-        left: 50px;
-        top: 2px;
-        cursor: pointer;
-    }
+        .header-section img {
+            width: 9vw;
+            height: 9vh;
+            cursor: pointer;
+            margin: 10px;
+        }
 
-    .nav-item {
-        list-style: none;
-        display: inline-block;
-        margin: 5px 40px 5px 10px;
-    }
+        .nav-item {
+            list-style: none;
+            display: inline-block;
+            margin: 5px 40px 5px 10px;
+        }
 
-    .nav-item ul {
-        display: flex;
-        list-style: none;
-        margin: 20px 100px;
-        margin-top: 25px;
-    }
+        .nav-item ul {
+            display: flex;
+            list-style: none;
+            margin: 20px 100px;
+        }
 
-    .nav-item li {
-        display: inline-block;
-        padding-right: 1cm;
-        margin-left: 20px;
-    }
+        .nav-item li {
+            display: inline-block;
+        }
 
-    .nav-item li a {
-        transition: all 0.3s ease 0s;
-        text-decoration: none;
-        color: #000000;
-        text-align: center;
-        font-size: 13px;
-        font-family: 'Inter';
+        .nav-item a {
+            transition: all 0.3s ease 0s;
+            text-decoration: none;
+            color: #1C1C1D;
+            font: normal 600 17px/normal 'Poppins';
+            cursor: pointer;
+            letter-spacing: 1px;
+            position: relative;
+            /* Added to position the ::after pseudo-element correctly */
+        }
 
-    }
+        .nav-item a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            /* Added to position the underline at the bottom */
+            left: 0;
+            /* Start from the left */
+            width: 0;
+            height: 3px;
+            /* Set the height to create an underline effect */
+            background-color: #E46F80;
+            transition: width 0.3s ease;
+            /* Changed to 0.3s for a smoother transition */
+        }
 
-    .nav-item li a.hover {
-        background-color: aqua;
-        flex-shrink: 0;
-    }
+        .nav-item a:hover::after {
+            width: 100%;
+        }
 
-    button {
-        width: 100px;
-        height: 34px;
-        left: 90vw;
-        top: 18px;
-        font-style: normal;
-        font-size: 15px;
-        line-height: 24px;
-        max-height: 100%;
-        font-family: 'Inter';
-        display: inline-block;
-        cursor: pointer;
-        border-radius: 30px;
-        display: inline-flex;
+        .nav-item a.active {
+            color: #E46F80;
+        }
 
-    }
+        .nav-item a:hover {
+            color: #E46F80;
+            ;
+            /* Text color change on hover */
+            cursor: pointer;
+            padding: 5px;
+            /* Add some padding to highlight the text */
+        }
 
+        .nav-item .nav-link .header-section .register a:hover {
+            text-decoration: none;
+            cursor: pointer;
+        }
 
-    /*****End of Sidebar*****/
-</style>
+        button {
+            width: 100px;
+            height: 34px;
+            left: 95vw;
+            font: normal 500 15px/normal 'Poppins';
+            line-height: 24px;
+            display: inline-block;
+            cursor: pointer;
+            fill: #FBF4F4;
+            stroke-width: 1px;
+            border-radius: 30px;
+            stroke: #000;
+            filter: drop-shadow(0px 3px 3px rgba(0, 0, 0, 0.25));
+            display: inline-flex;
+            padding: 3px 17px;
+            transition: background-color 0.3s;
+            /* Add a background-color transition */
+            /* Add background-color for the normal state (when not hovered) */
+            color: black;
+        }
 
-<!-------Topbar-------->
+        button:hover {
+            background-color: #E46F80;
+            /* Change the background color on hover */
+            color: black;
+            /* Set text color to white on hover */
+        }
 
-<header class="header-section">
-    <img src="../picture/logo.png">
+        /***** End of Sidebar *****/
+    </style>
+</head>
 
-    <ul>
-        <li class="nav-item">
-            <a class="nav-link active" href="homepage.php">Home</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="homepage.php">Gallery</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="homepage.php">Services</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="homepage.php">About</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="homepage.php">Contact</a>
-        </li>
-    </ul>
-    <a class="cta" href="#"><button>Register</button></a>
-</header>
+<body>
+    <header class="header-section">
+        <img src="../picture/logotry1.png">
 
-<!-------End Topbar------->
+        <ul>
+            <li class="nav-item">
+                <a class="nav-link" href="homepage.php">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="gallery.php">Gallery</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#services">Services</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#about">About</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#contact ">Contact</a>
+            </li>
+        </ul>
+        <a class="register" href="register.php"><button>Register</button></a>
+    </header>
+</body>
+
+</html>

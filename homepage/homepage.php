@@ -29,11 +29,22 @@
 </head>
 
 <body>
+    <!-----Navbar------->
     <?php
     include '../homepage/navbar.php';
     ?>
+    <!-----End of Navbar------->
 
+    <!----Main Content----->
 
+    <main class="homepage_main">
+        <div class="main-content">
+            <div class="image-content">
+                <img src="../picture/homepic.jpg" href="#home">
+            </div>
+        </div>
+    </main>
+    <!----End of Main Content----->
 
 </body>
 
