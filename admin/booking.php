@@ -29,22 +29,31 @@ $page = $components[2];
     <!---CSS--->
     <link rel="stylesheet" href="../css/admin.css">
 
-    <!--CSS FRAMEWORK-->
-
-
     <!--ICON LINKS-->
-    <script src="https://kit.fontawesome.com/11a4f2cc62.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="font-awesome-6/css/all.css">
 
     <!--FONT LINKS-->
-    <link
-        href="https://fonts.googleapis.com/css2?family=Abel&family=Inter:wght@400;800&family=Poppins:wght@400;500&display=swap"
-        rel="stylesheet">
+    <link rel="stylesheet" href="../css/fonts.css">
+
 </head>
     
 <body>
+    <div class="background">
+        <img src="../picture/logo.png">
+    </div>
+
     <?php 
         include '../admin/sidebar.php';
     ?>
+    
+    <section class="booking-box">
+        <div class="table-booking">
+            <h4>Booking Details</h4>
+            <table>
+
+            </table>
+        </div>
+    </section>
 
     
     
