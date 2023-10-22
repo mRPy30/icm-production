@@ -139,7 +139,7 @@ i{
 	border-radius: 5px;
 	text-align: center;
 	margin-bottom: 20px;
-	width: 27vw;
+	width: 100%;
 }
 .success {
 	background-color: #4CAF50; /* Green background color for success message */

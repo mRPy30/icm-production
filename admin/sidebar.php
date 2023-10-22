@@ -28,10 +28,11 @@ if ($result->num_rows > 0) {
 	    border-radius: 15px;
 	    display: flex;
         position: absolute;
+        width: 18%;
     }
     .side_bar{
-	    width: 250px;
-	    height: 106%;
+	    width: 100%;
+	    height: 99.5%;
 
     }
 
@@ -64,7 +65,7 @@ if ($result->num_rows > 0) {
 
     .side_bar .side_bar_top .profile_info p{
         margin-top: 5px;
-        font: normal 400 11px/20px 'Poppins';	
+        font: normal 400 12px/20px 'Poppins';	
     }
 
     .side_bar .side_bar_bottom{
@@ -136,7 +137,7 @@ if ($result->num_rows > 0) {
     }
 
     .side_bar .side_bar_bottom .logout{
-        padding: 50px 15px 15px 50px;		
+        padding: 17% 15px 15px 50px;		
     }
     .side_bar .side_bar_bottom .logout button{
         font: normal 500 14px/20px 'Poppins';

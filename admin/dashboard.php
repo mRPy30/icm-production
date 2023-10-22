@@ -14,6 +14,9 @@ if ($result->num_rows > 0) {
 } else {
     $total_number = 0;
 }
+
+
+
 // Active Page
 
 $directoryURI = $_SERVER['REQUEST_URI'];
@@ -39,16 +42,20 @@ $page = $components[2];
     <!---CSS--->
     <link rel="stylesheet" href="../css/admin.css">
 
-    <!--CSS FRAMEWORK-->
-
-
     <!--ICON LINKS-->
     <script src="https://kit.fontawesome.com/11a4f2cc62.js" crossorigin="anonymous"></script>
 
     <!--FONT LINKS-->
-    <link
-        href="https://fonts.googleapis.com/css2?family=Abel&family=Inter:wght@400;800&family=Poppins:wght@400;500&display=swap"
-        rel="stylesheet">
+    <link rel="stylesheet" href="../css/fonts.css">
+
+    <!----css---->
+    <style>
+        body {
+            overflow-y: hidden;
+        }       
+    </style>
+
+    
 </head>
     
 <body>
@@ -68,13 +75,63 @@ $page = $components[2];
                 <p>Staff</p>
                 <h1><?php echo $total_number; ?></h1>
             </div>
-            <div class='Client'>
-                <p></p>
-                <h1></h1>
+            <div class='staff'>
+                <p>Staff</p>
+                <h1><?php echo $total_number; ?></h1>
             </div>
-            <div class='events'>
+            <div class='staff'>
+                <p>Staff</p>
+                <h1><?php echo $total_number; ?></h1>
             </div>
         </div>
+
+        <section class="graph">
+            <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+            <div style="padding: 0px 0px 20px 0px; margin: 3% 0% 0% 24%; border-radius: 5px; filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25)); width: 69.3%; background-color:#ffffff;">
+                <h5 style="border-bottom: 1px solid #CCCCCC; border-radius: 7px 7px 0px 0px; padding: 20px 0px 20px 20px; color: #FBF4F4; background-color: #1c1c1c; font: normal 500 14px/normal 'Poppins';">Total Clients</h5>
+                    <canvas style="height: 50px;" id="lineChart"></canvas>
+            </div>
+    
+            <script>
+                async function fetchData() {
+                    const response = await fetch('../admin/dashboard.php');
+                    const data = await response.json();
+                    return data;
+                }
+
+                async function createChart() {
+                    const data = await fetchData();
+                    
+                    const years = data.map(entry => entry.year);
+                    const passingRates = data.map(entry => entry.passing_rate);
+                    
+                    const ctx = document.getElementById('lineChart').getContext('2d');
+                    const chart = new Chart(ctx, {
+                        type: 'line',
+                        data: {
+                            labels: years,
+                            datasets: [{
+                                label: 'Total ',
+                                data: passingRates,
+                                borderColor: '#008A0E',
+                                backgroundColor: '#008A0E',
+                                borderWidth: 3
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            scales: {
+                                y: {
+                                    beginAtZero: true
+                                }
+                            }
+                        }
+                    });
+                }
+
+                createChart();
+            </script>
+        </section>
     </main>
 
     
