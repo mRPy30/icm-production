@@ -52,22 +52,17 @@
             cursor: pointer;
             letter-spacing: 1px;
             position: relative;
-            /* Added to position the ::after pseudo-element correctly */
         }
 
         .nav-item a::after {
             content: '';
             position: absolute;
             bottom: 0;
-            /* Added to position the underline at the bottom */
             left: 0;
-            /* Start from the left */
             width: 0;
             height: 3px;
-            /* Set the height to create an underline effect */
             background-color: #E46F80;
             transition: width 0.3s ease;
-            /* Changed to 0.3s for a smoother transition */
         }
 
         .nav-item a:hover::after {
@@ -80,11 +75,8 @@
 
         .nav-item a:hover {
             color: #E46F80;
-            ;
-            /* Text color change on hover */
             cursor: pointer;
             padding: 5px;
-            /* Add some padding to highlight the text */
         }
 
         .nav-item .nav-link .header-section .register a:hover {
@@ -108,16 +100,12 @@
             display: inline-flex;
             padding: 3px 17px;
             transition: background-color 0.3s;
-            /* Add a background-color transition */
-            /* Add background-color for the normal state (when not hovered) */
             color: black;
         }
 
         button:hover {
             background-color: #E46F80;
-            /* Change the background color on hover */
             color: black;
-            /* Set text color to white on hover */
         }
 
         /***** End of Sidebar *****/
