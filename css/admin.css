@@ -1,34 +1,38 @@
 * {
     box-sizing: border-box;
-	padding: 0; 
+    padding: 0;
     margin: 0;
 }
 
 body {
-	background-color: #FBF4F4;
-  overflow-x: hidden;
+    background-color: #FBF4F4;
+    overflow-x: hidden;
 }
 
-.background{
-  width: 100vw;
-  position: absolute;
-  height: 24vh;
-  background: rgb(255,237,237);
-  background: linear-gradient(90deg, rgba(255,237,237,1) 0%, rgba(250,183,183,1) 35%, rgba(255,148,148,1) 100%);
-  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25)) drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+.background {
+    width: 100vw;
+    position: absolute;
+    height: 24vh;
+    background: rgb(255, 237, 237);
+    background: linear-gradient(90deg, rgba(255, 237, 237, 1) 0%, rgb(243, 132, 132) 35%, rgb(223, 100, 100) 100%);
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25)) drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
 }
-.background img{
-  width: 9%;
-  margin: 0% 0% 0% 20%;
+
+.background img {
+    width: 9%;
+    margin: 0% 0% 0% 20%;
 }
+
 
 /****Dashboard*****/
-.admin_main .total-result{
-  padding: 125px 0px 0px 180px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  }
+
+.admin_main .total-result {
+    padding: 125px 0px 0px 180px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .admin_main .total-result .staff {
     width: 23%;
     filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
@@ -42,21 +46,25 @@ body {
     margin: 0% 0% 0% 5%;
 }
 
+
 /*****Booking*****/
-.booking-box{
-  padding: 0px 0px 20px 0px;
-  margin: 10% 0% 0% 24%;
-  border-radius: 5px;
-  background-color: #FCF6F6;
-  height: 40%;
-  position: absolute;
-  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25)); width: 69.3%;
+
+.booking-box {
+    padding: 0px 0px 20px 0px;
+    margin: 10% 0% 0% 24%;
+    border-radius: 5px;
+    background-color: #FCF6F6;
+    height: 40%;
+    position: absolute;
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+    width: 69.3%;
 }
-.booking-box h4{
-  border-bottom: 1px solid #CCCCCC;
-  padding: 15px 0px 15px 20px; 
-  color: #FBF4F4; 
-  background-color: #1c1c1c; 
-  font: normal 500 16px/normal 'Poppins';
-  border-radius: 5px 5px 0px 0px;
+
+.booking-box h4 {
+    border-bottom: 1px solid #CCCCCC;
+    padding: 15px 0px 15px 20px;
+    color: #FBF4F4;
+    background-color: #1c1c1c;
+    font: normal 500 16px/normal 'Poppins';
+    border-radius: 5px 5px 0px 0px;
 }
