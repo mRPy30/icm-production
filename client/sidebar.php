@@ -2,17 +2,17 @@
 //Connection
 include '../dbcon.php';
 
-$adminID = $_SESSION['id'];
+$clientID = $_SESSION['id'];
 
 
-$sql = "SELECT name, profile FROM administrator WHERE id = '$adminID'";
+$sql = "SELECT firstName, lastName, profile FROM client WHERE id = '$clientID'";
 
 $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {
     $row = $result->fetch_assoc();
-    $name = $row["name"];
-    $profile = base64_encode($row["profile"]); // Corrected: Use base64_encode here
+    $name = $row["firstName"] . " " . $row["lastName"];
+    $profile = base64_encode($row["profile"]);
 } else {
     // Handle the case where no data is found
     $name = "Name Not Found";
@@ -46,7 +46,7 @@ if ($result->num_rows > 0) {
     .side_bar .side_bar_top .profile_pic{
         display: flex;
         justify-content: center;
-        margin-bottom: 20px;	
+        margin: 20px 0px 20px 0px;	
     }
 
     .side_bar .side_bar_top .profile_pic img{
@@ -59,7 +59,7 @@ if ($result->num_rows > 0) {
     .side_bar .side_bar_top .profile_info{
         text-align: center;
         color: #fff;
-        font: normal 500 15px/20px 'Poppins';
+        font: normal 500 13px/20px 'Poppins';
 
     }
 
@@ -71,7 +71,7 @@ if ($result->num_rows > 0) {
     .side_bar .side_bar_bottom{
         background: #1C1C1D;
         height: calc(100% - 200px);
-        padding: 0px 0px 0px 30px;
+        padding: 40px 0px 0px 30px;
         border-radius: 0px 0px 20px 0px;        
         text-decoration: none;
         list-style: none;	
@@ -182,27 +182,18 @@ if ($result->num_rows > 0) {
     <nav class="side_bar">
         <div class="side_bar_top">
             <div class="profile_pic">
-                <img src="data:image/jpeg;base64,<?php echo $profile; ?>" alt="admin image">
+                <img src="data:image/jpeg;base64,<?php echo $profile; ?>" alt="Client image">
             </div>
             <div class="profile_info">
                 <h3><?php echo $name; ?></h3>
-                <p>Admin</p>
+                <p>Client Id: <?php echo $clientID; ?></p>
             </div>
         </div>
         <div class="side_bar_bottom">
             <ul>
                 <li class="nav-link">
                     <span class="top_curve"></span>
-                    <a href="dashboard.php" class="<?php if ($page == "dashboard.php") {
-                        echo "nav-link active";
-                    } else {
-                        echo "nav-link";
-                    } ?> "><span class="item">Dashboard</span></a>
-                    <span class="bottom_curve"></span>
-                </li>
-                <li class="nav-link">
-                    <span class="top_curve"></span>
-                    <a href="booking.php" class="<?php if ($page == "..admin/booking.php") {
+                    <a href="booking.php" class="<?php if ($page == "booking.php") {
                         echo "nav-link active";
                     } else {
                         echo "nav-link";
@@ -211,38 +202,38 @@ if ($result->num_rows > 0) {
                 </li>
                 <li class="nav-link">
                     <span class="top_curve"></span>
-                    <a href="client.php" class="<?php if ($page == "..admin/client.php") {
+                    <a href="calendar.php" class="<?php if ($page == "..client/calendar.php") {
                         echo "nav-link active";
                     } else {
                         echo "nav-link";
-                    } ?> "><span class="item">Client</span></a>
+                    } ?> "><span class="item">Calendar</span></a>
                     <span class="bottom_curve"></span>
                 </li>
                 <li class="nav-link">
                     <span class="top_curve"></span>
-                    <a href="reports.php" class="<?php if ($page == "..admin/reports.php") {
+                    <a href="contacts.php" class="<?php if ($page == "..client/contacts.php") {
                         echo "nav-link active";
                     } else {
                         echo "nav-link";
-                    } ?> "><span class="item">Reports</span></a>
+                    } ?> "><span class="item">Contact Message</span></a>
                     <span class="bottom_curve"></span>
                 </li>
                 <li class="nav-link">
                     <span class="top_curve"></span>
-                    <a href="service.php" class="<?php if ($page == "..admin/service.php") {
+                    <a href="feedback.php" class="<?php if ($page == "..client/feedback.php") {
                         echo "nav-link active";
                     } else {
                         echo "nav-link";
-                    } ?> "><span class="item">Service</span></a>
+                    } ?> "><span class="item">Feedback</span></a>
                     <span class="bottom_curve"></span>
                 </li>
                 <li class="nav-link">
                     <span class="top_curve"></span>
-                    <a href="website.php" class="<?php if ($page == "..admin/website.php") {
+                    <a href="profile.php" class="<?php if ($page == "..client/profile.php") {
                         echo "nav-link active";
                     } else {
                         echo "nav-link";
-                    } ?> "><span class="item">Website Management</span></a>
+                    } ?> "><span class="item">My Profile</span></a>
                     <span class="bottom_curve"></span>
                 </li>
             </ul>

@@ -23,24 +23,25 @@ $page = $components[2];
     <!---WEB TITLE--->
     <link rel="short icon" href="../picture/shortcut-logo.jpg" type="x-icon">
     <title>
-        <?php echo "User | Conatact"; ?>
+        <?php echo "User | Booking Schedule"; ?>
     </title>
 
     <!---CSS--->
-    <link rel="stylesheet" href="../css/client-style.css">
+    <link rel="stylesheet" href="../css/client.css">
 
     <!--ICON LINKS-->
     <link rel="stylesheet" href="font-awesome-6/css/all.css">
 
     <!--FONT LINKS-->
     <link rel="stylesheet" href="../css/fonts.css">
+    
 </head>
     
 <body>
     <?php 
         include '../client/sidebar.php';
     ?>
-
+    
     
     
 </body>
