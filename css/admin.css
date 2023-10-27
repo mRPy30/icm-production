@@ -14,7 +14,7 @@ body {
     position: absolute;
     height: 24vh;
     background: rgb(255, 237, 237);
-    background: linear-gradient(90deg, rgba(255, 237, 237, 1) 0%, rgb(243, 132, 132) 35%, rgb(223, 100, 100) 100%);
+    background: linear-gradient(90deg, rgba(255, 237, 237, 1) 0%, rgb(243, 132, 132) 35%, rgb(170, 73, 73) 100%);
     filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25)) drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
 }
 
