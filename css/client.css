@@ -7,3 +7,12 @@
 body {
 	background-color: #FBF4F4;
 }
+.popup {
+    display: none;
+    /* Popup styles */
+}
+
+.step {
+    display: none;
+    /* Step styles */
+}

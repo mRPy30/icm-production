@@ -21,13 +21,13 @@ $page = $components[2];
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!---WEB TITLE--->
-    <link rel="short icon" href="../picture/logo.jpg" type="x-icon">
+    <link rel="short icon" href="../picture/shortcut-logo.jpg" type="x-icon">
     <title>
-        <?php echo "User | Feedback"; ?>
+        <?php echo "User | Booking Schedule"; ?>
     </title>
 
     <!---CSS--->
-    <link rel="stylesheet" href="../css/client-style.css">
+    <link rel="stylesheet" href="../css/client.css">
 
     <!--ICON LINKS-->
     <link rel="stylesheet" href="font-awesome-6/css/all.css">
@@ -41,7 +41,7 @@ $page = $components[2];
     <?php 
         include '../client/sidebar.php';
     ?>
-
+    
     
     
 </body>
