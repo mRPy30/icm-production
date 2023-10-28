@@ -6,13 +6,145 @@
 
 body {
 	background-color: #FBF4F4;
+    overflow-x: hidden;
+
 }
-.popup {
-    display: none;
-    /* Popup styles */
+.background {
+    width: 100vw;
+    position: absolute;
+    height: 24vh;
+    background: rgb(255,235,235);
+    background: linear-gradient(86deg, rgba(255,235,235,1) 1%, rgba(243,132,132,1) 47%, rgba(210,90,90,1) 100%);
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
 }
 
-.step {
-    display: none;
-    /* Step styles */
+.background img {
+    width: 11%;
+    margin: -1% 0% 0% 20%;
 }
+/*****Booking*****/
+
+.booking-box {
+    padding: 0px 0px 20px 0px;
+    margin: 10% 0% 0% 24%;
+    border-radius: 5px;
+    background-color: #FCF6F6;
+    height: 40%;
+    position: absolute;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25), 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    width: 69.3%;
+}
+
+.booking-box h4 {
+    border-bottom: 1px solid #CCCCCC;
+    padding: 15px 0px 15px 20px;
+    color: #1c1c1c;
+    font: normal 600 18px/normal 'Poppins';
+    border-radius: 5px 5px 0px 0px;
+}
+table {
+    border-collapse: collapse;
+    width: 93%;
+    margin: 30px 25px 0px 35px;
+}
+
+th, td {
+    border: 1px solid #dddddd;
+    text-align: center;
+    padding: 8px;
+}
+
+th {
+    background-color: #f2f2f2;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+tr:nth-child(odd) {
+    background-color: #ffffff;
+}
+
+.form-popup {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 53%;
+    height: 40% ;
+    width: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 400px 900px rgba(0,0,0,0.28);
+    z-index: 9999;
+} 
+
+
+
+
+.steps {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+  }
+  .steps .circle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 50px;
+    width: 50px;
+    color: #999;
+    font-size: 22px;
+    font-weight: 500;
+    border-radius: 50%;
+    background: #fff;
+    border: 4px solid #e0e0e0;
+    transition: all 200ms ease;
+    transition-delay: 0s;
+  }
+  .steps .circle.active {
+    transition-delay: 100ms;
+    background-color: #1C1C1D;
+    color: #FBF4F4;
+  }
+  .steps .progress-bar {
+    position: absolute;
+    height: 4px;
+    width: 100%;
+    background: #e0e0e0;
+    z-index: -1;
+  }
+  .progress-bar .indicator {
+    position: absolute;
+    height: 100%;
+    width: 0%;
+    background: #1C1C1D;
+    transition: all 300ms ease;
+  }
+  .container .buttons {
+    display: flex;
+    gap: 20px;
+  }
+  .buttons button {
+    padding: 8px 25px;
+    background: #D25A5A;
+    border: none;
+    border-radius: 8px;
+    color: #fff;
+    font-size: 16px;
+    font-weight: 400;
+    cursor: pointer;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.05);
+    transition: all 200ms linear;
+  }
+  .buttons button:active {
+    transform: scale(0.97);
+  }
+  .buttons button:disabled {
+    background: #B3B3B3;
+    cursor: not-allowed;
+  }

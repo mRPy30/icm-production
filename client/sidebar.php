@@ -39,7 +39,7 @@ if ($result->num_rows > 0) {
     .side_bar .side_bar_top{
         background: #1C1C1D;
         height: 245px;
-        border-radius: 0px 20px 0px 0px;
+        border-radius: 0px 18px 0px 0px;
         padding: 30px;
     }
 

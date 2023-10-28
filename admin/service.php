@@ -2,7 +2,6 @@
 //Connection
 include '../dbcon.php';
 
-session_start(); // Start the session
 
 // Active Page
 
