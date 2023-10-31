@@ -81,12 +81,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     <!---WEB TITLE--->
     <link rel="short icon" href="../picture/shortcut-logo.jpg" type="x-icon">
+    <link rel=stylesheet
     <title>
         <?php echo "User | Booking Schedule"; ?>
     </title>
 
     <!---CSS--->
-    <link rel="stylesheet" href="../css/client.css">
+    <link rel="stylesheet" href="../css/booking.css">
 
     <!--ICON LINKS-->
     <link rel="stylesheet" href="../font-awesome-6/css/all.css">
@@ -114,7 +115,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
           </div>
             <table>
                 <thead>
-                    <tr>
+                    <tr style="font-family: Poppins">
                         <th>Title Event</th>
                         <th>Event Location</th>
                         <th>Select Date</th>
@@ -140,7 +141,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <div id="setForm" class="form-popup">
     <span class="close-button" onclick="closeForm()" style="font-size: 20px; font-weight: 600;">&#10006;</span>
         <form action="booking.php" method="POST" class="" enctype="multipart/form-data">
-            <header class="header">Booking Schedule</header>
+            <header class="header" style="font-size: 30px;font-weight:bold; text-align: center; font-family: Poppins; padding: 20px">Book Schedule</header>
             <div class="steps">
               <div class="circle active">
                 <i class="fa-solid fa-check"></i>
@@ -172,18 +173,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </div>
 
             <!-- Step 1 -->
+            <p style="font-size: 25px; padding:20px">Set Date and Time Schedule</p>
             <div id="step1" class="form-step">
-                <p>Set Date and Time Schedule</p>
+                
+                <form>
+                  <div class="form-group">
                 <label for="bookingDate">Date:</label>
-                <input type="date" name="bookingDate" id="bookingDate" required>
-
+                <input type="date" name="bookingDate" id="bookingDate" class="form-input"  required>
+              </div>
+              <div class="form-group">
                 <label for="bookingTime">Time:</label>
-                <input type="time" name="bookingTime" required>
+                <input type="time" name="bookingTime" class="form-input" required>
+              </div>
             </div>
 
             <!-- Step 2 -->
-            <div id="step2" class="form-step" style="display: none">
-                <p>Set Event Title and Type</p>
+            <div id="step2" class="form-step" >
+                <p style="font-size: 25px; padding:20px; text-align:left;">Set Event Title and Type</p>
                 <label for="eventType">Type of Event</label>
                 <select name="eventType" required>
                     <?php
