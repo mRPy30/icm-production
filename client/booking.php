@@ -6,7 +6,7 @@ session_start(); // Start the session
 $clientID = $_SESSION['id'];
 
 // Display data in a table
-$sql = "SELECT title_event, venue, eventDate FROM booking";
+$sql = "SELECT title_event, venue, eventDate FROM booking WHERE clientName = '$clientID' ";
 $result = mysqli_query($conn, $sql);
 
 // Fetch data from the "event" table
@@ -246,9 +246,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </div>
 
             <div id="showConfirmationPopup" class="confirmation-popup" style="display: none;">
-                <p>Do you want to proceed with this booking event?</p>
-                <button id="confirmYes" class="confirm-button" onclick="confirmBooking()">Yes</button>
-                <button id="confirmWait" class="confirm-button" onclick="hideConfirmationPopup()">Wait</button>
+              <p>Do you want to proceed with this booking event?</p>
+              <button id="confirmYes" class="confirm-button" onclick="confirmBooking()">Yes</button>
+              <button id="confirmWait" class="confirm-button" onclick="hideConfirmationPopup()">Wait</button>
             </div>
             
             
@@ -471,6 +471,30 @@ document.getElementById('prev').addEventListener('click', function (event) {
     document.getElementById('prev').style.display = 'none';
 
   });
+
+  // Function to show the confirmation popup
+function showConfirmationPopup() {
+    var confirmationPopup = document.getElementById('showConfirmationPopup');
+    confirmationPopup.style.display = 'block';
+}
+
+// Function to hide the confirmation popup
+function hideConfirmationPopup() {
+    var confirmationPopup = document.getElementById('showConfirmationPopup');
+    confirmationPopup.style.display = 'none';
+}
+
+// Function to confirm the booking (you can customize this part)
+function confirmBooking() {
+    // Here you can submit the form to the database
+    document.querySelector('form').submit();
+}
+
+// Add an event listener to the "Pay" button
+document.getElementById('payButton').addEventListener('click', function (event) {
+    event.preventDefault();
+    showConfirmationPopup();
+});
 
 
 </script>

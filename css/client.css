@@ -179,7 +179,44 @@ tr:nth-child(odd) {
     border-radius: 2px;
 }
 
-  
+.confirmation-popup {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  z-index: 10000;
+  text-align: center;
+}
+
+.confirmation-popup p {
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+
+.confirm-button {
+  padding: 8px 20px;
+  background: #D25A5A;
+  border: none;
+  border-radius: 8px;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 400;
+  cursor: pointer;
+  margin: 0 10px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+  transition: all 200ms linear;
+}
+
+.confirm-button:active {
+  transform: scale(0.97);
+}
+
+
   .container .buttons {
     display: flex;
     gap: 20px;

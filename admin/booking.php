@@ -1,16 +1,24 @@
-<?php 
-//Connection
+<?php
+// Connection
 include '../dbcon.php';
-
 session_start();
 
 // Active Page
-
 $directoryURI = $_SERVER['REQUEST_URI'];
 $path = parse_url($directoryURI, PHP_URL_PATH);
 $components = explode('/', $path);
 $page = $components[2];
 
+// Fetch booking details from the database
+$sql = "SELECT scheduleId, eventDate, eventTime, venue, type_of_event, title_event, paymentAmount, description, clientName FROM booking";
+$result = $conn->query($sql);
+
+// Check if there's a result
+if ($result->num_rows > 0) {
+    $bookingData = $result->fetch_all(MYSQLI_ASSOC);
+} else {
+    $bookingData = [];
+}
 ?>
 
 <!DOCTYPE html>
@@ -52,31 +60,27 @@ $page = $components[2];
             <table>
         <thead>
             <tr>
+                <th>Name</th>
                 <th>Title Event</th>
-                <th>Title Event</th>
-                <th>Title Event</th>
-                <th>Title Event</th>
+                <th>Event Address</th>
+                <th>Date</th>
+                <th>Packages</th>
+                <th>Status</th>
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td>Data 1</td>
-                <td>Data 2</td>
-                <td>Data 3</td>
-                <td>Data 3</td>
-            </tr>
-            <tr>
-                <td>Data 4</td>
-                <td>Data 5</td>
-                <td>Data 6</td>
-                <td>Data 3</td>
-            </tr>
-            <tr>
-                <td>Data 7</td>
-                <td>Data 8</td>
-                <td>Data 9</td>
-                <td>Data 3</td>
-            </tr>
+        <?php
+                    foreach ($bookingData as $booking) {
+                        echo '<tr>';
+                        echo '<td>' . $booking['clientName'] . '</td>';
+                        echo '<td>' . $booking['title_event'] . '</td>';
+                        echo '<td>' . $booking['venue'] . '</td>';
+                        echo '<td>' . $booking['eventDate'] . '</td>';
+                        echo '<td>' . $booking['type_of_event'] . '</td>';
+                        echo '</tr>';
+                    }
+                    ?>
+
         </tbody>
     </table>
         </div>

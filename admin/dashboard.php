@@ -4,7 +4,7 @@ include '../dbcon.php';
 
 session_start(); // Start the session
 
-$sql = "SELECT COUNT(photographerID) AS total FROM staff";
+$sql = "SELECT COUNT(staffID) AS total FROM staff";
 $result = $conn->query($sql);
 
 // Check if there's a result
