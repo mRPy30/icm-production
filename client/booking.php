@@ -1,47 +1,75 @@
-<?php 
-//Connection
+<?php
+// Connection
 include '../dbcon.php';
 
 session_start(); // Start the session
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-  // Handle form submission
-
-  // Retrieve and sanitize form data
-  $bookingDate = $_POST['date'];
-  $bookingTime = $_POST['time'];
-  $eventType = $_POST['type_of_event'];
-  $eventTitle = $_POST['title_event	'];
-  $eventLocation = $_POST['venue'];
-  $eventDescription = $_POST['description'];
-  $paymentAmount = $_POST['paymentAmount'];
-
-  // Insert the data into the "booking" table
-  $sql = "INSERT INTO booking (date, time, type_of_event, title_event, venue, description, paymentAmount) 
-          VALUES ('$bookingDate', '$bookingTime', '$eventType', '$eventTitle', '$eventLocation', '$eventDescription', '$paymentAmount')";
-
-  if (mysqli_query($conn, $sql)) {
-      // Data inserted successfully
-
-      // Redirect to the same page to prevent form resubmission
-      header('Location: ' . $_SERVER['PHP_SELF']);
-      exit();
-  } else {
-      // Handle insertion error, you may want to show an error message
-      $_SESSION['error_message'] = 'Error: ' . mysqli_error($conn);
-      header('Location: booking.php'); // Redirect to the form page
-      exit();
-  }
-}
+$clientID = $_SESSION['id'];
 
 // Display data in a table
 $sql = "SELECT title_event, venue, eventDate FROM booking";
 $result = mysqli_query($conn, $sql);
+
+// Fetch data from the "event" table
+$eventQuery = "SELECT eventName FROM event";
+$eventResult = mysqli_query($conn, $eventQuery);
+
+// Fetch data from the "package" table
+$packageQuery = "SELECT packageName, packagePrice, packageDetails FROM package";
+$packageResult = mysqli_query($conn, $packageQuery);
 
 // Active Page
 $directoryURI = $_SERVER['REQUEST_URI'];
 $path = parse_url($directoryURI, PHP_URL_PATH);
 $components = explode('/', $path);
 $page = $components[2];
+
+// Query the database to retrieve the client's first name and last name
+$nameQuery = "SELECT firstName, lastName FROM client WHERE id = $clientID";
+$nameResult = mysqli_query($conn, $nameQuery);
+
+if ($nameResult && mysqli_num_rows($nameResult) > 0) {
+    $row = mysqli_fetch_assoc($nameResult);
+    $firstName = $row['firstName'];
+    $lastName = $row['lastName'];
+    
+    // Update the $_SESSION variables with the user's first name and last name
+    $_SESSION['firstName'] = $firstName;
+    $_SESSION['lastName'] = $lastName;
+} else {
+    // Handle the case where the user's information is not found
+    echo "User information not found.";
+}
+
+// Check if the form is submitted
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Data from the form
+    $bookingDate = $_POST['bookingDate'];
+    $bookingTime = $_POST['bookingTime'];
+    $eventType = $_POST['eventType'];
+    $eventTitle = $_POST['eventTitle'];
+    $eventLocation = $_POST['eventLocation'];
+    $eventDescription = $_POST['eventDescription'];
+    $paymentAmount = $_POST['paymentAmount'];
+
+    // Client's first name and last name (Assuming you have this information)
+    $firstName = $_SESSION['firstName'];
+    $lastName = $_SESSION['lastName']; 
+
+    // Generate a 3-digit scheduleId (you may want to customize this logic)
+    $scheduleId = mt_rand(100, 999);
+
+    // Insert data into the 'booking' table
+    $insertQuery = "INSERT INTO booking (scheduleId, eventDate, eventTime, venue, type_of_event, title_event, paymentAmount, description, clientName) 
+                    VALUES ('$scheduleId', '$bookingDate', '$bookingTime', '$eventLocation', '$eventType', '$eventTitle', '$paymentAmount', '$eventDescription', '$firstName $lastName')";
+
+    if (mysqli_query($conn, $insertQuery)) {
+        // Insert successful
+        echo "Booking data has been successfully inserted into the database.";
+    } else {
+        // Insert failed
+        echo "Error: " . mysqli_error($conn);
+    }
+}
 ?>
 
 <!DOCTYPE html>
@@ -78,12 +106,12 @@ $page = $components[2];
     ?>
     <section class="booking-box">
         <div class="table-booking">
+          <div class="table-top">
             <h4>Booking Details</h4>
-
                 <div class="add-event">
-                    <button class="add-button" id="addEvent">Set Schedule</button>
+                    <button class="add-button" id="addEvent">Set Schedule <i class="fa-solid fa-plus"></i></button>
                 </div>
-
+          </div>
             <table>
                 <thead>
                     <tr>
@@ -99,11 +127,10 @@ $page = $components[2];
                       echo '<tr>';
                       echo '<td>' . $row['title_event'] . '</td>';
                       echo '<td>' . $row['venue'] . '</td>';
-                      echo '<td>' . $row['date'] . '</td>';
-                      echo '<td>Status</td>'; // You can replace this with the actual status
+                      echo '<td>' . $row['eventDate'] . '</td>';
                       echo '</tr>';
-                  }
-                  ?>
+                }
+                ?>
             </table>
         </div>
     </section>
@@ -111,7 +138,8 @@ $page = $components[2];
    
         <!-- Set schedule form (hidden by default) -->
     <div id="setForm" class="form-popup">
-        <form action="manageBooking.php" method="POST" class="" enctype="multipart/form-data">
+    <span class="close-button" onclick="closeForm()" style="font-size: 20px; font-weight: 600;">&#10006;</span>
+        <form action="booking.php" method="POST" class="" enctype="multipart/form-data">
             <header class="header">Booking Schedule</header>
             <div class="steps">
               <div class="circle active">
@@ -157,8 +185,14 @@ $page = $components[2];
             <div id="step2" class="form-step" style="display: none">
                 <p>Set Event Title and Type</p>
                 <label for="eventType">Type of Event</label>
-                <input type="text" name="eventType" required>
-
+                <select name="eventType" required>
+                    <?php
+                    while ($event = mysqli_fetch_assoc($eventResult)) {
+                        echo "<option value='" . $event['eventName'] . "'>" . $event['eventName'] . "</option>";
+                    }
+                    ?>
+                </select>
+                  
                 <label for="eventTitle">Title Event</label>
                 <input type="text" name="eventTitle" required>
             </div>
@@ -173,17 +207,16 @@ $page = $components[2];
             <!-- Step 4 -->
             <div id="step4" class="form-step" style="display: none">
                 <p>Choose your Packages</p>
-                <div class="package-box basic" onclick="selectPackage('Basic', this)">
-                    <h4>Basic</h4>
-                </div>
-                <div class="package-box standard" onclick="selectPackage('Standard', this)">
-                    <h4>Standard</h4>
-                </div>
-                <div class="package-box premium" onclick="selectPackage('Premium', this)">
-                    <h4>Premium</h4>
-                </div>
+                <?php
+                while ($package = mysqli_fetch_assoc($packageResult)) {
+                    echo "<div class='package-box' onclick='selectPackage(\"" . $package['packageName'] . "\", this)'>";
+                    echo "<h4>" . $package['packageName'] . "</h4>";
+                    echo "<p>Price: $" . $package['packagePrice'] . "</p>";
+                    echo "<p>" . $package['packageDetails'] . "</p>";
+                    echo "</div>";
+                }
+                ?>
             </div>
-
 
             <!-- Step 5 -->
             <div id="step5" class="form-step" style="display: none">
@@ -248,7 +281,11 @@ $page = $components[2];
         currentStep = 1;
         updateStepDisplay();
     });
-
+    
+    function closeForm() {
+    var addEventForm = document.getElementById('setForm');
+    addEventForm.style.display = 'none';
+}
     var selectedPackage = null;
 
     function selectPackage(packageName, packageElement) {
@@ -390,62 +427,50 @@ $page = $components[2];
 }
 
 
-// Initialize an object to store user input data
-var data = {
-    bookingDate: null,
-    bookingTime: null,
-    eventType: null,
-    eventTitle: null,
-    eventLocation: null,
-    eventDescription: null,
-    selectedPackage: null,
-    paymentAmount: null
-};
+function collectAndDisplayData() {
+    // Collect data from all steps
+    var formData = {
+        bookingDate: document.getElementById('bookingDate').value,
+        bookingTime: document.getElementById('bookingTime').value,
+        eventType: document.getElementsByName('eventType')[0].value,
+        eventTitle: document.getElementsByName('eventTitle')[0].value,
+        eventLocation: document.getElementsByName('eventLocation')[0].value,
+        eventDescription: document.getElementsByName('eventDescription')[0].value,
+        selectedPackage: selectedPackage || 'N/A',
+        paymentAmount: document.getElementById('paymentAmount').value,
+    };
 
-function updateData(step) {
-    switch (step) {
-        case 1:
-            data.bookingDate = document.getElementById('bookingDate').value;
-            data.bookingTime = document.getElementById('bookingTime').value;
-            break;
-        case 2:
-            data.eventType = document.getElementsByName('eventType')[0].value;
-            data.eventTitle = document.getElementsByName('eventTitle')[0].value;
-            break;
-        case 3:
-            data.eventLocation = document.getElementsByName('eventLocation')[0].value;
-            break;
-        case 4:
-            // You already have selectedPackage.
-            break;
-        case 5:
-            data.eventDescription = document.getElementsByName('eventDescription')[0].value;
-            break;
-        case 6:
-            // Display data on the receipt for step 6
-            document.getElementById('receiptDate').textContent = data.bookingDate;
-            document.getElementById('receiptTime').textContent = data.bookingTime;
-            document.getElementById('receiptEventType').textContent = data.eventType;
-            document.getElementById('receiptEventTitle').textContent = data.eventTitle;
-            document.getElementById('receiptEventLocation').textContent = data.eventLocation;
-            document.getElementById('receiptEventDescription').textContent = data.eventDescription;
-            document.getElementById('selectedPackage').textContent = data.selectedPackage || 'N/A';
-            break;
-        case 7:
-            data.paymentAmount = document.getElementById('paymentAmount').value;
-            break;
-    }
-}
-function showConfirmationPopup() {
-    updateData(currentStep);
+    // Display the collected data in the summary receipt
+    document.getElementById('receiptDate').textContent = formData.bookingDate;
+    document.getElementById('receiptTime').textContent = formData.bookingTime;
+    document.getElementById('receiptEventType').textContent = formData.eventType;
+    document.getElementById('receiptEventTitle').textContent = formData.eventTitle;
+    document.getElementById('receiptEventLocation').textContent = formData.eventLocation;
+    document.getElementById('receiptEventDescription').textContent = formData.eventDescription;
+    document.getElementById('selectedPackage').textContent = formData.selectedPackage;
 
-    // Show the confirmation popup
-    var confirmationPopup = document.getElementById('confirmationPopup');
-    if (confirmationPopup) {
-        confirmationPopup.style.display = 'block';
-    }
+    // Show the summary section (Step 6)
+    document.getElementById('step6').style.display = 'block';
+    // Hide the "Next" button and show the "Previous" button
+    document.getElementById('next').style.display = 'none';
+    document.getElementById('prev').style.display = 'block';
 }
 
+  /// Add an event listener to the "Submit" button
+document.getElementById('next').addEventListener('click', function (event) {
+    event.preventDefault();
+    collectAndDisplayData();
+});
+
+// Add an event listener to the "Previous" button
+document.getElementById('prev').addEventListener('click', function (event) {
+    event.preventDefault();
+    // Hide the summary section (Step 6) and show the previous step
+    document.getElementById('step6').style.display = 'none';
+    document.getElementById('next').style.display = 'block';
+    document.getElementById('prev').style.display = 'none';
+
+  });
 
 
 </script>
