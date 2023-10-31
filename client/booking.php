@@ -81,13 +81,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     <!---WEB TITLE--->
     <link rel="short icon" href="../picture/shortcut-logo.jpg" type="x-icon">
-    <link rel=stylesheet
+    <link rel=stylesheet>
     <title>
         <?php echo "User | Booking Schedule"; ?>
     </title>
 
     <!---CSS--->
-    <link rel="stylesheet" href="../css/booking.css">
+    <link rel="stylesheet" href="../css/client.css">
 
     <!--ICON LINKS-->
     <link rel="stylesheet" href="../font-awesome-6/css/all.css">
@@ -260,7 +260,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             
 
             <div class="buttons">
-                <button id="prev" disabled>Prev</button>
+                <button id="prev">Prev</button>
                 <button id="next">Next</button>
             </div>
         </form>
@@ -308,129 +308,137 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     packageElement.classList.add('glowing');
 }
     
-    var currentStep = 1; // Initialize the current step to 1
-  var totalSteps = 7; // Define the total number of steps
+   // JavaScript to handle "Prev" and "Next" buttons
 
-  // Get the "Next" and "Prev" buttons
-  var nextButton = document.getElementById('next');
-  var prevButton = document.getElementById('prev');
+var currentStep = 1;
+var totalSteps = 7;
 
-  // Get the circle indicators
-  var circles = document.querySelectorAll('.circle');
+// Get the "Next" and "Prev" buttons
+var nextButton = document.getElementById('next');
+var prevButton = document.getElementById('prev');
 
-  // Add an event listener to the "Next" button
-  nextButton.addEventListener('click', function (event) {
+// Get the circle indicators
+var circles = document.querySelectorAll('.circle');
+
+// Add an event listener to the "Next" button
+nextButton.addEventListener('click', function (event) {
     event.preventDefault();
     nextStep();
-  });
+});
 
-  // Add an event listener to the "Prev" button
-  prevButton.addEventListener('click', function (event) {
+// Add an event listener to the "Prev" button
+prevButton.addEventListener('click', function (event) {
     event.preventDefault();
     prevStep();
-  });
+});
 
-  function nextStep() {
-  if (currentStep < totalSteps) {
-    if (validateFields(currentStep)) {
-      currentStep++;
-      updateStepDisplay();
-    } else {
-      // Validation failed, don't proceed to the next step
+// Initialize the form, enabling or disabling "Next" and "Prev" buttons
+updateStepDisplay();
+
+function nextStep() {
+    if (currentStep < totalSteps) {
+        if (validateFields(currentStep)) {
+            currentStep++;
+            updateStepDisplay();
+        } else {
+            // Validation failed, don't proceed to the next step
+        }
     }
-  }
 }
 
-
-  function prevStep() {
+function prevStep() {
     if (currentStep > 1) {
-      currentStep--;
-      updateStepDisplay();
+        currentStep--;
+        updateStepDisplay();
     }
-  }
+}
 
-  function updateStepDisplay() {
+function updateStepDisplay() {
     // Hide all form steps
     var formSteps = document.querySelectorAll('.form-step');
     formSteps.forEach(function (step) {
-      step.style.display = 'none';
+        step.style.display = 'none';
     });
 
     // Show the current step
     var currentStepElement = document.getElementById('step' + currentStep);
     if (currentStepElement) {
-      currentStepElement.style.display = 'block';
+        currentStepElement.style.display = 'block';
     }
 
     // Update the circle indicators
     circles.forEach(function (circle, index) {
-      if (index < currentStep) {
-        circle.classList.add('active');
-      } else {
-        circle.classList.remove('active');
-      }
-       // Update the progress line position
-        var progressLine = document.querySelector('.progress-line');
-        if (progressLine) {
-            var stepWidth = (100 / (totalSteps - 1)) * (currentStep - 1);
-            progressLine.style.width = stepWidth + '%';
+        if (index < currentStep) {
+            circle.classList.add('active');
+        } else {
+            circle.classList.remove('active');
         }
     });
 
+    // Update the progress line position
+    var progressLine = document.querySelector('.progress-line');
+    if (progressLine) {
+        var stepWidth = (80 / (totalSteps - 1)) * (currentStep - 1);
+        progressLine.style.width = stepWidth + '%';
+        progressLine.style.left = '10%';
+    }
+
     // Enable or disable "Next" and "Prev" buttons based on the current step
     if (currentStep === 1) {
-      prevButton.disabled = true;
+        prevButton.disabled = true;
+        nextButton.disabled = false;
     } else if (currentStep === totalSteps) {
-      nextButton.disabled = true;
+        prevButton.disabled = true;
+        nextButton.disabled = true;
     } else {
-      prevButton.disabled = false;
-      nextButton.disabled = false;
+        prevButton.disabled = false;
+        nextButton.disabled = false;
     }
-  }
-
-  function validateFields(step) {
-  if (step === 1) {
-    const bookingDate = document.getElementById('bookingDate').value;
-    if (bookingDate === '') {
-      alert('Please enter a booking date.');
-      return false;
-    }
-  } else if (step === 2) {
-    const eventType = document.getElementsByName('eventType')[0].value;
-    const eventTitle = document.getElementsByName('eventTitle')[0].value;
-    if (eventType === '' || eventTitle === '') {
-      alert('Please fill in all required fields.');
-      return false;
-    }
-  } else if (step === 3) {
-    const eventLocation = document.getElementsByName('eventLocation')[0].value;
-    if (eventLocation === '') {
-      alert('Please enter the event location.');
-      return false;
-    }
-  } else if (step === 4) {
-    if (selectedPackage === null) {
-      alert('Please choose a package.');
-      return false;
-    }
-  } else if (step === 5) {
-    const eventDescription = document.getElementsByName('eventDescription')[0].value;
-    if (eventDescription === '') {
-      alert('Please provide an event description.');
-      return false;
-    }
-  } else if (step === 7) {
-    const paymentAmount = document.getElementById('paymentAmount').value;
-    if (paymentAmount === '') {
-      alert('Please enter the payment amount.');
-      return false;
-    }
-  }
-
-  // Add similar validation for other steps
-
-  return true;
 }
+
+    function validateFields(step) {
+    if (step === 1) {
+      const bookingDate = document.getElementById('bookingDate').value;
+      if (bookingDate === '') {
+        alert('Please enter a booking date.');
+        return false;
+      }
+    } else if (step === 2) {
+      const eventType = document.getElementsByName('eventType')[0].value;
+      const eventTitle = document.getElementsByName('eventTitle')[0].value;
+      if (eventType === '' || eventTitle === '') {
+        alert('Please fill in all required fields.');
+        return false;
+      }
+    } else if (step === 3) {
+      const eventLocation = document.getElementsByName('eventLocation')[0].value;
+      if (eventLocation === '') {
+        alert('Please enter the event location.');
+        return false;
+      }
+    } else if (step === 4) {
+      if (selectedPackage === null) {
+        alert('Please choose a package.');
+        return false;
+      }
+    } else if (step === 5) {
+      const eventDescription = document.getElementsByName('eventDescription')[0].value;
+      if (eventDescription === '') {
+        alert('Please provide an event description.');
+        return false;
+      }
+    } else if (step === 7) {
+      const paymentAmount = document.getElementById('paymentAmount').value;
+      if (paymentAmount === '') {
+        alert('Please enter the payment amount.');
+        return false;
+      }
+    }
+
+    // Add similar validation for other steps
+
+    return true;
+  }
 
 
 function collectAndDisplayData() {

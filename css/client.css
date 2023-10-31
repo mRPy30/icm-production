@@ -103,7 +103,7 @@ tr:nth-child(odd) {
     position: fixed;
     top: 50%;
     left: 53%;
-    height: 40% ;
+    height: 54%;
     width: 50%;
     transform: translate(-50%, -50%);
     background-color: #fff;
@@ -136,6 +136,7 @@ tr:nth-child(odd) {
   align-items: center; /* Center vertically */
   justify-content: space-between;
   position: relative;
+  padding: 0% 10% 0% 10%;
 }
 
 .steps .circle {
