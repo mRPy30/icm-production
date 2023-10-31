@@ -281,27 +281,28 @@ p {
 }
 
 .form-step {
-    max-width: 400px;
-    margin: 0 auto;
+    max-width: 800px;
     font-family: Arial, sans-serif;
 }
 
 .form-group {
-    margin-bottom: 50px;
+    padding-bottom: 10px;
+    display: inline-block;
+    margin: 20px;
 }
 
 .form-label {
     display: block;
     font-weight: bold;
-    margin-bottom: 5px;
+    margin-bottom: 20px;
 }
 
 .form-input {
-    width: 100%;
-    padding: 8px;
+    width: 250px;
+    padding: 15px;
     box-sizing: border-box;
 }
 
 .form {
-    height: 200px;
+    height: 300px;
 }
