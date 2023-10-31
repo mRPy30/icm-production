@@ -173,23 +173,32 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </div>
 
             <!-- Step 1 -->
-            <p style="font-size: 25px; padding:20px">Set Date and Time Schedule</p>
+            
             <div id="step1" class="form-step">
-                
+            <p style="font-size: 25px; padding:20px">Set Date and Time Schedule</p>
+            <div class="form-group">
                 <form>
-                  <div class="form-group">
-                <label for="bookingDate">Date:</label>
+                <p>Date</p>
+                <label for="bookingDate"></label>
                 <input type="date" name="bookingDate" id="bookingDate" class="form-input"  required>
+                </form>
               </div>
+              
               <div class="form-group">
-                <label for="bookingTime">Time:</label>
+              <form>
+                <p>Time</p>
+                <label for="bookingTime"></label>
                 <input type="time" name="bookingTime" class="form-input" required>
+                </form<>
               </div>
             </div>
+              
 
             <!-- Step 2 -->
             <div id="step2" class="form-step" >
                 <p style="font-size: 25px; padding:20px; text-align:left;">Set Event Title and Type</p>
+                <div class="form-group">
+                <form>
                 <label for="eventType">Type of Event</label>
                 <select name="eventType" required>
                     <?php
@@ -198,9 +207,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     }
                     ?>
                 </select>
-                  
+                </form>
+              </div>
+
+              <div class="form-group">
+              <form>
                 <label for="eventTitle">Title Event</label>
                 <input type="text" name="eventTitle" required>
+                </form>
+              </div>
             </div>
 
             <!-- Step 3 -->
