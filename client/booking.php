@@ -62,13 +62,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $insertQuery = "INSERT INTO booking (scheduleId, eventDate, eventTime, venue, type_of_event, title_event, paymentAmount, description, clientName) 
                     VALUES ('$scheduleId', '$bookingDate', '$bookingTime', '$eventLocation', '$eventType', '$eventTitle', '$paymentAmount', '$eventDescription', '$firstName $lastName')";
 
-    if (mysqli_query($conn, $insertQuery)) {
-        // Insert successful
-        echo "Booking data has been successfully inserted into the database.";
-    } else {
-        // Insert failed
-        echo "Error: " . mysqli_error($conn);
-    }
+$bookingSuccessful = false;
+$bookingMessage = '';
+
+if (mysqli_query($conn, $insertQuery)) {
+    // Insert successful
+    $bookingSuccessful = true;
+    $bookingMessage = "Booking data has been successfully inserted into the database.";
+} else {
+    // Insert failed
+    $bookingMessage = "Error: " . mysqli_error($conn);
+}
 }
 ?>
 
@@ -248,13 +252,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <label for="paymentAmount">Payment Amount:</label>
                 <input type="number" name="paymentAmount" id="paymentAmount" required>
 
-                <button id="payButton" onclick="showConfirmationPopup()">Pay</button>
+                <button id="payButton" onclick="closeFormAndShowConfirmation()">Pay</button>
             </div>
 
             <div id="showConfirmationPopup" class="confirmation-popup" style="display: none;">
               <p>Do you want to proceed with this booking event?</p>
-              <button id="confirmYes" class="confirm-button" onclick="confirmBooking()">Yes</button>
               <button id="confirmWait" class="confirm-button" onclick="hideConfirmationPopup()">Wait</button>
+              <button id="confirmYes" class="confirm-button" onclick="confirmBooking()">Yes</button>
+
             </div>
             
             
@@ -307,7 +312,26 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Add the 'glowing' class to the clicked package box
     packageElement.classList.add('glowing');
 }
-    
+    //alert after submit data in booking
+    document.addEventListener("DOMContentLoaded", function() {
+    <?php
+    if (isset($_SESSION['booking_success'])) {
+        if ($_SESSION['booking_success']) {
+            echo "alert('Booking data has been successfully inserted into the database.');";
+            header('Location: ../client/booking.php');
+            exit();
+        } else {
+            $errorMessage = isset($_SESSION['booking_error_message']) ? $_SESSION['booking_error_message'] : 'An error occurred while inserting booking data.';
+            echo "alert('$errorMessage');";
+            header('Location: ../client/booking.php');
+            exit();
+        }
+    }
+    unset($_SESSION['booking_success']);
+    unset($_SESSION['booking_error_message']);
+    ?>
+});
+
    // JavaScript to handle "Prev" and "Next" buttons
 
 var currentStep = 1;
@@ -492,17 +516,28 @@ function showConfirmationPopup() {
     confirmationPopup.style.display = 'block';
 }
 
-// Function to hide the confirmation popup
-function hideConfirmationPopup() {
-    var confirmationPopup = document.getElementById('showConfirmationPopup');
-    confirmationPopup.style.display = 'none';
-}
+    // Function to hide the confirmation popup
+    function hideConfirmationPopup() {
+        var confirmationPopup = document.getElementById('showConfirmationPopup');
+        confirmationPopup.style.display = 'none';
+    }
 
-// Function to confirm the booking (you can customize this part)
-function confirmBooking() {
-    // Here you can submit the form to the database
-    document.querySelector('form').submit();
-}
+ // Check if the "Wait" button was clicked in the confirmation popup
+ var waitButtonClicked = false;
+    document.getElementById('confirmWait').addEventListener('click', function (event) {
+        event.preventDefault();
+        waitButtonClicked = true;
+    });
+
+    // If "Wait" was clicked, close the confirmation popup
+    if (waitButtonClicked) {
+        hideConfirmationPopup();
+    }
+    // Function to confirm the booking (you can customize this part)
+    function confirmBooking() {
+        // Here you can submit the form to the database
+        document.querySelector('form').submit();
+    }
 
 // Add an event listener to the "Pay" button
 document.getElementById('payButton').addEventListener('click', function (event) {

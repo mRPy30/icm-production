@@ -133,7 +133,7 @@ tr:nth-child(odd) {
 .steps {
   display: flex;
   width: 100%;
-  align-items: center; /* Center vertically */
+  align-items: center;
   justify-content: space-between;
   position: relative;
   padding: 0% 10% 0% 10%;
@@ -143,10 +143,10 @@ tr:nth-child(odd) {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 30px; /* Change height to 30px */
-  width: 30px; /* Change width to 30px */
+  height: 30px;
+  width: 30px;
   color: #999;
-  font-size: 14px; /* Adjust the font size as needed */
+  font-size: 14px;
   font-weight: 500;
   border-radius: 50%;
   background: #fff;
@@ -154,7 +154,7 @@ tr:nth-child(odd) {
   transition: all 200ms ease;
   transition-delay: 0s;
   position: relative;
-  z-index: 2; /* Make the circles appear above the progress line */
+  z-index: 2;
 }
 
   
@@ -199,9 +199,23 @@ tr:nth-child(odd) {
   margin-bottom: 20px;
 }
 
-.confirm-button {
+.confirm-button#confirmYes {
   padding: 8px 20px;
   background: #D25A5A;
+  border: none;
+  border-radius: 8px;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 400;
+  cursor: pointer;
+  margin: 0 10px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+  transition: all 200ms linear;
+}
+
+.confirm-button#confirmWait {
+  padding: 8px 20px;
+  background: #B3B3B3;
   border: none;
   border-radius: 8px;
   color: #fff;
