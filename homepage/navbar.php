@@ -22,8 +22,8 @@
         }
 
         .header-section img {
-            width: 9vw;
-            height: 9vh;
+            width: 9%;
+            height: 9%;
             cursor: pointer;
             margin: 10px;
         }
@@ -114,7 +114,7 @@
 
 <body>
     <header class="header-section">
-        <img src="../picture/logotry1.png">
+        <img src="../picture/logo.png">
 
         <ul>
             <li class="nav-item">
