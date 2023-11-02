@@ -22,31 +22,15 @@ if ($result->num_rows > 0) {
 <style>
     /*****Sidebar*****/
 
-<<<<<<< HEAD
     .wrapper{
 	    height: calc(100vh - 40px);
 	    border-radius: 15px;
 	    display: flex;
-=======
-    .wrapper {
-        background: #FBF4F4;
-        height: calc(100vh - 40px);
-        border-radius: 15px;
-        display: flex;
->>>>>>> 40bfe7071e58dab8d6d6d46dd59cb2ac5cde1397
         position: absolute;
     }
-<<<<<<< HEAD
     .side_bar{
 	    width: 97%;
 	    height: 99.5%;
-=======
-
-    .side_bar {
-        width: 100%;
-        height: 99.5%;
->>>>>>> 40bfe7071e58dab8d6d6d46dd59cb2ac5cde1397
-
     }
 
     .side_bar .side_bar_top {
@@ -84,13 +68,8 @@ if ($result->num_rows > 0) {
     .side_bar .side_bar_bottom {
         background: #1C1C1D;
         height: calc(100% - 200px);
-<<<<<<< HEAD
         padding: 15px 0px 0px 30px;
         border-radius: 0px 0px 20px 0px;        
-=======
-        padding: 0px 0px 0px 30px;
-        border-radius: 0px 0px 20px 0px;
->>>>>>> 40bfe7071e58dab8d6d6d46dd59cb2ac5cde1397
         text-decoration: none;
         list-style: none;
     }
@@ -154,20 +133,11 @@ if ($result->num_rows > 0) {
         border-top-right-radius: 25px;
     }
 
-<<<<<<< HEAD
     .side_bar .side_bar_bottom .logout{
         padding: 10% 15px 15px 50px;		
     }
     .side_bar .side_bar_bottom .logout button{
         font: normal 500 75%/20px 'Poppins';
-=======
-    .side_bar .side_bar_bottom .logout {
-        padding: 17% 15px 15px 50px;
-    }
-
-    .side_bar .side_bar_bottom .logout button {
-        font: normal 500 14px/20px 'Poppins';
->>>>>>> 40bfe7071e58dab8d6d6d46dd59cb2ac5cde1397
         color: #FBF4F4;
         background: #1C1C1D;
         border: none;

@@ -63,7 +63,7 @@ $page = $components[2];
     </title>
 
     <!---CSS--->
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/styles.css">
 
     <!--ICON LINKS-->
     <link rel="stylesheet" href="font-awesome-6/css/all.css">

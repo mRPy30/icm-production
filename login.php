@@ -67,7 +67,7 @@ $page = $components[2];
     <title><?php echo "Icm Production | Login Account"; ?></title>
 
     <!---CSS--->
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/styles.css">
 
     <!--CSS FRAMEWORK-->
    
