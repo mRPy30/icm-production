@@ -148,6 +148,60 @@ if ($result->num_rows > 0) {
         border: none;
     }
 
+    .popup {
+        display: none;
+        position: fixed;
+        top: 50%;
+        left: 53%;
+        height: 25%;
+        width: 30%;
+        transform: translate(-50%, -50%);
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 5px;
+        box-shadow: 0px 0px 400px 900px rgba(0,0,0,0.28);
+        z-index: 9999;
+    }
+
+    .popup-content {
+        background: #fff;
+        padding: 20px;
+        border-radius: 5px;
+        text-align: center;
+    }
+
+    .popup-content p{
+        font: normal 600 18px/20px 'Poppins';
+        color: #1C1C1D;
+        margin-bottom: 10%;
+    }
+
+    button#logoutYes {
+        padding: 10px 15px;
+        margin: 5px;
+        background: #D25A5A;
+        border: none;
+        border-radius: 8px;
+        color: #fff;
+        font: normal 500 14px/20px 'Poppins';
+        cursor: pointer;
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.05);
+        transition: all 200ms linear;
+    }
+
+    button#logoutNo {
+        padding: 10px 15px;
+        margin: 5px;
+        background: #747473;;
+        border: none;
+        border-radius: 8px;
+        color: #ffffff;
+        font: normal 500 14px/20px 'Poppins';
+        cursor: pointer;
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.05);
+        transition: all 200ms linear;
+    }
+
     /*******RESPONSIVE**********/
 
     @media (max-width: 992px) {
@@ -237,7 +291,7 @@ if ($result->num_rows > 0) {
                         echo "nav-link active";
                     } else {
                         echo "nav-link";
-                    } ?> "><span class="item">Service</span></a>
+                    } ?> "><span class="item">Finance</span></a>
                     <span class="bottom_curve"></span>
                 </li>
                 <li class="nav-link">
@@ -256,6 +310,15 @@ if ($result->num_rows > 0) {
         </div>
     </nav>
 </div>
+
+    <!-----popup confirmation logout------>
+    <div id="logoutPopup" class="popup">
+                <div class="popup-content">
+                    <p>Are you sure you want to logout?</p>
+                    <button id="logoutNo">No</button>
+                    <button id="logoutYes">Yes</button>
+                </div>
+            </div>
 
 <script>
 
@@ -282,8 +345,22 @@ if ($result->num_rows > 0) {
     // Call the setActivePage function when the page loads
     window.addEventListener("load", setActivePage);
 
-    function goBack() {
-        window.location.href = "../login.php";
-    }
+   
+
+            // JavaScript code to show the logout confirmation popup
+        document.querySelector(".btn-logout").addEventListener("click", function() {
+            document.getElementById("logoutPopup").style.display = "block";
+        });
+
+        // Close the popup when clicking "No"
+        document.getElementById("logoutNo").addEventListener("click", function() {
+            document.getElementById("logoutPopup").style.display = "none";
+        });
+
+        // Handle the "Yes" click event for logout
+        document.getElementById("logoutYes").addEventListener("click", function() {
+            // Redirect to the logout page
+            window.location.href = "../login.php";
+        });
 </script>
 <!-------End Sidebar------------>
