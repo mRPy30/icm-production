@@ -104,15 +104,9 @@ if ($result->num_rows > 0) {
         display: block;
         padding: 15px 15px 15px 50px;
         color: #FBF4F4;
-<<<<<<< HEAD
         font: normal 500 80%/20px 'Poppins';
         margin-bottom: 5px;		
         text-decoration: none;	
-=======
-        font: normal 500 14px/20px 'Poppins';
-        margin-bottom: 5px;
-        text-decoration: none;
->>>>>>> 40bfe7071e58dab8d6d6d46dd59cb2ac5cde1397
     }
 
     .side_bar .side_bar_bottom ul .nav-link.active a {
