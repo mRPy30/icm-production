@@ -23,15 +23,13 @@ if ($result->num_rows > 0) {
     /*****Sidebar*****/
 
     .wrapper{
-	    background: #FBF4F4;
 	    height: calc(100vh - 40px);
 	    border-radius: 15px;
 	    display: flex;
         position: absolute;
-        width: 18%;
     }
     .side_bar{
-	    width: 100%;
+	    width: 97%;
 	    height: 99.5%;
 
     }
@@ -40,7 +38,7 @@ if ($result->num_rows > 0) {
         background: #1C1C1D;
         height: 245px;
         border-radius: 0px 17px 0px 0px;
-        padding: 30px;
+        padding: 50px 0px 0px 0px;
     }
 
     .side_bar .side_bar_top .profile_pic{
@@ -71,7 +69,7 @@ if ($result->num_rows > 0) {
     .side_bar .side_bar_bottom{
         background: #1C1C1D;
         height: calc(100% - 200px);
-        padding: 0px 0px 0px 30px;
+        padding: 15px 0px 0px 30px;
         border-radius: 0px 0px 20px 0px;        
         text-decoration: none;
         list-style: none;	
@@ -86,7 +84,7 @@ if ($result->num_rows > 0) {
         display: block;
         padding: 15px 15px 15px 50px;		
         color: #FBF4F4;
-        font: normal 500 14px/20px 'Poppins';
+        font: normal 500 80%/20px 'Poppins';
         margin-bottom: 5px;		
         text-decoration: none;	
     }
@@ -96,7 +94,7 @@ if ($result->num_rows > 0) {
         color:  #1c1c1c;
         border-top-left-radius: 20px;
         border-bottom-left-radius: 20px;
-        font: normal 500 14px/20px 'Poppins';
+        font: normal 500 83%/20px 'Poppins';
     }
 
     .side_bar .side_bar_bottom ul .nav-link.active .top_curve,
@@ -104,9 +102,9 @@ if ($result->num_rows > 0) {
         position: absolute;
         left: 0;
         width: 100%;
-        height: 20px;
+        height: 40%;
         background: #FBF4F4;
-        transition: background-color 0.6s, color 1s;
+        transition: background-color 0.7s, color 1s;
     }
 
     .side_bar .side_bar_bottom ul .nav-link.active .top_curve{
@@ -137,10 +135,10 @@ if ($result->num_rows > 0) {
     }
 
     .side_bar .side_bar_bottom .logout{
-        padding: 17% 15px 15px 50px;		
+        padding: 10% 15px 15px 50px;		
     }
     .side_bar .side_bar_bottom .logout button{
-        font: normal 500 14px/20px 'Poppins';
+        font: normal 500 75%/20px 'Poppins';
         color: #FBF4F4;
         background: #1C1C1D;
         border: none;
@@ -283,7 +281,7 @@ if ($result->num_rows > 0) {
                 </li>
                 <li class="nav-link">
                     <span class="top_curve"></span>
-                    <a href="service.php" class="<?php if ($page == "..admin/service.php") {
+                    <a href="finance.php" class="<?php if ($page == "..admin/finance.php") {
                         echo "nav-link active";
                     } else {
                         echo "nav-link";

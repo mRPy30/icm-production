@@ -30,7 +30,7 @@ $page = $components[2];
     <link rel="stylesheet" href="../css/admin.css">
 
     <!--ICON LINKS-->
-    <link rel="stylesheet" href="font-awesome-6/css/all.css">
+    <link rel="stylesheet" href="../font-awesome-6/css/all.css">
 
     <!--FONT LINKS-->
     <link rel="stylesheet" href="../css/fonts.css">
@@ -40,7 +40,8 @@ $page = $components[2];
 
     <div class="background">
         <img src="../picture/logo.png">
-    </div> 
+        <i class="fa-regular fa-bell"></i>
+    </div>  
     <?php 
         include '../admin/sidebar.php';
     ?>

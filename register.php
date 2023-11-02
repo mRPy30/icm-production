@@ -80,7 +80,9 @@ $page = $components[2];
     <!--background-->
     <main class="body_content">
         <div class="logo">
-            <img src="picture/logo.png" alt="logo">
+            <a href="homepage/homepage.php">
+                <img src="picture/logo.png" alt="logo">
+            </a>
         </div>
         <div class="text">
             <h2>Welcome to <br>ICM Production</h2>

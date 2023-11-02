@@ -43,7 +43,7 @@ $page = $components[2];
     <link rel="stylesheet" href="../css/admin.css">
 
     <!--ICON LINKS-->
-    <script src="https://kit.fontawesome.com/11a4f2cc62.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../font-awesome-6/css/all.css">
 
     <!--FONT LINKS-->
     <link rel="stylesheet" href="../css/fonts.css">
@@ -61,6 +61,7 @@ $page = $components[2];
 <body>
     <div class="background">
         <img src="../picture/logo.png">
+        <i class="fa-regular fa-bell"></i>
     </div> 
     <!----Sidebar----->
     <?php 
@@ -80,6 +81,14 @@ $page = $components[2];
                 <h1><?php echo $total_number; ?></h1>
             </div>
             <div class='staff'>
+                <p>Staff</p>
+                <h1><?php echo $total_number; ?></h1>
+            </div>
+            <div class='staff'>
+                <p>Staff</p>
+                <h1><?php echo $total_number; ?></h1>
+            </div>
+            <div class='staff2'>
                 <p>Staff</p>
                 <h1><?php echo $total_number; ?></h1>
             </div>
