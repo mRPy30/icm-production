@@ -133,7 +133,7 @@
                 <a class="nav-link" href="#contact ">Contact</a>
             </li>
         </ul>
-        <a class="register" href="register.php"><button>Register</button></a>
+        <a class="register" href="../register.php"><button>Register</button></a>
     </header>
 </body>
 

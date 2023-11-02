@@ -30,7 +30,7 @@
 
     <!--FONT LINKS-->
     <link rel="stylesheet" href="../css/fonts.css">
-    
+
 </head>
 
 <body>
@@ -45,9 +45,10 @@
     <main class="homepage_main">
         <div class="main-content">
             <div class="image-content">
-                <img src="../picture/homepic.jpg" href="#home">
+                <img src="../picture/ICM.png" href="#home">
             </div>
         </div>
+
     </main>
     <!----End of Main Content----->
 

@@ -22,85 +22,86 @@ if ($result->num_rows > 0) {
 <style>
     /*****Sidebar*****/
 
-    .wrapper{
-	    background: #FBF4F4;
-	    height: calc(100vh - 40px);
-	    border-radius: 15px;
-	    display: flex;
+    .wrapper {
+        background: #FBF4F4;
+        height: calc(100vh - 40px);
+        border-radius: 15px;
+        display: flex;
         position: absolute;
         width: 18%;
     }
-    .side_bar{
-	    width: 100%;
-	    height: 99.5%;
+
+    .side_bar {
+        width: 100%;
+        height: 99.5%;
 
     }
 
-    .side_bar .side_bar_top{
+    .side_bar .side_bar_top {
         background: #1C1C1D;
         height: 245px;
         border-radius: 0px 17px 0px 0px;
         padding: 30px;
     }
 
-    .side_bar .side_bar_top .profile_pic{
+    .side_bar .side_bar_top .profile_pic {
         display: flex;
         justify-content: center;
-        margin-bottom: 20px;	
+        margin-bottom: 20px;
     }
 
-    .side_bar .side_bar_top .profile_pic img{
+    .side_bar .side_bar_top .profile_pic img {
         width: 110px;
         height: 110px;
         padding: 5px;
         border-radius: 50%;
     }
 
-    .side_bar .side_bar_top .profile_info{
+    .side_bar .side_bar_top .profile_info {
         text-align: center;
         color: #fff;
         font: normal 500 15px/20px 'Poppins';
 
     }
 
-    .side_bar .side_bar_top .profile_info p{
+    .side_bar .side_bar_top .profile_info p {
         margin-top: 5px;
-        font: normal 400 12px/20px 'Poppins';	
+        font: normal 400 12px/20px 'Poppins';
     }
 
-    .side_bar .side_bar_bottom{
+    .side_bar .side_bar_bottom {
         background: #1C1C1D;
         height: calc(100% - 200px);
         padding: 0px 0px 0px 30px;
-        border-radius: 0px 0px 20px 0px;        
+        border-radius: 0px 0px 20px 0px;
         text-decoration: none;
-        list-style: none;	
+        list-style: none;
     }
 
-    .side_bar .side_bar_bottom ul li{
+    .side_bar .side_bar_bottom ul li {
         position: relative;
-        list-style: none;	
+        list-style: none;
     }
 
-    .side_bar .side_bar_bottom ul .nav-link a{
+    .side_bar .side_bar_bottom ul .nav-link a {
         display: block;
-        padding: 15px 15px 15px 50px;		
+        padding: 15px 15px 15px 50px;
         color: #FBF4F4;
         font: normal 500 14px/20px 'Poppins';
-        margin-bottom: 5px;		
-        text-decoration: none;	
+        margin-bottom: 5px;
+        text-decoration: none;
     }
 
-    .side_bar .side_bar_bottom ul .nav-link.active a{
+    .side_bar .side_bar_bottom ul .nav-link.active a {
         background: #FBF4F4;
-        color:  #1c1c1c;
+        color: #1c1c1c;
         border-top-left-radius: 20px;
         border-bottom-left-radius: 20px;
         font: normal 500 14px/20px 'Poppins';
     }
 
     .side_bar .side_bar_bottom ul .nav-link.active .top_curve,
-    .side_bar .side_bar_bottom ul .nav-link.active .bottom_curve{
+    .side_bar .side_bar_bottom ul .nav-link.active .bottom_curve {
         position: absolute;
         left: 0;
         width: 100%;
@@ -109,37 +110,38 @@ if ($result->num_rows > 0) {
         transition: background-color 0.6s, color 1s;
     }
 
-    .side_bar .side_bar_bottom ul .nav-link.active .top_curve{
+    .side_bar .side_bar_bottom ul .nav-link.active .top_curve {
         top: -20px;
     }
 
-    .side_bar .side_bar_bottom ul .nav-link.active .bottom_curve{
-        bottom: -20px;	
+    .side_bar .side_bar_bottom ul .nav-link.active .bottom_curve {
+        bottom: -20px;
     }
 
     .side_bar .side_bar_bottom ul .nav-link.active .top_curve:before,
-    .side_bar .side_bar_bottom ul .nav-link.active .bottom_curve:before{
+    .side_bar .side_bar_bottom ul .nav-link.active .bottom_curve:before {
         content: "";
         position: absolute;
         top: 0;
         left: 0;
         width: 100%;
         height: 100%;
-        background: #1C1C1D;	
+        background: #1C1C1D;
     }
 
-    .side_bar .side_bar_bottom ul li.active .top_curve:before{
+    .side_bar .side_bar_bottom ul li.active .top_curve:before {
         border-bottom-right-radius: 25px;
     }
 
-    .side_bar .side_bar_bottom ul li.active .bottom_curve:before{
+    .side_bar .side_bar_bottom ul li.active .bottom_curve:before {
         border-top-right-radius: 25px;
     }
 
-    .side_bar .side_bar_bottom .logout{
-        padding: 17% 15px 15px 50px;		
+    .side_bar .side_bar_bottom .logout {
+        padding: 17% 15px 15px 50px;
     }
-    .side_bar .side_bar_bottom .logout button{
+
+    .side_bar .side_bar_bottom .logout button {
         font: normal 500 14px/20px 'Poppins';
         color: #FBF4F4;
         background: #1C1C1D;
@@ -185,7 +187,9 @@ if ($result->num_rows > 0) {
                 <img src="data:image/jpeg;base64,<?php echo $profile; ?>" alt="admin image">
             </div>
             <div class="profile_info">
-                <h3><?php echo $name; ?></h3>
+                <h3>
+                    <?php echo $name; ?>
+                </h3>
                 <p>Admin</p>
             </div>
         </div>
@@ -251,10 +255,10 @@ if ($result->num_rows > 0) {
             </div>
         </div>
     </nav>
-</div> 
+</div>
 
 <script>
-    
+
     // JavaScript code to set the active page
     function setActivePage() {
         var currentUrl = window.location.href;
