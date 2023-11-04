@@ -40,7 +40,7 @@ $page = $components[2];
     </title>
 
     <!---CSS--->
-    <link rel="stylesheet" href="../css/client.css">
+    <link rel="stylesheet" href="../css/booking.css">
 
     <!--ICON LINKS-->
     <link rel="stylesheet" href="../font-awesome-6/css/all.css">
@@ -131,11 +131,13 @@ $page = $components[2];
                 
                 <form>
                   <div class="form-group">
-                <label for="bookingDate">Date:</label>
+                    <p>Date</p>
+                <label for="bookingDate"></label>
                 <input type="date" name="bookingDate" id="bookingDate" class="form-input"  required>
               </div>
               <div class="form-group">
-                <label for="bookingTime">Time:</label>
+              <p>Time</p>
+                <label for="bookingTime"></label>
                 <input type="time" name="bookingTime" class="form-input" required>
               </div>
             </div>
@@ -439,7 +441,7 @@ function collectAndDisplayData() {
     // Show the summary section (Step 6)
     document.getElementById('step6').style.display = 'block';
     // Hide the "Next" button and show the "Previous" button
-    document.getElementById('next').style.display = 'none';
+    document.getElementById('next').style.display = 'none';     
     document.getElementById('prev').style.display = 'block';
 }
 
