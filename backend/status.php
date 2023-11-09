@@ -1,32 +1,39 @@
 <?php
-include '../dbcon.php';
+include '../backend/dbcon.php';
 
 //Admin
 
-// Handle booking status change (accept or decline)
-if (isset($_POST['accept'])) {
-    $scheduleId = $_POST['schedule_id'];
-    // Perform a SQL UPDATE operation to change the status to 'Accepted'
-    $updateSql = "UPDATE booking SET status = 'Accepted' WHERE scheduleId = $scheduleId";
-    if ($conn->query($updateSql) === true) {
-        // Booking has been accepted
-        // You can set a success message or redirect to a specific page
-        header("Location: your_redirect_page.php"); // Redirect to a specific page
-        exit();
-    } else {
-        echo "Error accepting booking: " . $conn->error;
+    if (isset($_POST['accept'])) {
+        $scheduleId = $_POST['schedule_id'];
+
+        // Perform a SQL UPDATE operation to change the status to 'Accepted'
+        $updateSql = "UPDATE booking SET status = 'Accepted' WHERE bookingId = $scheduleId";
+
+        if ($conn->query($updateSql) === true) {
+            // Booking has been accepted
+            // Redirect to the admin booking page
+            header("Location: ../admin/booking.php");
+            exit();
+        } else {
+            // Handle the case where the update fails
+            echo "Error accepting booking: " . $conn->error;
+        }
     }
-} elseif (isset($_POST['decline'])) {
-    $scheduleId = $_POST['schedule_id'];
-    // Perform a SQL UPDATE operation to change the status to 'Declined'
-    $updateSql = "UPDATE booking SET status = 'Declined' WHERE scheduleId = $scheduleId";
-    if ($conn->query($updateSql) === true) {
-        // Booking has been declined
-        // You can set a success message or redirect to a specific page
-        header("Location: your_redirect_page.php"); // Redirect to a specific page
-        exit();
-    } else {
-        echo "Error declining booking: " . $conn->error;
-    }
+
+    // Check if the "Decline" button is clicked (similar process as "Accept")
+    elseif (isset($_POST['decline'])) {
+        $scheduleId = $_POST['schedule_id'];
+
+        // Perform a SQL UPDATE operation to change the status to 'Declined'
+        $updateSql = "UPDATE booking SET status = 'Declined' WHERE bookingId = $scheduleId";
+
+        if ($conn->query($updateSql) === true) {
+
+            header("Location: ../admin/booking.php");
+            exit();
+        } else {
+            
+            echo "Error declining booking: " . $conn->error;
+        }
 }
 ?>

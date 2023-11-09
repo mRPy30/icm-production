@@ -19,19 +19,19 @@ body {
 	width: 28%;
 }
 .body_content .logo img{
-	width: 120%;
+	width: 110%;
 }
 .body_content .text{
-	margin: 18% 0% 0% 20%;
+	margin: 16%;
 	width: 110%;
 }
 .body_content .text h2{
-	font: normal 600 60px/normal 'Poppins';
+	font: normal 600 70px/normal 'Poppins';
 	color: #1C1C1D;
 	letter-spacing: 3px;
 }
 .body_content .text h4{
-	font: normal 600 18px/normal 'Poppins';
+	font: normal 600 15px/normal 'Poppins';
 	color: #1C1C1D;
 	letter-spacing: 1px;
 }
@@ -61,7 +61,7 @@ body {
 .form_nav .nav-item {
 	display: inline-block; 
 	margin: 0 7% 0 0; 
-	font: normal 500 16px/normal 'Poppins';
+	font: normal 600 16px/normal 'Poppins';
 	position: relative;
   }
 

@@ -1,6 +1,6 @@
 <?php
 //Connection
-include 'dbcon.php';
+include 'backend/dbcon.php';
 
 if (isset($_POST['submit'])) {
     $firstname = mysqli_real_escape_string($conn, $_POST["firstname"]);
@@ -57,13 +57,13 @@ $page = $components[2];
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!---WEB TITLE--->
-    <link rel="short icon" href="picture/shortcut-logo.jpg" type="x-icon">
+    <link rel="short icon" href="picture/shortcut-logo.png" type="x-icon">
     <title>
-        <?php echo "Icm Production | Register Account"; ?>
+        <?php echo "Icsm Production | Register Account"; ?>
     </title>
 
     <!---CSS--->
-    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/style.css">
 
     <!--ICON LINKS-->
     <link rel="stylesheet" href="font-awesome-6/css/all.css">
@@ -85,8 +85,8 @@ $page = $components[2];
             </a>
         </div>
         <div class="text">
-            <h2>Welcome to <br>ICM Production</h2>
-            <h4>Capture the moments of the world through our lenses.</h4>
+            <h2>Welcome to <br>ICSM Creatives</h2>
+            <h4>We poured out our undying dedications In Capturing Sweet Memories. </h4>
         </div>
     </main>
 

@@ -1,12 +1,12 @@
 <?php
 // Connection
-include '../dbcon.php';
+include '../backend/dbcon.php';
 
 session_start(); // Start the session
 $clientID = $_SESSION['id'];
 
 // Display data in a table
-$sql = "SELECT title_event, venue, eventDate FROM booking WHERE clientName = '$clientID' ";
+$sql = "SELECT title_event, eventLocation, eventDate, status FROM booking WHERE clientID = $clientID";
 $result = mysqli_query($conn, $sql);
 
 // Fetch data from the "event" table
@@ -52,12 +52,11 @@ $page = $components[2];
 </head>
     
 <body>
-    <div class="background">
-        <img src="../picture/logo.png">
+    <div class="navbar">
+        <h3>Booking Event</h3>
+        <i class="fa-regular fa-bell"></i>
     </div> 
-    <?php 
-        include '../client/sidebar.php';
-    ?>
+    
     <section class="booking-box">
         <div class="table-booking">
           <div class="table-top">
@@ -80,16 +79,20 @@ $page = $components[2];
                   while ($row = mysqli_fetch_assoc($result)) {
                       echo '<tr>';
                       echo '<td>' . $row['title_event'] . '</td>';
-                      echo '<td>' . $row['venue'] . '</td>';
+                      echo '<td>' . $row['eventLocation'] . '</td>';
                       echo '<td>' . $row['eventDate'] . '</td>';
+                      echo '<td>' . $row['status'] . '</td>';
                       echo '</tr>';
                 }
                 ?>
+                </tbody>
             </table>
         </div>
     </section>
 
-   
+    <?php 
+        include '../client/sidebar.php';
+    ?>
         <!-- Set schedule form (hidden by default) -->
     <div id="setForm" class="form-popup">
     <span class="close-button" onclick="closeForm()" style="font-size: 20px; font-weight: 600;">&#10006;</span>

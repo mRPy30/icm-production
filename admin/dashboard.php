@@ -1,6 +1,6 @@
 <?php 
 //Connection
-include '../dbcon.php';
+include '../backend/dbcon.php';
 
 session_start(); // Start the session
 
@@ -34,7 +34,7 @@ $page = $components[2];
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!---WEB TITLE--->
-    <link rel="short icon" href="../picture/shortcut-logo.jpg" type="x-icon">
+    <link rel="short icon" href="../picture/shortcut-logo.png" type="x-icon">
     <title>
         <?php echo "Admin | Dashboard"; ?>
     </title>
@@ -59,10 +59,10 @@ $page = $components[2];
 </head>
     
 <body>
-    <div class="background">
-        <img src="../picture/logo.png">
+    <div class="navbar">
+        <h3>Admin Dashboard</h3>
         <i class="fa-regular fa-bell"></i>
-    </div> 
+    </div>  
     <!----Sidebar----->
     <?php 
         include '../admin/sidebar.php';
@@ -71,7 +71,7 @@ $page = $components[2];
     <!----Main Content----->
     <main class="admin_main">   
         <div class="total-result">
-            <!---BOXES--->
+            <!---BOXES---
             <div class='staff'>
                 <p>Staff</p>
                 <h1><?php echo $total_number; ?></h1>
@@ -93,7 +93,7 @@ $page = $components[2];
                 <h1><?php echo $total_number; ?></h1>
             </div>
         </div>
-
+    --
         <section class="graph">
             <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
             <div style="padding: 0px 0px 20px 0px; margin: 3% 0% 0% 24%; border-radius: 5px; filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25)); width: 69.3%; background-color:#ffffff;">
@@ -142,7 +142,7 @@ $page = $components[2];
             </script>
         </section>
     </main>
-
+            -->
     
     
 </body>

@@ -1,26 +1,33 @@
 * {
     box-sizing: border-box;
-	padding: 0; 
+	  padding: 0; 
     margin: 0;
 }
 
 body {
-	background-color: #FBF4F4;
-    overflow-x: hidden;
-
+	background-color: #dfdfdf;
+  overflow-x: hidden;
 }
-.background {
+
+.navbar {
     width: 100vw;
     position: absolute;
-    height: 24vh;
-    background: rgb(255,235,235);
-    background: linear-gradient(86deg, rgba(255,235,235,1) 1%, rgba(243,132,132,1) 47%, rgba(210,90,90,1) 100%);
-    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+    height: 10vh;
+    background-color: #EEEEEE;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 }
 
-.background img {
-    width: 11%;
-    margin: -1% 0% 0% 20%;
+.navbar h3{
+  color: #1c1c1c;
+  margin: 1.6% 0% 0% 18%;
+  font: normal 600 110%/normal 'Poppins';
+  position: absolute;
+
+}
+
+.navbar i{
+  margin: 1.7% 0% 0% 93%;
+  font-size: x-large;
 }
 /*****Booking*****/
 
@@ -32,13 +39,13 @@ body {
 
 .booking-box {
     padding: 0px 0px 20px 0px;
-    margin: 10% 0% 0% 24%;
+    margin: 10% 0% 0% 22.5%;
     border-radius: 5px;
     background-color: #FCF6F6;
     height: 40%;
     position: absolute;
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25), 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-    width: 69.3%;
+    width: 71.3%;
 }
 
 .booking-box h4 {
@@ -84,6 +91,9 @@ th, td {
     border: 1px solid #dddddd;
     text-align: center;
     padding: 8px;
+}
+td {
+  font: normal 14px/normal 'Poppins';
 }
 
 th {
