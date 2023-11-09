@@ -124,10 +124,11 @@ $page = $components[2];
                 <br><br>
                 <input type="password" class="form" placeholder="Enter your Password" name="password" id="password"
                     required oninput="checkPasswordStrength(this)">
-                    <i class="fa-solid fa-eye-slash" id="password-toggle" onclick="togglePassword()" style= "right: 17%; top: 49.9%; position: fixed;"></i>
+                <i class="fa-solid fa-eye-slash" id="password-toggle" onclick="togglePassword()"
+                    style="right: 17%; top: 49.9%; position: fixed;"></i>
                 <br><br>
-                <input type="password" class="form" placeholder="Enter your Confirm Password" name="confirm-password" id="confirmpassword"
-                    required>
+                <input type="password" class="form" placeholder="Enter your Confirm Password" name="confirm-password"
+                    id="confirmpassword" required>
                 <br><br>
                 <div id="password-strength" class="alert"></div>
                 <button class="btn btn-lg btn-block btn-success" type="submit" name="submit"
@@ -155,8 +156,8 @@ $page = $components[2];
         }
         ?>
 
-        // Eye view hide
-        let isPasswordVisible = false;
+            // Eye view hide
+            let isPasswordVisible = false;
         const passwordField = document.getElementById('password');
         const passwordToggle = document.getElementById('password-toggle');
 
