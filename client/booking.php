@@ -40,7 +40,7 @@ $page = $components[2];
     </title>
 
     <!---CSS--->
-    <link rel="stylesheet" href="../css/client.css">
+    <link rel="stylesheet" href="../css/booking.css">
 
     <!--ICON LINKS-->
     <link rel="stylesheet" href="../font-awesome-6/css/all.css">
@@ -134,11 +134,13 @@ $page = $components[2];
                 
                 <form>
                   <div class="form-group">
-                <label for="bookingDate">Date:</label>
+                    <p>Date</p>
+                <label for="bookingDate"></label>
                 <input type="date" name="bookingDate" id="bookingDate" class="form-input"  required>
               </div>
               <div class="form-group">
-                <label for="bookingTime">Time:</label>
+              <p>Time   </p>
+                <label for="bookingTime"></label>
                 <input type="time" name="bookingTime" class="form-input" required>
               </div>
             </div>
@@ -147,7 +149,7 @@ $page = $components[2];
             <div id="step2" class="form-step" >
                 <p style="font-size: 25px; padding:20px; text-align:left;">Set Event Title and Type</p>
                 <label for="eventType">Type of Event</label>
-                <select name="eventType" required>
+                <select name="eventType" id="eventType" required >
                     <?php
                     while ($event = mysqli_fetch_assoc($eventResult)) {
                         echo "<option value='" . $event['eventName'] . "'>" . $event['eventName'] . "</option>";
@@ -156,14 +158,14 @@ $page = $components[2];
                 </select>
                   
                 <label for="eventTitle">Title Event</label>
-                <input type="text" name="eventTitle" required>
+                <input type="text" id="eventTitle" name="eventTitle" required>
             </div>
 
             <!-- Step 3 -->
             <div id="step3" class="form-step" style="display: none">
                 <p>Where is your event?</p>
                 <label for="eventLocation">Address of Event</label>
-                <input type="text" name="eventLocation" required>
+                <input type="text" id="eventLocation" name="eventLocation" required>
             </div>
 
             <!-- Step 4 -->
@@ -183,7 +185,7 @@ $page = $components[2];
             <!-- Step 5 -->
             <div id="step5" class="form-step" style="display: none">
                 <p>Booking Description</p>
-                <input type="text" name="eventDescription" required>
+                <input type="text" id="eventDescription" name="eventDescription" required>
             </div>
 
             <!-- Step 6 -->
@@ -442,7 +444,7 @@ function collectAndDisplayData() {
     // Show the summary section (Step 6)
     document.getElementById('step6').style.display = 'block';
     // Hide the "Next" button and show the "Previous" button
-    document.getElementById('next').style.display = 'none';
+    document.getElementById('next').style.display = 'none';     
     document.getElementById('prev').style.display = 'block';
 }
 
