@@ -19,6 +19,8 @@
             align-items: center;
             padding: 0px 5% 0px 5%;
             position: fixed;
+            background: #fff;
+            z-index: 9999;
         }
 
         .header-section img {
