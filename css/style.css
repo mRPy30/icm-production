@@ -25,13 +25,13 @@ body {
 	margin: 16%;
 	width: 110%;
 }
-.body_content .text h2{
-	font: normal 600 70px/normal 'Poppins';
+.body_content .text h1{
+	font: normal 700 70px/normal 'Poppins';
 	color: #1C1C1D;
 	letter-spacing: 3px;
 }
 .body_content .text h4{
-	font: normal 600 15px/normal 'Poppins';
+	font: normal 700 15px/normal 'Poppins';
 	color: #1C1C1D;
 	letter-spacing: 1px;
 }
