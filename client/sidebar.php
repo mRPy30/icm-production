@@ -1,6 +1,6 @@
 <?php
 //Connection
-include '../dbcon.php';
+include '../backend/dbcon.php';
 
 $clientID = $_SESSION['id'];
 
@@ -14,52 +14,55 @@ if ($result->num_rows > 0) {
     $name = $row["firstName"] . " " . $row["lastName"];
     $profile = base64_encode($row["profile"]);
 } else {
-    // Handle the case where no data is found
     $name = "Name Not Found";
-    $profile = "default_profile.jpg"; // Provide a default profile image
+    $profile = "../default_profile.jpg"; // Provide a default profile image
 }
 ?>
 <style>
     /*****Sidebar*****/
 
     .wrapper{
-	    background: #FBF4F4;
-	    height: calc(100vh - 40px);
-	    border-radius: 15px;
+	    height: calc(100vh - 0px);
 	    display: flex;
         position: absolute;
-        width: 18%;
+        width: 16%;
+        background-color: #000000;
+        background-image: linear-gradient(147deg, #000000 0%, #434343 74%);
     }
     .side_bar{
-	    width: 100%;
-	    height: 99.5%;
+	    width: 98%;
+	    height: 90vh;
 
     }
 
     .side_bar .side_bar_top{
-        background: #1C1C1D;
-        height: 245px;
-        border-radius: 0px 18px 0px 0px;
-        padding: 30px;
+        background: #EEEEEE;
+        height: 280px;
+    }
+
+    .side_bar .side_bar_top .logo-sidebar img{
+        width: 50%;
+        margin: 15% 0% 0% 27%;
     }
 
     .side_bar .side_bar_top .profile_pic{
         display: flex;
         justify-content: center;
-        margin: 20px 0px 20px 0px;	
+        margin: 25px 0px 20px 0px;	
     }
 
     .side_bar .side_bar_top .profile_pic img{
-        width: 110px;
-        height: 110px;
+        width: 97px;
+        height: 97px;
         padding: 5px;
         border-radius: 50%;
+        border: 3px solid #1c1c1c;
     }
 
     .side_bar .side_bar_top .profile_info{
         text-align: center;
-        color: #fff;
-        font: normal 500 13px/20px 'Poppins';
+        color: #1c1c1c;
+        font: normal 500 12px/20px 'Poppins';
 
     }
 
@@ -69,10 +72,9 @@ if ($result->num_rows > 0) {
     }
 
     .side_bar .side_bar_bottom{
-        background: #1C1C1D;
+        background: #EEEEEE;
         height: calc(100% - 200px);
-        padding: 40px 0px 0px 30px;
-        border-radius: 0px 0px 20px 0px;        
+        padding: 15% 0% 0% 10%;
         text-decoration: none;
         list-style: none;	
     }
@@ -85,17 +87,18 @@ if ($result->num_rows > 0) {
     .side_bar .side_bar_bottom ul .nav-link a{
         display: block;
         padding: 15px 15px 15px 50px;		
-        color: #FBF4F4;
+        color: #1c1c1c;
         font: normal 500 14px/20px 'Poppins';
         margin-bottom: 5px;		
         text-decoration: none;	
     }
 
     .side_bar .side_bar_bottom ul .nav-link.active a{
-        background: #FBF4F4;
-        color:  #1c1c1c;
-        border-top-left-radius: 20px;
-        border-bottom-left-radius: 20px;
+        background-color: #000000;
+        background-image: linear-gradient(147deg, #000000 0%, #434343 74%);
+        color:  #fbf4fb;
+        border-top-left-radius: 30px;
+        border-bottom-left-radius: 30px;
         font: normal 500 14px/20px 'Poppins';
     }
 
@@ -105,7 +108,7 @@ if ($result->num_rows > 0) {
         left: 0;
         width: 100%;
         height: 20px;
-        background: #FBF4F4;
+        background: #EEEEEE;
         transition: background-color 0.6s, color 1s;
     }
 
@@ -124,8 +127,8 @@ if ($result->num_rows > 0) {
         top: 0;
         left: 0;
         width: 100%;
-        height: 100%;
-        background: #1C1C1D;	
+        height: 90%;
+        background: #EEEEEE;	
     }
 
     .side_bar .side_bar_bottom ul li.active .top_curve:before{
@@ -137,13 +140,16 @@ if ($result->num_rows > 0) {
     }
 
     .side_bar .side_bar_bottom .logout{
-        padding: 17% 15px 15px 50px;		
+        padding: 17% 15% 15% 0%;		
     }
     .side_bar .side_bar_bottom .logout button{
-        font: normal 500 14px/20px 'Poppins';
-        color: #FBF4F4;
-        background: #1C1C1D;
+        font: normal 600 14px/20px 'Poppins';
+        color: #1c1c1c;
+        background: #D9D9D9;
         border: none;
+        width: 105%;
+        height: 40px;
+        border-radius: 10px;
     }
     
     .popup {
@@ -190,11 +196,11 @@ if ($result->num_rows > 0) {
     button#logoutNo {
         padding: 10px 15px;
         margin: 5px;
-        background: #747473;;
+        background: #9b9b9b;
         border: none;
         border-radius: 8px;
         color: #ffffff;
-        font: normal 500 14px/20px 'Poppins';
+        font: normal 600 14px/20px 'Poppins';
         cursor: pointer;
         box-shadow: 0 5px 10px rgba(0, 0, 0, 0.05);
         transition: all 200ms linear;
@@ -234,6 +240,9 @@ if ($result->num_rows > 0) {
 <div class="wrapper">
     <nav class="side_bar">
         <div class="side_bar_top">
+            <div class="logo-sidebar">
+                <img src="../picture/logo.png">
+            </div>    
             <div class="profile_pic">
                 <img src="data:image/jpeg;base64,<?php echo $profile; ?>" alt="Client image">
             </div>
@@ -268,7 +277,7 @@ if ($result->num_rows > 0) {
                         echo "nav-link active";
                     } else {
                         echo "nav-link";
-                    } ?> "><span class="item">Contact Message</span></a>
+                    } ?> "><span class="item">Message</span></a>
                     <span class="bottom_curve"></span>
                 </li>
                 <li class="nav-link">

@@ -1,12 +1,12 @@
 <?php
 // Connection
-include '../dbcon.php';
+include '../backend/dbcon.php';
 
 session_start(); // Start the session
 $clientID = $_SESSION['id'];
 
 // Display data in a table
-$sql = "SELECT title_event, venue, eventDate FROM booking WHERE clientName = '$clientID' ";
+$sql = "SELECT title_event, eventLocation, eventDate, status FROM booking WHERE clientID = $clientID";
 $result = mysqli_query($conn, $sql);
 
 // Fetch data from the "event" table
@@ -23,57 +23,6 @@ $path = parse_url($directoryURI, PHP_URL_PATH);
 $components = explode('/', $path);
 $page = $components[2];
 
-// Query the database to retrieve the client's first name and last name
-$nameQuery = "SELECT firstName, lastName FROM client WHERE id = $clientID";
-$nameResult = mysqli_query($conn, $nameQuery);
-
-if ($nameResult && mysqli_num_rows($nameResult) > 0) {
-    $row = mysqli_fetch_assoc($nameResult);
-    $firstName = $row['firstName'];
-    $lastName = $row['lastName'];
-    
-    // Update the $_SESSION variables with the user's first name and last name
-    $_SESSION['firstName'] = $firstName;
-    $_SESSION['lastName'] = $lastName;
-} else {
-    // Handle the case where the user's information is not found
-    echo "User information not found.";
-}
-
-// Check if the form is submitted
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Data from the form
-    $bookingDate = $_POST['bookingDate'];
-    $bookingTime = $_POST['bookingTime'];
-    $eventType = $_POST['eventType'];
-    $eventTitle = $_POST['eventTitle'];
-    $eventLocation = $_POST['eventLocation'];
-    $eventDescription = $_POST['eventDescription'];
-    $paymentAmount = $_POST['paymentAmount'];
-
-    // Client's first name and last name (Assuming you have this information)
-    $firstName = $_SESSION['firstName'];
-    $lastName = $_SESSION['lastName']; 
-
-    // Generate a 3-digit scheduleId (you may want to customize this logic)
-    $scheduleId = mt_rand(100, 999);
-
-    // Insert data into the 'booking' table
-    $insertQuery = "INSERT INTO booking (scheduleId, eventDate, eventTime, venue, type_of_event, title_event, paymentAmount, description, clientName) 
-                    VALUES ('$scheduleId', '$bookingDate', '$bookingTime', '$eventLocation', '$eventType', '$eventTitle', '$paymentAmount', '$eventDescription', '$firstName $lastName')";
-
-$bookingSuccessful = false;
-$bookingMessage = '';
-
-if (mysqli_query($conn, $insertQuery)) {
-    // Insert successful
-    $bookingSuccessful = true;
-    $bookingMessage = "Booking data has been successfully inserted into the database.";
-} else {
-    // Insert failed
-    $bookingMessage = "Error: " . mysqli_error($conn);
-}
-}
 ?>
 
 <!DOCTYPE html>
@@ -91,7 +40,7 @@ if (mysqli_query($conn, $insertQuery)) {
     </title>
 
     <!---CSS--->
-    <link rel="stylesheet" href="../css/client.css">
+    <link rel="stylesheet" href="../css/booking.css">
 
     <!--ICON LINKS-->
     <link rel="stylesheet" href="../font-awesome-6/css/all.css">
@@ -103,12 +52,11 @@ if (mysqli_query($conn, $insertQuery)) {
 </head>
     
 <body>
-    <div class="background">
-        <img src="../picture/logo.png">
+    <div class="navbar">
+        <h3>Booking Event</h3>
+        <i class="fa-regular fa-bell"></i>
     </div> 
-    <?php 
-        include '../client/sidebar.php';
-    ?>
+    
     <section class="booking-box">
         <div class="table-booking">
           <div class="table-top">
@@ -131,20 +79,24 @@ if (mysqli_query($conn, $insertQuery)) {
                   while ($row = mysqli_fetch_assoc($result)) {
                       echo '<tr>';
                       echo '<td>' . $row['title_event'] . '</td>';
-                      echo '<td>' . $row['venue'] . '</td>';
+                      echo '<td>' . $row['eventLocation'] . '</td>';
                       echo '<td>' . $row['eventDate'] . '</td>';
+                      echo '<td>' . $row['status'] . '</td>';
                       echo '</tr>';
                 }
                 ?>
+                </tbody>
             </table>
         </div>
     </section>
 
-   
+    <?php 
+        include '../client/sidebar.php';
+    ?>
         <!-- Set schedule form (hidden by default) -->
     <div id="setForm" class="form-popup">
     <span class="close-button" onclick="closeForm()" style="font-size: 20px; font-weight: 600;">&#10006;</span>
-        <form action="booking.php" method="POST" class="" enctype="multipart/form-data">
+        <form action="../backend/request.php" method="POST" class="" enctype="multipart/form-data">
             <header class="header" style="font-size: 30px;font-weight:bold; text-align: center; font-family: Poppins; padding: 20px">Book Schedule</header>
             <div class="steps">
               <div class="circle active">
@@ -182,11 +134,13 @@ if (mysqli_query($conn, $insertQuery)) {
                 
                 <form>
                   <div class="form-group">
-                <label for="bookingDate">Date:</label>
+                    <p>Date</p>
+                <label for="bookingDate"></label>
                 <input type="date" name="bookingDate" id="bookingDate" class="form-input"  required>
               </div>
               <div class="form-group">
-                <label for="bookingTime">Time:</label>
+              <p>Time   </p>
+                <label for="bookingTime"></label>
                 <input type="time" name="bookingTime" class="form-input" required>
               </div>
             </div>
@@ -195,7 +149,7 @@ if (mysqli_query($conn, $insertQuery)) {
             <div id="step2" class="form-step" >
                 <p style="font-size: 25px; padding:20px; text-align:left;">Set Event Title and Type</p>
                 <label for="eventType">Type of Event</label>
-                <select name="eventType" required>
+                <select name="eventType" id="eventType" required >
                     <?php
                     while ($event = mysqli_fetch_assoc($eventResult)) {
                         echo "<option value='" . $event['eventName'] . "'>" . $event['eventName'] . "</option>";
@@ -204,14 +158,14 @@ if (mysqli_query($conn, $insertQuery)) {
                 </select>
                   
                 <label for="eventTitle">Title Event</label>
-                <input type="text" name="eventTitle" required>
+                <input type="text" id="eventTitle" name="eventTitle" required>
             </div>
 
             <!-- Step 3 -->
             <div id="step3" class="form-step" style="display: none">
                 <p>Where is your event?</p>
                 <label for="eventLocation">Address of Event</label>
-                <input type="text" name="eventLocation" required>
+                <input type="text" id="eventLocation" name="eventLocation" required>
             </div>
 
             <!-- Step 4 -->
@@ -231,7 +185,7 @@ if (mysqli_query($conn, $insertQuery)) {
             <!-- Step 5 -->
             <div id="step5" class="form-step" style="display: none">
                 <p>Booking Description</p>
-                <input type="text" name="eventDescription" required>
+                <input type="text" id="eventDescription" name="eventDescription" required>
             </div>
 
             <!-- Step 6 -->
@@ -490,7 +444,7 @@ function collectAndDisplayData() {
     // Show the summary section (Step 6)
     document.getElementById('step6').style.display = 'block';
     // Hide the "Next" button and show the "Previous" button
-    document.getElementById('next').style.display = 'none';
+    document.getElementById('next').style.display = 'none';     
     document.getElementById('prev').style.display = 'block';
 }
 

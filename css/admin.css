@@ -5,60 +5,78 @@
 }
 
 body {
-    background-color: #FBF4F4;
+    background-color: #dfdfdf;
     overflow-x: hidden;
 }
 
-.background {
+.navbar {
     width: 100vw;
     position: absolute;
-    height: 24vh;
-    background: rgb(255,235,235);
-    background: linear-gradient(86deg, rgba(255,235,235,1) 1%, rgba(243,132,132,1) 47%, rgba(210,90,90,1) 100%);
-    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+    height: 10vh;
+    background-color: #EEEEEE;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.navbar h3{
+  color: #1c1c1c;
+  margin: 1.6% 0% 0% 18%;
+  font: normal 600 110%/normal 'Poppins';
+  position: absolute;
 
 }
 
-.background img {
-    width: 11%;
-    margin: -1% 0% 0% 20%;
+.navbar i{
+  margin: 1.7% 0% 0% 93%;
+  font-size: x-large;
 }
-
-
 /****Dashboard*****/
 
 .admin_main .total-result {
-    padding: 125px 0px 0px 180px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    padding: 11% 0px 0px 22%;
+    
+    height: 35vh;
 }
 
 .admin_main .total-result .staff {
-    width: 23%;
+    width: 17%;
     filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
     display: flex;
     background-color: #FCF6F6;
     flex-direction: column;
     align-items: center;
     justify-content: flex-end;
-    padding: 20px 10px 20px 5px;
+    height: 6rem;
     border-radius: 5px;
-    margin: 0% 0% 0% 5%;
+    margin: 0% 10% 0% -8%;
+    padding: 18px;
+}
+
+.admin_main .total-result .staff2 {
+    width: 25%;
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+    display: flex;
+    background-color: #FCF6F6;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    border-radius: 5px;
+    margin: 17% 0% 0% -7%;
+    height: 19rem;
+    padding: 18px;
 }
 
 
-/*****Booking*****/
+/*****Booking & Client*****/
 
 .booking-box {
     padding: 0px 0px 20px 0px;
-    margin: 10% 0% 0% 24%;
+    margin: 10% 0% 0% 19%;
     border-radius: 5px;
     background-color: #FCF6F6;
     height: 70%;
     position: absolute;
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25), 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-    width: 69.3%;
+    width: 77%;
 }
 
 .booking-box h4 {
@@ -69,26 +87,134 @@ body {
     border-radius: 5px 5px 0px 0px;
 }
 
-table {
+.accept-decline-form {
+    display: inline-block; /* Ensures that the buttons are on the same line */
+}
+
+td form button[name="accept"]{
+    background-color: #00c72e;
+    border-radius: 10px;
+    font: normal 11px/normal 'Poppins';
+    height: 5%;
+    color: #FFF;
+    border: none;
+    padding: 5px 10px;
+    text-align: center;
+    display: inline-block;
+    cursor: pointer;
+    text-decoration: none;
+}
+td form button[name="accept"]:hover{
+    background-color: #00861f;
+    transition: 0.4s;
+}
+
+td form button[name="decline"] {
+    background-color: #ff3628;
+    border-radius: 10px;
+    font: normal 11px/normal 'Poppins';
+    height: 5%;
+    color: #FFF;
+    border: none;
+    padding: 5px 10px;
+    text-align: center;
+    display: inline-block;
+    cursor: pointer;
+    text-decoration: none;
+}
+td form button[name="decline"]:hover{
+    background-color: rgb(172, 3, 0);
+    transition: 0.4s;
+}
+/***Table Style***/ 
+.header-table {
     border-collapse: collapse;
-    width: 93%;
-    margin: 30px 25px 0px 35px;
+    width: 100%;
+    table-layout: fixed;
+    font: normal 15px/normal 'Poppins';
+}
+
+.data-table-container {
+    overflow-y: scroll;
+    overflow-x: hidden;
+    height: 53vh;
+}
+
+.data-table {
+    border-collapse: collapse;
+    width: 101%;
+    table-layout: fixed;
 }
 
 th, td {
-    border: 1px solid #dddddd;
     text-align: center;
-    padding: 8px;
+    padding: 10px;
+    border-bottom: 1px solid #CCCCCC;
 }
 
 th {
+    position: sticky;
+    top: 0;
     background-color: #f2f2f2;
+    z-index: 2;
 }
 
-tr:nth-child(even) {
-    background-color: #f2f2f2;
+td {
+    font: normal 14px/normal 'Poppins';
 }
 
-tr:nth-child(odd) {
-    background-color: #ffffff;
+td form button[name="delete"] {
+    background-color: #ff3628;
+    border-radius: 6px;
+    font: normal 11px/normal 'Poppins';
+    height: 5%;
+    color: #FFF;
+    border: none;
+    padding: 5px 10px;
+    text-align: center;
+    display: inline-block;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+td form button[name="delete"]:hover{
+    background-color: rgb(172, 3, 0);
+    transition: 0.4s;
+}
+
+td .profile-image {
+    width: 50px; 
+    height: 50px; 
+    border-radius: 50%; 
+}
+
+.search-bar {
+    margin: -3.4% 0px 0px 80%; 
+    position: absolute;
+}
+
+.search-bar #client-search {
+    width: 70%;
+    border: none;
+    border-bottom: 2px solid #9b9b9b;
+    outline: 0;
+    font-size: 17px;
+    color: #1C1C1D;
+    background: transparent;
+    transition: border-color 0.2s;
+}
+.search-bar #client-search::placeholder {
+    color: #9b9b9b;
+    font: normal 13px/normal 'Poppins';
+}
+
+.search-bar #client-search:focus{
+  font-weight: 700;
+  border-width: 3px;
+  border-image: linear-gradient(to right, #f73d62, #f04d4d);
+  border-image-slice: 1;
+  font: normal 15px/normal 'Poppins';
+}
+.search-bar button{
+    margin-top: 7%;
 }

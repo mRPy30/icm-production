@@ -1,6 +1,6 @@
 <?php
 // Connection
-include 'dbcon.php';
+include 'backend/dbcon.php';
 
 session_start(); // Start the session
 
@@ -63,8 +63,8 @@ $page = $components[2];
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <!---WEB TITLE--->
-    <link rel="short icon" href="picture/shortcut-logo.jpg" type="x-icon">
-    <title><?php echo "Icm Production | Login Account"; ?></title>
+    <link rel="short icon" href="picture/shortcut-logo.png" type="x-icon">
+    <title><?php echo "Icsm Production | Login Account"; ?></title>
 
     <!---CSS--->
     <link rel="stylesheet" href="css/style.css">
@@ -86,11 +86,13 @@ $page = $components[2];
     <!--background-->
     <main class="body_content">
         <div class="logo">
-            <img src="picture/logo.png" alt="logo">
+            <a href="homepage/homepage.php">
+                <img src="picture/logo.png" alt="logo">
+            </a>
         </div>
         <div class="text">
-            <h2>Welcome to <br>ICM Production</h2>
-            <h4>Capture the moments of the world through our lenses.</h4>
+            <h2>Welcome to <br>ICSM Creatives</h2>
+            <h4>We poured out our undying dedications In Capturing Sweet Memories. </h4>
         </div>
     </main>
 
