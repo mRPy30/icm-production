@@ -75,10 +75,6 @@ $page = $components[2];
     <!--ICON LINKS-->
     <link rel="stylesheet" href="font-awesome-6/css/all.css">
 
-    <!--FONT LINKS-->
-    <link rel="stylesheet" href="../css/fonts.css">
-
-
 
 </head>
 <body>
@@ -91,7 +87,7 @@ $page = $components[2];
             </a>
         </div>
         <div class="text">
-            <h2>Welcome to <br>ICSM Creatives</h2>
+            <h1>Welcome to <br>ICSM Creatives</h1>
             <h4>We poured out our undying dedications In Capturing Sweet Memories. </h4>
         </div>
     </main>
