@@ -1,6 +1,6 @@
 <?php
 //Connection
-include 'dbcon.php';
+include 'backend/dbcon.php';
 
 if (isset($_POST['submit'])) {
     $firstname = mysqli_real_escape_string($conn, $_POST["firstname"]);
@@ -57,19 +57,18 @@ $page = $components[2];
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!---WEB TITLE--->
-    <link rel="short icon" href="picture/shortcut-logo.jpg" type="x-icon">
+    <link rel="short icon" href="picture/shortcut-logo.png" type="x-icon">
     <title>
-        <?php echo "Icm Production | Register Account"; ?>
+        <?php echo "Icsm Production | Register Account"; ?>
     </title>
 
     <!---CSS--->
-    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/style.css">
 
     <!--ICON LINKS-->
     <link rel="stylesheet" href="font-awesome-6/css/all.css">
 
-    <!--FONT LINKS-->
-    <link rel="stylesheet" href="../css/fonts.css">
+  
 
 
 
@@ -85,8 +84,8 @@ $page = $components[2];
             </a>
         </div>
         <div class="text">
-            <h2>Welcome to <br>ICM Production</h2>
-            <h4>Capture the moments of the world through our lenses.</h4>
+            <h1>Welcome to <br>ICSM Creatives</h1>
+            <h4>We poured out our undying dedications In Capturing Sweet Memories. </h4>
         </div>
     </main>
 
@@ -124,10 +123,11 @@ $page = $components[2];
                 <br><br>
                 <input type="password" class="form" placeholder="Enter your Password" name="password" id="password"
                     required oninput="checkPasswordStrength(this)">
-                    <i class="fa-solid fa-eye-slash" id="password-toggle" onclick="togglePassword()" style= "right: 17%; top: 49.9%; position: fixed;"></i>
+                <i class="fa-solid fa-eye-slash" id="password-toggle" onclick="togglePassword()"
+                    style="right: 17%; top: 49.9%; position: fixed;"></i>
                 <br><br>
-                <input type="password" class="form" placeholder="Enter your Confirm Password" name="confirm-password" id="confirmpassword"
-                    required>
+                <input type="password" class="form" placeholder="Enter your Confirm Password" name="confirm-password"
+                    id="confirmpassword" required>
                 <br><br>
                 <div id="password-strength" class="alert"></div>
                 <button class="btn btn-lg btn-block btn-success" type="submit" name="submit"
@@ -155,8 +155,8 @@ $page = $components[2];
         }
         ?>
 
-        // Eye view hide
-        let isPasswordVisible = false;
+            // Eye view hide
+            let isPasswordVisible = false;
         const passwordField = document.getElementById('password');
         const passwordToggle = document.getElementById('password-toggle');
 

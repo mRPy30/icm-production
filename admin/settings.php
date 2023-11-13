@@ -1,6 +1,6 @@
 <?php 
 //Connection
-include '../dbcon.php';
+include '../backend/dbcon.php';
 
 session_start(); // Start the session
 
@@ -21,7 +21,7 @@ $page = $components[2];
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!---WEB TITLE--->
-    <link rel="short icon" href="../picture/shortcut-logo.jpg" type="x-icon">
+    <link rel="short icon" href="../picture/shortcut-logo.png" type="x-icon">
     <title>
         <?php echo "Admin | Website Management"; ?>
     </title>
@@ -34,12 +34,19 @@ $page = $components[2];
 
     <!--FONT LINKS-->
     <link rel="stylesheet" href="../css/fonts.css">
+
+    <style>
+        body {
+            overflow-y: hidden;
+        }       
+    </style>
 </head>
     
 <body>
 
-    <div class="background">
-        <img src="../picture/logo.png">
+    <div class="navbar">
+        <h3>Settings</h3>
+        <i class="fa-regular fa-bell"></i>
     </div> 
     <?php 
         include '../admin/sidebar.php';

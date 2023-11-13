@@ -1,7 +1,6 @@
 <?php 
 //Connection
-include '../dbcon.php';
-
+include '../backend/dbcon.php';
 session_start(); // Start the session
 
 // Active Page

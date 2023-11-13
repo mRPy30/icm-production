@@ -1,6 +1,6 @@
 <?php
 // Connection
-include 'dbcon.php';
+include 'backend/dbcon.php';
 
 session_start(); // Start the session
 
@@ -57,30 +57,30 @@ $page = $components[2];
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+
     <!---WEB TITLE--->
-    <link rel="short icon" href="picture/shortcut-logo.jpg" type="x-icon">
-    <title><?php echo "Icm Production | Login Account"; ?></title>
+    <link rel="short icon" href="picture/shortcut-logo.png" type="x-icon">
+    <title>
+        <?php echo "Icsm Production | Login Account"; ?>
+    </title>
 
     <!---CSS--->
-    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/style.css">
 
     <!--CSS FRAMEWORK-->
-   
+
 
     <!--ICON LINKS-->
     <link rel="stylesheet" href="font-awesome-6/css/all.css">
 
-    <!--FONT LINKS-->
-    <link rel="stylesheet" href="../css/fonts.css">
-
-
 
 </head>
+
 <body>
 
     <!--background-->
@@ -91,8 +91,8 @@ $page = $components[2];
             </a>
         </div>
         <div class="text">
-            <h2>Welcome to <br>ICM Production</h2>
-            <h4>Capture the moments of the world through our lenses.</h4>
+            <h1>Welcome to <br>ICSM Creatives</h1>
+            <h4>We poured out our undying dedications In Capturing Sweet Memories. </h4>
         </div>
     </main>
 
@@ -104,34 +104,37 @@ $page = $components[2];
                     <li class="nav-item">
                         <a href="login.php" class="<?php if ($page == "login.php") {
                             echo "nav-link active";
-                                } else {
+                        } else {
                             echo "nav-link";
-                                } ?> " href="register.php">
+                        } ?> " href="register.php">
                             Login
                         </a>
-                    </li>                    
+                    </li>
                     <li class="nav-item">
                         <a href="register.php" class="<?php if ($page == "register.php") {
                             echo "nav-link active";
-                                } else {
+                        } else {
                             echo "nav-link";
-                                } ?> " href="register.php">
+                        } ?> " href="register.php">
                             Register
                         </a>
                     </li>
                 </ul>
-            </div>             
+            </div>
             <form class="form-fillup needs-validation" method="POST" onsubmit="return validateForm()">
                 <input type="text" class="form" placeholder="Enter your Email" name="email" required><br><br>
-                <input type="password" class="form" placeholder="Enter your Password" name="password" id="password" required oninput="checkPasswordStrength(this)"><br><br>
-                <i class="fa-solid fa-eye-slash" id="password-toggle" onclick="togglePassword()" style= "right: 17%; top: 29.5%;"></i>
-                <button class="btn btn-lg btn-block btn-success" type="submit" name="submit" value="Submit" style="height: 7vh;">Login</button>
+                <input type="password" class="form" placeholder="Enter your Password" name="password" id="password"
+                    required oninput="checkPasswordStrength(this)"><br><br>
+                <i class="fa-solid fa-eye-slash" id="password-toggle" onclick="togglePassword()"
+                    style="right: 17%; top: 29.5%;"></i>
+                <button class="btn btn-lg btn-block btn-success" type="submit" name="submit" value="Submit"
+                    style="height: 7vh;">Login</button>
             </form>
         </div>
     </section>
 
     <script>
-        
+
         let isPasswordVisible = false;
         const passwordField = document.getElementById('password');
         const passwordToggle = document.getElementById('password-toggle');
@@ -141,7 +144,8 @@ $page = $components[2];
             passwordField.type = isPasswordVisible ? 'text' : 'password';
             passwordToggle.className = isPasswordVisible ? 'fa-solid fa-eye' : 'fa-solid fa-eye-slash';
         }
-        
+
     </script>
 </body>
+
 </html>

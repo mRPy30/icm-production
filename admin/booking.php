@@ -1,7 +1,6 @@
 <?php
 // Connection
-include '../dbcon.php';
-include '../backend/status.php';
+include '../backend/dbcon.php';
 session_start();
 
 // Active Page
@@ -10,8 +9,9 @@ $path = parse_url($directoryURI, PHP_URL_PATH);
 $components = explode('/', $path);
 $page = $components[2];
 
-// Fetch booking details from the database
-$sql = "SELECT scheduleId, eventDate, eventTime, venue, type_of_event, title_event, paymentAmount, description, clientName, status FROM booking";
+// Fetch all booking details from the database, joining with the client table using the clientID foreign key
+$sql = "SELECT b.bookingId, b.eventDate, b.eventTime, b.eventLocation, b.type_of_event, b.title_event, b.paymentAmount, b.description, CONCAT(c.firstName, ' ', c.lastName) AS clientName, b.status FROM booking AS b
+        LEFT JOIN client AS c ON b.clientID = c.id";
 $result = $conn->query($sql);
 
 // Check if there's a result
@@ -31,7 +31,7 @@ if ($result->num_rows > 0) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!---WEB TITLE--->
-    <link rel="short icon" href="../picture/shortcut-logo.jpg" type="x-icon">
+    <link rel="short icon" href="../picture/shortcut-logo.png" type="x-icon">
     <title>
         <?php echo "Admin | Booking"; ?>
     </title>
@@ -45,11 +45,16 @@ if ($result->num_rows > 0) {
     <!--FONT LINKS-->
     <link rel="stylesheet" href="../css/fonts.css">
 
+    <style>
+        body {
+            overflow-y: hidden;
+        }       
+    </style>
 </head>
     
 <body>
-    <div class="background">
-        <img src="../picture/logo.png">
+    <div class="navbar">
+        <h3>Admin Booking Details</h3>
         <i class="fa-regular fa-bell"></i>
     </div> 
 
@@ -77,25 +82,26 @@ if ($result->num_rows > 0) {
         <div class="data-table-container">
             <table class="data-table">
                 <tbody>
-                    <?php
-                    foreach ($bookingData as $booking) {
-                        echo '<tr>';
-                        echo '<td>' . $booking['clientName'] . '</td>';
-                        echo '<td>' . $booking['title_event'] . '</td>';
-                        echo '<td>' . $booking['venue'] . '</td>';
-                        echo '<td>' . $booking['eventDate'] . '</td>';
-                        echo '<td>' . $booking['type_of_event'] . '</td>';
-                        echo '<td>'; if ($booking['status'] == 'Pending') {
-                            echo '<form method="POST" action="../backend/status.php">';
-                            echo '<input type="hidden" name="schedule_id" value="' . $booking['scheduleId'] . '">';
-                            echo '<button type="submit" name="accept">Accept</button>';
-                            echo '<button type="submit" name="decline">Decline</button>';
-                            echo '</form>';
-                        }
-                        echo '</td>';
-                        echo '</tr>';
-                    }
-                    ?>
+                <?php foreach ($bookingData as $booking): ?>
+            <tr>
+                <td><?php echo $booking['clientName']; ?></td>
+                <td><?php echo $booking['title_event']; ?></td>
+                <td><?php echo $booking['eventLocation']; ?></td>
+                <td><?php echo date('F d Y', strtotime($booking['eventDate'])); ?></td>
+                <td><?php echo $booking['type_of_event']; ?></td>
+                <td>
+                    <?php if ($booking['status'] == 'Accepted' || $booking['status'] == 'Declined'): ?>
+                        <?php echo $booking['status']; ?>
+                    <?php elseif ($booking['status'] == 'Pending'): ?>
+                        <form method="POST" action="../backend/status.php">
+                            <input type="hidden" name="schedule_id" value="<?php echo $booking['bookingId']; ?>">
+                            <button type="submit" name="accept">Accept</button>
+                            <button type="submit" name="decline">Decline</button>
+                        </form>
+                    <?php endif; ?>
+                </td>
+            </tr>
+        <?php endforeach; ?>
                 </tbody>
             </table>
         </div>
