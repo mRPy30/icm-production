@@ -37,6 +37,10 @@ $page = $components[2];
 </head>
     
 <body>
+<div class="background">
+        <img src="../picture/logo.png">
+        <i class="fa-regular fa-bell"></i>
+    </div>  
     <?php 
         include '../client/sidebar.php';
     ?>
