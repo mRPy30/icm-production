@@ -45,7 +45,7 @@ if (isset($_POST['delete'])) {
     <!---WEB TITLE--->
     <link rel="short icon" href="../picture/shortcut-logo.png" type="x-icon">
     <title>
-        <?php echo "Admin | Dashboard"; ?>
+        <?php echo "Admin | Client"; ?>
     </title>
 
     <!---CSS--->
@@ -65,13 +65,12 @@ if (isset($_POST['delete'])) {
 </head>
     
 <body>
-    <div class="navbar">
-        <h3>Admin Client</h3>
-        <i class="fa-regular fa-bell"></i>
-    </div>  
+    <!----Navbar&Sidebar----->
     <?php 
+        include '../admin/navbar.php';
         include '../admin/sidebar.php';
-    ?>
+    ?>   
+
 
     <section class="booking-box">
         <div class="table-booking">

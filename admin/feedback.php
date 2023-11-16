@@ -23,7 +23,7 @@ $page = $components[2];
     <!---WEB TITLE--->
     <link rel="short icon" href="../picture/shortcut-logo.png" type="x-icon">
     <title>
-        <?php echo "Admin | Website Management"; ?>
+        <?php echo "Admin | Feedback"; ?>
     </title>
 
     <!---CSS--->
@@ -44,15 +44,12 @@ $page = $components[2];
     
 <body>
 
-    <div class="navbar">
-        <h3>Settings</h3>
-        <i class="fa-regular fa-bell"></i>
-    </div> 
+    <!----Navbar&Sidebar----->
     <?php 
+        include '../admin/navbar.php';
         include '../admin/sidebar.php';
-    ?>
+    ?>   
 
-    
     
 </body>
 </html>

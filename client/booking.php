@@ -33,14 +33,14 @@ $page = $components[2];
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!---WEB TITLE--->
-    <link rel="short icon" href="../picture/shortcut-logo.jpg" type="x-icon">
+    <link rel="short icon" href="../picture/shortcut-logo.png" type="x-icon">
     <link rel=stylesheet>
     <title>
         <?php echo "User | Booking Schedule"; ?>
     </title>
 
     <!---CSS--->
-    <link rel="stylesheet" href="../css/booking.css">
+    <link rel="stylesheet" href="../css/client.css">
 
     <!--ICON LINKS-->
     <link rel="stylesheet" href="../font-awesome-6/css/all.css">

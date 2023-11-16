@@ -1,81 +1,36 @@
-<?php
-//Connection
-include '../backend/dbcon.php';
-
-$adminID = $_SESSION['id'];
-
-
-$sql = "SELECT name, profile FROM administrator WHERE id = '$adminID'";
-
-$result = $conn->query($sql);
-
-if ($result->num_rows > 0) {
-    $row = $result->fetch_assoc();
-    $name = $row["name"];
-    $profile = base64_encode($row["profile"]); // Corrected: Use base64_encode here
-} else {
-    // Handle the case where no data is found
-    $name = "Name Not Found";
-    $profile = "default_profile.jpg"; // Provide a default profile image
-}
-?>
+<!--FONT LINKS-->
+<link rel="stylesheet" href="../css/fonts.css">
 <style>
     /*****Sidebar*****/
 
-    .wrapper{
-	    height: calc(100vh - 0px);
-	    display: flex;
-        position: absolute;
+    .wrapper {
+        height: 100%;
+        display: flex;
+        position: fixed;
+        top: 0;
+        left: 0;
         width: 16%;
         background-color: #000000;
         background-image: linear-gradient(147deg, #000000 0%, #434343 74%);
-    }
-    .side_bar{
-	    width: 98%;
-	    height: 90vh;
-
+        z-index: 1001; /* Make sure sidebar is above navbar */
     }
 
-    .side_bar .side_bar_top{
+
+    .side_bar {
+        width: 98%;
+        height: 100vh;
         background: #EEEEEE;
-        height: 280px;
     }
 
-    .side_bar .side_bar_top .logo-sidebar img{
+    .side_bar .logo-sidebar img{
         width: 50%;
         margin: 15% 0% 0% 27%;
-    }
-
-    .side_bar .side_bar_top .profile_pic{
-        display: flex;
-        justify-content: center;
-        margin: 18px 0px 20px 0px;	
-    }
-
-    .side_bar .side_bar_top .profile_pic img{
-        width: 100px;
-        height: 100px;
-        padding: 5px;
-        border-radius: 50%;
-        border: 3px solid #1c1c1c;
-    }
-
-    .side_bar .side_bar_top .profile_info{
-        text-align: center;
-        color: #1c1c1c;
-        font: normal 500 14px/20px 'Poppins';
-
-    }
-
-    .side_bar .side_bar_top .profile_info p{
-        margin-top: 5px;
-        font: normal 400 12px/20px 'Poppins';	
     }
 
     .side_bar .side_bar_bottom{
         background: #EEEEEE;
         height: calc(100% - 200px);
-        padding: 8% 0% 0% 10%;
+        padding: 10% 0% 0% 10%;
         text-decoration: none;
         list-style: none;	
     }
@@ -140,8 +95,25 @@ if ($result->num_rows > 0) {
         border-top-right-radius: 25px;
     }
 
+    .side_bar .side_bar_bottom ul .nav-link:not(.active) a:hover {
+        background: #D9D9D9;
+        color: #1c1c1c;
+        border-radius: 30px 0px 0px 30px;
+    }
+
+    .side_bar .side_bar_bottom ul .nav-link.active a:hover {
+        background-color: #000000;
+        color: #fbf4fb;
+    }
+
+    .side_bar .side_bar_bottom ul .nav-link.active .top_curve,
+    .side_bar .side_bar_bottom ul .nav-link.active .bottom_curve {
+        display: none;
+    }
+    
+    
     .side_bar .side_bar_bottom .logout{
-        padding: 17% 15% 15% 0%;		
+        padding: 10% 15% 15% 0%;		
     }
     .side_bar .side_bar_bottom .logout button{
         font: normal 600 14px/20px 'Poppins';
@@ -151,6 +123,12 @@ if ($result->num_rows > 0) {
         width: 105%;
         height: 40px;
         border-radius: 10px;
+        transition: all .3s ease;
+    }
+
+    .side_bar .side_bar_bottom .logout button:hover{
+        transform: scale(1.02);
+        background-color: #B3B3B3;
     }
     
     .popup {
@@ -207,6 +185,32 @@ if ($result->num_rows > 0) {
         transition: all 200ms linear;
     }
 
+    #loadingOverlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.8);
+            z-index: 10000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .loading-circle {
+            border: 8px solid #000;
+            border-top: 8px solid #1c1c1c;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 5s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
     /*******RESPONSIVE**********/
 
     @media (max-width: 992px) {
@@ -241,20 +245,9 @@ if ($result->num_rows > 0) {
 <!---------Sidebar------------>
 <div class="wrapper">
     <nav class="side_bar">
-        <div class="side_bar_top">
             <div class="logo-sidebar">
                 <img src="../picture/logo.png">
             </div> 
-            <div class="profile_pic">
-                <img src="data:image/jpeg;base64,<?php echo $profile; ?>" alt="admin image">
-            </div>
-            <div class="profile_info">
-                <h3>
-                    <?php echo $name; ?>
-                </h3>
-                <p>Admin</p>
-            </div>
-        </div>
         <div class="side_bar_bottom">
             <ul>
                 <li class="nav-link">
@@ -277,6 +270,15 @@ if ($result->num_rows > 0) {
                 </li>
                 <li class="nav-link">
                     <span class="top_curve"></span>
+                    <a href="calendar.php" class="<?php if ($page == "..admin/calendar.php") {
+                        echo "nav-link active";
+                    } else {
+                        echo "nav-link";
+                    } ?> "><span class="item">Calendar</span></a>
+                    <span class="bottom_curve"></span>
+                </li>
+                <li class="nav-link">
+                    <span class="top_curve"></span>
                     <a href="client.php" class="<?php if ($page == "..admin/client.php") {
                         echo "nav-link active";
                     } else {
@@ -286,11 +288,20 @@ if ($result->num_rows > 0) {
                 </li>
                 <li class="nav-link">
                     <span class="top_curve"></span>
-                    <a href="reports.php" class="<?php if ($page == "..admin/reports.php") {
+                    <a href="feedback.php" class="<?php if ($page == "..admin/feedback.php") {
                         echo "nav-link active";
                     } else {
                         echo "nav-link";
-                    } ?> "><span class="item">Reports</span></a>
+                    } ?> "><span class="item">Feedback</span></a>
+                    <span class="bottom_curve"></span>
+                </li>
+                <li class="nav-link">
+                    <span class="top_curve"></span>
+                    <a href="analytics.php" class="<?php if ($page == "..admin/analytics.php") {
+                        echo "nav-link active";
+                    } else {
+                        echo "nav-link";
+                    } ?> "><span class="item">Analytics</span></a>
                     <span class="bottom_curve"></span>
                 </li>
                 <li class="nav-link">
@@ -304,29 +315,41 @@ if ($result->num_rows > 0) {
                 </li>
                 <li class="nav-link">
                     <span class="top_curve"></span>
-                    <a href="settings.php" class="<?php if ($page == "..admin/settings.php") {
+                    <a href="content.php" class="<?php if ($page == "..admin/content.php") {
                         echo "nav-link active";
                     } else {
                         echo "nav-link";
-                    } ?> "><span class="item">Settings</span></a>
+                    } ?> "><span class="item">Content</span></a>
+                    <span class="bottom_curve"></span>
+                </li>
+                <li class="nav-link">
+                    <span class="top_curve"></span>
+                    <a href="account.php" class="<?php if ($page == "..admin/account.php") {
+                        echo "nav-link active";
+                    } else {
+                        echo "nav-link";
+                    } ?> "><span class="item">Profile</span></a>
                     <span class="bottom_curve"></span>
                 </li>
             </ul>
             <div class="logout">
-                <button type="text" class="btn-logout" onclick="goBack()"> Logout </button>
+                <button type="text" class="btn-logout" onclick="openPopup()"> Logout </button>
             </div>
         </div>
     </nav>
 </div>
-
+    
+<div id="loadingOverlay">
+    <div class="loading-circle"></div>
+</div>
     <!-----popup confirmation logout------>
     <div id="logoutPopup" class="popup">
-                <div class="popup-content">
-                    <p>Are you sure you want to logout?</p>
-                    <button id="logoutNo">No</button>
-                    <button id="logoutYes">Yes</button>
-                </div>
-            </div>
+        <div class="popup-content">
+            <p>Are you sure you want to logout?</p>
+            <button id="logoutNo">No</button>
+            <button id="logoutYes">Yes</button>
+        </div>
+    </div>
 
 <script>
 
@@ -354,21 +377,22 @@ if ($result->num_rows > 0) {
     window.addEventListener("load", setActivePage);
 
    
-
-            // JavaScript code to show the logout confirmation popup
-        document.querySelector(".btn-logout").addEventListener("click", function() {
-            document.getElementById("logoutPopup").style.display = "block";
-        });
+    function openPopup() {
+        document.getElementById("logoutPopup").style.display = "block";
 
         // Close the popup when clicking "No"
-        document.getElementById("logoutNo").addEventListener("click", function() {
+        document.getElementById("logoutNo").addEventListener("click", function () {
             document.getElementById("logoutPopup").style.display = "none";
         });
 
-        // Handle the "Yes" click event for logout
-        document.getElementById("logoutYes").addEventListener("click", function() {
-            // Redirect to the logout page
-            window.location.href = "../login.php";
+         // Handle the "Yes" click event for logout
+         document.getElementById("logoutYes").addEventListener("click", function () {
+            document.getElementById("loadingOverlay").style.display = "flex";
+
+            setTimeout(function () {
+                window.location.href = "../login.php";
+            }, 50000); 
         });
+    }
 </script>
 <!-------End Sidebar------------>
