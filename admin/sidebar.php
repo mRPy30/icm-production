@@ -199,12 +199,12 @@
         }
 
         .loading-circle {
-            border: 8px solid #000;
+            border: 8px solid #fff;
             border-top: 8px solid #1c1c1c;
             border-radius: 50%;
             width: 50px;
             height: 50px;
-            animation: spin 5s linear infinite;
+            animation: spin 3s linear infinite;
         }
 
         @keyframes spin {
@@ -391,7 +391,7 @@
 
             setTimeout(function () {
                 window.location.href = "../login.php";
-            }, 50000); 
+            }, 2000); 
         });
     }
 </script>

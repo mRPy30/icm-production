@@ -56,8 +56,8 @@ if ($result->num_rows > 0) {
 
     <!----Navbar&Sidebar----->
     <?php 
-        include '../admin/navbar.php';
         include '../admin/sidebar.php';
+        include '../admin/navbar.php';
     ?>   
     
     <section class="booking-box">

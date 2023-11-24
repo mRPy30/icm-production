@@ -189,6 +189,7 @@ td form button[name="decline"]:hover{
     background-color: rgb(172, 3, 0);
     transition: 0.4s;
 }
+
 /***Table Style***/ 
 .header-table {
     border-collapse: collapse;
@@ -282,36 +283,138 @@ td .profile-image {
     margin-top: 7%;
 }
 
-
-
-
-
-/********Admin Account*******/
-.account{
+/****Admin Account****/
+.account {
     margin: 4.5% 0 0 16%;
-    padding: 3%; 
+    padding: 3%;
     display: flex;
     justify-content: space-between;
-    
 }
 
-.account-management{
+.account-management {
     border-radius: 14px;
     border: 1px solid #BCB4B5;
     background: #FCF6F6;
     width: 100%;
-    height: 80vh;
+    height: 80vh; 
+    padding: 10px 50px 50px 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start; 
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25), 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 }
 
 .profile img {
-    max-width: 15%;
-    max-height: 15%;
+    width: 11%;
+    height: auto;
+    max-width: 100%;
     border-radius: 50%;
+    display: block;
+    margin: 0 auto;
+    margin-top: 30px; 
 }
 
-#profile-image {
-    max-width: 15%;
-    max-height: 15%;
-    border-radius: 50%;
+.profile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: auto;
+}
+
+.profile-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+}
+
+
+form .profile-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+    height: auto;
+    max-height: 50%;
+    margin-top: 1.4%;
+}
+form .profile-section .separator{
+    border-bottom: 1px solid #BCB4B5;
+    width: 78vw;
+    margin-top: 1.4%;
+}
+form .profile-section label input[type="file"] {
+    display: none;
+}
+
+form .profile-section label {
+    color: #4285F4; 
+    cursor: pointer;
+    font: normal 600 16px/normal 'Poppins';
+}
+
+form .profile-section p{
+    color: #747473;
+    font: normal 500 13px/normal 'Poppins';
+}
+
+
+.fillup {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    width: 100%;
+}
+
+.two-columns {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-top: 15px;
+
+}
+
+.two-columns > div {
+    width: 48%;
+    display: flex;
+    flex-direction: column;
+}
+
+.fillup label{
+    font: normal 500 13px/normal 'Poppins';
+    margin-bottom: 5px;
+}
+.fillup input {
+    width: 100%;
+    height: 7vh;
+    border-radius: 10px;
+    border: 1px solid #BCB4B5;
+    padding: 10px;
+    box-sizing: border-box;
+    background: #FCF6F6;
+    font: normal 400 13px/normal 'Poppins';
+}
+
+.fillup input:focus {
+    outline-color: #807f7f;
+}
+
+.save-changes {
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+    margin-top: 20px;
+    width: 100%;
+    height: 50px; 
+}
+
+.save-changes input[type="submit"] {
+    width: 100%;
+    height: 80%; 
+    border-radius: 10px;
+    background: #C2BE63;
 }

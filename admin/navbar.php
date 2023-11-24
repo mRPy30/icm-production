@@ -235,7 +235,7 @@ $pageTitle = isset($pageTitles[$currentPage]) ? $pageTitles[$currentPage] : "Adm
         </div>
         <div class="profile_dropdown-content">
             <a href="account.php">Profile</a> <!-- Replace "#" with the actual profile page URL -->
-            <a type="text" class="btn-logout" onclick="goBack()">Logout</a>
+            <a type="text" id="logoutPopup" class="btn-logout" onclick="goBack()">Logout</a>
         </div>
     </div>
 </header>
@@ -243,28 +243,39 @@ $pageTitle = isset($pageTitles[$currentPage]) ? $pageTitles[$currentPage] : "Adm
 <body>
     <!-----popup confirmation logout------>
     <div id="logoutPopup" class="popup">
-        <div class="popup-content">
-            <p>Are you sure you want to logout?</p>
-            <button id="logoutNo">No</button>
-            <button id="logoutYes">Yes</button>
-        </div>
+    <div class="popup-content">
+        <p>Are you sure you want to logout?</p>
+        <button id="logoutNo">No</button>
+        <button id="logoutYes">Yes</button>
     </div>
-</body>
-
+</div>
+    </body>
 <script>
-    // JavaScript code to show the logout confirmation popup
-    document.querySelector(".btn-logout").addEventListener("click", function() {
-            document.getElementById("logoutPopup").style.display = "block";
+    function openPopup() {
+        document.getElementById("logoutPopup").style.display = "block";
+    }
+
+    function closePopup() {
+        document.getElementById("logoutPopup").style.display = "none";
+    }
+
+    function handleLogout() {
+        document.getElementById("loadingOverlay").style.display = "flex";
+        setTimeout(function() {
+            window.location.href = "../login.php";
+        }, 1000); // Redirect after 3 seconds (adjust as needed)
+    }
+
+    document.addEventListener("DOMContentLoaded", function() {
+        // Open the logout popup on button click
+        document.querySelectorAll(".btn-logout").forEach(function(btn) {
+            btn.addEventListener("click", openPopup);
         });
 
         // Close the popup when clicking "No"
-        document.getElementById("logoutNo").addEventListener("click", function() {
-            document.getElementById("logoutPopup").style.display = "none";
-        });
+        document.getElementById("logoutNo").addEventListener("click", closePopup);
 
         // Handle the "Yes" click event for logout
-        document.getElementById("logoutYes").addEventListener("click", function() {
-            // Redirect to the logout page
-            window.location.href = "../login.php";
-        });
+        document.getElementById("logoutYes").addEventListener("click", handleLogout);
+    });
 </script>

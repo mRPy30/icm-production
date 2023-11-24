@@ -44,11 +44,11 @@ $page = $components[2];
     
 <body>
 
-    <!----Navbar&Sidebar----->
+<!----Navbar&Sidebar----->
     <?php 
-        include '../admin/navbar.php';
         include '../admin/sidebar.php';
-    ?>   
+        include '../admin/navbar.php';
+    ?>    
 
     
 </body>
