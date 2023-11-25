@@ -5,7 +5,7 @@
 }
 body{
     background-color: white;
-    margin: 0;
+    margin: 0;   
 	padding: 0;
 }
 .homepage_main {
@@ -15,14 +15,14 @@ body{
 .main-content {
     width: 100%;
 }
-section{
-	position: relative;
-	margin-top: 0;
-	padding: 0;
-	background: #583648 url("../picture/homepic.jpg");
-	background-size: contain;
-	width: 100%;
-	height: 67vw;
+section {
+    position: relative;
+    margin-top: 0;
+    padding: 0;
+    background: #583648 url("../picture/homepic.jpg") no-repeat;
+    background-size: cover;
+    width: 100%;
+    height: 67vw;
 }
 #curve{
 	position: absolute;
@@ -37,4 +37,13 @@ section.sec2{
 	width: 100%;
 	height: 100vh;
 	background: #fff;
+}
+
+
+/*****Responsive*****/
+
+@media screen and (max-width: 768px) {
+	section {
+		height: 100vh;
+	}
 }
