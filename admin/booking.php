@@ -53,14 +53,12 @@ if ($result->num_rows > 0) {
 </head>
     
 <body>
-    <div class="navbar">
-        <h3>Admin Booking Details</h3>
-        <i class="fa-regular fa-bell"></i>
-    </div> 
 
+    <!----Navbar&Sidebar----->
     <?php 
         include '../admin/sidebar.php';
-    ?>
+        include '../admin/navbar.php';
+    ?>   
     
     <section class="booking-box">
         <div class="table-booking">

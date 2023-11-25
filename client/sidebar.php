@@ -138,9 +138,33 @@ if ($result->num_rows > 0) {
     .side_bar .side_bar_bottom ul li.active .bottom_curve:before{
         border-top-right-radius: 25px;
     }
+    .side_bar .side_bar_bottom ul li.active .top_curve:before{
+        border-bottom-right-radius: 25px;
+    }
 
+    .side_bar .side_bar_bottom ul li.active .bottom_curve:before{
+        border-top-right-radius: 25px;
+    }
+
+    .side_bar .side_bar_bottom ul .nav-link:not(.active) a:hover {
+        background: #D9D9D9;
+        color: #1c1c1c;
+        border-radius: 30px 0px 0px 30px;
+    }
+
+    .side_bar .side_bar_bottom ul .nav-link.active a:hover {
+        background-color: #000000;
+        color: #fbf4fb;
+    }
+
+    .side_bar .side_bar_bottom ul .nav-link.active .top_curve,
+    .side_bar .side_bar_bottom ul .nav-link.active .bottom_curve {
+        display: none;
+    }
+    
+    
     .side_bar .side_bar_bottom .logout{
-        padding: 17% 15% 15% 0%;		
+        padding: 10% 15% 15% 0%;		
     }
     .side_bar .side_bar_bottom .logout button{
         font: normal 600 14px/20px 'Poppins';
@@ -150,6 +174,12 @@ if ($result->num_rows > 0) {
         width: 105%;
         height: 40px;
         border-radius: 10px;
+        transition: all .3s ease;
+    }
+
+    .side_bar .side_bar_bottom .logout button:hover{
+        transform: scale(1.02);
+        background-color: #B3B3B3;
     }
     
     .popup {
@@ -205,6 +235,33 @@ if ($result->num_rows > 0) {
         box-shadow: 0 5px 10px rgba(0, 0, 0, 0.05);
         transition: all 200ms linear;
     }
+
+    #loadingOverlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.8);
+            z-index: 10000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .loading-circle {
+            border: 8px solid #000;
+            border-top: 8px solid #1c1c1c;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 5s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
     /*******RESPONSIVE**********/
 
     @media (max-width: 992px) {

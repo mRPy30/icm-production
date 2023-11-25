@@ -1,8 +1,8 @@
 <?php 
 //Connection
 include '../backend/dbcon.php';
-session_start();
 
+session_start(); // Start the session
 
 // Active Page
 
@@ -23,18 +23,18 @@ $page = $components[2];
     <!---WEB TITLE--->
     <link rel="short icon" href="../picture/shortcut-logo.png" type="x-icon">
     <title>
-        <?php echo "Admin | Finance"; ?>
+        <?php echo "Admin | Calendar"; ?>
     </title>
 
     <!---CSS--->
     <link rel="stylesheet" href="../css/admin.css">
 
     <!--ICON LINKS-->
-    <link rel="stylesheet" href="../font-awesome-6/css/all.css">
+    <link rel="stylesheet" href="font-awesome-6/css/all.css">
 
     <!--FONT LINKS-->
     <link rel="stylesheet" href="../css/fonts.css">
-    
+
     <style>
         body {
             overflow-y: hidden;
@@ -43,13 +43,13 @@ $page = $components[2];
 </head>
     
 <body>
+
     <!----Navbar&Sidebar----->
     <?php 
         include '../admin/sidebar.php';
         include '../admin/navbar.php';
-    ?>  
+    ?>    
 
-    
     
 </body>
 </html>

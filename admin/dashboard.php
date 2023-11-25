@@ -15,6 +15,16 @@ if ($result->num_rows > 0) {
     $total_number = 0;
 }
 
+$sql = "SELECT staffID, name, profile, email, role FROM staff";
+$result = $conn->query($sql);
+
+// Check if there's a result
+if ($result->num_rows > 0) {
+    $staffData = $result->fetch_all(MYSQLI_ASSOC);
+} else {
+    $staffData = array(); // Empty array if no data
+}
+
 
 
 // Active Page
@@ -48,6 +58,8 @@ $page = $components[2];
     <!--FONT LINKS-->
     <link rel="stylesheet" href="../css/fonts.css">
 
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
     <!----css---->
     <style>
         body {
@@ -59,91 +71,116 @@ $page = $components[2];
 </head>
     
 <body>
-    <div class="navbar">
-        <h3>Admin Dashboard</h3>
-        <i class="fa-regular fa-bell"></i>
-    </div>  
-    <!----Sidebar----->
+      
+    <!----Navbar&Sidebar----->
     <?php 
         include '../admin/sidebar.php';
-    ?>  
+        include '../admin/navbar.php';
+    ?>   
 
     <!----Main Content----->
-    <main class="admin_main">   
-        <div class="total-result">
-            <!---BOXES---
-            <div class='staff'>
-                <p>Staff</p>
-                <h1><?php echo $total_number; ?></h1>
+    <main>
+        <div class="dashboard">
+            <div class="dashboard-item">
+                <div class="dashboard-item-content">
+                    <p>Total Client</p>
+                    <h2><?php echo $total_number; ?></h2>
+                </div>
+                <div class="icon-container-client">
+                    <i class="fas fa-user" style="font-size: 36px; color: #D25A5A;"></i>
+                </div>
             </div>
-            <div class='staff'>
-                <p>Staff</p>
-                <h1><?php echo $total_number; ?></h1>
+            <div class="dashboard-item">
+                <div class="dashboard-item-content">
+                    <p>Revenue</p>
+                    <h2><?php echo $total_number; ?></h2>
+                </div>
+                <div class="icon-container-chart">
+                    <i class="fas fa-chart-line" style="font-size: 36px; color: #00008B;"></i>
+                </div>
             </div>
-            <div class='staff'>
-                <p>Staff</p>
-                <h1><?php echo $total_number; ?></h1>
-            </div>
-            <div class='staff'>
-                <p>Staff</p>
-                <h1><?php echo $total_number; ?></h1>
-            </div>
-            <div class='staff2'>
-                <p>Staff</p>
-                <h1><?php echo $total_number; ?></h1>
+            <div class="dashboard-item">
+                <div class="dashboard-item-content">
+                    <p>Rating</p>
+                    <h2><?php echo $total_number; ?></h2>
+                </div>
+                <div class="icon-container-rate">
+                <i class="fas fa-star" style="font-size: 36px; color: #FFF500;"></i>
+                </div>
             </div>
         </div>
-    --
-        <section class="graph">
-            <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-            <div style="padding: 0px 0px 20px 0px; margin: 3% 0% 0% 24%; border-radius: 5px; filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25)); width: 69.3%; background-color:#ffffff;">
-                <h5 style="border-bottom: 1px solid #CCCCCC; border-radius: 7px 7px 0px 0px; padding: 20px 0px 20px 20px; color: #FBF4F4; background-color: #1c1c1c; font: normal 500 14px/normal 'Poppins';">Total Clients</h5>
-                    <canvas style="height: 50px;" id="lineChart"></canvas>
+
+        <div class="dashboard-bottom">
+            <div class="total-revenue">
+                <h4>Total Revenue</h4>
+                <canvas id="revenueChart"></canvas>
             </div>
+            <div class="tbl-prod">
+                <div class="title-bar">
+                    <h4>Production Member</h4>
+                </div>
+                <div class="table-container">
+                    <table class="prod-table">
+                        <thead>
+                            <tr>
+                                <th colspan="2" style="padding-right: 30px">Name</th>
+                                <th>Role</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php foreach ($staffData as $staff): ?>
+                                <tr>
+                                    <td style="padding-left: 30px; vertical-align: middle;"><img src="data:image/jpeg;base64,<?php echo base64_encode($staff['profile']); ?>" alt="Profile" style="width: 40px; height: 40px; border-radius: 100%;"></td>
+                                    <td style="padding: 0px; text-align: start; color: #1C1C1D; font: normal 500 15px/normal 'Poppins'; ">
+                                        <?php echo $staff['name']; ?><br>
+                                        <span style="font: normal 400 11px/normal 'Poppins'; color: #929292;"><?php echo $staff['email']; ?></span>
+                                    </td>
+                                    <td>
+                                        <?php
+                                        $roles = explode(",", $staff['role']);
+                                        echo implode("<br>", $roles);
+                                        ?>
+                                    </td>
+                                </tr>
+                            <?php endforeach; ?>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    <main>
     
-            <script>
-                async function fetchData() {
-                    const response = await fetch('../admin/dashboard.php');
-                    const data = await response.json();
-                    return data;
-                }
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const revenueData = [100, 150, 200, 180, 250, 220];
 
-                async function createChart() {
-                    const data = await fetchData();
-                    
-                    const years = data.map(entry => entry.year);
-                    const passingRates = data.map(entry => entry.passing_rate);
-                    
-                    const ctx = document.getElementById('lineChart').getContext('2d');
-                    const chart = new Chart(ctx, {
-                        type: 'line',
-                        data: {
-                            labels: years,
-                            datasets: [{
-                                label: 'Total ',
-                                data: passingRates,
-                                borderColor: '#008A0E',
-                                backgroundColor: '#008A0E',
-                                borderWidth: 3
-                            }]
-                        },
-                        options: {
-                            responsive: true,
-                            scales: {
-                                y: {
-                                    beginAtZero: true
-                                }
-                            }
+            const ctx = document.getElementById('revenueChart').getContext('2d');
+
+            const revenueChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+                    datasets: [{
+                        label: 'Monthly Revenue',
+                        data: revenueData,
+                        borderColor: 'background-color: #0d0a0b;',
+                        borderWidth: 3,
+                        pointBackgroundColor: 'background-color:  #7a7adb;',
+                        pointRadius: 5,
+                        fill: false
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true
                         }
-                    });
+                    }
                 }
-
-                createChart();
-            </script>
-        </section>
-    </main>
-            -->
-    
-    
+            });
+        });
+    </script>
 </body>
 </html>

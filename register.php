@@ -68,8 +68,8 @@ $page = $components[2];
     <!--ICON LINKS-->
     <link rel="stylesheet" href="font-awesome-6/css/all.css">
 
-  
-
+    <!--FONT LINKS-->
+    <link rel="stylesheet" href="../css/fonts.css">
 
 
 </head>
