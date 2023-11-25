@@ -199,12 +199,12 @@
         }
 
         .loading-circle {
-            border: 8px solid #fff;
-            border-top: 8px solid #1c1c1c;
+            border: 8px solid #1c1c1c;
+            border-top: 8px solid #C2BE63;
             border-radius: 50%;
             width: 50px;
             height: 50px;
-            animation: spin 3s linear infinite;
+            animation: spin 5s linear infinite;
         }
 
         @keyframes spin {
