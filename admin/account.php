@@ -101,17 +101,20 @@ $page = $components[2];
                             </div>
                             <div class="two-columns">
                                 <div>
-                                    <label for="confirm_password">Confirm Password:</label>
-                                    <input type="password" id="confirm_password" name="confirm_password">
-                                    <div id="password-strength" class="alert" style="display: none;"></div>
+                                    <label for="password">Enter your New Password:</label>
+                                    <input type="password" id="password" name="password">
                                 </div>
                                 <div>
-                                    <label for="password">Password:</label>
-                                    <input type="password" id="password" name="password">
+                                    <label for="confirm_password">Confirm New Password:</label>
+                                    <input type="password" id="confirm_password" name="confirm_password">
+                                    <div id="password-strength" class="alert" style="display: none;"></div>
                                 </div>
                             </div>
                             <div class="save-changes">
                                 <input type="submit" value="Save Changes">
+                            </div>
+                            <div class="reset-button">
+                                <input type="reset" value="Reset" onclick="resetForm()">
                             </div>
                         </div>
                     </form>      
@@ -155,37 +158,40 @@ $page = $components[2];
         }
 
         document.getElementById('updateForm').addEventListener('submit', function(event) {
-    const passwordInput = document.getElementById('password');
-    const confirmPasswordInput = document.getElementById('confirm_password');
-    const strength = document.getElementById('password-strength');
-    
-    if (!passwordsMatch()) {
-        strength.textContent = 'Password and Confirm Password do not match.';
-        strength.style.backgroundColor = '#f8d7da';
-        strength.style.color = '#842029';
-        strength.style.border = '2px solid #f5c2c7';
-        strength.style.display = 'block'; 
+            const passwordInput = document.getElementById('password');
+            const confirmPasswordInput = document.getElementById('confirm_password');
+            const strength = document.getElementById('password-strength');
+                
+            if (!passwordsMatch()) {
+                strength.textContent = 'Password and Confirm Password do not match.';
+                strength.style.color = '#ff0000';
+                strength.style.display = 'block'; 
+                
+                passwordInput.style.border = '2px solid #ff0000';
+                confirmPasswordInput.style.border = '2px solid #ff0000';
+                passwordInput.style.background = '#FCF6F6';
+                confirmPasswordInput.style.background = '#FCF6F6';
+                
+                event.preventDefault();
+            } else {
+                strength.style.display = 'none';
+                passwordInput.style.border = '1px solid #BCB4B5';
+                confirmPasswordInput.style.border = '1px solid #BCB4B5';
+                confirmPasswordInput.style.background = '#FCF6F6';
+            }
+        });
         
-        passwordInput.style.border = '2px solid #f5c2c7';
-        confirmPasswordInput.style.border = '2px solid #f5c2c7';
-        passwordInput.style.background = '#FCF6F6';
-        confirmPasswordInput.style.background = '#FCF6F6';
-        
-        event.preventDefault();
-    } else {
-        strength.style.display = 'none';
-        passwordInput.style.border = '1px solid #BCB4B5';
-        confirmPasswordInput.style.border = '1px solid #BCB4B5';
-        passwordInput.style.background = '#FCF6F6';
-        confirmPasswordInput.style.background = '#FCF6F6';
-    }
-});
+        function passwordsMatch() {
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirm_password').value;
+            return password === confirmPassword;
+        }
 
-function passwordsMatch() {
-    const password = document.getElementById('password').value;
-    const confirmPassword = document.getElementById('confirm_password').value;
-    return password === confirmPassword;
-}
+        function resetForm() {
+            document.getElementById('updateForm').reset();
+            const strength = document.getElementById('password-strength');
+            strength.style.display = 'none';
+        }
         </script>
 </body>
 </html>

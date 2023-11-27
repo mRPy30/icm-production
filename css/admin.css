@@ -283,7 +283,120 @@ td .profile-image {
     margin-top: 7%;
 }
 
-/****Admin Account****/
+/*****Admin Calendar*****/
+.calendar {
+    margin: 4% 0 0 16%;
+    padding: 3%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.calendar-header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative; /* Set the position to relative */
+}
+
+.event_management {
+    background: #FCF6F6;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding-top: 40px;
+    border-radius: 10px 10px 0 0;
+    width: 100%;
+    position: relative; 
+}
+
+#calendar {
+    border: 1px solid #ccc;
+    height: 78.2vh; 
+    font: normal 600 16px/normal 'Poppins';
+    flex-grow: 1; 
+}
+
+.add-schedule-button {
+    background-color: #C2BE63;
+    font: normal 500 15px/normal 'Poppins';
+    color: #FCF6F6;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    position: absolute;
+    left: 30px;
+    top: 41px;
+    display: block;
+    z-index: 1; 
+    transition: background-color 0.3s ease-in-out; 
+}
+.add-schedule-button:hover {
+    background-color: #c0b71a;
+}
+
+.fc-view {
+    height: 110vh; 
+}
+.fc-day-header {
+    background-color: #E1DE8F; /* Change the background color here */
+}
+
+.fc-left {
+    text-align: center;
+}
+.fc-right {
+    position: absolute;
+    right: 55px;
+}
+.fc-basic-view .fc-day-number, .fc-basic-view .fc-week-number {
+    padding: 12%;
+}
+
+
+.modal {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 53%;
+    height: 54%;
+    width: 50%;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+    border-radius: 5px;
+    z-index: 9999;
+}
+
+.modal-content {
+    background: linear-gradient(0deg, #FBF4F4 0%, #FBF4F4 100%), linear-gradient(0deg, #FBF4F4 0%, #FBF4F4 100%), #FBF4F4;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    box-shadow: 0px 0px 400px 900px rgba(0,0,0,0.28);
+    width: 80%;
+    max-width: 600px;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/******Admin Account*******/
 .account {
     margin: 4.5% 0 0 16%;
     padding: 3%;
@@ -336,7 +449,7 @@ form .profile-section {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     height: auto;
     max-height: 50%;
     margin-top: 1.4%;
@@ -407,14 +520,45 @@ form .profile-section p{
     display: flex;
     justify-content: center;
     align-items: center; 
-    margin-top: 20px;
+    margin-top: 10px;
     width: 100%;
     height: 50px; 
 }
 
 .save-changes input[type="submit"] {
     width: 100%;
-    height: 80%; 
+    height: 85%; 
     border-radius: 10px;
     background: #C2BE63;
+    cursor: pointer;
+    font: normal 500 14px/normal 'Poppins';
+    transition: background-color 0.3s ease-in-out; 
 }
+.save-changes input[type="submit"]:hover {
+    background-color: #c4bd3d;
+}
+
+.reset-button {
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+    width: 100%;
+    height: 50px; 
+}
+
+.reset-button input[type="reset"] {
+    width: 100%;
+    height: 70%;
+    border-radius: 10px;
+    background-color: #aeaeae;
+    border: none;
+    color: #1c1c1c;
+    cursor: pointer;
+    font: normal 500 13px/normal 'Poppins';
+    transition: background-color 0.3s ease-in-out; /* Add transition for hover effect */
+}
+
+.reset-button input[type="reset"]:hover {
+    background-color: #8f8f8f; 
+}
+
