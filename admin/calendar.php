@@ -3,43 +3,36 @@
 include '../backend/dbcon.php';
 
 session_start(); // Start the session
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Check if the form data exists
+    if(isset($_POST['event_name'], $_POST['event_start_date'], $_POST['event_end_date'])) {
+        $event_name = $_POST['event_name'];
+        $event_start_date = $_POST['event_start_date'];
+        $event_end_date = $_POST['event_end_date'];
 
-// Check if $conn is set and not null
-if(isset($conn) && !is_null($conn)) {
-    // Display Booking logic
-    $display_query = "SELECT bookingId, eventDate, eventTime, eventLocation, type_of_event, title_event, paymentAmount, description, clientID, status FROM booking";             
-    $results = mysqli_query($conn, $display_query);   
-    $count = mysqli_num_rows($results);  
-    if ($count > 0) {
-        $data_arr = array();
-        $i = 1;
-        while ($data_row = mysqli_fetch_array($results, MYSQLI_ASSOC)) {
-            $data_arr[$i]['bookingId'] = $data_row['bookingId'];
-            $data_arr[$i]['title'] = $data_row['title_event'];
-            $data_arr[$i]['start'] = date("Y-m-d", strtotime($data_row['eventDate']));
-            $data_arr[$i]['end'] = date("Y-m-d", strtotime($data_row['eventDate']));
-            $data_arr[$i]['color'] = '#' . substr(uniqid(), -6);
-            $data_arr[$i]['url'] = 'https://www.shinerweb.com';
-            $i++;
+        $insert_query = "INSERT INTO `calendar_event_master`(`event_name`,`event_start_date`,`event_end_date`) VALUES ('$event_name','$event_start_date','$event_end_date')";             
+        if(mysqli_query($conn, $insert_query)) {
+            $data = array(
+                'status' => true,
+                'msg' => 'Event added successfully!'
+            );
+        } else {
+            $data = array(
+                'status' => false,
+                'msg' => 'Sorry, Event not added.'				
+            );
         }
-        
-        $events_data = array(
-            'status' => true,
-            'msg' => 'successfully!',
-            'data' => $data_arr
-        );
+        echo json_encode($data);
+        exit();
     } else {
-        $events_data = array(
+        $data = array(
             'status' => false,
-            'msg' => 'Error!'                
+            'msg' => 'Invalid form data!'
         );
+        echo json_encode($data);
+        exit();
     }
-    $events_json = json_encode($events_data);
-} else {
-    echo "Database connection error!";
-    exit(); 
 }
-
 ?>
 
 
@@ -57,7 +50,6 @@ if(isset($conn) && !is_null($conn)) {
     </title>
 
     <!---CSS--->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../css/admin.css">
 
     <!--ICON LINKS-->
@@ -66,6 +58,12 @@ if(isset($conn) && !is_null($conn)) {
     <!--FONT LINKS-->
     <link rel="stylesheet" href="../css/fonts.css">
 
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.min.css" rel="stylesheet" />
+    <!-- JS for jQuery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <!-- JS for full calender -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.20.1/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.min.js"></script>
     <!----css---->
     <style>
         body {
@@ -84,7 +82,7 @@ if(isset($conn) && !is_null($conn)) {
         include '../admin/navbar.php';
     ?> 
 
-    <main class="calendar">
+	<main class="calendar">
         <div class="calendar-header">
             <button id="addScheduleButton" class="add-schedule-button"><i class="fa-solid fa-plus"></i> Add Schedule</button>
             <div id="calendar" class="event_management"></div>
@@ -135,105 +133,119 @@ if(isset($conn) && !is_null($conn)) {
         </div>
     </div>
 </div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.20.1/moment.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.min.js"></script>
-    <script>
-    $(document).ready(function() {
-    var calendar; // Declare the calendar variable outside the function scope
+</div>
+<!-- End popup dialog box -->
 
-    function initializeCalendar(eventsData) {
-        if (eventsData.status) {
-            var events = eventsData.data;
-            calendar = $('#calendar').fullCalendar({
-                defaultView: 'month',
-                timeZone: 'local',
-                editable: true,
-                selectable: true,
-                selectHelper: true,
-                events: events,
-                eventRender: function(event, element, view) {
-                    element.bind('click', function() {
-                        alert(event.event_id);
-                    });
-                },
-                select: function(start, end) {
-                    $('#event_start_date').val(moment(start).format('YYYY-MM-DD'));
-                    // Automatically attach the start date to the input field
-                    $('#event_start_date').val(moment(start).format('YYYY-MM-DD'));
-                    $('#event_end_date').val(moment(end).format('YYYY-MM-DD'));
-                    $('#event_entry_modal').show();
-                }
-            });
-        } else {
-            alert('No events to display!');
-        }
-    }
+</body>
+<script>
+        $(document).ready(function() {
+            display_events();
 
-    var eventsData = <?php echo $events_json; ?>;
-    initializeCalendar(eventsData);
+            function display_events() {
+                $.ajax({
+                    url: '../backend/display_event.php',
+                    dataType: 'json',
+                    success: function(response) {
+                        var events = [];
+                        if (response.status) {
+                            $.each(response.data, function(i, item) {
+                                events.push({
+                                    event_id: item.event_id,
+                                    title: item.title,
+                                    start: item.start,
+                                    end: item.end,
+                                    color: item.color,
+                                    url: item.url
+                                });
+                            });
+                            initializeCalendar(events);
+                        } else {
+                            alert('No events to display!');
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        console.error("Error fetching events: " + error);
+                    }
+                });
+            }
 
-    $("#addScheduleButton").click(function() {
-        $("#event_entry_modal").show();
-    });
+            function initializeCalendar(events) {
+                var calendar = $('#calendar').fullCalendar({
+                    defaultView: 'month',
+                    timeZone: 'local',
+                    editable: true,
+                    selectable: true,
+                    selectHelper: true,
+                    events: events,
+                    select: function(start, end) {
+                        // Open the modal for adding events when a day is clicked
+                        $('#event_start_date').val(moment(start).format('YYYY-MM-DD'));
+                        $('#event_end_date').val(moment(end).format('YYYY-MM-DD'));
+                        $('#event_entry_modal').show();
+                    },
+                    eventRender: function(event, element, view) {
+                        element.bind('click', function() {
+                            alert(event.event_id);
+                        });
+                    }
+                });
+            }
 
-    $(".close").click(function() {
-        $("#event_entry_modal").hide();
-    });
-
-    $(window).click(function(event) {
-        if (event.target.id === "event_entry_modal") {
-            $("#event_entry_modal").hide();
-        }
+            // Save Event button click handler
+            $("#saveEventButton").on("click", function() {
+        save_event();
     });
 
     function save_event() {
         var event_name = $("#event_name").val();
         var event_start_date = $("#event_start_date").val();
         var event_end_date = $("#event_end_date").val();
-        var event_color = $("#event_color").val();
+
+        if (event_name === "" || event_start_date === "" || event_end_date === "") {
+            alert("Please enter all required details.");
+            return false;
+        }
 
         $.ajax({
-            method: 'POST',
-            url: 'calendar.php',
+            url: "calendar.php",
+            type: "POST",
+            dataType: 'json',
             data: {
-                title: event_name,
-                start_date: event_start_date,
-                end_date: event_end_date,
-                color: event_color
+                event_name: event_name,
+                event_start_date: event_start_date,
+                event_end_date: event_end_date
             },
             success: function(response) {
                 $('#event_entry_modal').hide();
-                if (response.status) {
-                    // Fetch updated events from the server
-                    $.ajax({
-                        method: 'GET',
-                        url: 'fetch_events.php', // Replace with your endpoint to fetch events
-                        success: function(data) {
-                            calendar.fullCalendar('removeEvents');
-                            calendar.fullCalendar('addEventSource', data);
-                            calendar.fullCalendar('rerenderEvents');
-                        },
-                        error: function(error) {
-                            console.error("Error fetching events: ", error);
-                        }
-                    });
+                if (response.status === true) {
+                    alert(response.msg);
+                    location.reload();
                 } else {
-                    console.error("Error: " + response.msg);
+                    alert(response.msg);
                 }
             },
-            error: function(error) {
-                console.error("Error saving event: ", error);
+            error: function(xhr, status, error) {
+                console.error("AJAX error:", status, error);
+                alert("Error occurred while processing the request.");
             }
         });
+
+        return false;
     }
+            // Event handlers for modal display
+            $("#addScheduleButton").on("click", function() {
+                $("#event_entry_modal").show();
+            });
 
-    $("#saveEventButton").click(function() {
-        save_event();
-    });
-});
+            $(".close").on("click", function() {
+                $("#event_entry_modal").hide();
+            });
+
+            $(window).on("click", function(event) {
+                if (event.target.id === "event_entry_modal") {
+                    $("#event_entry_modal").hide();
+                }
+            });
+        });
     </script>
-
-    
-</body>
-</html>
+</html> 
