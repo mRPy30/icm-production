@@ -59,18 +59,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <link rel="stylesheet" href="../css/fonts.css">
 
     <link href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.min.css" rel="stylesheet" />
-    <!-- JS for jQuery -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <!-- JS for full calender -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.20.1/moment.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.min.js"></script>
+
     <!----css---->
     <style>
         body {
             overflow-y: hidden;
         }       
     </style>
-    
 </head>
     
 <body>
@@ -90,53 +85,39 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </main>
 
 
-<!-- Popup -->
-<div id="event_entry_modal" class="modal">
-    <div class="modal-content">
-        <span class="close">&times;</span>
-        <div class="img-container">
-            <div class="row">
-                <div class="col-sm-12">  
-                    <div class="form-group">
-                        <label for="event_name">Event name</label>
-                        <input type="text" name="event_name" id="event_name" class="form-control" placeholder="Enter your event name">
-                    </div>
+    <!-- Popup -->
+    <div id="event_entry_modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div class="img-container">
+                <div class="form-group">
+                    <label for="event_name">Event name</label>
+                    <input type="text" name="event_name" id="event_name" class="form-control" placeholder="Enter your event name">
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-sm-6">  
-                    <div class="form-group">
-                        <label for="event_start_date">Event start</label>
-                        <input type="date" name="event_start_date" id="event_start_date" class="form-control onlydatepicker" placeholder="Event start date">
-                    </div>
+                <div class="form-group">
+                    <label for="event_start_date">Event start</label>
+                    <input type="date" name="event_start_date" id="event_start_date" class="form-control onlydatepicker" placeholder="Event start date">
                 </div>
-                <div class="col-sm-6">  
-                    <div class="form-group">
-                        <label for="event_end_date">Event end</label>
-                        <input type="date" name="event_end_date" id="event_end_date" class="form-control" placeholder="Event end date">
-                    </div>
+                <div class="form-group">
+                    <label for="event_end_date">Event end</label>
+                    <input type="date" name="event_end_date" id="event_end_date" class="form-control" placeholder="Event end date">
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-sm-12">  
-                    <div class="form-group">
-                        <label for="event_color">Event color</label>
-                        <input type="color" name="event_color" id="event_color" class="form-control" value="#C2BE63">
-                    </div>
+                <div class="form-group">
+                    <label for="event_color">Event color</label>
+                    <input type="color" name="event_color" id="event_color" class="form-control" value="#C2BE63">
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-sm-12">  
-                    <button id="saveEventButton" class="btn-save-event">Save Event</button>
-                </div>
+                <button id="saveEventButton" class="btn-save-event">Save Event</button>
             </div>
         </div>
     </div>
-</div>
-</div>
 <!-- End popup dialog box -->
 
-</body>
+    <!-- JS for jQuery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <!-- JS for full calendar -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.20.1/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.min.js"></script>
+    <!----css---->
 <script>
         $(document).ready(function() {
             display_events();
@@ -248,4 +229,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             });
         });
     </script>
+    </body>
 </html> 

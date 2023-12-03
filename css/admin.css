@@ -286,7 +286,7 @@ td .profile-image {
 /*****Admin Calendar*****/
 .calendar {
     margin: 4% 0 0 16%;
-    padding: 3%;
+    padding: 4%;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -297,7 +297,7 @@ td .profile-image {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    position: relative; /* Set the position to relative */
+    position: relative; 
 }
 
 .event_management {
@@ -317,6 +317,7 @@ td .profile-image {
     height: 78.2vh; 
     font: normal 600 16px/normal 'Poppins';
     flex-grow: 1; 
+    
 }
 
 .add-schedule-button {
@@ -340,29 +341,49 @@ td .profile-image {
     background-color: #c0b71a;
 }
 
-.fc-view {
-    height: 12vh; 
-}
 .fc-day-header {
-    background-color: #E1DE8F; /* Change the background color here */
+    background-color: #E1DE8F; 
 }
 
 .fc-left {
     text-align: center;
 }
+
 .fc-right {
     position: absolute;
     right: 55px;
 }
-.fc-basic-view .fc-day-number, .fc-basic-view .fc-week-number {
-    padding: 12%;
+
+#calendar .fc-view {
+    padding: 0;
+    margin: 0;
+    height: 99vh; 
+}
+
+#calendar .fc-body {
+    padding: 0;
+    margin: 0;
+}
+
+#calendar .fc-row {
+    margin: 0;
+}
+
+#calendar .fc-widget-content {
+    padding: 0;
+    margin: 0;
+}
+#calendar .fc-content{
+    height: 15px;
+    font: normal 500 11px/normal 'Poppins';
+    color: #FCF6F6;
 }
 
 
 .modal {
     display: none;
     position: fixed;
-    top: 50%;
+    top: 35%;
     left: 53%;
     height: 54%;
     width: 50%;
@@ -370,6 +391,16 @@ td .profile-image {
     padding: 20px;
     border-radius: 5px;
     z-index: 9999;
+    animation: slideIn 0.3s ease-in-out forwards;
+}
+
+@keyframes slideIn {
+    from {
+        top: -50%; 
+    }
+    to {
+        top: 35%; 
+    }
 }
 
 .modal-content {
@@ -382,18 +413,56 @@ td .profile-image {
     max-width: 600px;
 }
 
+
 .close {
     color: #aaa;
     float: right;
     font-size: 28px;
     font-weight: bold;
+    cursor: pointer;
 }
 
 .close:hover,
 .close:focus {
     color: black;
     text-decoration: none;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+    font: normal 500 15px/normal 'Poppins';
+}
+
+.form-group input[type="text"],
+.form-group input[type="date"],
+.form-group input[type="color"] {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font: normal 400 13px/normal 'Poppins';
+}
+
+.btn-save-event {
+    background-color: #C2BE63;
+    color: white;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 10px;
     cursor: pointer;
+    font: normal 500 13px/normal 'Poppins';
+    transition: background-color 0.3s ease-in-out; 
+}
+
+.btn-save-event:hover {
+    background-color: #c0b71a;
 }
 
 /******Admin Account*******/
