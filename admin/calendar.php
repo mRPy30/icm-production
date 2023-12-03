@@ -1,17 +1,20 @@
-<?php 
+<?php
 // Connection
 include '../backend/dbcon.php';
 
 session_start(); // Start the session
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Check if the form data exists
-    if(isset($_POST['event_name'], $_POST['event_start_date'], $_POST['event_end_date'])) {
+    if (isset($_POST['event_name'], $_POST['event_start_date'], $_POST['event_end_date'])) {
         $event_name = $_POST['event_name'];
         $event_start_date = $_POST['event_start_date'];
         $event_end_date = $_POST['event_end_date'];
 
-        $insert_query = "INSERT INTO `calendar_event_master`(`event_name`,`event_start_date`,`event_end_date`) VALUES ('$event_name','$event_start_date','$event_end_date')";             
-        if(mysqli_query($conn, $insert_query)) {
+        // Modify the query to insert data into the schedule table
+        $insert_query = "INSERT INTO `schedule` (`schedName`, `schedStart`, `schedEnd`) 
+                         VALUES ('$event_name', '$event_start_date', '$event_end_date')";
+
+        if (mysqli_query($conn, $insert_query)) {
             $data = array(
                 'status' => true,
                 'msg' => 'Event added successfully!'
@@ -19,7 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         } else {
             $data = array(
                 'status' => false,
-                'msg' => 'Sorry, Event not added.'				
+                'msg' => 'Sorry, Event not added.'
             );
         }
         echo json_encode($data);
@@ -34,6 +37,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 ?>
+
 
 
 <!DOCTYPE html>
