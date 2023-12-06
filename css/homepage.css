@@ -15,7 +15,7 @@ body{
 .main-content {
     width: 100%;
 }
-section {
+main {
     position: relative;
     margin-top: 0;
     padding: 0;
@@ -38,6 +38,71 @@ section.sec2{
 	height: 100vh;
 	background: #fff;
 }
+
+ .text{
+    padding-top: 20%;
+    padding-left: 50%;
+}
+.text h2{
+    font: normal 700 50px/normal 'Poppins';
+	color: #1C1C1D;
+	letter-spacing: 3px;
+    text-align: center;
+    width: 90%;
+}
+
+.text .button2 {
+    margin: 30px 0px 0px 270px;
+    padding: 7px 0px 5px 17px;
+    height: 40px;
+    width: 15%; 
+    border: none;
+}
+.events {
+    display: flex;
+    margin: 3% 0 0 4%;
+    justify-content: space-between;
+}
+.events .box{
+    margin: 10px;
+}
+.events img{
+    width: 90%;
+    height: 90%;
+    filter: brightness(60%);
+}
+.events .first-event-box{
+    font: normal 700 18px/normal 'Poppins';
+	position: absolute;
+	top: 150%;
+	left: 23%;
+    color: white;
+    letter-spacing: 1px;
+}
+.events .second-event-box{
+    font: normal 700 18px/normal 'Poppins';
+	position: absolute;
+	top: 150%;
+	left: 55%;
+    color: white;
+    letter-spacing: 1px;
+}
+.events .third-event-box{
+    font: normal 700 18px/normal 'Poppins';
+	position: absolute;
+	top: 150%;
+	left: 86%;
+    color: white;
+    letter-spacing: 1px;
+}
+
+
+
+
+
+
+
+
 
 
 /*****Responsive*****/

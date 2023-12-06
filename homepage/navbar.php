@@ -43,7 +43,6 @@
     }
 
     .nav-item a {
-        transition: all 0.3s ease 0s;
         text-decoration: none;
         color: #1C1C1D;
         font: normal 600 17px/normal 'Poppins';
@@ -52,29 +51,13 @@
         position: relative;
     }
 
-    .nav-item a::after {
-        content: '';
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        width: 0;
-        height: 3px;
-        background-color: #E46F80;
-        transition: width 0.3s ease;
-    }
-
-    .nav-item a:hover::after {
-        width: 100%;
-    }
-
     .nav-item a.active {
-        color: #E46F80;
+        color: #C2BE63;
     }
 
     .nav-item a:hover {
-        color: #E46F80;
-        cursor: pointer;
-        padding: 5px;
+        color: #C2BE63;
+        transition: all 0.3s;
     }
 
     .nav-item .nav-link .header-section .register a:hover {
@@ -86,14 +69,12 @@
         width: 100px;
         height: 34px;
         left: 95vw;
-        font: normal 500 15px/normal 'Poppins';
+        font: normal 400 15px/normal 'Poppins';
         line-height: 24px;
         display: inline-block;
         cursor: pointer;
         fill: #FBF4F4;
-        stroke-width: 1px;
         border-radius: 30px;
-        stroke: #000;
         filter: drop-shadow(0px 3px 3px rgba(0, 0, 0, 0.25));
         display: inline-flex;
         padding: 3px 17px;
@@ -102,8 +83,8 @@
     }
 
     button:hover {
-        background-color: #E46F80;
-        color: black;
+        background-color: #c4bd3d;
+        color: white;
     }
 
     .nav-list {
@@ -191,7 +172,6 @@
     <header class="header-section">
         <img src="../picture/logo.png">
 
-        <!-- Add a button for mobile navigation -->
         <button class="mobile-menu-button">&#9776; Menu</button>
 
         <ul class="nav-list">

@@ -42,18 +42,41 @@
 
     <!----Main Content----->
 
-    <section>
+    <main>
         <div class="main-content" stylesheet="">
             <svg id="curve" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1416.99 174.01">
                 <path class="cls-1" d="M0,280.8S283.66,59,608.94,163.56s437.93,150.57,808,10.34V309.54H0V280.8Z"
                     transform="translate(0-135.53)" />
             </svg>
+
+
+            <div class="text">
+                <h2>Capture the moments of the world through our lenses</h2>
+                <button class="button2">Book Now</button>
+            </div>
         </div>
-    </section>
-    <section class="sec2">
 
-    </section>
 
+    </main>
+
+    <div class="events">
+        <div class="box">
+            <img src="../picture/wedding.jpg" alt="wedding">
+            <span class="first-event-box">Wedding</span>
+        </div>
+        <div class="box">
+            <img src="../picture/birthday.jpg" alt="birthday">
+            <span class="second-event-box">Birthday</span>
+        </div>
+        <div class="box">
+            <img src="../picture/graduation.jpg" alt="graduation">
+            <span class="third-event-box">Graduation</span>
+        </div>
+    </div>
+
+    <div class="">
+
+    </div>
 
     <!----End of Main Content----->
 
