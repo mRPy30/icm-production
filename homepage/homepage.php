@@ -52,7 +52,7 @@
 
             <div class="text">
                 <h2>Capture the moments of the world through our lenses</h2>
-                <button class="button2">Book Now</button>
+                <button class="button">Book Now</button>
             </div>
         </div>
 

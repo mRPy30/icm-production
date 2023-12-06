@@ -51,12 +51,21 @@ section.sec2{
     width: 90%;
 }
 
-.text .button2 {
+.button  {
     margin: 30px 0px 0px 270px;
-    padding: 7px 0px 5px 17px;
+    padding: 5px 0px 5px 0px;
     height: 40px;
     width: 15%; 
+    font: normal 400 15px/normal 'Poppins';
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+    transition: background-color 0.3s;
     border: none;
+    background-color: #FBF4F4;
+    border-radius: 30px;
+}
+.button:hover {
+    background-color: #454548;
+    color: #fcfcfc;
 }
 .events {
     display: flex;

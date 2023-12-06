@@ -65,25 +65,24 @@
         cursor: pointer;
     }
 
-    button {
+    .register button {
         width: 100px;
         height: 34px;
         left: 95vw;
         font: normal 400 15px/normal 'Poppins';
-        line-height: 24px;
         display: inline-block;
         cursor: pointer;
-        fill: #FBF4F4;
+        background-color: #1C1C1D;
+        filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
         border-radius: 30px;
-        filter: drop-shadow(0px 3px 3px rgba(0, 0, 0, 0.25));
-        display: inline-flex;
         padding: 3px 17px;
         transition: background-color 0.3s;
-        color: black;
+        color: #FCF6F6;
+        border: none;
     }
 
-    button:hover {
-        background-color: #c4bd3d;
+    .register button:hover {
+        background-color: #525256;
         color: white;
     }
 
