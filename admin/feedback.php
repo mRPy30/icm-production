@@ -44,7 +44,21 @@ $page = $components[2];
     
 <body>
 
-<!----Navbar&Sidebar----->
+    <section class="feedbox">
+        <div class="table-feedback">
+            <table class="header-table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Title</th>
+                        <th>Feedback</th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+    </section>
+
+    <!----Navbar&Sidebar----->
     <?php 
         include '../admin/sidebar.php';
         include '../admin/navbar.php';

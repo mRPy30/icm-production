@@ -64,42 +64,42 @@ if ($result->num_rows > 0) {
         <div class="table-booking">
             <h4>Booking Details</h4>
             <table class="header-table">
-            <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Title Event</th>
-                    <th>Event Address</th>
-                    <th>Date</th>
-                    <th>Packages</th>
-                    <th>Status</th>
-                </tr>
-            </thead>
-        </table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Title Event</th>
+                        <th>Event Address</th>
+                        <th>Date</th>
+                        <th>Packages</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+            </table>
 
-        <!-- Data Table -->
-        <div class="data-table-container">
-            <table class="data-table">
-                <tbody>
-                <?php foreach ($bookingData as $booking): ?>
-            <tr>
-                <td><?php echo $booking['clientName']; ?></td>
-                <td><?php echo $booking['title_event']; ?></td>
-                <td><?php echo $booking['eventLocation']; ?></td>
-                <td><?php echo date('F d Y', strtotime($booking['eventDate'])); ?></td>
-                <td><?php echo $booking['type_of_event']; ?></td>
-                <td>
-                    <?php if ($booking['status'] == 'Accepted' || $booking['status'] == 'Declined'): ?>
-                        <?php echo $booking['status']; ?>
-                    <?php elseif ($booking['status'] == 'Pending'): ?>
-                        <form method="POST" action="../backend/status.php">
-                            <input type="hidden" name="schedule_id" value="<?php echo $booking['bookingId']; ?>">
-                            <button type="submit" name="accept">Accept</button>
-                            <button type="submit" name="decline">Decline</button>
-                        </form>
-                    <?php endif; ?>
-                </td>
-            </tr>
-        <?php endforeach; ?>
+            <!-- Data Table -->
+            <div class="data-table-container">
+                <table class="data-table">
+                    <tbody>
+                    <?php foreach ($bookingData as $booking): ?>
+                <tr>
+                    <td><?php echo $booking['clientName']; ?></td>
+                    <td><?php echo $booking['title_event']; ?></td>
+                    <td><?php echo $booking['eventLocation']; ?></td>
+                    <td><?php echo date('F d Y', strtotime($booking['eventDate'])); ?></td>
+                    <td><?php echo $booking['type_of_event']; ?></td>
+                    <td>
+                        <?php if ($booking['status'] == 'Accepted' || $booking['status'] == 'Declined'): ?>
+                            <?php echo $booking['status']; ?>
+                        <?php elseif ($booking['status'] == 'Pending'): ?>
+                            <form method="POST" action="../backend/status.php">
+                                <input type="hidden" name="schedule_id" value="<?php echo $booking['bookingId']; ?>">
+                                <button type="submit" name="accept">Accept</button>
+                                <button type="submit" name="decline">Decline</button>
+                            </form>
+                        <?php endif; ?>
+                    </td>
+                </tr>
+            <?php endforeach; ?>
                 </tbody>
             </table>
         </div>

@@ -54,7 +54,7 @@ $pageTitle = isset($pageTitles[$currentPage]) ? $pageTitles[$currentPage] : "Adm
     }
 
     .nav-left {
-        margin: 0% 0% 0% 17%;
+        margin: 0% 0% 0% 15%;
     }
 
     .nav-left h3 {
