@@ -34,51 +34,32 @@
 </head>
 
 <body>
-
     <!-----Navbar------->
     <?php
     include '../homepage/navbar.php';
     ?>
     <!-----End of Navbar------->
-
-
-    <!----Main Content----->
-
-
-    <main class="main-content" stylesheet="">
-        <div class="coverpage">
-            <img src="../picture/homepic.jpg" alt="homepic">
-        </div>
-        <div class="text">
-            <h2>Capture the moments of the world through our lenses</h2>
-            <button class="button">Book Now</button>
-        </div>
-
-        <div id="portfolio" class="portfolio">
-            <div class="portfolio-title">
-                <hr class="horizontal-line1">
-                <h2>Explore Porfolio</h2>
-                <hr class="horizontal-line2">
-            </div>
-            <div class="box">
-
-            </div>
-        </div>
-    </main>
-
-
-
-
-
-
-
-
-
-
-
-
-    <!-----End of Main Content---->
-
 </body>
+
+<main class="main-content" stylesheet="">
+    <div class="coverpage">
+        <img src="../picture/homepic.jpg" alt="homepic">
+    </div>
+    <div class="text">
+        <h2>Capture the moments of the world through our lenses</h2>
+        <button class="button">Book Now</button>
+    </div>
+
+    <div id="portfolio" class="portfolio">
+        <div class="portfolio-title">
+            <hr class="horizontal-line1">
+            <h2>Explore Porfolio</h2>
+            <hr class="horizontal-line2">
+        </div>
+        <div class="box">
+
+        </div>
+    </div>
+</main>
 
 </html>
