@@ -3,49 +3,25 @@
     padding: 0;
     margin: 0;
 }
-body{
-    background-color: white;
-    margin: 0;   
-	padding: 0;
-}
-.homepage_main {
-    width: 100%;
-    background-color: #f0f0f0;
-}
+
 .main-content {
     width: 100%;
+    position: absolute;
 }
-main {
-    position: relative;
-    margin-top: 0;
-    padding: 0;
-    background: #583648 url("../picture/homepic.jpg") no-repeat;
-    background-size: cover;
+.main-content .coverpage img{
     width: 100%;
-    height: 67vw;
+    height: 110%;
+    position: absolute;
+    filter: brightness(50%)
 }
-#curve{
-	position: absolute;
-	bottom: 0px;
-	width: 100%;
-}
-#curve path{
-	fill: #fff;
-
-}
-section.sec2{
-	width: 100%;
-	height: 100vh;
-	background: #fff;
-}
-
- .text{
+.text{
     padding-top: 20%;
     padding-left: 50%;
+    position: absolute;
 }
 .text h2{
     font: normal 700 50px/normal 'Poppins';
-	color: #1C1C1D;
+	color: white;
 	letter-spacing: 3px;
     text-align: center;
     width: 90%;
@@ -67,43 +43,56 @@ section.sec2{
     background-color: #454548;
     color: #fcfcfc;
 }
-.events {
+
+
+
+/**** Portfolio Section ****    
+
+.portfolio{
+    width: 100%; 
+    
+}
+.potfolio-title{
+    align-items: center;
+}
+.portolio-title h2{
+   top: 100px;
+}
+.portfolio .porfolio-section{
+    width: 1200px;
+    height: 667px;
+}
+.portfolio .porfolio-section .box{
+    left: 31px;
+    top: 160px;
+    width: 353px;
+    height: 427px;
+    background: blue;
+
+}****/
+
+
+
+/*****Responsive****/
+
+
+ .portfolio {
+    margin: 0% 0 0 0%;
+    padding: 1% 2% 0% 1.8%; 
     display: flex;
-    margin: 3% 0 0 4%;
     justify-content: space-between;
+    position: relative;
+    width: 100%;
+    background-color: #FBF4F4;
 }
-.events .box{
-    margin: 10px;
-}
-.events img{
-    width: 90%;
-    height: 90%;
-    filter: brightness(60%);
-}
-.events .first-event-box{
+
+.portfolio .box {
     font: normal 700 18px/normal 'Poppins';
-	position: absolute;
 	top: 150%;
 	left: 23%;
     color: white;
     letter-spacing: 1px;
 }
-.events .second-event-box{
-    font: normal 700 18px/normal 'Poppins';
-	position: absolute;
-	top: 150%;
-	left: 55%;
-    color: white;
-    letter-spacing: 1px;
-}
-.events .third-event-box{
-    font: normal 700 18px/normal 'Poppins';
-	position: absolute;
-	top: 150%;
-	left: 86%;
-    color: white;
-    letter-spacing: 1px;
-}
 
 
 
@@ -113,11 +102,11 @@ section.sec2{
 
 
 
-
-/*****Responsive*****/
+/*****Responsive*
 
 @media screen and (max-width: 768px) {
 	section {
 		height: 100vh;
 	}
 }
+****/

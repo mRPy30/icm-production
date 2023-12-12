@@ -1,5 +1,5 @@
 <style>
-    /***** Sidebar *****/
+    /***** Homepage Navbar *****/
 
     * {
         box-sizing: border-box;
@@ -14,7 +14,7 @@
         justify-content: space-between;
         align-items: center;
         padding: 0px 5% 0px 5%;
-        position: fixed;
+        position: relative;
         background: #fff;
         z-index: 9999;
     }
@@ -178,7 +178,7 @@
                 <a class="nav-link" href="homepage.php">Home</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="gallery.php">Gallery</a>
+                <a class="nav-link" href="Portfolio.php">Portfolio</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#services">Services</a>
