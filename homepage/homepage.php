@@ -34,51 +34,101 @@
 </head>
 
 <body>
-
     <!-----Navbar------->
-    <?php
-    include '../homepage/navbar.php';
-    ?>
-    <!-----End of Navbar------->
+    <?php include '../homepage/navbar.php'; ?>
 
+    <main class="main-content">
+        <section class="coverpage">
+            <div class="cover-content">
+                <img src="../picture/coverpage1.jpg" alt="coverpage">
+                <div class="text">
+                    <h2>Capture the moments of the World through our Lenses</h2>
+                    <button class="button">Book Now</button>
+                </div>
+            </div>
+        </section>
 
-    <!----Main Content----->
-
-
-    <main class="main-content" stylesheet="">
-        <div class="coverpage">
-            <img src="../picture/homepic.jpg" alt="homepic">
-        </div>
-        <div class="text">
-            <h2>Capture the moments of the world through our lenses</h2>
-            <button class="button">Book Now</button>
-        </div>
-
-        <div id="portfolio" class="portfolio">
+        <section class="portfolio">
+            <!-- Portfolio content here -->
             <div class="portfolio-title">
                 <hr class="horizontal-line1">
-                <h2>Explore Porfolio</h2>
+                <h2>Explore Portfolio</h2>
                 <hr class="horizontal-line2">
             </div>
-            <div class="box">
 
+            <div class="box-section">
+                <!-- Portfolio items -->
+                <div class="box1">
+                    <div class="box4">
+                        <div class="portfolio-content1">
+                            <img src="../picture/wed.jpg" alt="Wedding-Engagement">
+                            <h2>Wedding + Engagement</h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="box2">
+                    <div class="box5">
+                        <div class="portfolio-content2">
+                            <img src="../picture/birthday.jpg" alt="Birthday">
+                            <h2>Birthday</h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="box3">
+                    <div class="box6">
+                        <div class="portfolio-content3">
+                            <img src="../picture/portrait.jpg" alt="Portrait">
+                            <h2>Portrait + Family</h2>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
+        </section>
+
+        <section class="services">
+            <div class="portfolio-title">
+                <h2>Service Price</h2>
+                <h6>Photography / Videography ICSM Ratings:</h6>
+            </div>
+
+            <div class="services-box-section">
+                <!-- services price items -->
+                <div class="service-box"></div>
+                <div class="service-box"></div>
+                <div class="service-box"></div>
+                <div class="service-box"></div>
+            </div>
+            <button class="button-services-section">Book Now</button>
+        </section>
+
+        <section class="review">
+            <div class="review-part">
+                <div class="review-left">
+                    <img src="../picture/review.jpg" alt="">
+                </div>
+                <div class="review-right">
+                    <div class="testimonial">
+                        <h5> Testimonial</h5>
+                        <h4>"Hands down one of our best decisions in our wedding planning process!"</h4>
+                        <div>
+                            <p>"Where do I even begin with these two!? Such amazing photographers - so amazing for our
+                                wedding. They are amazing at communicating their vision and aligning it with yours, and
+                                make sure it comes alive on your wedding day. They were patient and fun and personable,
+                                and felt more like friends than photographers on the big day. Their images are striking,
+                                being able to capture both beautiful posed shots as well as heartfelt candids. Truly
+                                amazing photos and we feel so lucky that they were there to capture such a great and
+                                memorable day."<br><br>
+                                <i>- Janvier & Maezelle</i>
+                            </p>
+                        </div>
+                        <i></i>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
     </main>
-
-
-
-
-
-
-
-
-
-
-
-
-    <!-----End of Main Content---->
-
 </body>
 
 </html>

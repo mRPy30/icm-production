@@ -5,30 +5,44 @@
 }
 
 .main-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.coverpage {
     width: 100%;
-    position: absolute;
 }
-.main-content .coverpage img{
+
+.cover-content {
+    position: relative;
     width: 100%;
-    height: 110%;
-    position: absolute;
-    filter: brightness(50%)
+    
 }
-.text{
-    padding-top: 20%;
-    padding-left: 50%;
-    position: absolute;
+
+.coverpage img {
+    width: 100%;
+    height: 10%;
+    filter: brightness(50%);
 }
-.text h2{
-    font: normal 700 50px/normal 'Poppins';
-	color: white;
-	letter-spacing: 3px;
+
+.text {
+    position: absolute;
+    top: 44%;
+    left: 51%;
+    transform: translate(-50%, -50%);
     text-align: center;
-    width: 90%;
+    width: 45%;
+    color: white;
+}
+
+.text h2 {
+    font: normal 700 50px/normal 'Poppins';
+    letter-spacing: 3px;
 }
 
 .button  {
-    margin: 30px 0px 0px 270px;
+    margin: 30px 0px 0px 0px;
     padding: 5px 0px 5px 0px;
     height: 40px;
     width: 15%; 
@@ -46,53 +60,264 @@
 
 
 
-/**** Portfolio Section ****    
+/**** Portfolio Section *****/
 
-.portfolio{
-    width: 100%; 
-    
+.portfolio .portfolio-title .horizontal-line1{
+    position: absolute;
+    width: 30%;
+    height: 3px;
+    background: black;
+    left: 66px;
 }
-.potfolio-title{
-    align-items: center;
+.portfolio .portfolio-title .horizontal-line2{
+    position: absolute;
+    width: 30%;
+    height: 3px;
+    background: black;
+    left: 65%;
 }
-.portolio-title h2{
-   top: 100px;
-}
-.portfolio .porfolio-section{
-    width: 1200px;
-    height: 667px;
-}
-.portfolio .porfolio-section .box{
-    left: 31px;
-    top: 160px;
-    width: 353px;
-    height: 427px;
-    background: blue;
-
-}****/
-
-
-
-/*****Responsive****/
-
-
- .portfolio {
-    margin: 0% 0 0 0%;
-    padding: 1% 2% 0% 1.8%; 
-    display: flex;
-    justify-content: space-between;
-    position: relative;
+.portfolio {
     width: 100%;
     background-color: #FBF4F4;
+    padding: 70px 0px 50px 0px;
+    text-align: center;
 }
 
-.portfolio .box {
-    font: normal 700 18px/normal 'Poppins';
-	top: 150%;
-	left: 23%;
-    color: white;
-    letter-spacing: 1px;
+.portfolio .portfolio-title {
+    margin-bottom: 30px;
 }
+
+.portfolio .portfolio-title h2 {
+    font: normal 700 36px/normal 'Poppins';
+    letter-spacing: 1px;
+    position: absolute;
+    text-align: center;
+    width: 100%;
+    top: 118%;
+}
+
+
+.portfolio .box-section{
+    width: 100%;
+    height: 30%;
+    background:#FBF4F4;
+    padding: 40px 120px 35px 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.portfolio .box1{
+    background: #454548;
+    width: 25%;
+    height: 65vh;
+    margin-left: 80px;
+}
+.portfolio .box2{
+    background: #393e46;
+    width: 25%;
+    height: 65vh;
+    margin-left: 80px;
+}
+.portfolio .box3{
+    background: #454548;
+    width: 25%;
+    height: 65vh;
+    margin-left: 80px;
+}
+.portfolio .box1 .box4{
+    background: white;
+    width: 100%;
+    height: 65vh;
+    margin-left:-10px;
+    margin-top: -9px;
+}
+.portfolio .box2 .box5{
+    background:white;
+    width: 100%;
+    height: 65vh;
+    margin-left: -9px;
+    margin-top: -9px;
+
+}
+.portfolio .box3 .box6{
+    background: white;
+    width: 100%;
+    height: 65vh;
+    margin-left: -10px;
+    margin-top: -9px;
+}
+.box4 .portfolio-content1 img{
+    width: 85%;
+    height: 46vh;
+    margin: 30px 10px 30px 10px;
+    filter: brightness(85%);
+}
+.box5 .portfolio-content2 img{
+    width: 84%;
+    height: 46vh;
+    margin: 30px 10px 30px 10px;
+    filter: brightness(85%);
+}
+.box6 .portfolio-content3 img{
+    width: 85%;
+    height: 46vh;
+    margin: 30px 10px 30px 10px;
+    filter: brightness(85%);
+}
+.box-section .box4 .portfolio-content1 h2{
+    font: normal 20px/normal 'Poppins';
+}
+
+.box5 .portfolio-content2 h2{
+    font: normal 20px/normal 'Poppins';
+}
+
+.box6 .portfolio-content3 h2{
+    font: normal 20px/normal 'Poppins';
+}
+
+
+
+
+
+
+/**** Services Price Section *****/
+
+.services{
+    width: 100%;
+    background-color: #D9D9D9;
+    padding: 70px 0px 70px 0px;
+    text-align: center;
+}
+.services .portfolio-title h2{
+    font: normal 700 36px/normal 'Poppins';
+    letter-spacing: 1px;
+    position: absolute;
+    text-align: center;
+    width: 100%;
+    top: 217%;
+}
+.services .portfolio-title h6{
+    font: normal  20px/normal 'Poppins';
+    letter-spacing: 1px;
+    position: absolute;
+    text-align: left;
+    width: 70%;
+    top: 227%;
+    left: 105px;
+}
+
+.services .services-box-section{
+    width: 100%;
+    height: 50%;
+    background: #D9D9D9;
+    padding: 130px 90px 10px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.services .service-box{
+    background: #1B1212;
+    width: 100%;
+    height: 47vh;
+    margin-left: 70px;
+    border-radius: 10px;
+}
+
+.services .button-services-section {
+    margin: 50px 0px 0px 30px;
+    padding: 5px 0px 5px 0px;
+    height: 40px;
+    width:10%; 
+    font: normal 400 15px/normal 'Poppins';
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+    transition: background-color 0.3s;
+    border: none;
+    background-color: #FBF4F4;
+    border-radius: 30px;
+}
+.services .button-services-section:hover {
+    background-color: #454548;
+    color: #fcfcfc;
+}
+
+
+
+/**** Review Page ****/
+.review {
+    width: 100%;
+    height: auto; /* Set height according to content */
+    background: white;
+    display: flex;
+    justify-content: space-between; /* Align review-left and review-right */
+    align-items: center; /* Align items vertically */
+    padding: 20px; /* Add padding as needed */
+    box-sizing: border-box; /* Include padding in the total width */
+  }
+  
+  .review-part {
+    display: flex;
+    width: 100%;
+  }
+  
+  .review-left {    
+    width: 30%;
+    flex: 1; /* Occupy remaining space */
+    padding: 10px 0px 0px 30px; /* Add padding as needed */
+    box-sizing: border-box; /* Include padding in the total width */
+  }
+  
+  .review-left img {
+    width: 80%;
+    height: 85vh; /* Adjust image height proportionally */
+    max-width: 100%; /* Ensure image doesn't exceed container */
+    display: block;
+    margin-left: 100px;
+  }
+  
+  .review-right {
+    flex: 1; /* Occupy remaining space */
+    padding: 9px 0px 0px 10px; /* Add padding as needed */
+    box-sizing: border-box; /* Include padding in the total width */
+  }
+  
+  .testimonial {
+    /* Add any necessary styles for the testimonial content */
+  }
+  
+.review .review-right .testimonial h5{
+    color: #1C1C1D;
+    font-family: Poppins;
+    font: normal 500 23px/normal 'Poppins';
+    width: 232px;
+    height: 59px;
+    flex-shrink: 0;
+}
+.review .review-right .testimonial h4{
+    color: #1C1C1D;
+    font-family: Poppins;
+    font: normal 500 25px/normal 'Poppins';
+    width: 80%;
+    height: 59px;
+    flex-shrink: 0;
+    margin-left: 35px;
+}
+
+.review .review-right .testimonial p{
+    color: #1C1C1D;
+    font-family: Poppins;
+    font: normal 15px/normal 'Poppins';
+    width: 90%;
+    height: 59px;
+    margin-top: 35px;
+    flex-shrink: 0;
+    text-align: justify;
+    margin: 20px;
+}
+
+
+
 
 
 

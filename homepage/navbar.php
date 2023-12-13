@@ -14,7 +14,7 @@
         justify-content: space-between;
         align-items: center;
         padding: 0px 5% 0px 5%;
-        position: relative;
+        position: fixed;
         background: #fff;
         z-index: 9999;
     }
