@@ -9,10 +9,10 @@
         position: fixed;
         top: 0;
         left: 0;
-        width: 16%;
+        width: 14%;
         background-color: #000000;
         background-image: linear-gradient(147deg, #000000 0%, #434343 74%);
-        z-index: 1001; /* Make sure sidebar is above navbar */
+        z-index: 1001; 
     }
 
 
@@ -42,17 +42,17 @@
 
     .side_bar .side_bar_bottom ul .nav-link a{
         display: block;
-        padding: 15px 15px 15px 50px;		
+        padding: 12px 15px 12px 50px;		
         color: #1c1c1c;
         font: normal 500 14px/20px 'Poppins';
-        margin-bottom: 5px;		
+        margin-bottom: 8px;		
         text-decoration: none;	
     }
 
     .side_bar .side_bar_bottom ul .nav-link.active a{
         background-color: #000000;
         background-image: linear-gradient(147deg, #000000 0%, #434343 74%);
-        color:  #fbf4fb;
+        color: #fbf4fb;
         border-top-left-radius: 30px;
         border-bottom-left-radius: 30px;
         font: normal 500 14px/20px 'Poppins';
