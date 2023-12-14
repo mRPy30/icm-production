@@ -11,6 +11,16 @@ $path = parse_url($directoryURI, PHP_URL_PATH);
 $components = explode('/', $path);
 $page = $components[2];
 
+// Fetch data from the database
+$query = "SELECT client.firstname, feedback.feedback_Title, feedback.feedback_description
+          FROM feedback
+          INNER JOIN client ON feedback.clientID = client.id"; 
+
+$result = mysqli_query($conn, $query);
+
+if (!$result) {
+    die("Query Failed: " . mysqli_error($connection));
+}
 ?>
 
 <!DOCTYPE html>
@@ -43,26 +53,46 @@ $page = $components[2];
 </head>
     
 <body>
+    
+    
 
     <section class="feedbox">
         <div class="table-feedback">
-            <table class="header-table">
+            <table class="header-feedback">
                 <thead>
                     <tr>
-                        <th>Name</th>
-                        <th>Title</th>
-                        <th>Feedback</th>
+                        <th style="width: 10%;"></th>
+                        <th style="padding: 1.5% 0% 1% 1%; width: 15%;">Name</th>
+                        <th style="padding: 1.5% 0% 1% 1%; width: 15%;">Title</th>
+                        <th style="padding: 1.5% 0% 1% 0%;">Feedback</th>
                     </tr>
                 </thead>
             </table>
+            <div class="data-container">
+                <table class="data-table">
+                <tbody>
+                    <?php
+                    // Output data from the database
+                    while ($row = mysqli_fetch_assoc($result)) {
+                        echo "<tr>";
+                        echo "<td style='width: 7%;'><input type='checkbox'></td>";
+                        echo "<td style='padding: 1.5% 0% 1% 1%; width: 15%;'>" . $row['firstname'] . "</td>";
+                        echo "<td style='padding: 1.5% 0% 1% 1%; width: 10%;'>" . $row['feedback_Title'] . "</td>";
+                        echo "<td style='padding: 1.5% 3% 1% 0%;'>" . $row['feedback_description'] . "</td>";
+                        echo "</tr>";
+                    }
+                    ?>
+                </tbody>
+            </table>
         </div>
     </section>
-
+    
     <!----Navbar&Sidebar----->
     <?php 
-        include '../admin/sidebar.php';
         include '../admin/navbar.php';
-    ?>    
+        include '../admin/sidebar.php';
+    ?> 
+   
 
     
 </body>
