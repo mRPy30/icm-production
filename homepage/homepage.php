@@ -86,7 +86,7 @@
         </section>
 
         <section class="services">
-            <div class="portfolio-title">
+            <div class="services-title">
                 <h2>Service Price</h2>
                 <h6>Photography / Videography ICSM Ratings:</h6>
             </div>
@@ -110,18 +110,19 @@
                     <div class="testimonial">
                         <h5> Testimonial</h5>
                         <h4>"Hands down one of our best decisions in our wedding planning process!"</h4>
-                        <div>
-                            <p>"Where do I even begin with these two!? Such amazing photographers - so amazing for our
-                                wedding. They are amazing at communicating their vision and aligning it with yours, and
-                                make sure it comes alive on your wedding day. They were patient and fun and personable,
-                                and felt more like friends than photographers on the big day. Their images are striking,
-                                being able to capture both beautiful posed shots as well as heartfelt candids. Truly
-                                amazing photos and we feel so lucky that they were there to capture such a great and
-                                memorable day."<br><br>
-                                <i>- Janvier & Maezelle</i>
-                            </p>
-                        </div>
-                        <i></i>
+
+                        <p>"Where do I even begin with these two!? Such amazing photographers - so amazing for our
+                            wedding. They are amazing at communicating their vision and aligning it with yours, and
+                            make sure it comes alive on your wedding day. They were patient and fun and personable,
+                            and felt more like friends than photographers on the big day. Their images are striking,
+                            being able to capture both beautiful posed shots as well as heartfelt candids. Truly
+                            amazing photos and we feel so lucky that they were there to capture such a great and
+                            memorable day."<br><br>
+                            <i>- Kathryn & Daniel </i>
+                        </p>
+                        <div class="testimonial-arrow"><i class="fa-solid fa-arrow-left"></i><i
+                                class="fa-solid fa-arrow-right"></i></div>
+
                     </div>
 
                 </div>

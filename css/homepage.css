@@ -67,7 +67,7 @@
     width: 30%;
     height: 3px;
     background: black;
-    left: 66px;
+    left: 70px;
 }
 .portfolio .portfolio-title .horizontal-line2{
     position: absolute;
@@ -88,12 +88,12 @@
 }
 
 .portfolio .portfolio-title h2 {
-    font: normal 700 36px/normal 'Poppins';
+    font: normal 700 27px/normal 'Poppins';
     letter-spacing: 1px;
     position: absolute;
     text-align: center;
     width: 100%;
-    top: 118%;
+    top: 117%;
 }
 
 
@@ -189,7 +189,7 @@
     padding: 70px 0px 70px 0px;
     text-align: center;
 }
-.services .portfolio-title h2{
+.services .services-title h2{
     font: normal 700 36px/normal 'Poppins';
     letter-spacing: 1px;
     position: absolute;
@@ -197,8 +197,8 @@
     width: 100%;
     top: 217%;
 }
-.services .portfolio-title h6{
-    font: normal  20px/normal 'Poppins';
+.services .services-title h6{
+    font: normal  17px/normal 'Poppins';
     letter-spacing: 1px;
     position: absolute;
     text-align: left;
@@ -278,7 +278,7 @@
   
   .review-right {
     flex: 1; /* Occupy remaining space */
-    padding: 9px 0px 0px 10px; /* Add padding as needed */
+    padding: 80px 0px 0px 10px; /* Add padding as needed */
     box-sizing: border-box; /* Include padding in the total width */
   }
   
@@ -296,12 +296,12 @@
 }
 .review .review-right .testimonial h4{
     color: #1C1C1D;
-    font-family: Poppins;
-    font: normal 500 25px/normal 'Poppins';
-    width: 80%;
+    font-size: 35px;
+    width: 85%;
     height: 59px;
     flex-shrink: 0;
-    margin-left: 35px;
+    margin-top: 10px;
+    margin-left: 30px;
 }
 
 .review .review-right .testimonial p{
@@ -313,7 +313,8 @@
     margin-top: 35px;
     flex-shrink: 0;
     text-align: justify;
-    margin: 20px;
+    margin: 60px 0px 0px 10px;
+    line-height: 30px;
 }
 
 

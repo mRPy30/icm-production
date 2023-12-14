@@ -20,10 +20,10 @@
     }
 
     .header-section img {
-        width: 9%;
-        height: 9%;
+        width: 25%;
+        height: 11%;
         cursor: pointer;
-        margin: 10px;
+        margin-top: 5px;
     }
 
     .nav-item {
@@ -169,7 +169,11 @@
 
 <body>
     <header class="header-section">
-        <img src="../picture/logo.png">
+        <div class="logo">
+            <a href="../homepage/homepage.php">
+                <img src="../picture/logo.png" alt="logo">
+            </a>
+        </div>
 
         <button class="mobile-menu-button">&#9776; Menu</button>
 
@@ -178,16 +182,16 @@
                 <a class="nav-link" href="homepage.php">Home</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="Portfolio.php">Portfolio</a>
+                <a class="nav-link" href="portfolio.php">Portfolio</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#services">Services</a>
+                <a class="nav-link" href="services.php">Services</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#about">About</a>
+                <a class="nav-link" href="about.php">About</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#contact">Contact</a>
+                <a class="nav-link" href="contact.php">Contact</a>
             </li>
         </ul>
         <a class="register" href="../register.php"><button>Register</button></a>
