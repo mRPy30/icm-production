@@ -19,8 +19,11 @@
         z-index: 9999;
     }
 
-    .header-section img {
-        width: 25%;
+    .logo{
+        width: 10%;
+    }
+    .header-section .logo img {
+        width: 80%;
         height: 11%;
         cursor: pointer;
         margin-top: 5px;
