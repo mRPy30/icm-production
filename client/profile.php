@@ -37,6 +37,10 @@ $page = $components[2];
 </head>
     
 <body>
+<div class="navbar">
+        <h3>My Profile</h3>
+        <i class="fa-regular fa-bell"></i>
+    </div> 
     <?php 
         include '../client/sidebar.php';
     ?>

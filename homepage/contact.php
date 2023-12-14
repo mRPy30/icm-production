@@ -9,7 +9,7 @@
     <!---WEB TITLE--->
     <link rel="short icon" href="../picture/shortcut-logo.png" type="x-icon">
     <title>
-        <?php echo "Online Event Booking"; ?>
+        <?php echo "ICSM Contact"; ?>
     </title>
 
 
@@ -35,31 +35,19 @@
 
 <body>
     <!-----Navbar------->
-    <?php
-    include '../homepage/navbar.php';
-    ?>
-    <!-----End of Navbar------->
+    <?php include '../homepage/navbar.php'; ?>
+
+    <main class="main-content">
+        <section class="coverpage">
+            <div class="cover-content">
+                <img src="../picture/coverpage1.jpg" alt="coverpage">
+                <div class="text">
+                    <h2>Let’s be friends!</h2>
+                    <button class="button">Book Now</button>
+                </div>
+            </div>
+        </section>
+    </main>
 </body>
-
-<main class="main-content" stylesheet="">
-    <div class="coverpage">
-        <img src="../picture/homepic.jpg" alt="homepic">
-    </div>
-    <div class="text">
-        <h2>Capture the moments of the world through our lenses</h2>
-        <button class="button">Book Now</button>
-    </div>
-
-    <div id="portfolio" class="portfolio">
-        <div class="portfolio-title">
-            <hr class="horizontal-line1">
-            <h2>Explore Porfolio</h2>
-            <hr class="horizontal-line2">
-        </div>
-        <div class="box">
-
-        </div>
-    </div>
-</main>
 
 </html>

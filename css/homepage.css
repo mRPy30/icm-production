@@ -5,29 +5,44 @@
 }
 
 .main-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.coverpage {
     width: 100%;
 }
-.main-content .coverpage img{
+
+.cover-content {
+    position: relative;
     width: 100%;
-    height: 110%;
-    position: absolute;
-    filter: brightness(50%)
-}
-.text{
-    padding-top: 20%;
-    padding-left: 50%;
     position: absolute;
 }
-.text h2{
-    font: normal 700 50px/normal 'Poppins';
-	color: white;
-	letter-spacing: 3px;
+
+.coverpage img {
+    width: 100%;
+    height: 10%;
+    filter: brightness(50%);
+}
+
+.text {
+    position: absolute;
+    top: 44%;
+    left: 51%;
+    transform: translate(-50%, -50%);
     text-align: center;
-    width: 90%;
+    width: 45%;
+    color: white;
+}
+
+.text h2 {
+    font: normal 700 50px/normal 'Poppins';
+    letter-spacing: 3px;
 }
 
 .button  {
-    margin: 30px 0px 0px 270px;
+    margin: 30px 0px 0px 0px;
     padding: 5px 0px 5px 0px;
     height: 40px;
     width: 15%; 
@@ -44,26 +59,143 @@
 }
 
 
+
+/**** Portfolio Section ****    
+
+.portfolio{
+    width: 100%; 
+    
+}
+.potfolio-title{
+    align-items: center;
+}
+.portolio-title h2{
+   top: 100px;
+}
+.portfolio .porfolio-section{
+    width: 1200px;
+    height: 667px;
+}
+.portfolio .porfolio-section .box{
+    left: 31px;
+    top: 160px;
+    width: 353px;
+    height: 427px;
+    background: blue;
+
+}****/
+
+
+
 /*****Responsive****/
 
 
  .portfolio {
-    margin: 60% 0 0 0%;
+    margin: 0% 0 0 0%;
     padding: 1% 2% 0% 1.8%; 
     display: flex;
     justify-content: space-between;
-    position: absolute;
+    position: relative;
     width: 100%;
-    background-color: #FBF4F4;
+    height: 47vh;
+    margin-left: 70px;
+    border-radius: 10px;
 }
 
-.portfolio .box {
-    font: normal 700 18px/normal 'Poppins';
-	top: 150%;
-	left: 23%;
-    color: white;
-    letter-spacing: 1px;
+.services .button-services-section {
+    margin: 50px 0px 0px 30px;
+    padding: 5px 0px 5px 0px;
+    height: 40px;
+    width:10%; 
+    font: normal 400 15px/normal 'Poppins';
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+    transition: background-color 0.3s;
+    border: none;
+    background-color: #FBF4F4;
+    border-radius: 30px;
 }
+.services .button-services-section:hover {
+    background-color: #454548;
+    color: #fcfcfc;
+}
+
+
+
+/**** Review Page ****/
+.review {
+    width: 100%;
+    height: auto; /* Set height according to content */
+    background: white;
+    display: flex;
+    justify-content: space-between; /* Align review-left and review-right */
+    align-items: center; /* Align items vertically */
+    padding: 20px; /* Add padding as needed */
+    box-sizing: border-box; /* Include padding in the total width */
+  }
+  
+  .review-part {
+    display: flex;
+    width: 100%;
+  }
+  
+  .review-left {    
+    width: 30%;
+    flex: 1; /* Occupy remaining space */
+    padding: 10px 0px 0px 30px; /* Add padding as needed */
+    box-sizing: border-box; /* Include padding in the total width */
+  }
+  
+  .review-left img {
+    width: 80%;
+    height: 85vh; /* Adjust image height proportionally */
+    max-width: 100%; /* Ensure image doesn't exceed container */
+    display: block;
+    margin-left: 100px;
+  }
+  
+  .review-right {
+    flex: 1; /* Occupy remaining space */
+    padding: 80px 0px 0px 10px; /* Add padding as needed */
+    box-sizing: border-box; /* Include padding in the total width */
+  }
+  
+  .testimonial {
+    /* Add any necessary styles for the testimonial content */
+  }
+  
+.review .review-right .testimonial h5{
+    color: #1C1C1D;
+    font-family: Poppins;
+    font: normal 500 23px/normal 'Poppins';
+    width: 232px;
+    height: 59px;
+    flex-shrink: 0;
+}
+.review .review-right .testimonial h4{
+    color: #1C1C1D;
+    font-size: 35px;
+    width: 85%;
+    height: 59px;
+    flex-shrink: 0;
+    margin-top: 10px;
+    margin-left: 30px;
+}
+
+.review .review-right .testimonial p{
+    color: #1C1C1D;
+    font-family: Poppins;
+    font: normal 15px/normal 'Poppins';
+    width: 90%;
+    height: 59px;
+    margin-top: 35px;
+    flex-shrink: 0;
+    text-align: justify;
+    margin: 60px 0px 0px 10px;
+    line-height: 30px;
+}
+
+
+
 
 
 

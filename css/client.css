@@ -1,12 +1,12 @@
 * {
     box-sizing: border-box;
-	  padding: 0; 
+    padding: 0;
     margin: 0;
 }
 
 body {
-	background-color: #dfdfdf;
-  overflow-x: hidden;
+    background-color: #dfdfdf;
+    overflow-x: hidden;
 }
 
 .navbar {
@@ -17,24 +17,25 @@ body {
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 }
 
-.navbar h3{
-  color: #1c1c1c;
-  margin: 1.6% 0% 0% 18%;
-  font: normal 600 110%/normal 'Poppins';
-  position: absolute;
-
+.navbar h3 {
+    color: #1c1c1c;
+    margin: 1.6% 0% 0% 18%;
+    font: normal 600 110%/normal 'Poppins';
+    position: absolute;
 }
 
-.navbar i{
-  margin: 1.7% 0% 0% 93%;
-  font-size: x-large;
+.navbar i {
+    margin: 1.7% 0% 0% 93%;
+    font-size: x-large;
 }
+
+
 /*****Booking*****/
 
-.table-top{
-  width: 100%;
-  display: flex; 
-  border-bottom: 2px solid #CCCCCC;     
+.table-top {
+    width: 100%;
+    display: flex;
+    border-bottom: 2px solid #CCCCCC;
 }
 
 .booking-box {
@@ -55,31 +56,31 @@ body {
     border-radius: 5px 5px 0px 0px;
 }
 
-.add-event{
-  margin: 0.8% 0px 0px 83%; 
-  position: absolute;
-}
-.add-event button{
-  width: 100%;
-  z-index: 999;
-  background-color: #1c1c1c;
-  color: white; 
-  border: none;
-  padding: 8px 15px; 
-  text-align: center; 
-  text-decoration: none; 
-  display: inline-block; 
-  font: normal 400 14px/normal 'poppins'; 
-  margin: 4px 2px; 
-  cursor: pointer;
-  border-radius: 5px;
+.add-event {
+    margin: 0.8% 0px 0px 83%;
+    position: absolute;
 }
 
-.add-event button:hover{
-  background-color: #3b3b3b;
-  transition: 0.4s;
+.add-event button {
+    width: 100%;
+    z-index: 999;
+    background-color: #1c1c1c;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font: normal 400 14px/normal 'poppins';
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 5px;
 }
 
+.add-event button:hover {
+    background-color: #3b3b3b;
+    transition: 0.4s;
+}
 
 table {
     border-collapse: collapse;
@@ -87,13 +88,15 @@ table {
     margin: 30px 25px 0px 35px;
 }
 
-th, td {
+th,
+td {
     border: 1px solid #dddddd;
     text-align: center;
     padding: 8px;
 }
+
 td {
-  font: normal 14px/normal 'Poppins';
+    font: normal 14px/normal 'Poppins';
 }
 
 th {
@@ -119,71 +122,73 @@ tr:nth-child(odd) {
     background-color: #fff;
     padding: 20px;
     border-radius: 5px;
-    box-shadow: 0px 0px 400px 900px rgba(0,0,0,0.28);
+    box-shadow: 0px 0px 400px 900px rgba(0, 0, 0, 0.28);
     z-index: 9999;
-} 
+}
 
 .close-button {
-  position: absolute;
-  top: 10px; 
-  right: 10px; 
-  cursor: pointer;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
 }
-.form-popup .form-step .package-box{
-  width: 20%;
-  height: 80px;
-  display: flex;
-  flex-direction: column;
-  border-radius: 10px;
-  border: 1px solid #B3B3B3;
-  background: linear-gradient(0deg, #FBF4F4 0%, #FBF4F4 100%), linear-gradient(0deg, #FBF4F4 0%, #FBF4F4 100%), #FBF4F4;
-  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25), 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+
+.form-popup .form-step .package-box {
+    width: 20%;
+    height: 80px;
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+    border: 1px solid #B3B3B3;
+    background: linear-gradient(0deg, #FBF4F4 0%, #FBF4F4 100%), linear-gradient(0deg, #FBF4F4 0%, #FBF4F4 100%), #FBF4F4;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25), 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 }
 
 .steps {
-  display: flex;
-  width: 100%;
-  align-items: center;
-  justify-content: space-between;
-  position: relative;
-  padding: 0% 10% 0% 10%;
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    padding: 0% 10% 0% 10%;
 }
 
 .steps .circle {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 30px;
-  width: 30px;
-  color: #999;
-  font-size: 14px;
-  font-weight: 500;
-  border-radius: 50%;
-  background: #fff;
-  border: 4px solid #e0e0e0;
-  transition: all 200ms ease;
-  transition-delay: 0s;
-  position: relative;
-  z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 30px;
+    width: 30px;
+    color: #999;
+    font-size: 14px;
+    font-weight: 500;
+    border-radius: 50%;
+    background: #fff;
+    border: 4px solid #e0e0e0;
+    transition: all 200ms ease;
+    transition-delay: 0s;
+    position: relative;
+    z-index: 2;
 }
 
-  
-  .steps .circle.active {
+.steps .circle.active {
     transition-delay: 100ms;
     background-color: #1C1C1D;
     color: #FBF4F4;
     border-color: #000000;
-  }
-  
-  .steps .circle i.fa-circle-check{
+}
+
+.steps .circle i.fa-circle-check {
     font-size: larger;
     color: #D25A5A;
-  }
-  .steps .progress-line {
+}
+
+.steps .progress-line {
     height: 4px;
     background-color: #1c1c1c;
     position: absolute;
-    top: 50%; /* Center vertically */
+    top: 50%;
+    /* Center vertically */
     left: 0;
     width: 0;
     z-index: 1;
@@ -191,62 +196,62 @@ tr:nth-child(odd) {
 }
 
 .confirmation-popup {
-  display: none;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: #fff;
-  padding: 20px;
-  border-radius: 5px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-  z-index: 10000;
-  text-align: center;
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    z-index: 10000;
+    text-align: center;
 }
 
 .confirmation-popup p {
-  font-size: 16px;
-  margin-bottom: 20px;
+    font-size: 16px;
+    margin-bottom: 20px;
 }
 
 .confirm-button#confirmYes {
-  padding: 8px 20px;
-  background: #D25A5A;
-  border: none;
-  border-radius: 8px;
-  color: #fff;
-  font-size: 16px;
-  font-weight: 400;
-  cursor: pointer;
-  margin: 0 10px;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
-  transition: all 200ms linear;
+    padding: 8px 20px;
+    background: #D25A5A;
+    border: none;
+    border-radius: 8px;
+    color: #fff;
+    font-size: 16px;
+    font-weight: 400;
+    cursor: pointer;
+    margin: 0 10px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+    transition: all 200ms linear;
 }
 
 .confirm-button#confirmWait {
-  padding: 8px 20px;
-  background: #B3B3B3;
-  border: none;
-  border-radius: 8px;
-  color: #fff;
-  font-size: 16px;
-  font-weight: 400;
-  cursor: pointer;
-  margin: 0 10px;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
-  transition: all 200ms linear;
+    padding: 8px 20px;
+    background: #B3B3B3;
+    border: none;
+    border-radius: 8px;
+    color: #fff;
+    font-size: 16px;
+    font-weight: 400;
+    cursor: pointer;
+    margin: 0 10px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+    transition: all 200ms linear;
 }
 
 .confirm-button:active {
-  transform: scale(0.97);
+    transform: scale(0.97);
 }
 
-
-  .container .buttons {
+.container .buttons {
     display: flex;
     gap: 20px;
-  }
-  .buttons button {
+}
+
+.buttons button {
     padding: 8px 25px;
     background: #D25A5A;
     border: none;
@@ -257,24 +262,29 @@ tr:nth-child(odd) {
     cursor: pointer;
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.05);
     transition: all 200ms linear;
-  }
-  .buttons button:active {
+}
+
+.buttons button:active {
     transform: scale(0.97);
-  }
-  .buttons button:disabled {
+}
+
+.buttons button:disabled {
     background: #B3B3B3;
     cursor: not-allowed;
-  }
+}
 
-  @keyframes glow {
+@keyframes glow {
     0% {
-        box-shadow: 0 0 10px rgba(0, 123, 255, 0.5); /* Adjust the glow color and size as needed */
+        box-shadow: 0 0 10px rgba(0, 123, 255, 0.5);
+        /* Adjust the glow color and size as needed */
     }
     50% {
-        box-shadow: 0 0 20px rgba(0, 123, 255, 0.7); /* Adjust the glow color and size as needed */
+        box-shadow: 0 0 20px rgba(0, 123, 255, 0.7);
+        /* Adjust the glow color and size as needed */
     }
     100% {
-        box-shadow: 0 0 10px rgba(0, 123, 255, 0.5); /* Adjust the glow color and size as needed */
+        box-shadow: 0 0 10px rgba(0, 123, 255, 0.5);
+        /* Adjust the glow color and size as needed */
     }
 }
 
@@ -282,3 +292,223 @@ tr:nth-child(odd) {
     animation: glow 1s infinite;
     border: 2px solid rgba(0, 123, 255, 0.5);
 }
+
+.form-step {
+    max-width: 400px;
+    margin: 0 auto;
+    max-width: 800px;
+    font-family: Arial, sans-serif;
+}
+
+.form-group {
+    margin-bottom: 50px;
+    padding-bottom: 10px;
+    display: inline-block;
+    margin: 20px;
+}
+
+.form-label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+    margin-bottom: 20px;
+}
+
+.form-input {
+    width: 100%;
+    padding: 8px;
+    width: 250px;
+    padding: 15px;
+    box-sizing: border-box;
+}
+
+.form {
+    height: 200px;
+    height: 300px;
+}
+
+
+/*****Admin Calendar*****/
+
+.calendar {
+    margin: 4% 0 0 14%;
+    padding: 4%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.calendar-header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+}
+
+.event_management {
+    background: #FCF6F6;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding-top: 40px;
+    border-radius: 10px 10px 0 0;
+    width: 100%;
+    position: relative;
+}
+
+#calendar {
+    border: 1px solid #ccc;
+    height: 78.2vh;
+    font: normal 600 16px/normal 'Poppins';
+    flex-grow: 1;
+}
+
+.add-schedule-button {
+    background-color: #C2BE63;
+    font: normal 500 15px/normal 'Poppins';
+    color: #FCF6F6;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    position: absolute;
+    left: 30px;
+    top: 41px;
+    display: block;
+    z-index: 1;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.add-schedule-button:hover {
+    background-color: #c0b71a;
+}
+
+.fc-day-header {
+    background-color: #E1DE8F;
+}
+
+.fc-left {
+    text-align: center;
+}
+
+.fc-right {
+    position: absolute;
+    right: 55px;
+}
+
+#calendar .fc-view {
+    padding: 0;
+    margin: 0;
+    height: 99vh;
+}
+
+#calendar .fc-body {
+    padding: 0;
+    margin: 0;
+}
+
+#calendar .fc-row {
+    margin: 0;
+}
+
+#calendar .fc-widget-content {
+    padding: 0;
+    margin: 0;
+}
+
+#calendar .fc-content {
+    height: 15px;
+    font: normal 500 11px/normal 'Poppins';
+    color: #FCF6F6;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    top: 35%;
+    left: 53%;
+    height: 54%;
+    width: 50%;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+    border-radius: 5px;
+    z-index: 9999;
+    animation: slideIn 0.3s ease-in-out forwards;
+}
+
+@keyframes slideIn {
+    from {
+        top: -50%;
+    }
+    to {
+        top: 35%;
+    }
+}
+
+.modal-content {
+    background: linear-gradient(0deg, #FBF4F4 0%, #FBF4F4 100%), linear-gradient(0deg, #FBF4F4 0%, #FBF4F4 100%), #FBF4F4;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    box-shadow: 0px 0px 400px 900px rgba(0, 0, 0, 0.28);
+    width: 80%;
+    max-width: 600px;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+    font: normal 500 15px/normal 'Poppins';
+}
+
+.form-group input[type="text"],
+.form-group input[type="date"],
+.form-group input[type="color"] {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font: normal 400 13px/normal 'Poppins';
+}
+
+.btn-save-event {
+    background-color: #C2BE63;
+    color: white;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font: normal 500 13px/normal 'Poppins';
+    transition: background-color 0.3s ease-in-out;
+}
+
+.btn-save-event:hover {
+    background-color: #c0b71a;
+}
+
+
+/******end****/
