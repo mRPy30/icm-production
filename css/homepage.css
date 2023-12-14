@@ -6,7 +6,6 @@
 
 .main-content {
     width: 100%;
-    position: absolute;
 }
 .main-content .coverpage img{
     width: 100%;
@@ -45,43 +44,15 @@
 }
 
 
-
-/**** Portfolio Section ****    
-
-.portfolio{
-    width: 100%; 
-    
-}
-.potfolio-title{
-    align-items: center;
-}
-.portolio-title h2{
-   top: 100px;
-}
-.portfolio .porfolio-section{
-    width: 1200px;
-    height: 667px;
-}
-.portfolio .porfolio-section .box{
-    left: 31px;
-    top: 160px;
-    width: 353px;
-    height: 427px;
-    background: blue;
-
-}****/
-
-
-
 /*****Responsive****/
 
 
  .portfolio {
-    margin: 0% 0 0 0%;
+    margin: 60% 0 0 0%;
     padding: 1% 2% 0% 1.8%; 
     display: flex;
     justify-content: space-between;
-    position: relative;
+    position: absolute;
     width: 100%;
     background-color: #FBF4F4;
 }

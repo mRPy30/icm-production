@@ -51,7 +51,7 @@ body {
   }
    
 .form_nav .nav {
-	list-style: none; /* Remove default list styles */
+	list-style: none;
 	padding: 0;
 	margin: 0 0 0 13%;
 	padding: 10% 0 0 0;
@@ -121,8 +121,8 @@ body {
 	margin-top: 3%;
 }
 .form-section .form-fillup button:hover{
-	background: #282829;
-	transform: scale(1.01);
+	background-color: #454548;
+    color: #fcfcfc;
 }
 i{
 	position: absolute;
@@ -155,72 +155,3 @@ i{
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/***.form-signup .form-group .success input {
-	border-color: #39df7e;
-   
-	
-}
-
-.form-signup .form-group .error input {
-	border-color: #df3434;
-}
-
-.form-signup .form-group .form-control i {
-	position: absolute;
-	right: 75px;
-	visibility: hidden;
-}
-
-.form-signup .form-group small {
-	color: #df3434;
-	position: absolute;
-	left: 60px;
-	font-size: 11px;
-	display: none; /* Change visibility to display *
-	
-}
-
-.form-signup .form-group .success i.fa-check-circle {
-	color: #39df7e;
-	visibility: visible;
-}
-
-.form-signup .form-group .error i.fa-exclamation-circle {
-	color: #df3434;
-	visibility: visible;
-}
-
-.form-signup .form-group select {
-	width: 120px;
-	border: 1px solid black;
-	font-size: 14px;
-	border-radius: 5px;
-	padding: 12px;
-	display: block;
-}
-
-.form-signup .form-group .success select {
-	border-color: #39df7e;
-}
-
-.form-signup .form-group .error select {
-	border-color: #df3434;
-}***/

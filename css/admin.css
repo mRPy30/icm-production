@@ -285,7 +285,7 @@ td .profile-image {
 
 /*****Admin Calendar*****/
 .calendar {
-    margin: 4% 0 0 14%;
+    margin: 3.5% 0 0 14%;
     padding: 4%;
     display: flex;
     justify-content: space-between;
@@ -298,6 +298,8 @@ td .profile-image {
     justify-content: space-between;
     align-items: center;
     position: relative; 
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25), 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+
 }
 
 .event_management {
@@ -354,10 +356,14 @@ td .profile-image {
     right: 55px;
 }
 
+.fc-day .fc-widget-content td.fc-today {
+    background: #fbdf54;
+}
+
 #calendar .fc-view {
     padding: 0;
     margin: 0;
-    height: 99vh; 
+    height: 103vh; 
 }
 
 #calendar .fc-body {
@@ -476,6 +482,25 @@ td .profile-image {
     position: absolute;
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25), 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
     width: 77%;
+}
+
+.header-feedback{
+    border-collapse: collapse;
+    width: 100%;
+    table-layout: fixed;
+    font: normal 15px/normal 'Poppins';
+}
+
+.header-feedback th{
+    position: sticky;
+    top: 0;
+    background-color: #f2f2f2;
+    z-index: 2;
+    text-align: start;
+    margin-left: 20px;
+}
+.data-container{
+    
 }
 /*****end*****/
 
