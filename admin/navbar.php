@@ -25,6 +25,7 @@ $pageTitles = array(
     "calendar.php" => "Calendar Details",
     "client.php" => "Client Management",
     "feedback.php" => "Feedback Management",
+    "details.php" => "Feedback details",
     "analytics.php" => "Analytics / Records",
     "finance.php" => "Finance",
     "content.php" => "Content Management",

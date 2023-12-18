@@ -40,7 +40,7 @@ if (!$result) {
     <link rel="stylesheet" href="../css/admin.css">
 
     <!--ICON LINKS-->
-    <link rel="stylesheet" href="font-awesome-6/css/all.css">
+    <link rel="stylesheet" href="../font-awesome-6/css/all.css">
 
     <!--FONT LINKS-->
     <link rel="stylesheet" href="../css/fonts.css">
@@ -54,7 +54,8 @@ if (!$result) {
     
 <body>
     
-    
+
+   
 
     <section class="feedbox">
         <div class="table-feedback">
@@ -65,35 +66,47 @@ if (!$result) {
                         <th style="padding: 1.5% 0% 1% 1%; width: 15%;">Name</th>
                         <th style="padding: 1.5% 0% 1% 1%; width: 15%;">Title</th>
                         <th style="padding: 1.5% 0% 1% 0%;">Feedback</th>
+                        <th><i class="fa-regular fa-trash-can"></i><th>                
                     </tr>
                 </thead>
             </table>
             <div class="data-container">
                 <table class="data-table">
-                <tbody>
-                    <?php
-                    // Output data from the database
-                    while ($row = mysqli_fetch_assoc($result)) {
-                        echo "<tr>";
-                        echo "<td style='width: 7%;'><input type='checkbox'></td>";
-                        echo "<td style='padding: 1.5% 0% 1% 1%; width: 15%;'>" . $row['firstname'] . "</td>";
-                        echo "<td style='padding: 1.5% 0% 1% 1%; width: 10%;'>" . $row['feedback_Title'] . "</td>";
-                        echo "<td style='padding: 1.5% 3% 1% 0%;'>" . $row['feedback_description'] . "</td>";
-                        echo "</tr>";
-                    }
-                    ?>
-                </tbody>
-            </table>
-        </div>
-    </section>
-    
+                    <tbody>
+                        <?php
+                        // Output data from the database
+                        while ($row = mysqli_fetch_assoc($result)) {
+                            echo "<tr class='clickable-row'>";
+                            echo "<td style='width: 7%'><input type='checkbox'></td>";
+                            echo "<td style='padding: 1.5% 0% 1% 1%; width: 15%;'>" . $row['firstname'] . "</td>";
+                            echo "<td style='padding: 1.5% 0% 1% 1%; width: 10%;'>" . $row['feedback_Title'] . "</td>";
+                            echo "<td class='feedback-description' style='padding: 1.5% 3% 1% 7.8%; color: #959595;'>" . $row['feedback_description'] . "</td>";
+                            echo "</tr>";
+                        }                    
+                        ?>
+                    </tbody>
+                </table>
+            </div>
+
     <!----Navbar&Sidebar----->
     <?php 
-        include '../admin/navbar.php';
         include '../admin/sidebar.php';
+        include '../admin/navbar.php';
     ?> 
-   
+        <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const tableRows = document.querySelectorAll(".data-table tbody tr");
 
-    
+            tableRows.forEach(row => {
+            row.addEventListener("click", function(event) {
+                if (event.target.tagName !== 'INPUT') { // Check if the clicked element is not an input
+                window.location.href = '../admin/details.php'; // Redirect only if the clicked element is not an input
+                }
+            });
+            });
+        });
+        </script>
+        </div>
+    </section>    
 </body>
 </html>

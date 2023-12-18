@@ -124,7 +124,7 @@ $page = $components[2];
                 <input type="password" class="form" placeholder="Enter your Password" name="password" id="password"
                     required oninput="checkPasswordStrength(this)">
                 <i class="fa-solid fa-eye-slash" id="password-toggle" onclick="togglePassword()"
-                    style="right: 17%; top: 49.9%; position: fixed;"></i>
+                    style="right: 17%; top: 50.5%; position: fixed;"></i>
                 <br><br>
                 <input type="password" class="form" placeholder="Enter your Confirm Password" name="confirm-password"
                     id="confirmpassword" required>

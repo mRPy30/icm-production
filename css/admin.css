@@ -206,7 +206,7 @@ td form button[name="decline"]:hover{
 
 .data-table {
     border-collapse: collapse;
-    width: 101%;
+    width: 100%;
     table-layout: fixed;
 }
 
@@ -499,9 +499,146 @@ td .profile-image {
     text-align: start;
     margin-left: 20px;
 }
-.data-container{
-    
+.data-table td.feedback-description {
+    max-height: 50px; 
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap; 
+    position: relative;
 }
+
+.data-table td.feedback-description .hidden-text {
+    display: none; 
+}
+.data-table tr:hover{
+    background-color: #eaeaea;
+}
+.data-table td input[type='checkbox'] {
+    width: 18px; /* Adjust the width */
+    height: 18px; /* Adjust the height */
+    vertical-align: middle; /* Align vertically */
+}
+
+
+.feedbox-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 20px;
+    gap: 10px;
+    margin: 8.7% 0% 0% 18.5%;
+    border-radius: 5px;
+    background-color: #FCF6F6;
+    height: 75vh;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25), 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    width: 77%;
+}
+
+.feedback-details {
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+}
+.details {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.user_profile img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+
+.info h5{
+    font: normal 600 16px/normal 'Poppins';
+    color: #1c1c1c;
+}
+.info p{
+    font: normal 500 13px/normal 'Poppins';
+    color: #1c1c1c;
+}
+
+.middle{
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    margin: 5%;
+}
+
+.select_photo {
+    flex: 1; 
+}
+
+.select_photo img {
+    max-width: 100%;
+}
+
+.right {
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-left: 30%;
+}
+
+
+.title {
+    font: normal 600 17px/normal 'Poppins';
+    position: absolute;
+    margin-bottom: 20%;
+}
+
+.rate{
+    position: absolute;
+    margin-bottom: 15%;
+    margin-left: 80%;
+}
+.description {
+    font: normal 400 14px/normal 'Poppins';
+    text-align: center;
+    line-height: 20px;
+    position: absolute;
+    margin-bottom: 5%;
+    width: 32%;
+}
+
+.buttons {
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 20%;
+}
+
+.buttons #postedButton {
+    margin-left: 10px;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    background-color: #c4bd3d;
+    color: #fff;
+    cursor: pointer;
+    font: normal 500 13px/normal 'Poppins';
+}
+
+
+.buttons #backButton{
+    margin-left: 10px;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    background-color: #c6c6c6;
+    border: none;
+    color: #1c1c1c;
+    cursor: pointer;
+    font: normal 500 13px/normal 'Poppins';
+    transition: background-color 0.3s ease-in-out; 
+}
+
+.buttons #backButton:hover {
+    background-color: #8f8f8f; 
+}
+
 /*****end*****/
 
 
@@ -665,7 +802,7 @@ form .profile-section p{
     color: #1c1c1c;
     cursor: pointer;
     font: normal 500 13px/normal 'Poppins';
-    transition: background-color 0.3s ease-in-out; /* Add transition for hover effect */
+    transition: background-color 0.3s ease-in-out; 
 }
 
 .reset-button input[type="reset"]:hover {
