@@ -87,7 +87,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <?php 
     
     include '../client/sidebar.php';
-    include '../admin/navbar.php';
+    include '../client/clientnavbar.php';
 ?>  
 
 <div class="navbar">
