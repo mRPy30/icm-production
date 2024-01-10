@@ -2,6 +2,23 @@
 //Connection
 include '../backend/dbcon.php';
 session_start(); // Start the session
+$clientID = $_SESSION['id'];
+// Fetch the clients's data from the database
+$sql = "SELECT * FROM client WHERE id = '$clientID'";
+$result = $conn->query($sql);
+
+if ($result->num_rows > 0) {
+  $row = $result->fetch_assoc();
+  $clientID = $row['id'];
+  $clientName = $row['firstName'];
+  $clientLastame = $row['lastName'];
+  $clientEmail = $row['email'];
+  $clientProfilePicture = $row['profile'];
+} else {
+  echo "User data not found!";
+  exit();
+}
+
 
 // Active Page
 
@@ -26,7 +43,7 @@ $page = $components[2];
     </title>
 
     <!---CSS--->
-    <link rel="stylesheet" href="../css/client.css">
+    <link rel="stylesheet" href="../css/admin.css">
 
     <!--ICON LINKS-->
     <link rel="stylesheet" href="font-awesome-6/css/all.css">
@@ -42,10 +59,140 @@ $page = $components[2];
         <i class="fa-regular fa-bell"></i>
     </div> 
     <?php 
+    include '../client/clientnavbar.php';
         include '../client/sidebar.php';
+        
     ?>
     
-    
-    
+    <main class="account">
+        <div class="account-management">
+            <div class="profile">
+                <?php
+                // Check if a profile picture exists
+                if (!empty($clientProfilePicture)) {
+                    // Display the current profile picture as a Base64 encoded image
+                    echo '<div><img id="imagePreview" src="data:image/jpeg;base64,' . base64_encode($clientProfilePicture) . '" alt="Client Profile" width="50%" height="50%"></div>';
+                } else {
+                    echo "No profile picture available.";
+                }
+                ?>
+
+                    <form id="updateForm" action="../backend/update.php" method="post" enctype="multipart/form-data">
+                        <div class="profile-section">
+                            <label>
+                            <input type="file" id="picture" name="picture" onchange="previewImage(event)">
+                                Add new Photo+
+                            </label>
+                            <p>Client ID: <?php echo htmlspecialchars($clientID); ?></p> 
+                            <hr class="separator">
+                        </div>
+            </div>
+                        <div class="fillup">
+                            <div class="two-columns">
+                                <div>
+                                    <label for="name">Name:</label>
+                                    <input type="text" id="name" name="name" value="<?php echo htmlspecialchars($clientName); ?>">
+                                </div>
+
+                                <div>
+                                    <label for="email">Email:</label>
+                                    <input type="email" id="email" name="email" value="<?php echo htmlspecialchars($clientEmail); ?>">
+                                </div>
+                            </div>
+                            <div class="two-columns">
+                                <div>
+                                    <label for="password">Enter your New Password:</label>
+                                    <input type="password" id="password" name="password">
+                                </div>
+                                <div>
+                                    <label for="confirm_password">Confirm New Password:</label>
+                                    <input type="password" id="confirm_password" name="confirm_password">
+                                    <div id="password-strength" class="alert" style="display: none;"></div>
+                                </div>
+                            </div>
+                            <div class="save-changes">
+                                <input type="submit" value="Save Changes">
+                            </div>
+                            <div class="reset-button">
+                                <input type="reset" value="Reset" onclick="resetForm()">
+                            </div>
+                        </div>
+                    </form>      
+        </div>
+    </main>
+
+
+    <script>
+        // JavaScript to preview the selected image
+        function previewImage(event) {
+            const reader = new FileReader();
+            reader.onload = function () {
+                const imagePreview = document.getElementById('imagePreview');
+                imagePreview.src = reader.result; // Update the src attribute
+            }
+            reader.readAsDataURL(event.target.files[0]);
+        }
+
+        // JavaScript function to update the profile picture
+        function updateProfilePicture() {
+            const fileInput = document.getElementById('picture');
+            const file = fileInput.files[0];
+
+            if (file) {
+                const formData = new FormData();
+                formData.append('picture', file);
+
+                // Make an AJAX request to update.php to handle the update
+                fetch('update.php', {
+                    method: 'POST',
+                    body: formData
+                })
+                    .then(response => response.text())
+                    .then(data => {
+                        // On success, update the current profile picture on the page
+                        const currentProfilePic = document.getElementById('currentProfilePic');
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                    });
+            }
+        }
+
+        document.getElementById('updateForm').addEventListener('submit', function(event) {
+            const passwordInput = document.getElementById('password');
+            const confirmPasswordInput = document.getElementById('confirm_password');
+            const strength = document.getElementById('password-strength');
+                
+            if (!passwordsMatch()) {
+                strength.textContent = 'Password and Confirm Password do not match.';
+                strength.style.color = '#ff0000';
+                strength.style.display = 'block'; 
+                
+                passwordInput.style.border = '2px solid #ff0000';
+                confirmPasswordInput.style.border = '2px solid #ff0000';
+                passwordInput.style.background = '#FCF6F6';
+                confirmPasswordInput.style.background = '#FCF6F6';
+                
+                event.preventDefault();
+            } else {
+                strength.style.display = 'none';
+                passwordInput.style.border = '1px solid #BCB4B5';
+                confirmPasswordInput.style.border = '1px solid #BCB4B5';
+                confirmPasswordInput.style.background = '#FCF6F6';
+            }
+        });
+        
+        function passwordsMatch() {
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirm_password').value;
+            return password === confirmPassword;
+        }
+
+        function resetForm() {
+            document.getElementById('updateForm').reset();
+            const strength = document.getElementById('password-strength');
+            strength.style.display = 'none';
+        }
+        </script>
 </body>
 </html>
