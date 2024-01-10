@@ -1,7 +1,8 @@
 <?php
+// logout Automatically
+include '../backend/logout.php';
 // Connection
 include '../backend/dbcon.php';
-session_start();
 
 // Active Page
 $directoryURI = $_SERVER['REQUEST_URI'];
@@ -31,7 +32,9 @@ if (isset($_POST['delete'])) {
     } else {
         echo "Error deleting client: " . $conn->error;
     }
+    exit; // Terminate the script after handling the AJAX request
 }
+
 ?>
 
 
@@ -93,7 +96,7 @@ if (isset($_POST['delete'])) {
 
             <!-- Data Table -->
             <div class="data-table-container">
-                <table class="data-table">
+                <table class="data-table client">
                     <tbody>
                     <?php
                         foreach ($clientData as $client) {
@@ -113,9 +116,96 @@ if (isset($_POST['delete'])) {
                 </table>
             </div>
         </div>
+        <div class="popup" id="deletePopup">
+            <div class="popup-content">
+                <p>Do you want to delete the account of <span id="clientName"></span>?</p>
+                <button id="deleteNo">No</button>
+                <button id="deleteYes">Yes</button>
+            </div>
+        </div>
     </section>
     
     <script>
+       document.addEventListener("DOMContentLoaded", function () {
+            const deleteButtons = document.querySelectorAll(".data-table.client button[name='delete']");
+            const deletePopup = document.getElementById("deletePopup");
+            const deleteYesBtn = document.getElementById("deleteYes");
+            const deleteNoBtn = document.getElementById("deleteNo");
+            const loadingOverlay = document.getElementById("loadingOverlay");
+
+            let selectedRow; // Store the selected row
+
+            deleteYesBtn.addEventListener("click", function () {
+        // Check if a row is selected
+        if (selectedRow) {
+            // Fetch the client ID from the selected row
+            const clientId = selectedRow.querySelector("td:first-child").innerText;
+
+            // Fetch the client name from the selected row
+            const userName = selectedRow.querySelector("td:nth-child(3)").innerText + " " + selectedRow.querySelector("td:nth-child(4)").innerText;
+
+            // Set the client name in the confirmation popup
+            document.getElementById("clientName").innerText = userName;
+
+            // Show loading overlay immediately
+            loadingOverlay.style.display = "flex";
+
+            // Perform the deletion after a 2-second delay
+            setTimeout(function () {
+                deleteClient(clientId);
+            }, 2000);
+        }
+    });
+
+    deleteNoBtn.addEventListener("click", function () {
+        // Close the confirmation popup
+        deletePopup.style.display = "none";
+    });
+
+    deleteButtons.forEach(button => {
+        button.addEventListener("click", function (event) {
+            event.preventDefault();
+
+            // Fetch the name from the selected row
+            selectedRow = this.closest("tr");
+            const userName = selectedRow.querySelector("td:nth-child(3)").innerText + " " + selectedRow.querySelector("td:nth-child(4)").innerText;
+
+            // Set the client name in the confirmation popup
+            document.getElementById("clientName").innerText = userName;
+
+            // Show the confirmation popup
+            deletePopup.style.display = "block";
+        });
+    });
+
+    deleteForm.addEventListener("submit", function () {
+        // Show loading overlay when the form is submitted
+        loadingOverlay.style.display = "flex";
+    });
+
+    function deleteClient(clientId) {
+        // Make an AJAX request to delete the client
+        const xhr = new XMLHttpRequest();
+        xhr.open("POST", "../admin/client.php", true);
+        xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                // Hide loading overlay
+                loadingOverlay.style.display = "none";
+
+                // Handle the response from the server (you can redirect or display a message)
+                console.log(xhr.responseText);
+                // Reload the page to reflect the changes
+                location.reload();
+            }
+        };
+        xhr.send("delete=true&client_id=" + clientId);
+    }
+});
+
+
+
+
         function searchClient() {
             // Get the search input value and trim it
             var searchValue = document.getElementById("client-search").value.toLowerCase().trim();
@@ -135,6 +225,31 @@ if (isset($_POST['delete'])) {
                 }
             }
         }
+
+        // Add the following script to periodically check for inactivity and logout
+        var inactivityTimeout = 900; // 15 minutes in seconds
+
+        function checkInactivity() {
+            setTimeout(function () {
+                window.location.href = '../login.php'; // Replace 'logout.php' with the actual logout page
+            }, inactivityTimeout * 1000);
+        }
+
+        // Start checking for inactivity when the page loads
+        document.addEventListener('DOMContentLoaded', function () {
+            checkInactivity();
+        });
+
+        // Reset the inactivity timer when there's user activity
+        document.addEventListener('mousemove', function () {
+            clearTimeout(checkInactivity);
+            checkInactivity();
+        });
+
+        document.addEventListener('keypress', function () {
+            clearTimeout(checkInactivity);
+            checkInactivity();
+        });
     </script>
 
 </body>

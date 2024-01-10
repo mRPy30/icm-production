@@ -28,8 +28,10 @@ $pageTitles = array(
     "details.php" => "Feedback details",
     "analytics.php" => "Analytics / Records",
     "finance.php" => "Finance",
+    "expenses.php" => "Expenses Reports",
     "content.php" => "Content Management",
-    "account.php" => "Admin account Settings"
+    "account.php" => "Admin account Settings",
+    "production.php" => "Production Management"
 );
 
 $currentPage = basename($_SERVER['SCRIPT_NAME']); 
@@ -164,57 +166,65 @@ $pageTitle = isset($pageTitles[$currentPage]) ? $pageTitles[$currentPage] : "Adm
     }
 
     button#logoutYes {
-        padding: 10px 15px;
+        padding: 10px 25px;
         margin: 5px;
-        background: #D25A5A;
+        background: #FF8787;
         border: none;
         border-radius: 8px;
-        color: #fff;
-        font: normal 500 14px/20px 'Poppins';
+        color: #1c1c1c;
+        font: normal 400 14px/20px 'Poppins';
         cursor: pointer;
-        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.05);
+        box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
         transition: all 200ms linear;
+    }
+    button#logoutYes:hover{
+        background: #D25A5A;
     }
 
     button#logoutNo {
-        padding: 10px 15px;
+        padding: 10px 25px;
         margin: 5px;
-        background: #9b9b9b;
+        background: #DADADA;
         border: none;
         border-radius: 8px;
-        color: #ffffff;
-        font: normal 600 14px/20px 'Poppins';
+        color: #1c1c1c;
+        font: normal 400 14px/20px 'Poppins';
         cursor: pointer;
-        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.05);
+        box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);        
         transition: all 200ms linear;
+    }
+    button#logoutNo:hover{
+        background: #9b9b9b;
     }
 
     #loadingOverlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(255, 255, 255, 0.8);
-            z-index: 10000;
-            justify-content: center;
-            align-items: center;
-        }
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);        
+    z-index: 10000;
+    justify-content: center;
+    align-items: center;
+    }
 
-        .loading-circle {
-            border: 8px solid #1c1c1c;
-            border-top: 8px solid #C2BE63;
-            border-radius: 50%;
-            width: 50px;
-            height: 50px;
-            animation: spin 5s linear infinite;
-        }
+    .loading-circle {
+        display: inline-block;
+        width: 50px;
+        height: 50px;
+        border: 7px solid #E1DE8F;
+        border-radius: 50%;
+        border-top: 5px solid transparent;
+        animation: spin 1s linear infinite;
+    }
 
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
+    @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+
 </style>
 
 <header class="navbar">
@@ -235,7 +245,7 @@ $pageTitle = isset($pageTitles[$currentPage]) ? $pageTitles[$currentPage] : "Adm
             </div>
         </div>
         <div class="profile_dropdown-content">
-            <a href="account.php">Profile</a> <!-- Replace "#" with the actual profile page URL -->
+            <a href="account.php">Profile</a>
             <a type="text" id="logoutPopup" class="btn-logout" onclick="goBack()">Logout</a>
         </div>
     </div>

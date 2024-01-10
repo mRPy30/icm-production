@@ -1,7 +1,8 @@
 <?php
+// logout Automatically
+include '../backend/logout.php';
 // Connection
 include '../backend/dbcon.php';
-session_start();
 $adminID = $_SESSION['id'];
 
 // Fetch the admin's data from the database
@@ -67,57 +68,61 @@ $page = $components[2];
 
     <main class="account">
         <div class="account-management">
-            <div class="profile">
-                <?php
-                // Check if a profile picture exists
-                if (!empty($adminProfilePicture)) {
-                    // Display the current profile picture as a Base64 encoded image
-                    echo '<div><img id="imagePreview" src="data:image/jpeg;base64,' . base64_encode($adminProfilePicture) . '" alt="Admin Profile" width="50%" height="50%"></div>';
-                } else {
-                    echo "No profile picture available.";
-                }
-                ?>
-
+            <!-- Left Column -->
+            <div class="left-column">
+                <div class="profile">
+                    <?php
+                    // Check if a profile picture exists
+                    if (!empty($adminProfilePicture)) {
+                        // Display the current profile picture as a Base64 encoded image
+                        echo '<div><img id="imagePreview" src="data:image/jpeg;base64,' . base64_encode($adminProfilePicture) . '" alt="Admin Profile" width="50%" height="50%"></div>';
+                    } else {
+                        echo "No profile picture available.";
+                    }
+                    ?>
                     <form id="updateForm" action="../backend/update.php" method="post" enctype="multipart/form-data">
                         <div class="profile-section">
                             <label>
-                            <input type="file" id="picture" name="picture" onchange="previewImage(event)">
+                                <input type="file" id="picture" name="picture" onchange="previewImage(event)">
                                 Add new Photo+
                             </label>
-                            <p>Admin ID: <?php echo htmlspecialchars($adminID); ?></p> 
-                            <hr class="separator">
+                            <p>Admin ID: <?php echo htmlspecialchars($adminID); ?></p>
                         </div>
+                </div>
             </div>
-                        <div class="fillup">
-                            <div class="two-columns">
-                                <div>
-                                    <label for="name">Name:</label>
-                                    <input type="text" id="name" name="name" value="<?php echo htmlspecialchars($adminName); ?>">
-                                </div>
-                                <div>
-                                    <label for="email">Email:</label>
-                                    <input type="email" id="email" name="email" value="<?php echo htmlspecialchars($adminEmail); ?>">
-                                </div>
-                            </div>
-                            <div class="two-columns">
-                                <div>
-                                    <label for="password">Enter your New Password:</label>
-                                    <input type="password" id="password" name="password">
-                                </div>
-                                <div>
-                                    <label for="confirm_password">Confirm New Password:</label>
-                                    <input type="password" id="confirm_password" name="confirm_password">
-                                    <div id="password-strength" class="alert" style="display: none;"></div>
-                                </div>
-                            </div>
-                            <div class="save-changes">
-                                <input type="submit" value="Save Changes">
-                            </div>
-                            <div class="reset-button">
-                                <input type="reset" value="Reset" onclick="resetForm()">
-                            </div>
+
+            <div class="vertical"></div>
+            <!-- Right Column -->
+            <div class="right">
+                <div class="fillup">
+                    <div class="two-columns">
+                        <div>
+                            <label for="name">Name:</label>
+                            <input type="text" id="name" name="name" value="<?php echo htmlspecialchars($adminName); ?>">
                         </div>
-                    </form>      
+                        <div>
+                            <label for="email">Email:</label>
+                            <input type="email" id="email" name="email" value="<?php echo htmlspecialchars($adminEmail); ?>">
+                        </div>
+                        <div>
+                            <label for="password">Enter your New Password:</label>
+                            <input type="password" id="password" name="password">
+                        </div>
+                        <div>
+                            <label for="confirm_password">Confirm New Password:</label>
+                            <input type="password" id="confirm_password" name="confirm_password">
+                            <div id="password-strength" class="alert" style="display: none;"></div>
+                        </div>
+                        <div class="save-changes">
+                            <input type="submit" value="Save Changes">
+                        </div>
+                        <div class="reset-button">
+                            <input type="reset" value="Reset" onclick="resetForm()">
+                        </div>
+                    </div>
+                </div>
+                </form>
+            </div>
         </div>
     </main>
 
@@ -192,6 +197,31 @@ $page = $components[2];
             const strength = document.getElementById('password-strength');
             strength.style.display = 'none';
         }
+
+        // Add the following script to periodically check for inactivity and logout
+        var inactivityTimeout = 900; // 10 minutes in seconds
+
+        function checkInactivity() {
+            setTimeout(function () {
+                window.location.href = '../login.php'; // Replace 'logout.php' with the actual logout page
+            }, inactivityTimeout * 1000);
+        }
+
+        // Start checking for inactivity when the page loads
+        document.addEventListener('DOMContentLoaded', function () {
+            checkInactivity();
+        });
+
+        // Reset the inactivity timer when there's user activity
+        document.addEventListener('mousemove', function () {
+            clearTimeout(checkInactivity);
+            checkInactivity();
+        });
+
+        document.addEventListener('keypress', function () {
+            clearTimeout(checkInactivity);
+            checkInactivity();
+        });
         </script>
 </body>
 </html>

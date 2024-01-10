@@ -1,24 +1,54 @@
 <?php
+// logout Automatically
+include '../backend/logout.php';
 // Connection and fetching data
 include '../backend/dbcon.php';
-
-session_start();
 
 $directoryURI = $_SERVER['REQUEST_URI'];
 $path = parse_url($directoryURI, PHP_URL_PATH);
 $components = explode('/', $path);
 $page = end($components);
 
+$selectedFeedbackID = $_GET['feedbackID'] ?? null;
+
+if (!$selectedFeedbackID) {
+    header("Location: ../admin/feedback.php");
+    exit();
+}
+
 $query = "SELECT client.id, client.firstname AS firstname, client.profile, feedback.feedback_Title, feedback.select_photo, feedback.feedback_description, feedback.feedback_date
           FROM feedback
-          INNER JOIN client ON feedback.clientID = client.id";
+          INNER JOIN client ON feedback.clientID = client.id
+          WHERE feedback.feedbackID = $selectedFeedbackID";
 
 $result = mysqli_query($conn, $query);
 
 if (!$result) {
     die("Query Failed: " . mysqli_error($connection));
 }
+
+$row = mysqli_fetch_assoc($result);
+
+// Check if the feedback exists
+if (!$row) {
+    header("Location: ../admin/feedback.php");
+    exit();
+}
+
+$ratingQuery = "SELECT rating FROM feedback WHERE feedbackID = $selectedFeedbackID";
+$ratingResult = mysqli_query($conn, $ratingQuery);
+
+if ($ratingResult) {
+    $ratingRow = mysqli_fetch_assoc($ratingResult);
+    $ratingValue = $ratingRow['rating']; // Assuming 'rating' is the column name for ratings in your table
+} else {
+    // Set a default value if rating is not found or an error occurs
+    $ratingValue = 0;
+}
+
+
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -105,13 +135,18 @@ if (!$result) {
                     ?>
                 </div>
                 <div class="rate">
-                    <span class="rating" data-rating="0">
-                        <i class="fas fa-star" data-index="1"></i>
-                        <i class="fas fa-star" data-index="2"></i>
-                        <i class="fas fa-star" data-index="3"></i>
-                        <i class="fas fa-star" data-index="4"></i>
-                        <i class="fas fa-star" data-index="5"></i>
-                    </span>
+                    <div class="stars" data-rating="<?php echo $ratingValue; ?>">
+                        <?php
+                        // Display stars based on the rating value fetched from the database
+                        for ($i = 1; $i <= 5; $i++) {
+                            if ($i <= $ratingValue) {
+                                echo '<span class="star" data-value="' . $i . '">&#9733;</span>'; // Filled star
+                            } else {
+                                echo '<span class="star" data-value="' . $i . '">&#9734;</span>'; // Empty star
+                            }
+                        }
+                        ?>
+                    </div>
                 </div>
                 <div class="description">
                     <?php
@@ -134,13 +169,12 @@ if (!$result) {
     
     <!----Navbar&Sidebar----->
     <?php 
-        include '../admin/navbar.php';
         include '../admin/sidebar.php';
+        include '../admin/navbar.php';
     ?> 
    
 
     
-</body>
 <script>
     // Get the back button element
     const backButton = document.getElementById('backButton');
@@ -151,45 +185,62 @@ if (!$result) {
         history.back();
     });
 
-    // Get all the star elements
-    const stars = document.querySelectorAll('.rating i');
 
-    stars.forEach((star, index) => {
-        star.addEventListener('click', function() {
-            const ratingValue = index + 1; // Calculate the rating value (starts from 1)
-            const feedbackTitle = document.querySelector('.title h2').textContent.trim();
-            const feedbackDescription = document.querySelector('.description p').textContent.trim();
+    const stars = document.querySelectorAll('.star');
 
-            // Assuming you have clientID available in PHP session
-            const clientID = <?php echo $_SESSION['clientID']; ?>;
-
-            // Create an object to send to the backend (using fetch API for simplicity)
-            const data = {
-                feedback_Title: feedbackTitle,
-                feedback_date: new Date().toISOString().slice(0, 19).replace('T', ' '), // Current date and time
-                clientID: clientID,
-                select_photo: '', // You can add photo data here if required
-                feedback_description: feedbackDescription,
-                rating: ratingValue // Include the rating value
-            };
-
-            // Send the data to your backend PHP file for database insertion
-            fetch('../backend/insert_feedback.php', {
-                method: 'POST',
-                body: JSON.stringify(data),
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            }).then(response => {
-                // Handle the response from the server
-                // You can add further logic here if needed
-                console.log('Feedback submitted successfully!');
-            }).catch(error => {
-                console.error('Error:', error);
-            });
-        });
+stars.forEach(star => {
+    star.addEventListener('mouseover', function() {
+        highlightStars(this.getAttribute('data-value'));
     });
+
+    star.addEventListener('click', function() {
+        const rating = this.getAttribute('data-value');
+        // Send the rating to the server using an XMLHttpRequest or Fetch API
+        sendRatingToServer(rating);
+    });
+
+    star.addEventListener('mouseout', function() {
+        const currentRating = document.querySelector('.stars').getAttribute('data-rating');
+        highlightStars(currentRating);
+    });
+});
+
+function highlightStars(value) {
+    stars.forEach(star => {
+        if (star.getAttribute('data-value') <= value) {
+            star.style.color = 'gold'; /* Change color for filled stars */
+        } else {
+            star.style.color = 'gold'; /* Keep color gold for unfilled stars */
+        }
+    });
+    document.querySelector('.stars').setAttribute('data-rating', value);
+}
+    // Add the following script to periodically check for inactivity and logout
+    var inactivityTimeout = 900; // 15 minutes in seconds
+
+function checkInactivity() {
+    setTimeout(function () {
+        window.location.href = '../login.php'; // Replace 'logout.php' with the actual logout page
+    }, inactivityTimeout * 1000);
+}
+
+// Start checking for inactivity when the page loads
+document.addEventListener('DOMContentLoaded', function () {
+    checkInactivity();
+});
+
+// Reset the inactivity timer when there's user activity
+document.addEventListener('mousemove', function () {
+    clearTimeout(checkInactivity);
+    checkInactivity();
+});
+
+document.addEventListener('keypress', function () {
+    clearTimeout(checkInactivity);
+    checkInactivity();
+});
+    
 </script>
 
-
+</body>
 </html>

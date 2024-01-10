@@ -1,8 +1,9 @@
 <?php 
+// logout Automatically
+include '../backend/logout.php';
 //Connection
 include '../backend/dbcon.php';
 
-session_start(); // Start the session
 
 // Active Page
 
@@ -30,10 +31,11 @@ $page = $components[2];
     <link rel="stylesheet" href="../css/admin.css">
 
     <!--ICON LINKS-->
-    <link rel="stylesheet" href="font-awesome-6/css/all.css">
+    <link rel="stylesheet" href="../font-awesome-6/css/all.css">
 
     <!--FONT LINKS-->
     <link rel="stylesheet" href="../css/fonts.css">
+    
 
     <style>
         body {
@@ -43,7 +45,31 @@ $page = $components[2];
 </head>
     
 <body>
+    
 
+    <section class="content">
+        <div class="content-box">
+            <div class="content-box">
+                <div class="top">
+                    <h4>Upload Content Details</h4>
+                    <button class="add-button"><i class="fa-solid fa-plus"></i> Add New</button>
+                </div>
+                <div class="content-tbl">
+                    <table class="header-table">
+                        <thead>
+                            <tr>
+                                <th>No.</th>
+                                <th>Title</th>
+                                <th>Date</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>               
+            </div>
+        </div>
+    </section>
+    
     <!----Navbar&Sidebar----->
     <?php 
         include '../admin/sidebar.php';
@@ -53,4 +79,30 @@ $page = $components[2];
     
     
 </body>
+<script>
+    // Add the following script to periodically check for inactivity and logout
+    var inactivityTimeout = 900; // 15 minutes in seconds
+
+function checkInactivity() {
+    setTimeout(function () {
+        window.location.href = '../login.php'; // Replace 'logout.php' with the actual logout page
+    }, inactivityTimeout * 1000);
+}
+
+// Start checking for inactivity when the page loads
+document.addEventListener('DOMContentLoaded', function () {
+    checkInactivity();
+});
+
+// Reset the inactivity timer when there's user activity
+document.addEventListener('mousemove', function () {
+    clearTimeout(checkInactivity);
+    checkInactivity();
+});
+
+document.addEventListener('keypress', function () {
+    clearTimeout(checkInactivity);
+    checkInactivity();
+});
+</script>
 </html>
