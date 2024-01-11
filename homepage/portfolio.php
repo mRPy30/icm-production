@@ -16,17 +16,11 @@
     <!---CSS--->
     <link rel="stylesheet" href="../css/homepage.css">
 
-    <!--CSS FRAMEWORK-->
-
-
-    <!--ICON LINKS-->
-    <script src="https://kit.fontawesome.com/11a4f2cc62.js" crossorigin="anonymous"></script>
-
     <!--FONT LINKS-->
     <link
         href="https://fonts.googleapis.com/css2?family=Abel&family=Inter:wght@400;800&family=Poppins:wght@400;500&display=swap"
         rel="stylesheet"><!--ICON LINKS-->
-    <link rel="stylesheet" href="font-awesome-6/css/all.css">
+    <link rel="stylesheet" href="../font-awesome-6/css/all.css">
 
     <!--FONT LINKS-->
     <link rel="stylesheet" href="../css/fonts.css">
@@ -37,13 +31,12 @@
     <!-----Navbar------->
     <?php include '../homepage/navbar.php'; ?>
 
-    <main class="main-content">
+    <main class="portfolio-page">
         <section class="coverpage">
             <div class="cover-content">
-                <img src="../picture/coverpage1.jpg" alt="coverpage">
+                <img src="../picture/portfolio01.jpg" alt="coverpage">
                 <div class="text">
                     <h2>Portfolio</h2>
-                    <button class="button">Book Now</button>
                 </div>
             </div>
         </section>

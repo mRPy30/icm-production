@@ -20,47 +20,105 @@
     
 }
 
-.coverpage img {
+.carousel {
+    display: flex;
+    overflow: hidden;
     width: 100%;
-    height: 10%;
-    filter: brightness(50%);
+    height: 730px;
 }
 
+.carousel img {
+    width: 100%;
+    height: 100%;
+    display: none;
+    filter: brightness(50%);
+    object-fit: cover;
+}
+
+.carousel img:first-child {
+    display: block;
+}
+
+.carousel-page-numbers  {
+    display: flex;
+    justify-content: center;
+    z-index: 1;
+    position: absolute;
+    bottom: 15%;
+    left: 90%;
+    color: #FBF4F4;
+}
+.page-number-text {
+    font: normal 13px/normal 'Poppins';
+    letter-spacing: 5px;
+
+}
+.page-number span{
+    margin: 0 5px;
+    cursor: pointer;
+    font-size: 18px;
+    color: #d6d6d6;
+}
+
+.page-number.active {
+    color: #fbfbfb;
+    font-weight: bold;
+}
+
+.horizontal-line {
+    width: 90.5%;
+    height: 2.5px;
+    background-color: #ccc;
+    z-index: 1;
+    position: absolute;
+    bottom: 10%;
+    left: 4.5%;
+}
+
+/* Additional styles for the text content */
 .text {
     position: absolute;
-    top: 44%;
-    left: 51%;
-    transform: translate(-50%, -50%);
+    top: 28%;
+    left: 24%;
     text-align: center;
-    width: 45%;
+    width: 55%;
     color: white;
+    z-index: 1; /* Ensure text is above the carousel */
 }
 
 .text h2 {
-    font: normal 700 50px/normal 'Poppins';
+    font: normal 700 45px/normal 'Poppins';
     letter-spacing: 3px;
+    
 }
 
-.button  {
+.text p {
+    font: normal 20px/normal 'Poppins';
+    letter-spacing: 3px;
+    margin-top: 20px;
+}
+
+.button {
     margin: 30px 0px 0px 0px;
     padding: 5px 0px 5px 0px;
     height: 40px;
-    width: 15%; 
+    width: 15%;
     font: normal 400 15px/normal 'Poppins';
     filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
     transition: background-color 0.3s;
     border: none;
+    cursor: pointer;
     background-color: #FBF4F4;
     border-radius: 30px;
 }
+
 .button:hover {
     background-color: #454548;
     color: #fcfcfc;
 }
 
 
-
-/**** Portfolio Section *****/
+/**** Portfolio Section *****/  
 
 .portfolio .portfolio-title .horizontal-line1{
     position: absolute;
@@ -85,17 +143,19 @@
 
 .portfolio .portfolio-title {
     margin-bottom: 30px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
 }
 
 .portfolio .portfolio-title h2 {
     font: normal 700 27px/normal 'Poppins';
     letter-spacing: 1px;
-    position: absolute;
     text-align: center;
     width: 100%;
-    top: 117%;
+    top: 107%;
 }
-
 
 .portfolio .box-section{
     width: 100%;
@@ -151,18 +211,32 @@
     height: 46vh;
     margin: 30px 10px 30px 10px;
     filter: brightness(85%);
+    opacity: 1;
+	-webkit-transition: .3s ease-in-out;
+	transition: .3s ease-in-out;
 }
 .box5 .portfolio-content2 img{
     width: 84%;
     height: 46vh;
     margin: 30px 10px 30px 10px;
     filter: brightness(85%);
+    opacity: 1;
+	-webkit-transition: .3s ease-in-out;
+	transition: .3s ease-in-out;
 }
 .box6 .portfolio-content3 img{
     width: 85%;
     height: 46vh;
     margin: 30px 10px 30px 10px;
     filter: brightness(85%);
+    opacity: 1;
+	-webkit-transition: .3s ease-in-out;
+	transition: .3s ease-in-out;
+}
+.portfolio-content1:hover img,
+.portfolio-content2:hover img,
+.portfolio-content3:hover img{
+    opacity: .7 ;
 }
 .box-section .box4 .portfolio-content1 h2{
     font: normal 20px/normal 'Poppins';
@@ -324,50 +398,109 @@
 .services{
     width: 100%;
     background-color: #D9D9D9;
-    padding: 70px 0px 70px 0px;
-    text-align: center;
+    padding: 50px 0px 25px 0px;
+    text-align: start;
+    margin-bottom: 29px;
+    align-items: center;    
 }
-.services .services-title h2{
-    font: normal 700 36px/normal 'Poppins';
+.services .services-title h2{   
+    font: normal 700 25px/normal 'Poppins';
     letter-spacing: 1px;
-    position: absolute;
-    text-align: center;
-    width: 100%;
-    top: 217%;
+    margin-left: 8%;
 }
 .services .services-title h6{
     font: normal  17px/normal 'Poppins';
     letter-spacing: 1px;
-    position: absolute;
     text-align: left;
     width: 70%;
-    top: 227%;
-    left: 105px;
+    margin-left: 8%;
+    margin-top: 10px;
+
 }
 
 .services .services-box-section{
     width: 100%;
-    height: 50%;
+    height: 90%;
     background: #D9D9D9;
-    padding: 130px 90px 10px 30px;
+    padding: 30px 130px 20px 60px;
     display: flex;
-    justify-content: space-between;
     align-items: center;
 }
 
+
 .services .service-box{
-    background: #1B1212;
-    width: 100%;
-    height: 47vh;
+    background: #FCF6F6;
+    width: 50%;
+    height: 60vh;
     margin-left: 70px;
-    border-radius: 10px;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 40px 50px 40px 50px;
+    transition: all .5s ease;
 }
 
+.services .service-box:hover{
+    transform: scale(1.02);
+}
+
+.services .package-name{
+    text-align: center;
+    height: 1px;
+}
+.services .package-name h6{
+    text-align: center;
+    font: normal 700 22px/normal 'Poppins';
+    margin-bottom: 5px;
+}
+.services .package-name p{
+    text-align: center;
+    font: normal 500 14px/normal 'Poppins';
+    height: 2%;
+}
+.services .price{
+    text-align: center;
+    height: 5px;
+}
+.services .price h2{
+    text-align: center;
+    font: normal 700 40px/normal 'Poppins';
+    margin-top: 10px;
+}
+.services .feature{
+    height: 5px;
+    list-style: none;
+}
+.services .feature h4{
+    font: normal 600 15px/normal 'Poppins';
+    margin-top: 30px;
+}
+
+.services .price-details .top,
+.bottom{
+    display: flex;
+    margin: 10px 0px 5px 0px;   
+}
+.services .price-details .top i, 
+.bottom i{  
+    color: green;
+    margin-right: 5%;
+    font-size: 20px;
+}
+.services .price-details .top p, 
+.bottom p{  
+    font: normal 400 15px/normal 'Poppins';
+}
+
+.services button{
+    left: 60%;
+}
 .services .button-services-section {
-    margin: 50px 0px 0px 30px;
+    margin: 30px 0px 30px 670px;
     padding: 5px 0px 5px 0px;
     height: 40px;
-    width:10%; 
+    width: 10%; 
     font: normal 400 15px/normal 'Poppins';
     filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
     transition: background-color 0.3s;
@@ -379,6 +512,7 @@
     background-color: #454548;
     color: #fcfcfc;
 }
+
 
 
 
@@ -451,12 +585,173 @@
     margin: 60px 0px 0px 10px;
     line-height: 30px;
 }
+.review .testimonial-arrow{
+    margin: 200px 0px 0px 12px;
+    font-size: 70px;
+}
+.review .testimonial-arrow i{
+    font-weight: 50px;
+    font-size: 20px;
+}
 
 
 
 
 
 
+
+/****** About Section ******/
+.about {
+    width: 100%;
+    background-color: #FBF4F4;
+    padding: 50px 0px 50px 0px;
+}
+.about .about-page{
+    display: flex;
+    flex-direction: row;
+    margin: 0px 10px 0px 100px;
+}
+.about-left-content{
+    margin: 90px 20px 500px 40px ;
+    width: 30%;
+}
+.about-title h1{
+    font: normal 600 35px/normal 'Poppins';
+}
+.about-title h5{
+    font: normal 500 20px/normal 'Poppins';
+    margin: 10px 0px 10px 141px;
+}
+.about-description p{
+    color: #1C1C1D;
+    font-family: Poppins;
+    font: normal 15px/normal 'Poppins';
+    width: 92%;
+    height: 59px;
+    margin-top: 35px;
+    flex-shrink: 0;
+    text-align: justify;
+    margin: 0px 0px 0px 10px;
+    line-height: 30px;
+}
+
+.more-button{
+    margin: 5px 0px 0px 11px;
+}
+
+.more-button a button{
+    margin: 210px 0px 0px 0px;
+    padding: 5px 0px 5px 0px;
+    height: 40%;
+    width: 25%;
+    font: normal 400 15px/normal 'Poppins';
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+    transition: background-color 0.3s;
+    border: none;
+    cursor: pointer;
+    background-color: #FBF4F4;
+    border-radius: 30px;
+}
+
+
+.more-button  a button{
+    border-radius: 25px;
+	border: 1px solid #000;
+	background: #1C1C1D;
+	font: normal 400 15px/normal 'Poppins';
+	color: #FCF6F6;
+}
+
+.more-button  a button:hover{
+	background-color: #454548;
+    color: #fcfcfc;
+}
+
+
+
+
+.about-right-content {
+    padding: 10px 0px 0px 92px;
+    width: 60%;
+}
+
+.about-right-content .image1{
+    width: 16%; 
+    height: 28%;
+    z-index: 2;    
+    position: absolute;
+}
+.about-right-content .image1 img{
+    width: 140%; 
+    height: 215%;
+    top: 200%;
+    margin: 0px 0px 0px 60px;    
+    filter: brightness(70%);
+}
+.about-right-content .image2{
+    width: 37%; 
+    height: 25%; 
+    z-index: 1;
+}
+.about-right-content .image2 img{
+    width: 123%; 
+    height: 153%;
+    margin: 58% 0% 0% 128%;
+    filter: brightness(70%);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    /************** Portfolio Other Web Page *************/
+
+
+.portfolio-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.portfolio-page .coverpage {
+    width: 100%;
+}
+
+.portfolio-page .cover-content {
+    position: relative;
+    width: 100%; 
+}
+.portfolio-page .cover-content img{
+    width: 100%;
+    height: 500px;
+    filter: brightness(50%);
+}
+.portfolio-page .text h2{
+    font: normal 700 50px/normal 'Poppins';
+    letter-spacing: 5px;
+    position: absolute;
+    top: 50%;
+    left: 43%;
+    color: #ccc;
+}
 
 
 

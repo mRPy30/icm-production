@@ -19,9 +19,10 @@
         z-index: 9999;
     }
 
-    .logo{
+    .logo {
         width: 10%;
     }
+
     .header-section .logo img {
         width: 80%;
         height: 11%;
@@ -73,20 +74,22 @@
         height: 34px;
         left: 95vw;
         font: normal 400 15px/normal 'Poppins';
+        filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
         display: inline-block;
         cursor: pointer;
-        background-color: #1C1C1D;
-        filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
-        border-radius: 30px;
+        background: #1C1C1D;
+        border-radius: 25px;
         padding: 3px 17px;
         transition: background-color 0.3s;
         color: #FCF6F6;
         border: none;
+        border: 1px solid #000;
+
     }
 
     .register button:hover {
-        background-color: #525256;
-        color: white;
+        background-color: #454548;
+        color: #fcfcfc;
     }
 
     .nav-list {
@@ -149,24 +152,23 @@
         .register button {
             width: 100%;
             height: 34px;
-            font: normal 500 15px/normal 'Poppins';
-            line-height: 24px;
             cursor: pointer;
-            fill: #FBF4F4;
-            stroke-width: 1px;
-            border-radius: 30px;
-            stroke: #000;
-            filter: drop-shadow(0px 3px 3px rgba(0, 0, 0, 0.25));
-            display: inline-flex;
             padding: 3px 17px;
-            transition: background-color 0.3s;
-            color: black;
+            margin: 10px 0px 0px 0px;
+            border-radius: 25px;
+            border: 1px solid #000;
+            background: #1C1C1D;
+            width: 25%;
+            height: 6vh;
+            font: normal 500 13px/normal 'Poppins';
+            color: #FCF6F6;
         }
 
-        .register button:hover {
-            background-color: #E46F80;
-            color: black;
-        }
+    }
+
+    .register button:hover {
+        background-color: #454548;
+        color: #fcfcfc;
     }
 </style>
 
