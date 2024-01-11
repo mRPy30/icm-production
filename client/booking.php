@@ -138,7 +138,7 @@ $page = $components[2];
                 <label for="bookingDate" ></label>
                 <input type="date" name="bookingDate" id="bookingDate" class="form-input"  required>
               
-              <p>Time   </p>
+              <p>Time</p>
                 <label for="bookingTime"></label>
                 <input type="time" name="bookingTime" class="form-input" required>
               </div>

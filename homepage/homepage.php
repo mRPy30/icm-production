@@ -131,5 +131,9 @@
 
     </main>
 </body>
-
+<script>
+    document.querySelector(".button").addEventListener("click", function() {
+        window.location.href = "../homepage/booking.php";
+    });
+</script>
 </html>

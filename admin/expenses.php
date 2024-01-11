@@ -115,7 +115,8 @@ if ($resultExpenses->num_rows > 0) {
                                         <form method="post" action="../backend/expenses.php">
                                             <input type="hidden" name="expensesID" value="<?php echo $expense['expensesID']; ?>">
                                             <button type="submit" name="delete">Delete</button>
-                                        </form>                                    </td>
+                                        </form>                                   
+                                    </td>
                                 </tr>
                             <?php endforeach; ?>
                         <?php endif; ?>
@@ -151,14 +152,14 @@ if ($resultExpenses->num_rows > 0) {
                         </form>
                     </div>
                 </div>
+            </div> 
+        </div>
+        <div class="popupDelete" id="deleteExpensePopup">
+            <div class="modal">
+                <p>Do you want to delete this expenses report?</p>
+                <button id="deleteNo">No</button>
+                <button id="deleteYes">Yes</button>
             </div>
-            <div class="popupDelete" id="deleteExpensePopup">
-                <div class="modal">
-                    <p>Do you want to delete this expenses report?</p>
-                    <button id="deleteNo">No</button>
-                    <button id="deleteYes">Yes</button>
-                </div>
-            </div>  
         </div>
     </section>
     <!----Navbar&Sidebar----->
@@ -169,6 +170,7 @@ if ($resultExpenses->num_rows > 0) {
 
 </body>
 <script>
+
     document.addEventListener('DOMContentLoaded', function() {
             const revenueData = [100, 150, 200, 180, 250, 220];
 
@@ -229,7 +231,7 @@ if ($resultExpenses->num_rows > 0) {
             showSelectedMonth();
         };
         
-        
+
         function formatAmount() {
             var amountInput = document.getElementById('amount-exp');
             var amountValue = amountInput.value.replace(/[^\d.]/g, ''); // Remove non-numeric characters except for the period
@@ -278,19 +280,22 @@ if ($resultExpenses->num_rows > 0) {
     });
 
     function addExpenses() {
-    var form = document.getElementById('expensesForm');
+    var form = document.getElementById("expensesForm");
     var formData = new FormData(form);
 
     // Remove formatting from the amount before sending it to the server
-    var amountInput = document.getElementById('amount-exp');
-    formData.set('amount', removeFormatting(amountInput.value));
+    var amountInput = document.getElementById("amount-exp");
+    formData.set("amount", removeFormatting(amountInput.value));
+
+    // Add the selected category to the form data
+    var categorySelect = document.getElementById("category-exp");
+    formData.set("category", categorySelect.value);
 
     // Add additional data to the form data
-    formData.append('action', 'add_expenses');
+    formData.append("action", "add_expenses");
 
-    // Make an AJAX request to handle the form submission
     var xhr = new XMLHttpRequest();
-    xhr.open('POST', '../backend/expenses.php', true);
+    xhr.open("POST", "../backend/expenses.php", true);
     xhr.onload = function () {
         if (xhr.status == 200) {
             // Handle success, e.g., show a success message or redirect
@@ -298,12 +303,11 @@ if ($resultExpenses->num_rows > 0) {
             location.reload(); // You may customize this based on your needs
         } else {
             // Handle errors
-            alert('Error: ' + xhr.responseText);
+            alert("Error: " + xhr.responseText);
         }
     };
     xhr.send(formData);
 }
-
     function removeFormatting(amount) {
         // Remove currency symbol, comma, and period
         return parseFloat(amount.replace(/[^\d]/g, ''));

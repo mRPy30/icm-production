@@ -177,6 +177,144 @@
 }
 
 
+/********booking page*******/
+.main-book {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: #FBF4F4;
+    padding-top: 8%;
+}
+
+.coverbook {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.text-book {
+    text-align: center;
+    width: 45%;
+    z-index: 2; 
+}
+
+.text-book h4 {
+    color: #1C1C1D;
+    font: normal 700 35px/normal 'Poppins';
+}
+
+.text-book p {
+    color: #1C1C1D;
+    font: normal 500 15px/normal 'Poppins';
+}
+
+.line {
+    width: 90.5%;
+    height: 2px;
+    background-color: #B3B3B3;
+    z-index: 1;
+    bottom: 0;
+    margin-top: 20px;
+    position: relative;
+}
+
+.form-book {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.top-book {
+    display: flex;
+    justify-content: space-between;
+    width: 90%; 
+    margin-top: 1.5%;
+}
+
+.top-book h3{
+    font: normal 600 18px/normal 'Poppins';
+    margin-left: 10px;
+}
+
+.steps {
+    display: flex;
+    align-items: center;
+    width: 20%;
+}
+
+.circle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 30px;
+    width: 30px;
+    color: #999;
+    font-size: 14px;
+    font-weight: 500;
+    border-radius: 50%;
+    background: #fff;
+    border: 4px solid #e0e0e0;
+    transition: all 200ms ease;
+    transition-delay: 0s;
+    position: relative;
+    z-index: 2;
+}
+
+.circle.active {
+    transition-delay: 100ms;
+    background-color: #1C1C1D;
+    color: #FBF4F4;
+    border-color: #000000;
+}
+
+.circle i.fa-circle-check {
+    font-size: larger;
+    color: #D25A5A;
+}
+
+.steps .progress-line {
+    height: 4px;
+    background-color: #1c1c1c;
+    width: 30%;
+    z-index: 1;
+    border-radius: 2px;
+
+} 
+
+
+.form-group input[type="text"],
+.form-group input[type="date"],
+.form-group input[type="time"],
+.form-group select {
+    width: 50%;
+    padding: 8px;
+    border: 1px solid #FCF6F6;;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font: normal 400 13px/normal 'Poppins';
+    box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.form-group input[type="text"],
+.form-group input[type="date"],
+.form-group input[type="color"],
+.form-group select:focus {
+    outline-color: #807f7f;
+}
+
+
+
+
+
+
+
+
+
 
 
 

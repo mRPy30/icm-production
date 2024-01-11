@@ -21,6 +21,9 @@ if ($resultRevenue->num_rows > 0) {
     $totalRevenue = 0;
 }
 
+$sqlExpenses = "SELECT date, category FROM expenses";
+$resultExpenses = $conn->query($sqlExpenses);
+
 ?>
 
 <!DOCTYPE html>
@@ -93,6 +96,20 @@ if ($resultRevenue->num_rows > 0) {
                             </tr>
                         </thread>
                     </table>
+                    <div class="data-container">
+                            <table class="data-table">
+                                <tbody>
+                                    <?php
+                                    while ($rowExpense = $resultExpenses->fetch_assoc()) {
+                                        echo "<tr>";
+                                        echo "<td>" . date('F j, Y', strtotime($rowExpense['date'])); "</td>";
+                                        echo "<td>" . $rowExpense['category'] . "</td>";
+                                        echo "</tr>";
+                                    }
+                                    ?>
+                                </tbody>
+                            </table>
+                        </div>
                     <div class="bot-button">
                         <button>View More</button>
                     </div>    
@@ -116,6 +133,13 @@ if ($resultRevenue->num_rows > 0) {
                                 </tr>
                             </thead>
                         </table>
+                        <div class="data-container">
+                            <table class="data-table">
+                                <tbody>
+
+                                </tbody>
+                            </table>
+                        </div>
                     </div>               
                 </div>
             </div>
