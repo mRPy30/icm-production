@@ -2,16 +2,16 @@
 //Connection
 include '../backend/dbcon.php';
 
-$adminID = $_SESSION['id'];
+$clientID = $_SESSION['id'];
 
 
-$sql = "SELECT name, profile FROM administrator WHERE id = '$adminID'";
+$sql = "SELECT firstName, profile FROM client WHERE id = '$clientID'";
 
 $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {
     $row = $result->fetch_assoc();
-    $name = $row["name"];
+    $name = $row["firstName"];
     $profile = base64_encode($row["profile"]); // Corrected: Use base64_encode here
 } else {
     // Handle the case where no data is found
@@ -23,20 +23,13 @@ $pageTitles = array(
     "dashboard.php" => "Admin Dashboard",
     "booking.php" => "Booking Management",
     "calendar.php" => "Calendar Details",
-    "client.php" => "Client Management",
     "feedback.php" => "Feedback Management",
-    "details.php" => "Feedback details",
-    "analytics.php" => "Analytics / Records",
-    "finance.php" => "Finance",
-    "expenses.php" => "Expenses Reports",
-    "content.php" => "Content Management",
-    "account.php" => "Admin account Settings",
-    "production.php" => "Production Management"
+    "account.php" => "Admin account Settings"
 );
 
 $currentPage = basename($_SERVER['SCRIPT_NAME']); 
 
-$pageTitle = isset($pageTitles[$currentPage]) ? $pageTitles[$currentPage] : "Admin Dashboard";
+$pageTitle = isset($pageTitles[$currentPage]) ? $pageTitles[$currentPage] : "User Dashboard";
 ?>
 <style>
     
@@ -47,13 +40,13 @@ $pageTitle = isset($pageTitles[$currentPage]) ? $pageTitles[$currentPage] : "Adm
         display: flex;
         justify-content: space-between;
         align-items: center;
-        padding: 0 20px;
+        padding: 0 60px;
         box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
         position: fixed;
         top: 0;
         left: 0;
         right: 0;
-        z-index: 1000;
+        z-index: -1;
     }
 
     .nav-left {
@@ -166,65 +159,57 @@ $pageTitle = isset($pageTitles[$currentPage]) ? $pageTitles[$currentPage] : "Adm
     }
 
     button#logoutYes {
-        padding: 10px 25px;
+        padding: 10px 15px;
         margin: 5px;
-        background: #FF8787;
+        background: #D25A5A;
         border: none;
         border-radius: 8px;
-        color: #1c1c1c;
-        font: normal 400 14px/20px 'Poppins';
+        color: #fff;
+        font: normal 500 14px/20px 'Poppins';
         cursor: pointer;
-        box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.05);
         transition: all 200ms linear;
-    }
-    button#logoutYes:hover{
-        background: #D25A5A;
     }
 
     button#logoutNo {
-        padding: 10px 25px;
+        padding: 10px 15px;
         margin: 5px;
-        background: #DADADA;
+        background: #9b9b9b;
         border: none;
         border-radius: 8px;
-        color: #1c1c1c;
-        font: normal 400 14px/20px 'Poppins';
+        color: #ffffff;
+        font: normal 600 14px/20px 'Poppins';
         cursor: pointer;
-        box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);        
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.05);
         transition: all 200ms linear;
-    }
-    button#logoutNo:hover{
-        background: #9b9b9b;
     }
 
     #loadingOverlay {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);        
-    z-index: 10000;
-    justify-content: center;
-    align-items: center;
-    }
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.8);
+            z-index: 10000;
+            justify-content: center;
+            align-items: center;
+        }
 
-    .loading-circle {
-        display: inline-block;
-        width: 50px;
-        height: 50px;
-        border: 7px solid #E1DE8F;
-        border-radius: 50%;
-        border-top: 5px solid transparent;
-        animation: spin 1s linear infinite;
-    }
+        .loading-circle {
+            border: 8px solid #1c1c1c;
+            border-top: 8px solid #C2BE63;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 5s linear infinite;
+        }
 
-    @keyframes spin {
-        0% { transform: rotate(0deg); }
-        100% { transform: rotate(360deg); }
-    }
-
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
 </style>
 
 <header class="navbar">
@@ -238,14 +223,14 @@ $pageTitle = isset($pageTitles[$currentPage]) ? $pageTitles[$currentPage] : "Adm
             <div class="divider"></div>
             <div class="profile_info">
                 <h3><?php echo $name; ?></h3>
-                <p>Admin</p>
+                <p>Client</p>
             </div>
             <div class="profile_pic">
-                <img src="data:image/jpeg;base64,<?php echo $profile; ?>" alt="admin image">
+                <img src="data:image/jpeg;base64,<?php echo $profile; ?>" alt="user image">
             </div>
         </div>
         <div class="profile_dropdown-content">
-            <a href="account.php">Profile</a>
+            <a href="profile.php">Profile</a> <!-- Replace "#" with the actual profile page URL -->
             <a type="text" id="logoutPopup" class="btn-logout" onclick="goBack()">Logout</a>
         </div>
     </div>

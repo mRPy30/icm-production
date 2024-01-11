@@ -30,7 +30,7 @@
     .side_bar .side_bar_bottom{
         background: #EEEEEE;
         height: calc(100% - 200px);
-        padding: 10% 0% 0% 10%;
+        padding: 15% 0% 0% 10%;
         text-decoration: none;
         list-style: none;	
     }
@@ -42,7 +42,7 @@
 
     .side_bar .side_bar_bottom ul .nav-link a{
         display: block;
-        padding: 12px 15px 12px 50px;		
+        padding: 13px 15px 13px 50px;		
         color: #1c1c1c;
         font: normal 500 14px/20px 'Poppins';
         margin-bottom: 8px;		
@@ -112,105 +112,6 @@
     }
     
     
-    .side_bar .side_bar_bottom .logout{
-        padding: 10% 15% 15% 0%;		
-    }
-    .side_bar .side_bar_bottom .logout button{
-        font: normal 600 14px/20px 'Poppins';
-        color: #1c1c1c;
-        background: #D9D9D9;
-        border: none;
-        width: 105%;
-        height: 40px;
-        border-radius: 10px;
-        transition: all .3s ease;
-    }
-
-    .side_bar .side_bar_bottom .logout button:hover{
-        transform: scale(1.02);
-        background-color: #B3B3B3;
-    }
-    
-    .popup {
-        display: none;
-        position: fixed;
-        top: 50%;
-        left: 53%;
-        height: 25%;
-        width: 30%;
-        transform: translate(-50%, -50%);
-        background-color: #fff;
-        padding: 20px;
-        border-radius: 5px;
-        box-shadow: 0px 0px 400px 900px rgba(0,0,0,0.28);
-        z-index: 9999;
-    }
-
-    .popup-content {
-        background: #fff;
-        padding: 20px;
-        border-radius: 5px;
-        text-align: center;
-    }
-
-    .popup-content p{
-        font: normal 600 18px/20px 'Poppins';
-        color: #1C1C1D;
-        margin-bottom: 10%;
-    }
-
-    button#logoutYes {
-        padding: 10px 15px;
-        margin: 5px;
-        background: #D25A5A;
-        border: none;
-        border-radius: 8px;
-        color: #fff;
-        font: normal 500 14px/20px 'Poppins';
-        cursor: pointer;
-        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.05);
-        transition: all 200ms linear;
-    }
-
-    button#logoutNo {
-        padding: 10px 15px;
-        margin: 5px;
-        background: #9b9b9b;
-        border: none;
-        border-radius: 8px;
-        color: #ffffff;
-        font: normal 600 14px/20px 'Poppins';
-        cursor: pointer;
-        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.05);
-        transition: all 200ms linear;
-    }
-
-    #loadingOverlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(255, 255, 255, 0.8);
-            z-index: 10000;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .loading-circle {
-            border: 8px solid #1c1c1c;
-            border-top: 8px solid #C2BE63;
-            border-radius: 50%;
-            width: 50px;
-            height: 50px;
-            animation: spin 5s linear infinite;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
     /*******RESPONSIVE**********/
 
     @media (max-width: 992px) {
@@ -331,10 +232,16 @@
                     } ?> "><span class="item">Profile</span></a>
                     <span class="bottom_curve"></span>
                 </li>
+                <li class="nav-link">
+                    <span class="top_curve"></span>
+                    <a href="production.php" class="<?php if ($page == "..admin/production.php") {
+                        echo "nav-link active";
+                    } else {
+                        echo "nav-link";
+                    } ?> "><span class="item">Production</span></a>
+                    <span class="bottom_curve"></span>
+                </li>
             </ul>
-            <div class="logout">
-                <button type="text" class="btn-logout" onclick="openPopup()"> Logout </button>
-            </div>
         </div>
     </nav>
 </div>

@@ -1,8 +1,9 @@
 <?php
+// logout Automatically
+include '../backend/logout.php';
 // Connection
 include '../backend/dbcon.php';
 
-session_start(); // Start the session
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Check if the form data exists
     if (isset($_POST['event_name'], $_POST['event_start_date'], $_POST['event_end_date'])) {
@@ -105,10 +106,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <div class="form-group">
                     <label for="event_end_date">Event end</label>
                     <input type="date" name="event_end_date" id="event_end_date" class="form-control" placeholder="Event end date">
-                </div>
-                <div class="form-group">
-                    <label for="event_color">Event color</label>
-                    <input type="color" name="event_color" id="event_color" class="form-control" value="#C2BE63">
                 </div>
                 <button id="saveEventButton" class="btn-save-event">Save Event</button>
             </div>
@@ -231,6 +228,31 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $("#event_entry_modal").hide();
                 }
             });
+        });
+
+        // Add the following script to periodically check for inactivity and logout
+        var inactivityTimeout = 900; // 15 minutes in seconds
+
+        function checkInactivity() {
+            setTimeout(function () {
+                window.location.href = '../login.php'; // Replace 'logout.php' with the actual logout page
+            }, inactivityTimeout * 1000);
+        }
+
+        // Start checking for inactivity when the page loads
+        document.addEventListener('DOMContentLoaded', function () {
+            checkInactivity();
+        });
+
+        // Reset the inactivity timer when there's user activity
+        document.addEventListener('mousemove', function () {
+            clearTimeout(checkInactivity);
+            checkInactivity();
+        });
+
+        document.addEventListener('keypress', function () {
+            clearTimeout(checkInactivity);
+            checkInactivity();
         });
     </script>
     </body>

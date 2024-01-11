@@ -386,8 +386,7 @@
     display: flex;
     justify-content: space-between; 
     align-items: center; 
-    padding: 25px; 
-    margin-bottom: 30px;
+    padding: 20px; 
     box-sizing: border-box; 
   }
   
@@ -401,11 +400,11 @@
     flex: 1; 
     padding: 10px 0px 0px 30px; 
     box-sizing: border-box; 
-}
+  }
   
   .review-left img {
     width: 80%;
-    height: 85vh; 
+    height: 85vh;
     max-width: 100%; 
     display: block;
     margin-left: 100px;
@@ -413,13 +412,14 @@
   
   .review-right {
     flex: 1; 
-    padding: 50px 0px 0px 10px; 
-    box-sizing: border-box; 
+    padding: 80px 0px 0px 10px; 
+    box-sizing: border-box;
   }
+  
+
   
 .review .review-right .testimonial h5{
     color: #1C1C1D;
-    font-family: Poppins;
     font: normal 500 23px/normal 'Poppins';
     width: 232px;
     height: 59px;

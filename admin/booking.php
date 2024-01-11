@@ -1,7 +1,8 @@
 <?php
+// logout Automatically
+include '../backend/logout.php';
 // Connection
 include '../backend/dbcon.php';
-session_start();
 
 // Active Page
 $directoryURI = $_SERVER['REQUEST_URI'];
@@ -78,7 +79,7 @@ if ($result->num_rows > 0) {
 
             <!-- Data Table -->
             <div class="data-table-container">
-                <table class="data-table">
+                <table class="data-table booking">
                     <tbody>
                     <?php foreach ($bookingData as $booking): ?>
                 <tr>
@@ -105,4 +106,30 @@ if ($result->num_rows > 0) {
         </div>
     </section>
 </body>
+<script>
+    // Add the following script to periodically check for inactivity and logout
+    var inactivityTimeout = 900; // 15 minutes in seconds
+
+function checkInactivity() {
+    setTimeout(function () {
+        window.location.href = '../login.php'; // Replace 'logout.php' with the actual logout page
+    }, inactivityTimeout * 1000);
+}
+
+// Start checking for inactivity when the page loads
+document.addEventListener('DOMContentLoaded', function () {
+    checkInactivity();
+});
+
+// Reset the inactivity timer when there's user activity
+document.addEventListener('mousemove', function () {
+    clearTimeout(checkInactivity);
+    checkInactivity();
+});
+
+document.addEventListener('keypress', function () {
+    clearTimeout(checkInactivity);
+    checkInactivity();
+});
+</script>
 </html>
