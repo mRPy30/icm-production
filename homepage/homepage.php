@@ -258,6 +258,84 @@
             </div>
         </section>
 
+        <section class="call-to-attention">
+            <div class="banner-homepage">
+                <div class="banner-image">
+                    <img src="../picture/CTAcover.jpg" alt="coverpage">
+                </div>
+                <div class="banner-content">
+                    <div class="banner-inner-content">
+                        <h1>Let's make something incredible together</h1>
+                        <div class="CTA-button">
+                            <a href="../booking.php"><button>Inquire about your date </button></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <section class="footer-page">
+            <div class="footer">
+                <div class="footer-row">
+                    <ul class="footer-left-link">
+                        <li><a href="../login.php">Login</a></li>
+                        <li><a href="../about.php">About</a></li>
+                        <li><a href="../portfolio.php">Portfolio</a></li>
+                        <li><a href="../review.php">Testimonial</a></li>
+                        <li><a href="../contact.php">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="vertical-line-left"></div>
+                <div class="footer-center-content">
+
+                    <div class="footer-center">
+                        <h6>About ICSM Creatives</h6>
+                        <p>We are dedicated to serving women of color in an underrepresented bridal market. All brides
+                            will find inspiration on our blog, in our digital publication, on our social circuit and at
+                            our national bridal events.</p>
+
+                        <div class="social-meadia-links">
+                            <h6>Connect with us</h6>
+                            <div class="icons">
+                                <a class="facebook" href="https://www.facebook.com/icsmcreatives" target="_blank"><i
+                                        class="fa-brands fa-facebook"></i>
+                                </a>
+                                <a class="mail" href="https://www.facebook.com/cvsuimusofficialpage" target="_blank"><i
+                                        class="fa-solid fa-envelope"></i>
+                                </a>
+                                <a class="instagram" href="https://www.instagram.com/icsmcreatives">
+                                    <i class=" fa-brands fa-instagram"></i>
+                                </a>
+                                <a class="tiktok" href="https://www.tiktok.com/@icsm.creatives">
+                                    <i class="fa-brands fa-tiktok"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="vertical-line-right"></div>
+                <div class="footer-logo">
+                    <a href="../homepage/homepage.php">
+                        <img src="../picture/logo.png" alt="logo">
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section class="going-back">
+            <div class="arrow-up-button back-to-top-hidden">
+                <button class="back-to-top" onclick="scrollToTop()"><i class="fas fa-arrow-up"></i></button>
+            </div>
+        </section>
+
+        <section class="container-credential">
+            <div class="credit-info">
+                <div class="rights-definition">
+                    <p>© 2023-2024 ICSMCREATIVES.COM ALL RIGHTS RESERVED. TERMS OF USE | PRIVACY POLICY</p>
+                </div>
+            </div>
+        </section>
 
 
     </main>
@@ -308,6 +386,32 @@
                 showImage(index);
             });
         });
+
+
+
+        //Arrow up button
+        document.addEventListener('DOMContentLoaded', function () {
+            const arrowButton = document.querySelector('.arrow-up-button');
+            const coverpage = document.querySelector('.coverpage');
+
+            window.addEventListener('scroll', function () {
+                const coverpageRect = coverpage.getBoundingClientRect();
+
+                if (coverpageRect.bottom <= 0) {
+                    arrowButton.classList.remove('back-to-top-hidden');
+                } else {
+                    arrowButton.classList.add('back-to-top-hidden');
+                }
+            });
+        });
+
+        function scrollToTop() {
+            document.body.scrollTop = 0; // For Safari
+            document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE, and Opera
+        }
+
+
+
     </script>
 </body>
 <script>
