@@ -105,10 +105,12 @@ if (isset($_POST['delete'])) {
                             echo '<td><img src="data:image/jpeg;base64,' . base64_encode($client['profile']) . '" class="profile-image"></td>';
                             echo '<td>' . $client['firstName'] . '</td>';
                             echo '<td>' . $client['lastName'] . '</td>';
-                            echo '<td><form method="POST" action="../admin/client.php">
-                                    <input type="hidden" name="client_id" value="' . $client['id'] . '">
-                                    <button type="submit" name="delete">Delete</button>
-                                </form></td>';
+                            echo '<td>
+                                    <form method="POST" action="../admin/client.php">
+                                        <input type="hidden" name="client_id" value="' . $client['id'] . '">
+                                        <button type="submit" name="delete">Delete</button>
+                                    </form>
+                                </td>';
                             echo '</tr>';
                         }
                     ?>
