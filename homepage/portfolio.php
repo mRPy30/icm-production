@@ -36,11 +36,51 @@
             <div class="cover-content">
                 <img src="../picture/portfolio01.jpg" alt="coverpage">
                 <div class="text">
-                    <h2>Portfolio</h2>
+                    <h2>Featured Projects</h2>
                 </div>
             </div>
         </section>
+
+        <section class="featured_projects">
+            <div class="container-portfolio">
+                <div class="grind-portfolio">
+                    <img src="../picture/portfolio-wedding.jpg" alt="coverpage">
+                    <div class="text-portfolio-title">
+                        <p>Wedding</p>
+                    </div>
+                </div>
+                <div class="grind-portfolio">
+                    <img src="../picture/portrait.jpg" alt="coverpage">
+                    <div class="text-portfolio-title">
+                        <p>Portrait</p>
+                    </div>
+                </div>
+                <div class="grind-portfolio">
+                    <img src="../picture/birthday.jpg" alt="coverpage">
+                    <div class="text-portfolio-title">
+                        <p>Birthday</p>
+                    </div>
+                </div>
+                <div class="grind-portfolio">
+                    <img src="../picture/portfolio-family.jpg" alt="coverpage">
+                    <div class="text-portfolio-title">
+                        <p>Family</p>
+                    </div>
+                </div>
+                <div class="grind-portfolio">
+                    <img src="../picture/portfolio-prenup.jpg" alt="coverpage">
+                    <div class="text-portfolio-title">
+                        <p>Prenup</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+
     </main>
+
+
 </body>
 
 </html>
