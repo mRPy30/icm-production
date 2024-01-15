@@ -1,14 +1,35 @@
-<?php 
-//Connection
+<?php
+// Connection
 include '../backend/dbcon.php';
+
+
+
 session_start(); // Start the session
+$clientID = $_SESSION['id'];
+
+// Display data in a table
+$sql = "SELECT title_event, eventLocation, eventDate, status FROM booking WHERE clientID = $clientID";
+$result = mysqli_query($conn, $sql);
+
+
+
 
 // Active Page
-
 $directoryURI = $_SERVER['REQUEST_URI'];
 $path = parse_url($directoryURI, PHP_URL_PATH);
 $components = explode('/', $path);
 $page = $components[2];
+
+// Fetch all booking details from the database, joining with the client table using the clientID foreign key
+$sql = "SELECT bookingId, title_event, eventDate FROM booking";
+$result = $conn->query($sql);
+
+// Check if there's a result
+if ($result->num_rows > 0) {
+    $bookingData = $result->fetch_all(MYSQLI_ASSOC);
+} else {
+    $bookingData = [];
+}
 
 ?>
 
@@ -22,69 +43,65 @@ $page = $components[2];
     <!---WEB TITLE--->
     <link rel="short icon" href="../picture/shortcut-logo.png" type="x-icon">
     <title>
-        <?php echo "User | Booking Schedule"; ?>
+        <?php echo "User Feedback"; ?>
     </title>
 
     <!---CSS--->
     <link rel="stylesheet" href="../css/client.css">
-    <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
+
     <!--ICON LINKS-->
-    <link rel="stylesheet" href="font-awesome-6/css/all.css">
+    <link rel="stylesheet" href="../font-awesome-6/css/all.css">
 
     <!--FONT LINKS-->
     <link rel="stylesheet" href="../css/fonts.css">
-    
 
+    <style>
+        body {
+            overflow-y: hidden;
+        }       
+    </style>
+</head>
+    
 <body>
 
-	<div class="wrapper">
-		<h3>ganito feedback par</h3>
-		<form action="#">
-			<div class="rating">
-				<input type="number" name="rating" hidden>
-				<i class='bx bx-star star' style="--i: 0;"></i>
-				<i class='bx bx-star star' style="--i: 1;"></i>
-				<i class='bx bx-star star' style="--i: 2;"></i>
-				<i class='bx bx-star star' style="--i: 3;"></i>
-				<i class='bx bx-star star' style="--i: 4;"></i>
-			</div>
-			<textarea name="opinion" cols="30" rows="5" placeholder="Your opinion..."></textarea>
-			<div class="btn-group">
-				<button type="submit" class="btn submit">Submit</button>
-				<button class="btn cancel">Cancel</button>
-			</div>
-		</form>
-	</div>
 
+    
+    <section class="booking-box">
+        <div class="table-booking">
+            <table class="header-table">
+                <thead>
+                    <tr>
+                        
+                        <th>Title Event</th>
+                        <th>Date</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+            </table>
+
+            <!-- Data Table -->
+            <div class="data-table-container">
+                <table class="data-table booking">
+                    <tbody>
+                    <?php foreach ($bookingData as $booking): ?>
+                <tr>
+                    <td><?php echo $booking['title_event']; ?></td>
+                    <td><?php echo date('F d Y', strtotime($booking['eventDate'])); ?></td>
+                    <td>
+                        <button class="add-button"><i class="fa-solid fa-plus"></i> Add New</button>
+                    </td>
+                </tr>
+            <?php endforeach; ?>
+                </tbody>
+            </table>
+        </div>
+    </section>
+	
+	<!----Navbar&Sidebar----->
     <?php 
         include '../client/sidebar.php';
-    ?>
-    
-  <script>
-  const allStar = document.querySelectorAll('.rating .star')
-const ratingValue = document.querySelector('.rating input')
+        include '../client/navbar.php';
+    ?>   
+</body>
 
-allStar.forEach((item, idx)=> {
-	item.addEventListener('click', function () {
-		let click = 0
-		ratingValue.value = idx + 1
-
-		allStar.forEach(i=> {
-			i.classList.replace('bxs-star', 'bx-star')
-			i.classList.remove('active')
-		})
-		for(let i=0; i<allStar.length; i++) {
-			if(i <= idx) {
-				allStar[i].classList.replace('bx-star', 'bxs-star')
-				allStar[i].classList.add('active')
-			} else {
-				allStar[i].style.setProperty('--i', click)
-				click++
-			}
-		}
-	})
-})
-  </script>
-  
-    </body>
 </html>

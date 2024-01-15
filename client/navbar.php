@@ -5,13 +5,13 @@ include '../backend/dbcon.php';
 $clientID = $_SESSION['id'];
 
 
-$sql = "SELECT firstName, profile FROM client WHERE id = '$clientID'";
+$sql = "SELECT firstName , lastName, profile FROM client WHERE id = '$clientID'";
 
 $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {
     $row = $result->fetch_assoc();
-    $name = $row["firstName"];
+    $name = $row["firstName"] . " " .$row["lastName"];
     $profile = base64_encode($row["profile"]); // Corrected: Use base64_encode here
 } else {
     // Handle the case where no data is found
@@ -20,16 +20,15 @@ if ($result->num_rows > 0) {
 }
 
 $pageTitles = array(
-    "dashboard.php" => "Admin Dashboard",
-    "booking.php" => "Booking Management",
+    "booking.php" => "Booking Event",
     "calendar.php" => "Calendar Details",
-    "feedback.php" => "Feedback Management",
-    "account.php" => "Admin account Settings"
+    "contacts.php" => "Message",
+    "feedback.php" => "Feedback",
 );
 
 $currentPage = basename($_SERVER['SCRIPT_NAME']); 
 
-$pageTitle = isset($pageTitles[$currentPage]) ? $pageTitles[$currentPage] : "User Dashboard";
+$pageTitle = isset($pageTitles[$currentPage]) ? $pageTitles[$currentPage] : "Booking Event";
 ?>
 <style>
     
@@ -40,13 +39,13 @@ $pageTitle = isset($pageTitles[$currentPage]) ? $pageTitles[$currentPage] : "Use
         display: flex;
         justify-content: space-between;
         align-items: center;
-        padding: 0 60px;
+        padding: 0 20px;
         box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
         position: fixed;
         top: 0;
         left: 0;
         right: 0;
-        z-index: -1;
+        z-index: 1000;
     }
 
     .nav-left {
@@ -159,61 +158,73 @@ $pageTitle = isset($pageTitles[$currentPage]) ? $pageTitles[$currentPage] : "Use
     }
 
     button#logoutYes {
-        padding: 10px 15px;
+        padding: 10px 25px;
         margin: 5px;
-        background: #D25A5A;
+        background: #FF8787;
         border: none;
         border-radius: 8px;
-        color: #fff;
-        font: normal 500 14px/20px 'Poppins';
+        color: #1c1c1c;
+        font: normal 400 14px/20px 'Poppins';
         cursor: pointer;
-        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.05);
+        box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
         transition: all 200ms linear;
+    }
+    button#logoutYes:hover{
+        background: #D25A5A;
     }
 
     button#logoutNo {
-        padding: 10px 15px;
+        padding: 10px 25px;
         margin: 5px;
-        background: #9b9b9b;
+        background: #DADADA;
         border: none;
         border-radius: 8px;
-        color: #ffffff;
-        font: normal 600 14px/20px 'Poppins';
+        color: #1c1c1c;
+        font: normal 400 14px/20px 'Poppins';
         cursor: pointer;
-        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.05);
+        box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);        
         transition: all 200ms linear;
+    }
+    button#logoutNo:hover{
+        background: #9b9b9b;
     }
 
     #loadingOverlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(255, 255, 255, 0.8);
-            z-index: 10000;
-            justify-content: center;
-            align-items: center;
-        }
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);        
+    z-index: 10000;
+    justify-content: center;
+    align-items: center;
+    }
 
-        .loading-circle {
-            border: 8px solid #1c1c1c;
-            border-top: 8px solid #C2BE63;
-            border-radius: 50%;
-            width: 50px;
-            height: 50px;
-            animation: spin 5s linear infinite;
-        }
+    .loading-circle {
+        display: inline-block;
+        width: 50px;
+        height: 50px;
+        border: 7px solid #E1DE8F;
+        border-radius: 50%;
+        border-top: 5px solid transparent;
+        animation: spin 1s linear infinite;
+    }
 
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
+    @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+
 </style>
 
+
+
+
+
 <header class="navbar">
-    <div class="nav-left">
+<div class="nav-left">
         <h3><?php echo $pageTitle; ?></h3>
     </div>
     <div class="profile_dropdown">
@@ -226,12 +237,12 @@ $pageTitle = isset($pageTitles[$currentPage]) ? $pageTitles[$currentPage] : "Use
                 <p>Client</p>
             </div>
             <div class="profile_pic">
-                <img src="data:image/jpeg;base64,<?php echo $profile; ?>" alt="user image">
+                <img src="data:image/jpeg;base64,<?php echo $profile; ?>" alt="client image">
             </div>
         </div>
         <div class="profile_dropdown-content">
-            <a href="profile.php">Profile</a> <!-- Replace "#" with the actual profile page URL -->
-            <a type="text" id="logoutPopup" class="btn-logout" onclick="goBack()">Logout</a>
+            <a href="profile.php">Profile</a>
+            <a type="text" id="clientLogoutPopup" class="btn-logout">Logout</a>
         </div>
     </div>
 </header>
@@ -239,13 +250,13 @@ $pageTitle = isset($pageTitles[$currentPage]) ? $pageTitles[$currentPage] : "Use
 <body>
     <!-----popup confirmation logout------>
     <div id="logoutPopup" class="popup">
-    <div class="popup-content">
-        <p>Are you sure you want to logout?</p>
-        <button id="logoutNo">No</button>
-        <button id="logoutYes">Yes</button>
+        <div class="popup-content">
+            <p>Are you sure you want to logout?</p>
+            <button id="logoutNo">No</button>
+            <button id="logoutYes">Yes</button>
+        </div>
     </div>
-</div>
-    </body>
+</body>
 <script>
     function openPopup() {
         document.getElementById("logoutPopup").style.display = "block";
