@@ -52,11 +52,11 @@ $page = $components[2];
 </head>
     
 <body>
-    <div class="navbar">
-        <h3>Booking Event</h3>
-        <i class="fa-regular fa-bell"></i>
-    </div> 
-    
+    <?php 
+         include '../client/navbar.php';
+         include '../client/sidebar.php';
+
+    ?>
     <section class="booking-box">
         <div class="table-booking">
           <div class="table-top">
@@ -86,18 +86,16 @@ $page = $components[2];
                 }
                 ?>
                 </tbody>
-            </table>
+             </table>
         </div>
     </section>
-
-    <?php 
-        include '../client/sidebar.php';
-    ?>
+      
+   
         <!-- Set schedule form (hidden by default) -->
     <div id="setForm" class="form-popup">
-    <span class="close-button" onclick="closeForm()" style="font-size: 20px; font-weight: 600;">&#10006;</span>
+        <span class="close-button" onclick="closeForm()" style="font-size: 20px; font-weight: 600;">&#10006;</span>
         <form action="../backend/request.php" method="POST" class="" enctype="multipart/form-data">
-            <header class="header" style="font-size: 30px;font-weight:bold; text-align: center; font-family: Poppins; padding: 20px">Book Schedule</header>
+            
             <div class="steps">
               <div class="circle active">
                 <i class="fa-solid fa-check"></i>
@@ -225,6 +223,7 @@ $page = $components[2];
     </div>
 
     
+    </body>
 
     <script>
     // Get the button element
@@ -501,5 +500,4 @@ document.getElementById('payButton').addEventListener('click', function (event) 
 
 </script>
 
-</body>
 </html>

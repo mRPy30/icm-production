@@ -1,15 +1,8 @@
-<?php 
-//Connection
+<?php
+// logout Automatically
+include '../backend/logout.php';
+// Connection
 include '../backend/dbcon.php';
-session_start(); // Start the session
-
-// Active Page
-
-$directoryURI = $_SERVER['REQUEST_URI'];
-$path = parse_url($directoryURI, PHP_URL_PATH);
-$components = explode('/', $path);
-$page = $components[2];
-
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Check if the form data exists
@@ -48,9 +41,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 
 
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -61,20 +51,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <!---WEB TITLE--->
     <link rel="short icon" href="../picture/shortcut-logo.png" type="x-icon">
     <title>
-        <?php echo "User | Booking Schedule"; ?>
+        <?php echo "User | Calendar"; ?>
     </title>
 
     <!---CSS--->
-    <link rel="stylesheet" href="../css/admin.css">
+    <link rel="stylesheet" href="../css/client.css">
 
     <!--ICON LINKS-->
-    <link rel="stylesheet" href="font-awesome-6/css/all.css">
+    <link rel="stylesheet" href="../font-awesome-6/css/all.css">
 
     <!--FONT LINKS-->
     <link rel="stylesheet" href="../css/fonts.css">
 
     <link href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.min.css" rel="stylesheet" />
-    
+
     <!----css---->
     <style>
         body {
@@ -84,24 +74,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </head>
     
 <body>
-<?php 
-    
-    include '../client/sidebar.php';
-    include '../client/clientnavbar.php';
-?>  
 
-<div class="navbar">
-        <h3>Booking Event</h3>
-        <i class="fa-regular fa-bell"></i>
-    </div> 
-<main class="calendar">
+       
+    
+    <?php 
+         include '../client/sidebar.php';
+         include '../client/navbar.php';
+    ?> 
+	<main class="calendar">
         <div class="calendar-header">
             <button id="addScheduleButton" class="add-schedule-button"><i class="fa-solid fa-plus"></i> Add Schedule</button>
             <div id="calendar" class="event_management"></div>
         </div>
     </main>
 
-
+     
     <!-- Popup -->
     <div id="event_entry_modal" class="modal">
         <div class="modal-content">
@@ -119,16 +106,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <label for="event_end_date">Event end</label>
                     <input type="date" name="event_end_date" id="event_end_date" class="form-control" placeholder="Event end date">
                 </div>
-                <div class="form-group">
-                    <label for="event_color">Event color</label>
-                    <input type="color" name="event_color" id="event_color" class="form-control" value="#C2BE63">
-                </div>
                 <button id="saveEventButton" class="btn-save-event">Save Event</button>
             </div>
         </div>
     </div>
-
-    
 <!-- End popup dialog box -->
 
     <!-- JS for jQuery -->
@@ -247,9 +228,31 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 }
             });
         });
+
+        // Add the following script to periodically check for inactivity and logout
+        var inactivityTimeout = 900; // 15 minutes in seconds
+
+        function checkInactivity() {
+            setTimeout(function () {
+                window.location.href = '../login.php'; // Replace 'logout.php' with the actual logout page
+            }, inactivityTimeout * 1000);
+        }
+
+        // Start checking for inactivity when the page loads
+        document.addEventListener('DOMContentLoaded', function () {
+            checkInactivity();
+        });
+
+        // Reset the inactivity timer when there's user activity
+        document.addEventListener('mousemove', function () {
+            clearTimeout(checkInactivity);
+            checkInactivity();
+        });
+
+        document.addEventListener('keypress', function () {
+            clearTimeout(checkInactivity);
+            checkInactivity();
+        });
     </script>
-    
-    
-    
-</body>
-</html>
+    </body>
+</html> 
