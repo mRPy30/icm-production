@@ -72,7 +72,7 @@ $packageResult = mysqli_query($conn, $packageQuery);
                 </div>
             </div>
             <div class="forms">
-                <form id="bookingForm" class="form-fillup needs-validation" method="POST" onsubmit="return validateForm()">
+            <form id="bookingForm" class="form-fillup needs-validation" method="POST" action="../backend/booking.php" onsubmit="return validateForm()">
                     <div id="step1" class="form-step">
                         <div class="form-group">
                             <div class="left-info">
@@ -223,7 +223,7 @@ $packageResult = mysqli_query($conn, $packageQuery);
     xhr.onload = function () {
         if (xhr.status === 200) {
             // Redirect to a success page or handle the response
-            window.location.href = '../homepage/booking.php';
+            window.location.href = '../client/booking.php';
         } else {
             // Handle errors
             console.error('Form submission failed. Status:', xhr.status);

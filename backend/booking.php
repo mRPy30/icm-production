@@ -4,18 +4,18 @@ include '../backend/dbcon.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Retrieve data from the form
-    $bookingDate = $_POST['bookingDate'];
-    $bookingTime = $_POST['bookingTime'];
-    $eventType = $_POST['eventType'];
-    $eventTitle = $_POST['eventTitle'];
-    $eventLocation = $_POST['eventLocation'];
-    $eventDescription = $_POST['eventDescription'];
-    $package = $_POST['package'];
-    $firstName = $_POST['firstname'];
-    $lastName = $_POST['lastname'];
-    $email = $_POST['email'];
-    $password = $_POST['password'];
-    $confirmPassword = $_POST['confirm-password'];
+    $bookingDate = mysqli_real_escape_string($conn, $_POST['bookingDate']);
+    $bookingTime = mysqli_real_escape_string($conn, $_POST['bookingTime']);
+    $eventType = mysqli_real_escape_string($conn, $_POST['eventType']);
+    $eventTitle = mysqli_real_escape_string($conn, $_POST['eventTitle']);
+    $eventLocation = mysqli_real_escape_string($conn, $_POST['eventLocation']);
+    $eventDescription = mysqli_real_escape_string($conn, $_POST['eventDescription']);
+    $package = mysqli_real_escape_string($conn, $_POST['package']);
+    $firstName = mysqli_real_escape_string($conn, $_POST['firstname']);
+    $lastName = mysqli_real_escape_string($conn, $_POST['lastname']);
+    $email = mysqli_real_escape_string($conn, $_POST['email']);
+    $password = mysqli_real_escape_string($conn, $_POST['password']);
+    $confirmPassword = mysqli_real_escape_string($conn, $_POST['confirm-password']);
 
     // Check if the passwords match
     if ($password !== $confirmPassword) {
@@ -24,17 +24,27 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         exit();
     }
 
+    // Check if the email already exists
+    $checkEmailQuery = "SELECT * FROM client WHERE email = '$email'";
+    $result = $conn->query($checkEmailQuery);
+
+    if ($result->num_rows > 0) {
+        // Email already exists
+        echo '<script>alert("Registration failed. Email already exists. Please try again.");</script>';
+        exit;
+    }
+
     // Hash the password
     $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
-    // Insert data into the "client" table
-    $clientInsertQuery = "INSERT INTO client (firstName, lastName, email, password) VALUES (?, ?, ?, ?)";
-    $clientStmt = mysqli_prepare($conn, $clientInsertQuery);
-    mysqli_stmt_bind_param($clientStmt, "ssss", $firstName, $lastName, $email, $hashedPassword);
-    mysqli_stmt_execute($clientStmt);
+    // Generate a 5-digit customer ID
+    $clientID = sprintf("%05d", mt_rand(1, 99999));
 
-    // Get the ID of the last inserted client
-    $clientID = mysqli_insert_id($conn);
+    // Insert data into the "client" table
+    $clientInsertQuery = "INSERT INTO client (id, firstName, lastName, email, password, confirmPass) VALUES (?, ?, ?, ?, ?, ?)";
+    $clientStmt = mysqli_prepare($conn, $clientInsertQuery);
+    mysqli_stmt_bind_param($clientStmt, "ssssss", $clientID, $firstName, $lastName, $email, $hashedPassword, $hashedPassword);
+    mysqli_stmt_execute($clientStmt);
 
     // Insert data into the "booking" table
     $bookingInsertQuery = "INSERT INTO booking (eventDate, eventTime, eventLocation, type_of_event, title_event, description, clientID) VALUES (?, ?, ?, ?, ?, ?, ?)";
@@ -42,12 +52,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     mysqli_stmt_bind_param($bookingStmt, "ssssssi", $bookingDate, $bookingTime, $eventLocation, $eventType, $eventTitle, $eventDescription, $clientID);
     mysqli_stmt_execute($bookingStmt);
 
-    // Check for errors and handle them if needed
+    // Start a session and store user information
+    session_start();
+    $_SESSION['id'] = $clientID;
+    $_SESSION['name'] = $email;
 
-    // Additional code if needed after the data is inserted
-
-    // Redirect to a success page or perform additional actions
-    header("Location: ../homepage/booking.php");
+    // Redirect to the client's booking page
+    header("Location: ../client/booking.php");
     exit();
+
 }
 ?>

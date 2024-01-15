@@ -32,17 +32,53 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $_SESSION['name'] = $email;
             $_SESSION['id'] = $id;
 
-            if ($role == 'admin') {
-                header("location: admin/dashboard.php?id=$id");
-                exit();
-            } elseif ($role == 'client') {
-                header("location: client/booking.php?id=$id");
-                exit();
-            }
-        } else {
-            // No matching user found
-            echo ("No matching user found.");
+            // Show loading overlay using inline style
+            echo '<style>
+                body { overflow: hidden; }
+                .loading-overlay {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    background: rgba(255, 255, 255, 0.8);
+                    z-index: 10000;
+                }
+                .loading-circle {
+                    display: inline-block;
+                    width: 50px;
+                    height: 50px;
+                    border: 7px solid #E1DE8F;
+                    border-radius: 50%;
+                    border-top: 5px solid transparent;
+                    animation: spin 1s linear infinite;
+                }
+                @keyframes spin {
+                    0% { transform: rotate(0deg); }
+                    100% { transform: rotate(360deg); }
+                }
+            </style>';
+            echo '<div class="loading-overlay">
+                    <div class="loading-circle"></div>
+                  </div>';
+
+            // Redirect after a delay
+            echo '<script>
+                setTimeout(function() {
+                    if ("' . $role . '" === "admin") {
+                        window.location.href = "admin/dashboard.php?id=' . $id . '";
+                    } else if ("' . $role . '" === "client") {
+                        window.location.href = "client/booking.php?id=' . $id . '";
+                    }
+                }, 2000); // Delay for 2 seconds, you can adjust this value as needed
+            </script>';
             exit();
+        } else {
+            // Set login error to true if no matching user found
+            $loginError = true;
         }
     }
 }
@@ -129,24 +165,56 @@ $page = $components[2];
                     required oninput="checkPasswordStrength(this)"><br><br>
                 <i class="fa-solid fa-eye-slash" id="password-toggle" onclick="togglePassword()"
                     style="right: 17%; top: 29.5%;"></i>
+                    <div id="popup" class="popup">
+            <p id="popup-message"></p>
+        </div>
                 <button class="btn btn-lg btn-block btn-success" type="submit" name="submit" value="Submit"
                     style="height: 7vh;">Login</button>
             </form>
         </div>
+        <div id="popup" class="popup">
+            <p id="popup-message"></p>
+        </div>
     </section>
 
     <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            let isPasswordVisible = false;
+            const passwordField = document.getElementById('password');
+            const passwordToggle = document.getElementById('password-toggle');
 
-        let isPasswordVisible = false;
-        const passwordField = document.getElementById('password');
-        const passwordToggle = document.getElementById('password-toggle');
+            function togglePassword() {
+                isPasswordVisible = !isPasswordVisible;
+                passwordField.type = isPasswordVisible ? 'text' : 'password';
+                passwordToggle.className = isPasswordVisible ? 'fa-solid fa-eye' : 'fa-solid fa-eye-slash';
+            }
+            
 
-        function togglePassword() {
-            isPasswordVisible = !isPasswordVisible;
-            passwordField.type = isPasswordVisible ? 'text' : 'password';
-            passwordToggle.className = isPasswordVisible ? 'fa-solid fa-eye' : 'fa-solid fa-eye-slash';
-        }
+     
+            // Display popup if login was unsuccessful
+            <?php if ($loginError): ?>
+                var popup = document.getElementById("popup");
+                var popupMessage = document.getElementById("popup-message");
 
+                // Set the error message
+                popupMessage.innerText = "Wrong credentials. Invalid email or password.";
+
+                // Style the popup
+                popup.style.display = "block";
+                popup.style.backgroundColor = '#f8d7da';
+                popup.style.color = '#842029';
+                popup.style.border = '2px solid #f5c2c7';
+                popup.style.padding = '10px';
+                popup.style.font = 'normal 500 13px/normal "Poppins"';
+                popup.style.borderRadius = '5px';
+                popup.style.textAlign = 'center';
+
+                // Close the popup after 3 seconds
+                setTimeout(function () {
+                    popup.style.display = "none";
+                }, 7000);
+            <?php endif; ?>
+        });
     </script>
 </body>
 
