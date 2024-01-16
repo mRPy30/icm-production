@@ -10,7 +10,8 @@ $result = $conn->query($sql);
 if ($result->num_rows > 0) {
   $row = $result->fetch_assoc();
   $clientID = $row['id'];
-  $clientName = $row['firstName'];
+  $clientName = $row["firstName"] . " " .$row["lastName"];
+  $clienFirstname = $row['firstName'];
   $clientLastame = $row['lastName'];
   $clientEmail = $row['email'];
   $clientProfilePicture = $row['profile'];
@@ -43,14 +44,18 @@ $page = $components[2];
     </title>
 
     <!---CSS--->
-    <link rel="stylesheet" href="../css/admin.css">
+    <link rel="stylesheet" href="../css/client.css">
 
     <!--ICON LINKS-->
     <link rel="stylesheet" href="font-awesome-6/css/all.css">
 
     <!--FONT LINKS-->
     <link rel="stylesheet" href="../css/fonts.css">
-    
+    <style>
+        body {
+            overflow-y: hidden;
+        }
+    </style>
 </head>
     
 <body>
@@ -58,67 +63,47 @@ $page = $components[2];
          include '../client/sidebar.php';
          include '../client/navbar.php';
     ?>  
-    
-    
-    <main class="account">
-        <div class="account-management">
-            <div class="profile">
-                <?php
-                // Check if a profile picture exists
-                if (!empty($clientProfilePicture)) {
-                    // Display the current profile picture as a Base64 encoded image
-                    echo '<div><img id="imagePreview" src="data:image/jpeg;base64,' . base64_encode($clientProfilePicture) . '" alt="Client Profile" width="50%" height="50%"></div>';
-                } else {
-                    echo "No profile picture available.";
-                }
-                ?>
 
+
+<!---Profile-->
+<div class="clientprofile">
+<div class="left-column">
+                <div class="profile">
+                
+                <h1> <?php echo htmlspecialchars($clientName); ?></h1>
+                            <p>Client ID: <?php echo htmlspecialchars($clientID); ?></p>
+
+                    <?php
+                    // Check if a profile picture exists
+                    if (!empty($clientProfilePicture)) {
+                        // Display the current profile picture as a Base64 encoded image
+                        echo '<div><img id="imagePreview" src="data:image/jpeg;base64,' . base64_encode($clientProfilePicture) . '" alt="Admin Profile" width="50%" height="50%"></div>';
+                    } else {
+                        echo "No profile picture available.";
+                    }
+                    ?>
+                    
                     <form id="updateForm" action="../backend/update.php" method="post" enctype="multipart/form-data">
                         <div class="profile-section">
                             <label>
-                            <input type="file" id="picture" name="picture" onchange="previewImage(event)">
+                                <input type="file" id="picture" name="picture" onchange="previewImage(event)">
                                 Add new Photo+
                             </label>
-                            <p>Client ID: <?php echo htmlspecialchars($clientID); ?></p> 
-                            <hr class="separator">
                         </div>
-            </div>
-                        <div class="fillup">
-                            <div class="two-columns">
-                                <div>
-                                    <label for="name">Name:</label>
-                                    <input type="text" id="name" name="name" value="<?php echo htmlspecialchars($clientName); ?>">
-                                </div>
+                </div>
 
-                                <div>
-                                    <label for="email">Email:</label>
-                                    <input type="email" id="email" name="email" value="<?php echo htmlspecialchars($clientEmail); ?>">
-                                </div>
-                            </div>
-                            <div class="two-columns">
-                                <div>
-                                    <label for="password">Enter your New Password:</label>
-                                    <input type="password" id="password" name="password">
-                                </div>
-                                <div>
-                                    <label for="confirm_password">Confirm New Password:</label>
-                                    <input type="password" id="confirm_password" name="confirm_password">
-                                    <div id="password-strength" class="alert" style="display: none;"></div>
-                                </div>
-                            </div>
-                            <div class="save-changes">
-                                <input type="submit" value="Save Changes">
-                            </div>
-                            <div class="reset-button">
-                                <input type="reset" value="Reset" onclick="resetForm()">
-                            </div>
-                        </div>
-                    </form>      
-        </div>
-    </main>
-    
+       </div>
+<div>
 
-    <script>
+
+
+
+
+
+
+
+
+<script>
         // JavaScript to preview the selected image
         function previewImage(event) {
             const reader = new FileReader();
@@ -189,6 +174,31 @@ $page = $components[2];
             const strength = document.getElementById('password-strength');
             strength.style.display = 'none';
         }
+
+        // Add the following script to periodically check for inactivity and logout
+        var inactivityTimeout = 900; // 10 minutes in seconds
+
+        function checkInactivity() {
+            setTimeout(function () {
+                window.location.href = '../login.php'; // Replace 'logout.php' with the actual logout page
+            }, inactivityTimeout * 1000);
+        }
+
+        // Start checking for inactivity when the page loads
+        document.addEventListener('DOMContentLoaded', function () {
+            checkInactivity();
+        });
+
+        // Reset the inactivity timer when there's user activity
+        document.addEventListener('mousemove', function () {
+            clearTimeout(checkInactivity);
+            checkInactivity();
+        });
+
+        document.addEventListener('keypress', function () {
+            clearTimeout(checkInactivity);
+            checkInactivity();
+        });
         </script>
 </body>
 </html>

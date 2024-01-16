@@ -24,6 +24,7 @@ $pageTitles = array(
     "calendar.php" => "Calendar Details",
     "contacts.php" => "Message",
     "feedback.php" => "Feedback",
+    "profile.php" => "My Profile",
 );
 
 $currentPage = basename($_SERVER['SCRIPT_NAME']); 
@@ -250,13 +251,13 @@ $pageTitle = isset($pageTitles[$currentPage]) ? $pageTitles[$currentPage] : "Boo
 <body>
     <!-----popup confirmation logout------>
     <div id="logoutPopup" class="popup">
-        <div class="popup-content">
-            <p>Are you sure you want to logout?</p>
-            <button id="logoutNo">No</button>
-            <button id="logoutYes">Yes</button>
-        </div>
+    <div class="popup-content">
+        <p>Are you sure you want to logout?</p>
+        <button id="logoutNo">No</button>
+        <button id="logoutYes">Yes</button>
     </div>
-</body>
+</div>
+    </body>
 <script>
     function openPopup() {
         document.getElementById("logoutPopup").style.display = "block";
@@ -269,7 +270,7 @@ $pageTitle = isset($pageTitles[$currentPage]) ? $pageTitles[$currentPage] : "Boo
     function handleLogout() {
         document.getElementById("loadingOverlay").style.display = "flex";
         setTimeout(function() {
-            window.location.href = "../login.php";
+            window.location.href = "login.php";
         }, 1000); // Redirect after 3 seconds (adjust as needed)
     }
 

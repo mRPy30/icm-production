@@ -822,19 +822,11 @@ button#deleteYes:hover {
 
 /******Admin Account*******/
 
-.account {
-    margin: 4.5% 0 0 14%;
-    padding: 3%;
-    display: flex;
-    justify-content: space-between;
-}
-
-.account-management {
-    border-radius: 14px;
+.clientprofile {
     border: 1px solid #BCB4B5;
     background: #FCF6F6;
     width: 100%;
-    height: 80vh;
+    height: 45vh;
     padding: 10px 50px 50px 50px;
     display: flex;
     flex-direction: row;
@@ -844,11 +836,13 @@ button#deleteYes:hover {
 }
 
 .profile img {
-    width: 30%;
+    width: 15%;
+    object-fit: cover;
     border-radius: 50%;
     display: block;
     margin: 0 auto;
-    margin-top: 10%;
+    margin-top: 0%;
+    vertical-align: top;
     box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.55);
 }
 
@@ -857,6 +851,25 @@ button#deleteYes:hover {
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    position: relative;
+    width: 100%;
+}
+
+.profile h1 {
+    position: absolute;
+    display: flex;
+    color: #000000;
+    font: normal 500 19px/normal 'Poppins';
+    margin-left: 50%;
+    height: 70%;
+}
+
+.profile p {
+    color: #525252;
+    font: normal 500 12px/normal 'Poppins';
+    margin-left: 50%;
+    position: absolute;
+    margin-top: 2%;
 }
 
 .profile-info {
@@ -871,7 +884,7 @@ button#deleteYes:hover {
     display: flex;
     justify-content: center;
     align-items: flex-end;
-    margin-top: 10%;
+    margin-top: 8%;
 }
 
 .right {
@@ -884,11 +897,12 @@ form .profile-section {
     align-items: center;
     justify-content: center;
     margin-top: 8px;
+    vertical-align: top;
 }
 
 .vertical {
     width: 1px;
-    height: 100%;
+    height: 10%;
     background-color: #BCB4B5;
     margin: 2% 5% 0 0;
 }
@@ -900,12 +914,7 @@ form .profile-section label input[type="file"] {
 form .profile-section label {
     color: #4285F4;
     cursor: pointer;
-    font: normal 600 16px/normal 'Poppins';
-}
-
-form .profile-section p {
-    color: #747473;
-    font: normal 500 13px/normal 'Poppins';
+    font: normal 600 14px/normal 'Poppins';
 }
 
 .fillup {
