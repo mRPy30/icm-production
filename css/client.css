@@ -888,7 +888,7 @@ button#deleteYes:hover {
 }
 
 .right {
-    width: 50%;
+    width: 0%;
 }
 
 form .profile-section {
@@ -901,7 +901,7 @@ form .profile-section {
 }
 
 .vertical {
-    width: 1px;
+    width: 12px;
     height: 10%;
     background-color: #BCB4B5;
     margin: 2% 5% 0 0;
@@ -923,13 +923,16 @@ form .profile-section label {
     align-items: flex-start;
     justify-content: flex-start;
     width: 100%;
+    position: relative;
+    right: 29%;
 }
 
 .two-columns {
     display: flex;
     flex-direction: column;
     width: 100%;
-    margin-top: 17px;
+    margin-top: 55%;
+    margin-right: 50%;
 }
 
 .two-columns>div {
