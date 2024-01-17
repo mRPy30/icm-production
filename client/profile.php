@@ -12,7 +12,7 @@ if ($result->num_rows > 0) {
   $clientID = $row['id'];
   $clientName = $row["firstName"] . " " .$row["lastName"];
   $clientFirstname = $row['firstName'];
-  $clientLastame = $row['lastName'];
+  $clientLastname = $row['lastName'];
   $clientEmail = $row['email'];
   $clientProfilePicture = $row['profile'];
 } else {
@@ -74,7 +74,7 @@ $page = $components[2];
 <div class="left-column">
                 <div class="profile">
                 
-                <h1> <?php echo htmlspecialchars($clientFirstname); ?></h1>
+                <h1> <?php echo htmlspecialchars($clientName); ?></h1>
                             <p>Client ID: <?php echo htmlspecialchars($clientID); ?></p>
 
                     <?php
@@ -103,13 +103,18 @@ $page = $components[2];
                 <div class="fillup">
                     <div class="two-columns">
                         <div>
-                            <label for="name">Name:</label>
-                            <input type="text" id="name" name="name" value="<?php echo htmlspecialchars($clientFirstname); ?>">
+                            <label for="name">First Name:</label>
+                            <input type="text" id="firstName" name="firstName" value="<?php echo htmlspecialchars($clientFirstname); ?>">
+                        </div>
+                        <div>
+                            <label for="name">Last Name:</label>
+                            <input type="text" id="lastName" name="lastName" value="<?php echo htmlspecialchars($clientLastname); ?>">
                         </div>
                         <div>
                             <label for="email">Email:</label>
                             <input type="email" id="email" name="email" value="<?php echo htmlspecialchars($clientEmail); ?>">
                         </div>
+                        
                         <div>
                             <label for="password">Enter your New Password:</label>
                             <input type="password" id="password" name="password">
