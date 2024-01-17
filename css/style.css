@@ -142,8 +142,10 @@ i{
 	width: 100%;
 }
 .success {
-	background-color: #4CAF50; /* Green background color for success message */
+	background-color: #4CAF50;
 }
+
+
 /*****End Form*****/
 
 

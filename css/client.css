@@ -9,329 +9,309 @@ body {
     overflow-x: hidden;
 }
 
-.navbar {
-    width: 100vw;
-    position: absolute;
-    height: 10vh;
-    background-color: #EEEEEE;
+
+/****Dashboard*****/
+
+.dashboard {
+    margin: 6% 0 0 14%;
+    padding: 1.5%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.dashboard-item {
+    flex: 1;
+    background-color: #FCF6F6;
+    padding: 35px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.2);
+    margin: 10px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.dashboard-item-content {
+    flex: 1;
+}
+
+.dashboard-item h2 {
+    font: normal 700 35px/normal 'Poppins';
+    color: #1c1c1c;
+    margin: 0;
+}
+
+.dashboard-item p {
+    font: normal 15px/normal 'Poppins';
+    color: #555555;
+    margin-bottom: 10px;
+}
+
+.icon-container-client {
+    background-color: #FBD0D0;
+    border-radius: 5%;
+    padding: 15px;
+}
+
+.icon-container-chart {
+    background-color: #C0D6FB;
+    border-radius: 5%;
+    padding: 15px;
+}
+
+.icon-container-rate {
+    background-color: #C3C07B;
+    border-radius: 5%;
+    padding: 15px;
+}
+
+.icon-container-client i {
+    margin-left: auto;
+}
+
+.dashboard-bottom {
+    margin: 0% 0 0 14%;
+    padding: 1% 2% 0% 1.8%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.total-revenue {
+    flex: 1 1 calc(47.666% - 10px);
+    background-color: #FCF6F6;
+    padding: 20px 20px 50px 20px;
+    border-radius: 10px;
+    height: 47vh;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    margin: 0px 20px 0px 5px;
+}
+
+.total-revenue h4 {
+    font: normal 700 15px/normal 'Poppins';
+    color: #1c1c1c;
+}
+
+.tbl-prod {
+    flex: 1 1 calc(33.333% - 10px);
+    background-color: #FCF6F6;
+    padding: 0px 0px 50px 0px;
+    height: 47vh;
+    border-radius: 10px;
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 }
 
-.navbar h3 {
-    color: #1c1c1c;
-    margin: 1.6% 0% 0% 18%;
-    font: normal 600 110%/normal 'Poppins';
-    position: absolute;
+.tbl-prod .title-bar {
+    background-color: #444444;
+    color: #FCF6F6;
+    padding: 5px;
+    border-radius: 10px 10px 0 0;
 }
 
-.navbar i {
-    margin: 1.7% 0% 0% 93%;
-    font-size: x-large;
+.tbl-prod h4 {
+    font: normal 600 15px/normal 'Poppins';
+    margin: 10px;
 }
 
+.table-container {
+    height: 38vh;
+    /* Set your desired max height */
+    overflow-y: auto;
+}
 
-/*****Booking*****/
-
-.table-top {
+.prod-table {
     width: 100%;
-    display: flex;
-    border-bottom: 2px solid #CCCCCC;
+    border-collapse: collapse;
+    font: normal 15px/normal 'Poppins';
 }
+
+.prod-table th,
+.prod-table td {
+    border-bottom: 1px solid #CCCCCC;
+}
+
+
+/*****Booking & Client*****/
 
 .booking-box {
     padding: 0px 0px 20px 0px;
-    margin: 10% 0% 0% 22.5%;
+    margin: 10% 0% 0% 18.5%;
     border-radius: 5px;
     background-color: #FCF6F6;
-    height: 40%;
+    height: 70%;
     position: absolute;
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25), 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-    width: 71.3%;
+    width: 77%;
 }
 
 .booking-box h4 {
+    border-bottom: 1px solid #CCCCCC;
     padding: 15px 0px 15px 20px;
     color: #1c1c1c;
-    font: normal 600 18px/normal 'Poppins';
+    font: normal 600 17px/normal 'Poppins';
     border-radius: 5px 5px 0px 0px;
 }
 
-.add-event {
-    margin: 0.8% 0px 0px 83%;
-    position: absolute;
-}
-
-.add-event button {
-    width: 100%;
-    z-index: 999;
-    background-color: #1c1c1c;
-    color: white;
-    border: none;
-    padding: 8px 15px;
-    text-align: center;
-    text-decoration: none;
+.accept-decline-form {
     display: inline-block;
-    font: normal 400 14px/normal 'poppins';
-    margin: 4px 2px;
-    cursor: pointer;
-    border-radius: 5px;
 }
 
-.add-event button:hover {
-    background-color: #3b3b3b;
+.booking td:nth-child(1),
+.booking td:nth-child(2),
+.booking td:nth-child(3),
+.booking td:nth-child(4),
+.booking td:nth-child(5),
+.booking td:nth-child(6) {
+    border-right: 1px solid #CCCCCC;
+}
+
+td form button[name="accept"] {
+    background-color: #00c72e;
+    border-radius: 10px;
+    font: normal 11px/normal 'Poppins';
+    height: 5%;
+    color: #FFF;
+    border: none;
+    padding: 5px 10px;
+    text-align: center;
+    display: inline-block;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+td form button[name="accept"]:hover {
+    background-color: #00861f;
     transition: 0.4s;
 }
 
-table {
+td form button[name="decline"] {
+    background-color: #ff3628;
+    border-radius: 10px;
+    font: normal 11px/normal 'Poppins';
+    height: 5%;
+    color: #FFF;
+    border: none;
+    padding: 5px 10px;
+    text-align: center;
+    display: inline-block;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+td form button[name="decline"]:hover {
+    background-color: rgb(172, 3, 0);
+    transition: 0.4s;
+}
+
+
+/***Table Style***/
+
+.header-table {
     border-collapse: collapse;
-    width: 93%;
-    margin: 30px 25px 0px 35px;
+    width: 100%;
+    table-layout: fixed;
+    font: normal 13px/normal 'Poppins';
+}
+
+.data-table-container {
+    overflow-y: scroll;
+    overflow-x: hidden;
+    height: 53vh;
+}
+
+.data-table {
+    border-collapse: collapse;
+    width: 100%;
+    table-layout: fixed;
 }
 
 th,
 td {
-    border: 1px solid #dddddd;
     text-align: center;
-    padding: 8px;
-}
-
-td {
-    font: normal 14px/normal 'Poppins';
+    padding: 10px;
+    border-bottom: 1px solid #CCCCCC;
 }
 
 th {
+    position: sticky;
+    top: 0;
     background-color: #f2f2f2;
-}
-
-tr:nth-child(even) {
-    background-color: #f2f2f2;
-}
-
-tr:nth-child(odd) {
-    background-color: #ffffff;
-}
-
-.form-popup {
-    display: none;
-    position: fixed;
-    top: 50%;
-    left: 53%;
-    height: 54%;
-    width: 50%;
-    transform: translate(-50%, -50%);
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 5px;
-    box-shadow: 0px 0px 400px 900px rgba(0, 0, 0, 0.28);
-    z-index: 9999;
-}
-
-.close-button {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    cursor: pointer;
-}
-
-.form-popup .form-step .package-box {
-    width: 20%;
-    height: 80px;
-    display: flex;
-    flex-direction: column;
-    border-radius: 10px;
-    border: 1px solid #B3B3B3;
-    background: linear-gradient(0deg, #FBF4F4 0%, #FBF4F4 100%), linear-gradient(0deg, #FBF4F4 0%, #FBF4F4 100%), #FBF4F4;
-    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25), 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-}
-
-.steps {
-    display: flex;
-    width: 100%;
-    align-items: center;
-    justify-content: space-between;
-    position: relative;
-    padding: 0% 10% 0% 10%;
-}
-
-.steps .circle {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 30px;
-    width: 30px;
-    color: #999;
-    font-size: 14px;
-    font-weight: 500;
-    border-radius: 50%;
-    background: #fff;
-    border: 4px solid #e0e0e0;
-    transition: all 200ms ease;
-    transition-delay: 0s;
-    position: relative;
     z-index: 2;
 }
 
-.steps .circle.active {
-    transition-delay: 100ms;
-    background-color: #1C1C1D;
-    color: #FBF4F4;
-    border-color: #000000;
+td {
+    font: normal 13px/normal 'Poppins';
 }
 
-.steps .circle i.fa-circle-check {
-    font-size: larger;
-    color: #D25A5A;
-}
-
-.steps .progress-line {
-    height: 4px;
-    background-color: #1c1c1c;
-    position: absolute;
-    top: 50%;
-    /* Center vertically */
-    left: 0;
-    width: 0;
-    z-index: 1;
-    border-radius: 2px;
-}
-
-.confirmation-popup {
-    display: none;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-    z-index: 10000;
+td form button[name="delete"] {
+    background-color: #ff3628;
+    border-radius: 6px;
+    font: normal 11px/normal 'Poppins';
+    height: 5%;
+    color: #FFF;
+    border: none;
+    padding: 5px 10px;
     text-align: center;
-}
-
-.confirmation-popup p {
-    font-size: 16px;
-    margin-bottom: 20px;
-}
-
-.confirm-button#confirmYes {
-    padding: 8px 20px;
-    background: #D25A5A;
-    border: none;
-    border-radius: 8px;
-    color: #fff;
-    font-size: 16px;
-    font-weight: 400;
-    cursor: pointer;
-    margin: 0 10px;
-    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
-    transition: all 200ms linear;
-}
-
-.confirm-button#confirmWait {
-    padding: 8px 20px;
-    background: #B3B3B3;
-    border: none;
-    border-radius: 8px;
-    color: #fff;
-    font-size: 16px;
-    font-weight: 400;
-    cursor: pointer;
-    margin: 0 10px;
-    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
-    transition: all 200ms linear;
-}
-
-.confirm-button:active {
-    transform: scale(0.97);
-}
-
-.container .buttons {
-    display: flex;
-    gap: 20px;
-}
-
-.buttons button {
-    padding: 8px 25px;
-    background: #D25A5A;
-    border: none;
-    border-radius: 8px;
-    color: #fff;
-    font-size: 16px;
-    font-weight: 400;
-    cursor: pointer;
-    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.05);
-    transition: all 200ms linear;
-}
-
-.buttons button:active {
-    transform: scale(0.97);
-}
-
-.buttons button:disabled {
-    background: #B3B3B3;
-    cursor: not-allowed;
-}
-
-@keyframes glow {
-    0% {
-        box-shadow: 0 0 10px rgba(0, 123, 255, 0.5);
-        /* Adjust the glow color and size as needed */
-    }
-    50% {
-        box-shadow: 0 0 20px rgba(0, 123, 255, 0.7);
-        /* Adjust the glow color and size as needed */
-    }
-    100% {
-        box-shadow: 0 0 10px rgba(0, 123, 255, 0.5);
-        /* Adjust the glow color and size as needed */
-    }
-}
-
-.package-box.glowing {
-    animation: glow 1s infinite;
-    border: 2px solid rgba(0, 123, 255, 0.5);
-}
-
-.form-step {
-    max-width: 400px;
-    margin: 0 auto;
-    max-width: 800px;
-    font-family: Arial, sans-serif;
-}
-
-.form-group {
-    margin-bottom: 50px;
-    padding-bottom: 10px;
     display: inline-block;
-    margin: 20px;
+    cursor: pointer;
+    text-decoration: none;
 }
 
-.form-label {
-    display: block;
-    font-weight: bold;
-    margin-bottom: 5px;
-    margin-bottom: 20px;
+td form button[name="delete"]:hover {
+    background-color: rgb(172, 3, 0);
+    transition: 0.4s;
 }
 
-.form-input {
-    width: 100%;
-    padding: 8px;
-    width: 250px;
-    padding: 15px;
-    box-sizing: border-box;
+td .profile-image {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
 }
 
-.form {
-    height: 200px;
-    height: 300px;
+.search-bar {
+    margin: -3.4% 0px 0px 80%;
+    position: absolute;
+}
+
+.search-bar #client-search {
+    width: 70%;
+    border: none;
+    border-bottom: 2px solid #9b9b9b;
+    outline: 0;
+    font-size: 17px;
+    color: #1C1C1D;
+    background: transparent;
+    transition: border-color 0.2s;
+}
+
+.search-bar #client-search::placeholder {
+    color: #9b9b9b;
+    font: normal 13px/normal 'Poppins';
+}
+
+.search-bar #client-search:focus {
+    font-weight: 700;
+    border-width: 3px;
+    border-image: linear-gradient(to right, #C2BE63, #c0b71a);
+    border-image-slice: 1;
+    font: normal 15px/normal 'Poppins';
+}
+
+.search-bar button {
+    margin-top: 7%;
+}
+
+.client td:nth-child(1),
+.client td:nth-child(2),
+.client td:nth-child(3),
+.client td:nth-child(4) {
+    border-right: 1px solid #CCCCCC;
 }
 
 
 /*****Admin Calendar*****/
 
 .calendar {
-    margin: 4% 0 0 14%;
+    margin: 3.5% 0 0 14%;
     padding: 4%;
     display: flex;
     justify-content: space-between;
@@ -344,6 +324,7 @@ tr:nth-child(odd) {
     justify-content: space-between;
     align-items: center;
     position: relative;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25), 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 }
 
 .event_management {
@@ -366,9 +347,9 @@ tr:nth-child(odd) {
 }
 
 .add-schedule-button {
-    background-color: #C2BE63;
+    background-color: #E1DE8F;
     font: normal 500 15px/normal 'Poppins';
-    color: #FCF6F6;
+    color: #1c1c1c;
     padding: 5px 10px;
     border: none;
     border-radius: 10px;
@@ -381,10 +362,11 @@ tr:nth-child(odd) {
     display: block;
     z-index: 1;
     transition: background-color 0.3s ease-in-out;
+    box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.2);
 }
 
 .add-schedule-button:hover {
-    background-color: #c0b71a;
+    background-color: #C2BE63;
 }
 
 .fc-day-header {
@@ -400,10 +382,14 @@ tr:nth-child(odd) {
     right: 55px;
 }
 
+.fc-day .fc-widget-content td.fc-today {
+    background: #fbdf54;
+}
+
 #calendar .fc-view {
     padding: 0;
     margin: 0;
-    height: 99vh;
+    height: 97.5vh;
 }
 
 #calendar .fc-body {
@@ -424,6 +410,10 @@ tr:nth-child(odd) {
     height: 15px;
     font: normal 500 11px/normal 'Poppins';
     color: #FCF6F6;
+}
+
+#calendar .fc-unthemed td.fc-today {
+    background-color: #fff5c0;
 }
 
 .modal {
@@ -450,10 +440,9 @@ tr:nth-child(odd) {
 }
 
 .modal-content {
-    background: linear-gradient(0deg, #FBF4F4 0%, #FBF4F4 100%), linear-gradient(0deg, #FBF4F4 0%, #FBF4F4 100%), #FBF4F4;
+    background: #EEEE;
     margin: 15% auto;
-    padding: 20px;
-    border: 1px solid #888;
+    padding: 40px;
     box-shadow: 0px 0px 400px 900px rgba(0, 0, 0, 0.28);
     width: 80%;
     max-width: 600px;
@@ -486,29 +475,939 @@ tr:nth-child(odd) {
 
 .form-group input[type="text"],
 .form-group input[type="date"],
-.form-group input[type="color"] {
+.form-group input[type="color"],
+.form-group select {
     width: 100%;
     padding: 8px;
-    border: 1px solid #ccc;
+    border: 1px solid #FCF6F6;
+    ;
     border-radius: 5px;
     box-sizing: border-box;
     font: normal 400 13px/normal 'Poppins';
+    box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.form-group input[type="text"],
+.form-group input[type="date"],
+.form-group input[type="color"]:focus {
+    outline-color: #807f7f;
 }
 
 .btn-save-event {
-    background-color: #C2BE63;
-    color: white;
+    background-color: #E1DE8F;
+    color: #1c1c1c;
     padding: 5px 10px;
     border: none;
     border-radius: 10px;
+    cursor: pointer;
+    width: 100%;
+    height: 40px;
+    font: normal 500 14px/normal 'Poppins';
+    transition: background-color 0.3s ease-in-out;
+    box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.25);
+}
+
+.btn-save-event:hover {
+    background-color: #C2BE63;
+}
+
+
+/******end****/
+
+
+/******Feedback******/
+
+.feedbox {
+    padding: 0px 0px 20px 0px;
+    margin: 9% 0% 0% 18.5%;
+    border-radius: 10px;
+    background-color: #FCF6F6;
+    height: 75%;
+    position: absolute;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25), 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    width: 77%;
+}
+
+.header-feedback {
+    border-collapse: collapse;
+    width: 100%;
+    table-layout: fixed;
+}
+
+.header-feedback th {
+    position: sticky;
+    top: 0;
+    background-color: #f2f2f2;
+    z-index: 2;
+    text-align: start;
+    margin-left: 20px;
+    font: normal 600 15px/normal 'Poppins';
+    border-radius: 10px;
+}
+
+.data-table td.feedback-description {
+    max-height: 50px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    position: relative;
+    padding: 1.5% 3% 1% 7.8%;
+    color: #959595;
+    font: normal 13px/normal 'Poppins';
+    text-align: start;
+}
+
+.data-table td.feedback-title {
+    max-height: 50px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    position: relative;
+    padding: 1.5% 0% 1% 2.5%;
+    width: 10%;
+    font: normal 500 14px/normal 'Poppins';
+    text-align: start;
+}
+
+.data-table tr:hover {
+    background-color: #eaeaea;
+}
+
+.data-table td input[type='checkbox'] {
+    width: 18px;
+    height: 18px;
+    vertical-align: middle;
+}
+
+.data-container p {
+    font: normal 400 13px/normal 'Poppins';
+    margin: 2%;
+}
+
+
+/*******confirmation******/
+
+.popup {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 400px 900px rgba(0, 0, 0, 0.28);
+    z-index: 10000;
+}
+
+.popup-content {
+    padding: 20px;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.popup-content p {
+    font: normal 600 18px/18px 'Poppins';
+    color: #1C1C1D;
+    margin-bottom: 5%;
+}
+
+button#deleteNo {
+    padding: 10px 20px;
+    margin: 5px;
+    border: none;
+    border-radius: 8px;
+    color: #1c1c1c;
+    font: normal 400 14px/15px 'Poppins';
+    cursor: pointer;
+    background: #DADADA;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    transition: all 200ms linear;
+}
+
+button#deleteNo:hover {
+    background: #9b9b9b;
+}
+
+button#deleteYes {
+    padding: 10px 20px;
+    margin: 5px;
+    border: none;
+    background: #FF8787;
+    border-radius: 8px;
+    color: #1c1c1c;
+    font: normal 400 14px/15px 'Poppins';
+    cursor: pointer;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    transition: all 200ms linear;
+}
+
+button#deleteYes:hover {
+    background: #D25A5A;
+}
+
+#loadingOverlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    box-shadow: 0px 0px 400px 900px rgba(0, 0, 0, 0.28);
+    z-index: 10000;
+    justify-content: center;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.8);
+    /* Add a semi-transparent white background */
+}
+
+.loading-circle {
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    border: 7px solid #E1DE8F;
+    border-radius: 50%;
+    border-top: 5px solid transparent;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+
+/**details feedback***/
+
+.feedbox-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 20px;
+    gap: 10px;
+    margin: 8.7% 0% 0% 18.5%;
+    border-radius: 5px;
+    background-color: #FCF6F6;
+    height: 75vh;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25), 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    width: 77%;
+}
+
+.feedback-details {
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+}
+
+.details {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.user_profile img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+
+.info h5 {
+    font: normal 600 16px/normal 'Poppins';
+    color: #1c1c1c;
+}
+
+.info p {
+    font: normal 500 13px/normal 'Poppins';
+    color: #1c1c1c;
+}
+
+.middle {
+    display: flex;
+    width: 100%;
+    margin-top: 2%;
+}
+
+.select_photo {
+    width: 30%;
+    flex: 1;
+    padding: 10px 0px 0px 30px;
+    box-sizing: border-box;
+}
+
+.select_photo img {
+    max-width: 100%;
+}
+
+.right {
+    flex: 1;
+    padding: 10px 0px 0px 10px;
+    box-sizing: border-box;
+}
+
+.title {
+    font: normal 600 17px/normal 'Poppins';
+    width: 85%;
+    height: 59px;
+    flex-shrink: 0;
+    margin: 0 0 0 12%;
+}
+
+.rate {
+    height: 10%;
+    flex-shrink: 0;
+    margin: 12% 0 0 40%;
+}
+
+.stars {
+    font-size: 24px;
+}
+
+.star {
+    color: gold;
+    cursor: pointer;
+}
+
+.description {
+    font: normal 400 14px/normal 'Poppins';
+    text-align: center;
+    line-height: 20px;
+    width: 70%;
+    height: 59px;
+    flex-shrink: 0;
+    text-align: center;
+    margin: 0px 0px 25% 15%;
+    line-height: 30px;
+}
+
+.buttons {
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 35%;
+}
+
+.buttons #postedButton {
+    margin-left: 30px;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 10px;
+    background-color: #c4bd3d;
+    color: #fff;
+    cursor: pointer;
+    font: normal 500 13px/normal 'Poppins';
+}
+
+.buttons #backButton {
+    margin-left: 10px;
+    padding: 8px 23px;
+    border: none;
+    border-radius: 10px;
+    background-color: #c6c6c6;
+    border: none;
+    color: #1c1c1c;
     cursor: pointer;
     font: normal 500 13px/normal 'Poppins';
     transition: background-color 0.3s ease-in-out;
 }
 
-.btn-save-event:hover {
-    background-color: #c0b71a;
+.buttons #backButton:hover {
+    background-color: #8f8f8f;
 }
 
 
-/******end****/
+/*****end*****/
+
+
+/******Admin Account*******/
+
+.clientprofile {
+    border: 1px solid #BCB4B5;
+    background: #FCF6F6;
+    width: 100%;
+    height: 45vh;
+    padding: 10px 50px 50px 50px;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25), 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.profile img {
+    width: 15%;
+    object-fit: cover;
+    border-radius: 50%;
+    display: block;
+    margin: 0 auto;
+    margin-top: 0%;
+    vertical-align: top;
+    box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.55);
+}
+
+.profile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    width: 100%;
+}
+
+.profile h1 {
+    position: absolute;
+    display: flex;
+    color: #000000;
+    font: normal 500 19px/normal 'Poppins';
+    margin-left: 50%;
+    height: 70%;
+}
+
+.profile p {
+    color: #525252;
+    font: normal 500 12px/normal 'Poppins';
+    margin-left: 50%;
+    position: absolute;
+    margin-top: 2%;
+}
+
+.profile-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.left-column {
+    width: 45%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    margin-top: 8%;
+}
+
+.right {
+    width: 0%;
+}
+
+form .profile-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 8px;
+    vertical-align: top;
+}
+
+.vertical {
+    width: 12px;
+    height: 10%;
+    background-color: #BCB4B5;
+    margin: 2% 5% 0 0;
+}
+
+form .profile-section label input[type="file"] {
+    display: none;
+}
+
+form .profile-section label {
+    color: #4285F4;
+    cursor: pointer;
+    font: normal 600 14px/normal 'Poppins';
+}
+
+.fillup {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    width: 100%;
+    position: relative;
+    right: 29%;
+}
+
+.two-columns {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-top: 55%;
+    margin-right: 50%;
+}
+
+.two-columns>div {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.fillup label {
+    font: normal 500 13px/normal 'Poppins';
+    margin-bottom: 5px;
+}
+
+.fillup input {
+    width: 100%;
+    height: 7vh;
+    border-radius: 10px;
+    border: 1px solid #BCB4B5;
+    padding: 10px;
+    box-sizing: border-box;
+    background: #FCF6F6;
+    font: normal 400 13px/normal 'Poppins';
+    margin-bottom: 3%;
+}
+
+.fillup input:focus {
+    outline-color: #807f7f;
+}
+
+.save-changes {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 2% 0 1% 0;
+    width: 100%;
+    height: 65px;
+}
+
+.save-changes input[type="submit"] {
+    width: 100%;
+    height: 80%;
+    border-radius: 10px;
+    background: #C2BE63;
+    cursor: pointer;
+    font: normal 500 14px/normal 'Poppins';
+    transition: background-color 0.3s ease-in-out;
+}
+
+.save-changes input[type="submit"]:hover {
+    background-color: #c4bd3d;
+}
+
+.reset-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 65px;
+}
+
+.reset-button input[type="reset"] {
+    width: 100%;
+    height: 80%;
+    border-radius: 10px;
+    background-color: #aeaeae;
+    border: none;
+    color: #1c1c1c;
+    cursor: pointer;
+    font: normal 500 14px/normal 'Poppins';
+    transition: background-color 0.3s ease-in-out;
+}
+
+.reset-button input[type="reset"]:hover {
+    background-color: #8f8f8f;
+}
+
+
+/********analytics*******/
+
+.analytics {
+    margin: 5% 0 0 14%;
+    padding: 1.8% 3% 0% 3%;
+    display: flex;
+    flex-direction: column;
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
+
+.row h3 {
+    font: normal 600 19px/normal 'Poppins';
+}
+
+.row .select {
+    display: flex;
+    flex-direction: row;
+}
+
+.row .select button {
+    border: none;
+    border-radius: 10px;
+    background: #FFF;
+    width: 50%;
+    margin-left: 20px;
+    font: normal 500 13px/normal 'Poppins';
+    transition: background-color 0.3s ease-in-out;
+    padding: 0 20px;
+}
+
+.row .select button:hover {
+    background-color: #f5f3b8;
+}
+
+.row button i {
+    background-color: none;
+    font-size: small;
+    margin-right: 2px;
+}
+
+.row .select #monthSelect {
+    border: none;
+    border-radius: 10px;
+    background: #FFF;
+}
+
+.row .select #monthSelectt:focus {
+    outline: none;
+}
+
+.middle-section {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.column {
+    padding-top: 7px;
+    width: 30%;
+}
+
+.col-box {
+    margin-bottom: 7%;
+    height: 22.5vh;
+    flex: 1;
+    background-color: #FCF6F6;
+    width: 100%;
+    border-radius: 10px;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    display: flex;
+    align-items: center;
+    padding: 30px;
+}
+
+.col-box h2 {
+    font: normal 700 35px/normal 'Poppins';
+    color: #1c1c1c;
+    margin: 0;
+}
+
+.col-box p {
+    font: normal 15px/normal 'Poppins';
+    color: #555555;
+    margin-bottom: 10px;
+}
+
+.databox {
+    padding-top: 7px;
+    width: 65%;
+}
+
+.graphs {
+    padding: 20px 20px 50px 20px;
+    margin-bottom: 2.3%;
+    background-color: #FCF6F6;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    width: 100%;
+    height: 36vh;
+}
+
+.graphs h4 {
+    font: normal 700 15px/normal 'Poppins';
+    color: #1c1c1c;
+}
+
+
+/******Finance********/
+
+.finance {
+    margin: 5% 0 0 14%;
+    padding: 1.8% 3% 0% 3%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.mid-fin {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.left-finance {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
+
+.top {
+    display: flex;
+    flex-direction: row;
+    width: 102%;
+    margin-bottom: 15px;
+}
+
+.fin-box {
+    padding: 20px 20px 50px 20px;
+    margin: 0 5% 2.3% 0;
+    background: rgb(50, 50, 50);
+    background: linear-gradient(318deg, rgba(50, 50, 50, 1) 0%, rgba(28, 28, 29, 1) 45%);
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    width: 52%;
+    border-radius: 5%;
+    height: 35vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.fin-box h4 {
+    font: normal 700 35px/normal 'Poppins';
+    color: #C2BE63;
+    display: flex;
+    margin-top: 5%;
+}
+
+.fin-box p {
+    font: normal 400 15px/normal 'Poppins';
+    color: #FBF4F4;
+}
+
+.bottom {
+    padding: 1% 2% 0 0;
+    display: flex;
+    justify-content: space-between;
+}
+
+.projects {
+    margin-bottom: 2.3%;
+    background-color: #FCF6F6;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    width: 99%;
+    height: 36vh;
+    padding: 20px 0px 50px 0px;
+}
+
+.projects h4 {
+    font: normal 700 14px/normal 'Poppins';
+    color: #1c1c1c;
+    text-align: start;
+    margin: 0 0 1% 3%;
+}
+
+.right-finance {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
+
+.reports {
+    padding-top: 20px;
+    margin: 0% 5% 2.3% 3%;
+    background-color: #FBF4F4;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    width: 100%;
+    border-radius: 2%;
+    height: 75.8vh;
+}
+
+.reports h4 {
+    font: normal 700 14px/normal 'Poppins';
+    color: #1c1c1c;
+    text-align: start;
+    margin: 0 0 1% 3%;
+}
+
+.reports button:hover {
+    background-color: #454548;
+    color: #fcfcfc;
+}
+
+.bot-button button {
+    background-color: #1C1C1D;
+    font: normal 500 12px/normal 'Poppins';
+    color: #FBF4F4;
+    border: none;
+    border-radius: 6%;
+    padding: 4px 20px;
+    letter-spacing: 0.2px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+    margin-top: 5%;
+}
+
+.bot-button {
+    display: flex;
+    justify-content: center;
+}
+
+.packages h4 {
+    font: normal 600 16px/normal 'Poppins';
+    color: #1c1c1c;
+    text-align: start;
+    margin-left: 2%;
+}
+
+.pack-box {
+    padding: 20px 0px 50px 0px;
+    margin: 1% 5% 2.3% 0%;
+    background-color: #FBF4F4;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    width: 101.2%;
+    height: 70vh;
+    border-radius: 10px;
+}
+
+.pack-box .top {
+    display: flex;
+    justify-content: space-between;
+}
+
+.pack-box .add-button {
+    background-color: #E1DE8F;
+    font: normal 500 13px/normal 'Poppins';
+    color: #1c1c1c;
+    padding: 5px 15px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    transition: background-color 0.3s ease-in-out;
+    box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.2);
+    margin-right: 5%;
+}
+
+.pack-box .add-button:hover {
+    background-color: #C2BE63;
+}
+
+.add-button {
+    background-color: #E1DE8F;
+    font: normal 500 13px/normal 'Poppins';
+    color: #1c1c1c;
+    padding: 5px 20px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    transition: background-color 0.3s ease-in-out;
+    box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.2);
+    margin: 0px 0px 10px 20px;
+}
+
+.exp-box .add-button:hover {
+    background-color: #C2BE63;
+}
+
+.exp-box .search-bar {
+    margin: -2.8% 0px 0px 68%;
+    position: absolute;
+}
+
+.form-group input#amount-exp {
+    font: normal 500 13px/normal 'Poppins';
+    margin-right: 3px;
+}
+
+
+/*****production****/
+
+.production {
+    margin: 5% 0 0 13%;
+    padding: 1.8% 3% 0% 3%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.prod-box {
+    padding: 20px 0px 50px 0px;
+    margin: 1% 0% 2.3% 0%;
+    background-color: #FBF4F4;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    width: 101.2%;
+    height: 78vh;
+    border-radius: 10px;
+}
+
+.prod-box .add-button {
+    background-color: #E1DE8F;
+    font: normal 500 13px/normal 'Poppins';
+    color: #1c1c1c;
+    padding: 5px 15px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    transition: background-color 0.3s ease-in-out;
+    box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.2);
+    margin: 0px 0px 10px 20px;
+}
+
+.prod-box .add-button:hover {
+    background-color: #C2BE63;
+}
+
+.prod-box .search-bar {
+    margin: -2.8% 0px 0px 68%;
+    position: absolute;
+}
+
+
+/*****content*****/
+
+.content {
+    padding: 0px 0px 20px 0px;
+    margin: 9% 0% 0% 18.5%;
+    border-radius: 5px;
+    background-color: #FCF6F6;
+    height: 75%;
+    position: absolute;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25), 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    width: 77%;
+}
+
+.content-box h4 {
+    font: normal 600 16px/normal 'Poppins';
+    color: #1c1c1c;
+    text-align: start;
+    margin-left: 2%;
+}
+
+.content-box .top {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 0px 0px 0px;
+}
+
+.content-box .add-button {
+    background-color: #E1DE8F;
+    font: normal 500 13px/normal 'Poppins';
+    color: #1c1c1c;
+    padding: 5px 15px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    transition: background-color 0.3s ease-in-out;
+    box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.2);
+    margin-right: 5%;
+}
+
+.content-box .add-button:hover {
+    background-color: #C2BE63;
+}

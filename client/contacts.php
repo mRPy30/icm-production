@@ -37,14 +37,12 @@ $page = $components[2];
 </head>
     
 <body>
-<div class="navbar">
-        <h3>Message</h3>
-        <i class="fa-regular fa-bell"></i>
-    </div> 
-    <?php 
-        include '../client/sidebar.php';
-    ?>
-    
+
+<?php 
+    include '../client/sidebar.php';
+    include '../client/navbar.php';
+?>  
+
     
     
 </body>

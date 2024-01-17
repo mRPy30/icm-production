@@ -3,10 +3,10 @@
 include '../backend/dbcon.php';
 
 session_start(); // Start the session
-$clientsID = $_SESSION['id'];
+$clientID = $_SESSION['id'];
 
 // Display data in a table
-$sql = "SELECT title_event, eventLocation, eventDate, status FROM booking WHERE clientID = $clientsID";
+$sql = "SELECT title_event, eventLocation, eventDate, status FROM booking WHERE clientID = $clientID";
 $result = mysqli_query($conn, $sql);
 
 // Fetch data from the "event" table
@@ -95,7 +95,7 @@ $page = $components[2];
     <div id="setForm" class="form-popup">
         <span class="close-button" onclick="closeForm()" style="font-size: 20px; font-weight: 600;">&#10006;</span>
         <form action="../backend/request.php" method="POST" class="" enctype="multipart/form-data">
-            
+            <header class="header" style="font-size: 30px;font-weight:bold; text-align: center; font-family: Poppins; padding: 20px">Book Schedule</header>
             <div class="steps">
               <div class="circle active">
                 <i class="fa-solid fa-check"></i>
