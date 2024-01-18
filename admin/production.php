@@ -10,7 +10,8 @@ $path = parse_url($directoryURI, PHP_URL_PATH);
 $components = explode('/', $path);
 $page = $components[2];
 
-
+$sqlStaff = "SELECT staffID, name, email, role FROM staff";
+$resultStaff = $conn->query($sqlStaff);
 ?>
 
 <!DOCTYPE html>
@@ -63,8 +64,25 @@ $page = $components[2];
                             </tr>
                         </thead>
                     </table>
-                    <div class="">
-                        <table></table>
+                    <div class="data-container">
+                        <table class="data-table">
+                            <tbody>
+                            <?php
+                                while ($rowStaff = $resultStaff->fetch_assoc()) {
+                                    echo "<tr>";
+                                    echo "<td>" . $rowStaff['staffID'] . "</td>";
+                                    echo "<td>" . $rowStaff['name'] . "</td>";
+                                    echo "<td>" . $rowStaff['email'] . "</td>";
+                                    echo "<td>" . $rowStaff['role'] . "</td>";
+                                    echo "<td>";
+                                    echo "<button onclick='editStaff(" . $rowStaff['staffID'] . ")'>Edit</button>";
+                                    echo "<button onclick='deleteStaff(" . $rowStaff['staffID'] . ")'>Delete</button>";
+                                    echo "</td>";
+                                    echo "</tr>";
+                                }
+                            ?>
+                            </tbody>
+                        </table>
                     </div>
                 </div>               
             </div>

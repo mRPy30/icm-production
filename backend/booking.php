@@ -3,7 +3,6 @@
 include '../backend/dbcon.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Retrieve data from the form
     $bookingDate = mysqli_real_escape_string($conn, $_POST['bookingDate']);
     $bookingTime = mysqli_real_escape_string($conn, $_POST['bookingTime']);
     $eventType = mysqli_real_escape_string($conn, $_POST['eventType']);
@@ -24,7 +23,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         exit();
     }
 
-    // Check if the email already exists
     $checkEmailQuery = "SELECT * FROM client WHERE email = '$email'";
     $result = $conn->query($checkEmailQuery);
 
@@ -34,22 +32,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         exit;
     }
 
-    // Hash the password
     $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
-    // Generate a 5-digit customer ID
     $clientID = sprintf("%05d", mt_rand(1, 99999));
 
-    // Insert data into the "client" table
     $clientInsertQuery = "INSERT INTO client (id, firstName, lastName, email, password, confirmPass) VALUES (?, ?, ?, ?, ?, ?)";
     $clientStmt = mysqli_prepare($conn, $clientInsertQuery);
     mysqli_stmt_bind_param($clientStmt, "ssssss", $clientID, $firstName, $lastName, $email, $hashedPassword, $hashedPassword);
     mysqli_stmt_execute($clientStmt);
 
-    // Insert data into the "booking" table
-    $bookingInsertQuery = "INSERT INTO booking (eventDate, eventTime, eventLocation, type_of_event, title_event, description, clientID) VALUES (?, ?, ?, ?, ?, ?, ?)";
+    // Insert data into the "booking" table with 'Pending' status
+    $status = 'Pending';
+    $bookingInsertQuery = "INSERT INTO booking (eventDate, eventTime, eventLocation, type_of_event, title_event, description, clientID, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
     $bookingStmt = mysqli_prepare($conn, $bookingInsertQuery);
-    mysqli_stmt_bind_param($bookingStmt, "ssssssi", $bookingDate, $bookingTime, $eventLocation, $eventType, $eventTitle, $eventDescription, $clientID);
+    mysqli_stmt_bind_param($bookingStmt, "ssssssis", $bookingDate, $bookingTime, $eventLocation, $eventType, $eventTitle, $eventDescription, $clientID, $status);
     mysqli_stmt_execute($bookingStmt);
 
     // Start a session and store user information
@@ -60,6 +56,5 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Redirect to the client's booking page
     header("Location: ../client/booking.php");
     exit();
-
 }
 ?>

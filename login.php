@@ -49,8 +49,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 }
                 .loading-circle {
                     display: inline-block;
-                    width: 50px;
-                    height: 50px;
+                    width: 40px;
+                    height: 40px;
                     border: 7px solid #E1DE8F;
                     border-radius: 50%;
                     border-top: 5px solid transparent;

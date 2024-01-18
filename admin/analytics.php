@@ -35,28 +35,30 @@ if ($resultRevenue->num_rows > 0) {
     $totalRevenue = 0;
 }
 
-// Calculate average rating
-$sqlRatings = "SELECT AVG(rating) AS averageRating FROM feedback";
+$sqlRatings = "SELECT SUM(rating) AS totalRatings FROM feedback";
 $resultRatings = $conn->query($sqlRatings);
 
-// Check if there's a result for ratings
 if ($resultRatings->num_rows > 0) {
     $rowRatings = $resultRatings->fetch_assoc();
-    $averageRating = $rowRatings['averageRating'];
+    $totalRatings = $rowRatings['totalRatings']; 
 } else {
-    $averageRating = 0;
+    $totalRatings = 0;
 }
 
-$sql = "SELECT COUNT(staffID) AS total FROM staff";
+$averageRating = ($totalRatings > 0) ? $totalRatings / $totalClients : 0; // Calculate average rating
+
+$ratingPercentage = ($averageRating / 5) * 100;
+
+$sql = "SELECT staffID, name, profile, email, role FROM staff";
 $result = $conn->query($sql);
 
-// Check if there's a result
+
 if ($result->num_rows > 0) {
-    $row = $result->fetch_assoc();
-    $total_number = $row['total'];
+    $staffData = $result->fetch_all(MYSQLI_ASSOC);
 } else {
-    $total_number = 0;
+    $staffData = array(); 
 }
+
 ?>
 
 <!DOCTYPE html>
@@ -133,7 +135,7 @@ if ($result->num_rows > 0) {
             <div class="col-box">
                 <div class="dashboard-item-content">
                     <p>Revenue</p>
-                    <h2>₱<?php echo $totalRevenue; ?></h2>
+                    <h2>₱<?php echo number_format($totalRevenue)?></h2>
                 </div>
                 <div class="icon-container-chart">
                     <i class="fas fa-chart-line" style="font-size: 36px; color: #00008B;"></i>
@@ -142,7 +144,7 @@ if ($result->num_rows > 0) {
             <div class="col-box">
                 <div class="dashboard-item-content">
                     <p>Rating</p>
-                    <h2><?php echo $averageRating; ?>%</h2>
+                    <h2><?php echo number_format($averageRating, 1, '.', ''); ?> %</h2>
                 </div>
                 <div class="icon-container-rate">
                 <i class="fas fa-star" style="font-size: 36px; color: #FFF500;"></i>
@@ -154,7 +156,10 @@ if ($result->num_rows > 0) {
                 <h4>Total Revenue</h4>
                 <canvas id="revenueChart"></canvas>
             </div>
-            <div class="graphs"></div>
+            <div class="graphs">
+                <h4>Total Project Finished</h4>
+                <canvas id="revenueChart"></canvas>
+            </div>
         </div>
     </div>
 </main>
@@ -196,6 +201,7 @@ if ($result->num_rows > 0) {
                 }
             });
         });
+
         function showSelectedMonth() {
             var monthHeader = document.getElementById("monthHeader");
             var selectedMonth = document.getElementById("monthSelect").value;

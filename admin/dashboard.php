@@ -7,10 +7,10 @@ include '../backend/dbcon.php';
 // Set the last activity time
 if (isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY'] > 600)) {
     // Last request was more than 10 minutes ago
-    session_unset();     // Unset session variables
-    session_destroy();   // Destroy the session
+    session_unset();     
+    session_destroy();   
 }
-$_SESSION['LAST_ACTIVITY'] = time(); // Update last activity time
+$_SESSION['LAST_ACTIVITY'] = time(); 
 
 
 $sqlClients = "SELECT COUNT(*) AS totalClients FROM client"; 
@@ -33,17 +33,16 @@ if ($resultRevenue->num_rows > 0) {
     $totalRevenue = 0;
 }
 
-$sqlRatings = "SELECT SUM(rating) AS totalRatings FROM feedback"; // Modified query to sum ratings
+$sqlRatings = "SELECT SUM(rating) AS totalRatings FROM feedback";
 $resultRatings = $conn->query($sqlRatings);
 
 if ($resultRatings->num_rows > 0) {
     $rowRatings = $resultRatings->fetch_assoc();
-    $totalRatings = $rowRatings['totalRatings']; // Total sum of ratings
+    $totalRatings = $rowRatings['totalRatings']; 
 } else {
     $totalRatings = 0;
 }
 
-// Calculate average rating
 $averageRating = ($totalRatings > 0) ? $totalRatings / $totalClients : 0; // Calculate average rating
 
 $ratingPercentage = ($averageRating / 5) * 100;
@@ -122,7 +121,7 @@ $page = $components[2];
             <div class="dashboard-item" id="finance">
                 <div class="dashboard-item-content">
                     <p>Revenue</p>
-                    <h2>₱<?php echo $totalRevenue; ?></h2>
+                    <h2>₱ <?php echo number_format($totalRevenue)?></h2>
                 </div>
                 <div class="icon-container-chart">
                     <i class="fas fa-chart-line" style="font-size: 36px; color: #00008B;"></i>
@@ -131,7 +130,7 @@ $page = $components[2];
             <div class="dashboard-item" id="ratings">
                 <div class="dashboard-item-content">
                     <p>Rating</p>
-                    <h2><?php echo number_format($averageRating, 1, '.', ''); ?>%</h2>
+                    <h2><?php echo number_format($averageRating, 1, '.', ''); ?> %</h2>
                 </div>
                 <div class="icon-container-rate">
                 <i class="fas fa-star" style="font-size: 36px; color: #FFF500;"></i>
@@ -158,8 +157,8 @@ $page = $components[2];
                         </thead>
                         <tbody>
                             <?php foreach ($staffData as $staff): ?>
-                                <tr>
-                                    <td style="padding-left: 30px; vertical-align: middle;"><img src="data:image/jpeg;base64,<?php echo base64_encode($staff['profile']); ?>" alt="Profile" style="width: 40px; height: 40px; border-radius: 100%;"></td>
+                                <tr onclick="window.location.href='../admin/production.php';" style="cursor: pointer;">
+                                    <td class="name-and-email" style="padding-left: 30px; vertical-align: middle;"><img src="data:image/jpeg;base64,<?php echo base64_encode($staff['profile']); ?>" alt="Profile" style="width: 40px; height: 40px; border-radius: 100%;"></td>
                                     <td style="padding: 0px; text-align: start; color: #1C1C1D; font: normal 500 15px/normal 'Poppins'; ">
                                         <?php echo $staff['name']; ?><br>
                                         <span style="font: normal 400 11px/normal 'Poppins'; color: #929292;"><?php echo $staff['email']; ?></span>
@@ -241,12 +240,11 @@ $page = $components[2];
             }
         });
 
-        // Add the following script to periodically check for inactivity and logout
         var inactivityTimeout = 900; // 15 minutes in seconds
 
         function checkInactivity() {
             setTimeout(function () {
-                window.location.href = '../login.php'; // Replace 'logout.php' with the actual logout page
+                window.location.href = '../login.php'; 
             }, inactivityTimeout * 1000);
         }
 
@@ -264,6 +262,21 @@ $page = $components[2];
         document.addEventListener('keypress', function () {
             clearTimeout(checkInactivity);
             checkInactivity();
+        });
+
+        //Hovers
+        document.addEventListener('DOMContentLoaded', function() {
+            const dashboardItems = document.querySelectorAll('.dashboard-item');
+
+            dashboardItems.forEach(function(dashboardItem) {
+                dashboardItem.addEventListener('mouseover', function() {
+                    dashboardItem.classList.add('hovered');
+                });
+            
+                dashboardItem.addEventListener('mouseout', function() {
+                    dashboardItem.classList.remove('hovered');
+                });
+            });
         });
 
     </script>

@@ -1,11 +1,9 @@
 <?php
 include '../backend/dbcon.php';
 
-//Client
 
-session_start(); // Start the session
+session_start(); 
                 
-    // Step 1: Collect data from the form
     $bookingDate = $_POST['bookingDate'];
     $bookingTime = $_POST['bookingTime'];
     $eventType = $_POST['eventType'];

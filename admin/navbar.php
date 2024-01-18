@@ -274,19 +274,16 @@ $pageTitle = isset($pageTitles[$currentPage]) ? $pageTitles[$currentPage] : "Adm
         document.getElementById("loadingOverlay").style.display = "flex";
         setTimeout(function() {
             window.location.href = "../login.php";
-        }, 1000); // Redirect after 3 seconds (adjust as needed)
+        }, 1000); 
     }
 
     document.addEventListener("DOMContentLoaded", function() {
-        // Open the logout popup on button click
         document.querySelectorAll(".btn-logout").forEach(function(btn) {
             btn.addEventListener("click", openPopup);
         });
 
-        // Close the popup when clicking "No"
         document.getElementById("logoutNo").addEventListener("click", closePopup);
 
-        // Handle the "Yes" click event for logout
         document.getElementById("logoutYes").addEventListener("click", handleLogout);
     });
 </script>

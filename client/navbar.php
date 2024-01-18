@@ -244,7 +244,7 @@ $pageTitle = isset($pageTitles[$currentPage]) ? $pageTitles[$currentPage] : "Boo
         </div>
         <div class="profile_dropdown-content">
             <a href="profile.php">Profile</a>
-            <a type="text" id="clientLogoutPopup" class="btn-logout">Logout</a>
+            <a type="text" id="clientlogoutPopup" class="btn-logout">Logout</a>
         </div>
     </div>
 </header>
@@ -276,15 +276,12 @@ $pageTitle = isset($pageTitles[$currentPage]) ? $pageTitles[$currentPage] : "Boo
     }
 
     document.addEventListener("DOMContentLoaded", function() {
-        // Open the logout popup on button click
         document.querySelectorAll(".btn-logout").forEach(function(btn) {
             btn.addEventListener("click", openPopup);
         });
 
-        // Close the popup when clicking "No"
         document.getElementById("logoutNo").addEventListener("click", closePopup);
 
-        // Handle the "Yes" click event for logout
         document.getElementById("logoutYes").addEventListener("click", handleLogout);
     });
 </script>
