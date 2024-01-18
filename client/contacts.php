@@ -22,7 +22,7 @@ $page = $components[2];
     <!---WEB TITLE--->
     <link rel="short icon" href="../picture/shortcut-logo.png" type="x-icon">
     <title>
-        <?php echo "User | Booking Schedule"; ?>
+        <?php echo "User | Message"; ?>
     </title>
 
     <!---CSS--->
