@@ -68,6 +68,8 @@ $page = $components[2];
 
     <main class="account">
         <div class="account-management">
+
+        
             <!-- Left Column -->
             <div class="left-column">
                 <div class="profile">
@@ -92,6 +94,9 @@ $page = $components[2];
             </div>
 
             <div class="vertical"></div>
+
+
+
             <!-- Right Column -->
             <div class="right">
                 <div class="fillup">

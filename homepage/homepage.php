@@ -189,7 +189,7 @@
                     </div>
                 </div>
             </div>
-            <button class="button-services-section">Book Now</button>
+            <button class="button-services-section">View More</button>
         </section>
 
         <section class="review">
@@ -244,7 +244,7 @@
                             Looking forward to work with you.</p>
                     </div>
                     <div class="more-button">
-                        <a href="../about.php"><button>About Us</button></a>
+                        <a href="../homepage/about.php"><button>About Us</button></a>
                     </div>
                 </div>
                 <div class="about-right-content">
@@ -415,8 +415,9 @@
     </script>
 </body>
 <script>
-    document.querySelector(".button").addEventListener("click", function() {
+    document.querySelector(".button").addEventListener("click", function () {
         window.location.href = "../homepage/booking.php";
     });
 </script>
+
 </html>
