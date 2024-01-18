@@ -77,10 +77,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
        
     
-    <?php 
-         include '../client/sidebar.php';
-         include '../client/navbar.php';
-    ?> 
+    
 	<main class="calendar">
         <div class="calendar-header">
             <button id="addScheduleButton" class="add-schedule-button"><i class="fa-solid fa-plus"></i> Add Schedule</button>
@@ -110,6 +107,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </div>
         </div>
     </div>
+    <?php 
+         include '../client/sidebar.php';
+         include '../client/navbar.php';
+    ?> 
 <!-- End popup dialog box -->
 
     <!-- JS for jQuery -->

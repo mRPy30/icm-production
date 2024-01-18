@@ -30,6 +30,7 @@ body {
     display: flex;
     align-items: center;
     cursor: pointer;
+    transition: all .5s ease;
 }
 
 .dashboard-item-content {
@@ -46,6 +47,20 @@ body {
     font: normal 15px/normal 'Poppins';
     color: #555555;
     margin-bottom: 10px;
+}
+
+.dashboard-item:hover {
+    transform: scale(1.02);
+}
+
+.dashboard-item.hovered {
+    background-color: #444444;
+    color: #FCF6F6;
+}
+
+.dashboard-item.hovered h2,
+.dashboard-item.hovered p {
+    color: #FCF6F6;
 }
 
 .icon-container-client{
@@ -114,7 +129,7 @@ body {
 }
 
 .table-container {
-    height: 38vh; /* Set your desired max height */
+    height: 38vh;
     overflow-y: auto;
 }
 
@@ -128,6 +143,10 @@ body {
     border-bottom: 1px solid #CCCCCC;
 }
 
+.prod-table tbody tr:hover {
+    background-color: #e3e3e3;
+    transition: all .3s ease;
+}
 
 
 /*****Booking & Client*****/
@@ -1105,6 +1124,11 @@ form .profile-section p{
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    transition: all .3s ease;
+}
+
+.fin-box:hover{
+    transform: scale(1.01);
 }
 
 .fin-box h4{

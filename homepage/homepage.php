@@ -267,7 +267,7 @@
                     <div class="banner-inner-content">
                         <h1>Let's make something incredible together</h1>
                         <div class="CTA-button">
-                            <a href="../booking.php"><button>Inquire about your date </button></a>
+                            <a href="../homepage/booking.php"><button>Inquire about your date </button></a>
                         </div>
                     </div>
                 </div>
@@ -378,7 +378,7 @@
             pageNumberText.textContent = currentPage + '/' + totalPages;
         }
 
-        setInterval(nextImage, 5000); // Change image every 5 seconds (adjust this value as needed)
+        setInterval(nextImage, 3000); // Change image every 5 seconds (adjust this value as needed)
 
         // Add click event listeners to page numbers
         pageNumbers.forEach((pageNumber, index) => {

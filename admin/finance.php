@@ -24,6 +24,8 @@ if ($resultRevenue->num_rows > 0) {
 $sqlExpenses = "SELECT date, category FROM expenses";
 $resultExpenses = $conn->query($sqlExpenses);
 
+$sqlPackages = "SELECT * FROM package";
+$resultPackages = $conn->query($sqlPackages);
 ?>
 
 <!DOCTYPE html>
@@ -128,6 +130,7 @@ $resultExpenses = $conn->query($sqlExpenses);
                                 <tr>
                                     <th>Details</th>
                                     <th>Category</th>
+                                    <th>Package Name</th>
                                     <th>Price Amount</th>
                                     <th>Actions</th>
                                 </tr>
@@ -136,7 +139,20 @@ $resultExpenses = $conn->query($sqlExpenses);
                         <div class="data-container">
                             <table class="data-table">
                                 <tbody>
-
+                                <?php
+                                    while ($rowPackage = $resultPackages->fetch_assoc()) {
+                                        echo "<tr>";
+                                        echo "<td>" . $rowPackage['packageDetails'] . "</td>";
+                                        echo "<td>" . $rowPackage['packageCategory'] . "</td>";
+                                        echo "<td>" . $rowPackage['packageName'] . "</td>";
+                                        echo "<td>" . $rowPackage['packagePrice'] . "</td>";
+                                        echo "<td>";
+                                        echo "<button onclick='editPackage(" . $rowPackage['packageId'] . ")'>Edit</button>";
+                                        echo "<button onclick='deletePackage(" . $rowPackage['packageId'] . ")'>Delete</button>";
+                                        echo "</td>";
+                                        echo "</tr>";
+                                    }
+                                ?>
                                 </tbody>
                             </table>
                         </div>
