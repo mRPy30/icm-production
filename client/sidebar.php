@@ -187,6 +187,15 @@
                     } ?> "><span class="item">Feedback</span></a>
                     <span class="bottom_curve"></span>
                 </li>
+                <li class="nav-link">
+                    <span class="top_curve"></span>
+                    <a href="gallery.php" class="<?php if ($page == "..client/gallery.php") {
+                        echo "nav-link active";
+                    } else {
+                        echo "nav-link";
+                    } ?> "><span class="item">Gallery</span></a>
+                    <span class="bottom_curve"></span>
+                </li>
                 
             </ul>
         </div>

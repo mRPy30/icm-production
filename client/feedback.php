@@ -88,7 +88,7 @@ if ($result->num_rows > 0) {
                     <td><?php echo $booking['title_event']; ?></td>
                     <td><?php echo date('F d Y', strtotime($booking['eventDate'])); ?></td>
                     <td>
-                        <button class="add-button"><i class="fa-solid fa-plus"></i> Add Feedback</button>
+                        <button class="add-feedback"><i class="fa-solid fa-plus"></i> Add Feedback</button>
                     </td>
                 </tr>
             <?php endforeach; ?>

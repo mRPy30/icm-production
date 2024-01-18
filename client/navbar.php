@@ -25,6 +25,7 @@ $pageTitles = array(
     "contacts.php" => "Message",
     "feedback.php" => "Feedback",
     "profile.php" => "My Profile",
+    "gallery.php" => "My Gallery",
 );
 
 $currentPage = basename($_SERVER['SCRIPT_NAME']); 

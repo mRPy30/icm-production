@@ -4,11 +4,11 @@ session_start();
 $clientID = $_SESSION['id'];
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $clientFirstname = isset($_POST["firstName"]) ? $_POST["firstName"] : "";
-    $clientLastname = isset($_POST["lastName"]) ? $_POST["lastName"] : "";
-    $email = isset($_POST["email"]) ? $_POST["email"] : "";
-    $confirmPassword = isset($_POST["confirm_password"]) ? $_POST["confirm_password"] : "";
-    $password = isset($_POST["password"]) ? $_POST["password"] : "";
+    $firstname = $_POST["firstName"];
+    $lastname = $_POST["lastName"];
+    $email = $_POST["email"];
+    $confirmPassword = $_POST["confirm_password"];
+    $password = $_POST["password"];
 
     // Check if any file is uploaded
     if ($_FILES['picture']['size'] > 0) {
@@ -31,25 +31,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     // Update name, email, and profile picture in the database
-    $updateQuery = "UPDATE client SET firstName = ?, lastName = ?, email = ?, confirmPass = ?, password = ?";
-
-    // Only include profile column in the update query if profilePicture is set
     if (isset($profilePicture)) {
-        $updateQuery .= ", profile = ?";
-    }
-
-    $updateQuery .= " WHERE id = ?";
-    $stmt = $conn->prepare($updateQuery);
-
-    // Adjust bind_param based on whether profilePicture is set or not
-    if (isset($profilePicture)) {
-        $stmt->bind_param("ssssssi", $clientFirstname, $clientLastname, $email, $confirmPassword, $password, $profilePicture, $clientID);
+        $updateQuery = "UPDATE client SET firstName = ?, lastName = ?, email = ?, confirmPass = ?, password = ?, profile = ? WHERE id = ?";
+        $stmt = $conn->prepare($updateQuery);
+        $stmt->bind_param("ssssssi", $firstname, $lastname,  $email, $confirmPassword, $password, $profilePicture, $clientID);
     } else {
-        $stmt->bind_param("sssssi", $clientFirstname, $clientLastname, $email, $confirmPassword, $password, $clientID);
+        // Update name, email, password, and confirm_password in the database
+        $updateQuery = "UPDATE client SET firstName = ?, lastName = ?, email = ?, confirmPass = ?, password = ? WHERE id = ?";
+        $stmt = $conn->prepare($updateQuery);
+        $stmt->bind_param("sssssi", $firstname, $lastname, $email, $confirmPassword, $password,  $clientID);
     }
 
     if ($stmt->execute()) {
-        echo '<script>alert("User Account updated successfully."); 
+        echo '<script>alert("User Profile Account updated successfully."); 
         window.location.href = "../client/profile.php";</script>';
         exit(); // Terminate further execution
     } else {
