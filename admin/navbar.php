@@ -39,7 +39,28 @@ $currentPage = basename($_SERVER['SCRIPT_NAME']);
 $pageTitle = isset($pageTitles[$currentPage]) ? $pageTitles[$currentPage] : "Admin Dashboard";
 ?>
 <style>
+    /***dark Mode */
+    body.dark-mode .navbar {
+        background-color: #444444; 
+        color: #fff; 
+    }
+    body.dark-mode .navbar .nav-right i{
+        color: #FCF6F6;
+    }
+    body.dark-mode .navbar .nav-left i{
+        color: #FCF6F6;
+    }
+    body.dark-mode .navbar .nav-left h3{
+        color: #FCF6F6;
+    }
+    body.dark-mode .navbar .profile_info {
+        color: #FCF6F6;
+    }
     
+
+
+
+
     .navbar {
         width: 100%;
         height: 10%;
@@ -83,7 +104,10 @@ $pageTitle = isset($pageTitles[$currentPage]) ? $pageTitles[$currentPage] : "Adm
         background: #BCB4B5;
         margin: 0 15px;
     }
-
+    .icons{
+        display: flex;
+        flex-direction: row;
+    }
     .profile_info {
         text-align: right;
         color: #1c1c1c;
@@ -118,11 +142,14 @@ $pageTitle = isset($pageTitles[$currentPage]) ? $pageTitles[$currentPage] : "Adm
         min-width: 160px;
         box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
         z-index: 1;
-        margin-left: 75px;
+        top: 100%;
+        text-align: start;
+        right: 0;
     }
 
-    .profile_dropdown:hover .profile_dropdown-content {
+    .profile_info:hover .profile_dropdown-content {
         display: block;
+        right: 0;
     }
 
     .profile_dropdown-content a {
@@ -225,6 +252,37 @@ $pageTitle = isset($pageTitles[$currentPage]) ? $pageTitles[$currentPage] : "Adm
         100% { transform: rotate(360deg); }
     }
 
+    .dark-mode-toggle i {
+        transition: transform 0.5s ease-in-out;
+    }
+
+    .dark-mode-toggle i.sun-transition {
+        transform-origin: 50% 50%;
+        animation: rotateSun 0.5s ease-in-out forwards;
+    }
+
+    .dark-mode-toggle i.moon-transition {
+        transform-origin: 50% 50%;
+        animation: rotateMoon 0.5s ease-in-out forwards;
+    }
+
+    @keyframes rotateSun {
+        from {
+            transform: rotate(0deg);
+        }
+        to {
+            transform: rotate(180deg);
+        }
+    }
+
+    @keyframes rotateMoon {
+        from {
+            transform: rotate(180deg);
+        }
+        to {
+            transform: rotate(0deg);
+        }
+    }
 </style>
 
 <header class="navbar">
@@ -233,20 +291,25 @@ $pageTitle = isset($pageTitles[$currentPage]) ? $pageTitles[$currentPage] : "Adm
     </div>
     <div class="profile_dropdown">
         <div class="nav-right">
-            <i class="far fa-bell"></i> 
-            <i class="far fa-envelope"></i>
+            <div class="icons">
+                <i class="far fa-bell"></i> 
+                <i class="far fa-envelope"></i>
+                <div class="dark-mode-toggle" onclick="toggleDarkMode()">
+                    <i class="fas fa-moon"></i>
+                </div>
+            </div>
             <div class="divider"></div>
             <div class="profile_info">
                 <h3><?php echo $name; ?></h3>
                 <p>Admin</p>
+                <div class="profile_dropdown-content">
+                    <a href="account.php">Profile</a>
+                    <a type="text" id="logoutPopup" class="btn-logout" onclick="goBack()">Logout</a>
+                </div>
             </div>
             <div class="profile_pic">
                 <img src="data:image/jpeg;base64,<?php echo $profile; ?>" alt="admin image">
             </div>
-        </div>
-        <div class="profile_dropdown-content">
-            <a href="account.php">Profile</a>
-            <a type="text" id="logoutPopup" class="btn-logout" onclick="goBack()">Logout</a>
         </div>
     </div>
 </header>
@@ -286,4 +349,37 @@ $pageTitle = isset($pageTitles[$currentPage]) ? $pageTitles[$currentPage] : "Adm
 
         document.getElementById("logoutYes").addEventListener("click", handleLogout);
     });
+
+    function toggleDarkMode() {
+        const body = document.body;
+        const isDarkMode = body.classList.toggle('dark-mode');
+        const moonIcon = document.querySelector('.dark-mode-toggle i');
+
+        if (isDarkMode) {
+            moonIcon.className = 'fas fa-sun';
+
+            // Add transition class for animation
+            moonIcon.classList.add('sun-transition');
+            setTimeout(() => {
+                moonIcon.classList.remove('sun-transition');
+            }, 1000);
+        } else {
+            moonIcon.className = 'fas fa-moon';
+        }
+
+        // Save the dark mode preference to local storage or cookies if needed
+        localStorage.setItem('darkMode', isDarkMode);
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+        const body = document.body;
+        const savedDarkMode = localStorage.getItem('darkMode');
+
+        if (savedDarkMode === 'true') {
+            body.classList.add('dark-mode');
+            toggleDarkMode(); // Add this line to set the initial sun icon state
+        }
+    });
+
+
 </script>

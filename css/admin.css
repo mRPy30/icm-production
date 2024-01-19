@@ -9,8 +9,26 @@ body {
     overflow-x: hidden;
 }
 
+body.dark-mode {
+    background-color: #1c1c1c;
+    color: #ffffff;
+}
 
+.navbar.dark-mode {
+    background-color: #333333;
+    color: #ffffff;
+}
 
+.dark-mode-toggle {
+    cursor: pointer;
+    color: #ffffff;
+    font-size: 20px;
+    margin-right: 10px;
+}
+
+.dashboard-item.dark-mode{
+    background-color: #444444;
+}
 /****Dashboard*****/
 
 .dashboard {

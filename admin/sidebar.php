@@ -2,7 +2,23 @@
 <link rel="stylesheet" href="../css/fonts.css">
 <style>
     /*****Sidebar*****/
-
+    body.dark-mode .side_bar {
+        background-color: #444444; 
+        color: #fff; 
+    }
+    body.dark-mode .side_bar_bottom{
+        background-color: #444444;
+        color: #fff; 
+    } 
+    body.dark-mode .wrapper{
+        background-color: #f9fcff;
+        background-image: linear-gradient(147deg, #f9fcff 0%, #dee4ea 74%);
+    }
+    body.dark-mode .side_bar .side_bar_bottom ul .nav-link.active a{
+        background-color: #f9fcff;
+        background-image: linear-gradient(147deg, #f9fcff 0%, #dee4ea 74%);
+        color: #1c1c1c;
+    }
     .wrapper {
         height: 100%;
         display: flex;
@@ -301,5 +317,37 @@
             }, 2000); 
         });
     }
+
+    function toggleDarkMode() {
+        const body = document.body;
+        const isDarkMode = body.classList.toggle('dark-mode');
+        const moonIcon = document.querySelector('.dark-mode-toggle i');
+
+        if (isDarkMode) {
+            moonIcon.className = 'fas fa-sun';
+
+            // Add transition class for animation
+            moonIcon.classList.add('sun-transition');
+            setTimeout(() => {
+                moonIcon.classList.remove('sun-transition');
+            }, 1000);
+        } else {
+            moonIcon.className = 'fas fa-moon';
+        }
+
+        // Save the dark mode preference to local storage or cookies if needed
+        localStorage.setItem('darkMode', isDarkMode);
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+        const body = document.body;
+        const savedDarkMode = localStorage.getItem('darkMode');
+
+        if (savedDarkMode === 'true') {
+            body.classList.add('dark-mode');
+            toggleDarkMode(); // Add this line to set the initial sun icon state
+        }
+    });
+    
 </script>
 <!-------End Sidebar------------>
