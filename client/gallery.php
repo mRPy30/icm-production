@@ -22,7 +22,7 @@ $page = $components[2];
     <!---WEB TITLE--->
     <link rel="short icon" href="../picture/shortcut-logo.png" type="x-icon">
     <title>
-        <?php echo "User | Message"; ?>
+        <?php echo "User | Gallery"; ?>
     </title>
 
     <!---CSS--->
@@ -42,6 +42,7 @@ $page = $components[2];
     include '../client/sidebar.php';
     include '../client/navbar.php';
 ?>  
+
 
     
     
