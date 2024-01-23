@@ -80,8 +80,8 @@ if ($resultExpenses->num_rows > 0) {
         <div class="exp-box">
             <button class="add-button"><i class="fa-solid fa-plus"></i> Add New</button>
             <div class="search-bar">
-                <input type="text" placeholder="Search expenses " id="client-search">
-                  <i class="fa-solid fa-magnifying-glass" type="button" onclick="searchClient()" title="Search"></i>
+                <input type="text" placeholder="Search expenses " id="search">
+                  <i class="fa-solid fa-magnifying-glass" type="button" onclick="search()" title="Search"></i>
             </div>
             <div class="exp-tbl">
                 <table class="header-table">
@@ -110,7 +110,7 @@ if ($resultExpenses->num_rows > 0) {
                                     <td><?php echo date('F j, Y', strtotime($expense['date'])); ?></td>
                                     <td><?php echo $expense['category']; ?></td>
                                     <td><?php echo $expense['description']; ?></td>
-                                    <td><?php echo '₱' . number_format($expense['amount'], 2); ?></td>
+                                    <td><?php echo '₱ ' . number_format($expense['amount'], 2); ?></td>
                                     <td>
                                         <form method="post" action="../backend/expenses.php">
                                             <input type="hidden" name="expensesID" value="<?php echo $expense['expensesID']; ?>">
@@ -215,7 +215,6 @@ if ($resultExpenses->num_rows > 0) {
                 monthHeader.textContent = selectedMonth + " " + currentYear;
             }
         }
-        // Function to automatically select the current month
         window.onload = function() {
             var currentMonth = new Date().toLocaleString('default', { month: 'long' });
             var selectElement = document.getElementById("monthSelect");
@@ -227,7 +226,6 @@ if ($resultExpenses->num_rows > 0) {
                 }
             }
 
-            // Trigger the function to display the selected month
             showSelectedMonth();
         };
         
@@ -246,7 +244,6 @@ if ($resultExpenses->num_rows > 0) {
         }
 
 
-        // Set the default value of the input field to '₱'
         document.getElementById('amount-exp').value = '₱';
         
     // Function to show the popup
@@ -338,5 +335,21 @@ document.addEventListener('keypress', function () {
     clearTimeout(checkInactivity);
     checkInactivity();
 });
+
+        function search() {
+            var searchValue = document.getElementById("search").value.toLowerCase().trim();
+
+            var rows = document.querySelectorAll(".data-table tbody tr");
+
+            for (var i = 0; i < rows.length; i++) {
+                var nameColumn = (rows[i].querySelector("td:nth-child(3)").textContent + " " + rows[i].querySelector("td:nth-child(4)").textContent).toLowerCase();
+
+                if (nameColumn.includes(searchValue)) {
+                    rows[i].style.display = "";
+                } else {
+                    rows[i].style.display = "none";
+                }
+            }
+        }
 </script>
 </html>

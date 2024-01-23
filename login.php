@@ -159,18 +159,18 @@ $page = $components[2];
                     </li>
                 </ul>
             </div>
-            <form class="form-fillup needs-validation" method="POST" onsubmit="return validateForm()">
-                <input type="text" class="form" placeholder="Enter your Email" name="email" required><br><br>
-                <input type="password" class="form" placeholder="Enter your Password" name="password" id="password"
-                    required oninput="checkPasswordStrength(this)"><br><br>
-                <i class="fa-solid fa-eye-slash" id="password-toggle" onclick="togglePassword()"
-                    style="right: 17%; top: 29.5%;"></i>
-                    <div id="popup" class="popup">
-            <p id="popup-message"></p>
-        </div>
-                <button class="btn btn-lg btn-block btn-success" type="submit" name="submit" value="Submit"
-                    style="height: 7vh;">Login</button>
-            </form>
+                <form class="form-fillup needs-validation" method="POST" onsubmit="return validateForm()">
+                    <input type="text" class="form" placeholder="Enter your Email" name="email" required>
+                    <br><br>
+                    <input type="password" class="form" placeholder="Enter your Password" name="password" id="password" required oninput="checkPasswordStrength(this)">
+                        <i class="fa-solid fa-eye-slash" id="password-toggle" onclick="togglePassword()" style="right: 17%; top: 29.5%;"></i>
+                        <br><br>
+                        <div id="popup" class="popup">
+                            <p id="popup-message"></p>
+                        </div>
+                    <button class="btn btn-lg btn-block btn-success" type="submit" name="submit" value="Submit"
+                        style="height: 7vh;">Login</button>
+                </form>
         </div>
         <div id="popup" class="popup">
             <p id="popup-message"></p>
@@ -178,17 +178,18 @@ $page = $components[2];
     </section>
 
     <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            let isPasswordVisible = false;
-            const passwordField = document.getElementById('password');
-            const passwordToggle = document.getElementById('password-toggle');
+        // Eye view hide
+        let isPasswordVisible = false;
+        const passwordField = document.getElementById('password');
+        const passwordToggle = document.getElementById('password-toggle');
 
-            function togglePassword() {
-                isPasswordVisible = !isPasswordVisible;
-                passwordField.type = isPasswordVisible ? 'text' : 'password';
-                passwordToggle.className = isPasswordVisible ? 'fa-solid fa-eye' : 'fa-solid fa-eye-slash';
-            }
-            
+        function togglePassword() {
+            isPasswordVisible = !isPasswordVisible;
+            passwordField.type = isPasswordVisible ? 'text' : 'password';
+            passwordToggle.className = isPasswordVisible ? 'fa-solid fa-eye' : 'fa-solid fa-eye-slash';
+        }
+
+         document.addEventListener("DOMContentLoaded", function () {
 
      
             // Display popup if login was unsuccessful

@@ -151,17 +151,17 @@ $page = $components[2];
                     <table class="prod-table">
                         <thead>
                             <tr>
-                                <th colspan="2" style="padding-right: 30px">Name</th>
-                                <th>Role</th>
+                                <th class="header" colspan="2" style="padding-right: 30px">Name</th>
+                                <th class="header">Role</th>
                             </tr>
                         </thead>
                         <tbody>
                             <?php foreach ($staffData as $staff): ?>
                                 <tr onclick="window.location.href='../admin/production.php';" style="cursor: pointer;">
-                                    <td class="name-and-email" style="padding-left: 30px; vertical-align: middle;"><img src="data:image/jpeg;base64,<?php echo base64_encode($staff['profile']); ?>" alt="Profile" style="width: 40px; height: 40px; border-radius: 100%;"></td>
-                                    <td style="padding: 0px; text-align: start; color: #1C1C1D; font: normal 500 15px/normal 'Poppins'; ">
+                                    <td style="padding-left: 30px; vertical-align: middle;"><img src="data:image/jpeg;base64,<?php echo base64_encode($staff['profile']); ?>" alt="Profile" style="width: 40px; height: 40px; border-radius: 100%;"></td>
+                                    <td class="td-name">
                                         <?php echo $staff['name']; ?><br>
-                                        <span style="font: normal 400 11px/normal 'Poppins'; color: #929292;"><?php echo $staff['email']; ?></span>
+                                        <span><?php echo $staff['email']; ?></span>
                                     </td>
                                     <td>
                                         <?php
@@ -180,36 +180,63 @@ $page = $components[2];
     
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            const revenueData = [100, 150, 200, 180, 250, 220];
+        const revenueData = [0, 0, 4500, 6000, 2250, 9000, 2250];
+        const darkMode = localStorage.getItem('darkMode') === 'true';
 
-            const ctx = document.getElementById('revenueChart').getContext('2d');
+        const ctx = document.getElementById('revenueChart').getContext('2d');
 
-            const revenueChart = new Chart(ctx, {
-                type: 'line',
-                data: {
-                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
-                    datasets: [{
-                        label: 'Monthly Revenue',
-                        data: revenueData,
-                        borderColor: 'background-color: #0d0a0b;',
-                        borderWidth: 3,
-                        pointBackgroundColor: 'background-color:  #7a7adb;',
-                        pointRadius: 5,
-                        fill: false
-                    }]
+        const revenueChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ['May', 'June', 'July', 'Aug', 'Sept', 'Nov', 'Dec'],
+                datasets: [{
+                    label: 'Monthly Revenue',
+                    data: revenueData,
+                    borderColor: '#5B5A5A',
+                    borderWidth: 3,
+                    pointBackgroundColor: '#FCF6F6',
+                    pointRadius: 5,
+                    fill: false
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        color: darkMode ? '#fcf6f6' : '#1C1C1D' 
+                    },
+                    x: {
+                        color: darkMode ? '#fcf6f6' : '#1C1C1D' 
+                    }
                 },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    scales: {
-                        y: {
-                            beginAtZero: true
+                plugins: {
+                    legend: {
+                        labels: {
+                            color: darkMode ? '#fcf6f6' : '#1C1C1D'
                         }
                     }
                 }
-            });
+            }
         });
 
+    // Add or remove the dark-mode class based on the state
+    if (darkMode) {
+        document.getElementById('revenueChartContainer').classList.add('dark-mode');
+    } else {
+        document.getElementById('revenueChartContainer').classList.remove('dark-mode');
+    }
+
+    // Set text color for labels and dataset
+    const dataset = revenueChart.data.datasets[0];
+    const textColor = darkMode ? '#FCF6F6' : '#1C1C1D';
+    
+    dataset.borderColor = textColor;
+    dataset.pointBackgroundColor = textColor;
+    revenueChart.update();
+});
+        
         document.addEventListener('DOMContentLoaded', function() {
             const firstDashboardItemContent = document.getElementById('client');
 
@@ -240,12 +267,12 @@ $page = $components[2];
             }
         });
 
-        var inactivityTimeout = 900; // 15 minutes in seconds
+        var inactivityTimeout = 1000; 
 
         function checkInactivity() {
             setTimeout(function () {
                 window.location.href = '../login.php'; 
-            }, inactivityTimeout * 1000);
+            }, inactivityTimeout * 1100);
         }
 
         // Start checking for inactivity when the page loads
@@ -279,6 +306,46 @@ $page = $components[2];
             });
         });
 
+        //Dark Mode
+        function toggleDarkMode() {
+        const body = document.body;
+        const isDarkMode = body.classList.toggle('dark-mode');
+        const moonIcon = document.querySelector('.dark-mode-toggle i');
+
+        const dashboardItems = document.querySelectorAll('.dashboard-item');
+
+        if (isDarkMode) {
+            moonIcon.className = 'fas fa-sun';
+
+            moonIcon.classList.add('sun-transition');
+            setTimeout(() => {
+                moonIcon.classList.remove('sun-transition');
+            }, 1000);
+
+            // Add dark-mode class to dashboard items
+            dashboardItems.forEach(item => {
+                item.classList.add('dark-mode');
+            });
+        } else {
+            moonIcon.className = 'fas fa-moon';
+
+            moonIcon.classList.add('moon-transition');
+            setTimeout(() => {
+                moonIcon.classList.remove('moon-transition');
+            }, 1000);
+
+            // Remove dark-mode class from dashboard items
+            dashboardItems.forEach(item => {
+                item.classList.remove('dark-mode');
+            });
+        }
+
+        revenueChart.data.datasets[0].borderColor = isDarkMode ? '#FCF6F6' : '#1C1C1D';
+        revenueChart.data.datasets[0].pointBackgroundColor = isDarkMode ? '#FCF6F6' : '#7a7adb';
+        revenueChart.update();
+
+        localStorage.setItem('darkMode', isDarkMode);
+    }
     </script>
 </body>
 </html>

@@ -45,7 +45,8 @@ $page = $components[2];
     
 <body>
 
-    <section class="">
+    <section class="gallery">
+        <h4>Album Name</h4>
         
     </section>
     <!----Navbar&Sidebar----->

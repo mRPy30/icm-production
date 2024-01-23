@@ -244,7 +244,7 @@ $pageTitle = isset($pageTitles[$currentPage]) ? $pageTitles[$currentPage] : "Boo
         </div>
         <div class="profile_dropdown-content">
             <a href="profile.php">Profile</a>
-            <a type="text" id="clientlogoutPopup" class="btn-logout">Logout</a>
+            <a href="#" class="btn-logout">Logout</a>        
         </div>
     </div>
 </header>
@@ -252,36 +252,46 @@ $pageTitle = isset($pageTitles[$currentPage]) ? $pageTitles[$currentPage] : "Boo
 <body>
     <!-----popup confirmation logout------>
     <div id="logoutPopup" class="popup">
-    <div class="popup-content">
-        <p>Are you sure you want to logout?</p>
-        <button id="logoutNo">No</button>
-        <button id="logoutYes">Yes</button>
+        <div class="popup-content">
+            <p>Are you sure you want to logout?</p>
+            <button id="logoutNo">No</button>
+            <button id="logoutYes">Yes</button>
+        </div>
+
+        <div id="loadingOverlay">
+            <div class="loading-circle"></div>
+        </div>
     </div>
-</div>
-    </body>
+</body>
+
 <script>
-    function openPopup() {
-        document.getElementById("logoutPopup").style.display = "block";
-    }
+    
 
-    function closePopup() {
-        document.getElementById("logoutPopup").style.display = "none";
-    }
+    document.addEventListener("DOMContentLoaded", function () {
+            document.querySelectorAll(".btn-logout").forEach(function (btn) {
+                btn.addEventListener("click", openPopup);
+            });
 
-    function handleLogout() {
-        document.getElementById("loadingOverlay").style.display = "flex";
-        setTimeout(function() {
-            window.location.href = "login.php";
-        }, 1000); // Redirect after 3 seconds (adjust as needed)
-    }
+            document.getElementById("logoutNo").addEventListener("click", closePopup);
 
-    document.addEventListener("DOMContentLoaded", function() {
-        document.querySelectorAll(".btn-logout").forEach(function(btn) {
-            btn.addEventListener("click", openPopup);
+            document.getElementById("logoutYes").addEventListener("click", handleLogout);
         });
 
-        document.getElementById("logoutNo").addEventListener("click", closePopup);
+        function openPopup() {
+            document.getElementById("logoutPopup").style.display = "block";
+        }
 
-        document.getElementById("logoutYes").addEventListener("click", handleLogout);
-    });
+        function closePopup() {
+            document.getElementById("logoutPopup").style.display = "none";
+        }
+
+        function handleLogout() {
+            document.getElementById("loadingOverlay").style.display = "flex";
+
+            setTimeout(function () {
+                document.getElementById("loadingOverlay").style.display = "none";
+
+                window.location.href = "../login.php";
+            }, 3000);
+        }
 </script>

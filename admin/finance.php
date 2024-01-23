@@ -69,7 +69,7 @@ $resultPackages = $conn->query($sqlPackages);
                         <p>Expenses</p>
                     </div>
                     <div class="fin-box">
-                        <h4>₱ <?php echo $totalRevenue; ?></h4>
+                    <h4>₱ <?php echo number_format($totalRevenue); ?></h4>
                         <p>Overall Revenue</p>
                     </div>
                 </div>
@@ -138,25 +138,64 @@ $resultPackages = $conn->query($sqlPackages);
                         </table>
                         <div class="data-container">
                             <table class="data-table">
-                                <tbody>
-                                <?php
-                                    while ($rowPackage = $resultPackages->fetch_assoc()) {
-                                        echo "<tr>";
-                                        echo "<td>" . $rowPackage['packageDetails'] . "</td>";
-                                        echo "<td>" . $rowPackage['packageCategory'] . "</td>";
-                                        echo "<td>" . $rowPackage['packageName'] . "</td>";
-                                        echo "<td>" . $rowPackage['packagePrice'] . "</td>";
-                                        echo "<td>";
-                                        echo "<button onclick='editPackage(" . $rowPackage['packageId'] . ")'>Edit</button>";
-                                        echo "<button onclick='deletePackage(" . $rowPackage['packageId'] . ")'>Delete</button>";
-                                        echo "</td>";
-                                        echo "</tr>";
-                                    }
-                                ?>
-                                </tbody>
+                            <tbody>
+                                <?php if ($resultPackages->num_rows > 0) : ?>
+                                    <?php while ($rowPackage = $resultPackages->fetch_assoc()) : ?>
+                                        <tr>
+                                            <td><?php echo $rowPackage['packageDetails']; ?></td>
+                                            <td><?php echo $rowPackage['packageCategory']; ?></td>
+                                            <td><?php echo $rowPackage['packageName']; ?></td>
+                                            <td><?php echo '₱ ' . number_format($rowPackage['packagePrice'], 2); ?></td>
+                                            <td>
+                                                <form method="post" action="../backend/package.php" id="packageForm">
+                                                    <input type="hidden" name="packageId" value="<?php echo $rowPackage['packageId']; ?>">
+                                                    <input type="hidden" name="editPackageDetails" value="<?php echo $rowPackage['packageDetails']; ?>">
+                                                    <button type="button" name="edit" onclick="editPackage(<?php echo $rowPackage['packageId']; ?>)">Edit</button>
+                                                    <button type="submit" name="delete">Delete</button>
+                                                </form>
+                                            </td>
+                                        </tr>
+                                    <?php endwhile; ?>
+                                <?php else : ?>
+                                    <tr>
+                                        <td colspan="5">No packages found</td>
+                                    </tr>
+                                <?php endif; ?>
+                            </tbody>
                             </table>
                         </div>
                     </div>               
+                </div>
+            </div>
+            <!-- Popup -->
+            <div id="popup" class="modal">
+                <div class="modal-content">
+                    <span class="close" onclick="hidePopup()">&times;</span>
+                    <div class="form-container">
+                        <form method="post" action="../backend/package.php">
+                            <input type="hidden" name="submitPackage" value="1"> <!-- Add this line -->
+                            <input type="hidden" name="tableName" value="package"> <!-- Specify the table name -->
+                            <div class="form-group">
+                                <label for="details">Package Details</label>
+                                <input type="text" name="packageDetails" id="details" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="category">Package Category</label>
+                                <input type="text" name="packageCategory" id="category" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="packageName">Package Name</label>
+                                <input type="text" name="packageName" id="packageName" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="amount">Price Amount</label>
+                                <div class="input-group">
+                                    <input type="text" name="packagePrice" id="amount" class="form-control" oninput="formatAmount()">
+                                </div>
+                            </div>
+                            <button type="submit" class="btn-save-event">Add Package Price</button>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
@@ -169,38 +208,109 @@ $resultPackages = $conn->query($sqlPackages);
 
 </body>
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
+
+    document.addEventListener('DOMContentLoaded', function () {
         const viewMoreButton = document.querySelector('button');
 
-        viewMoreButton.addEventListener('click', function() {
+        viewMoreButton.addEventListener('click', function () {
             window.location.href = '../admin/expenses.php';
+        });
+
+        const addButton = document.querySelector('.add-button');
+        const popup = document.getElementById('popup');
+
+        addButton.addEventListener('click', function () {
+            popup.style.display = 'block';
         });
     });
 
-    // Add the following script to periodically check for inactivity and logout
-    var inactivityTimeout = 900; // 15 minutes in seconds
+    function hidePopup() {
+        const popup = document.getElementById('popup');
+        popup.style.display = 'none';
+    }
 
-function checkInactivity() {
-    setTimeout(function () {
-        window.location.href = '../login.php'; // Replace 'logout.php' with the actual logout page
-    }, inactivityTimeout * 1000);
-}
+    document.addEventListener('mousemove', function () {
+        clearTimeout(checkInactivity);
+        checkInactivity();
+    });
 
-// Start checking for inactivity when the page loads
-document.addEventListener('DOMContentLoaded', function () {
-    checkInactivity();
-});
+    document.addEventListener('keypress', function () {
+        clearTimeout(checkInactivity);
+        checkInactivity();
+    });
 
-// Reset the inactivity timer when there's user activity
-document.addEventListener('mousemove', function () {
-    clearTimeout(checkInactivity);
-    checkInactivity();
-});
+    function formatAmount() {
+        var amountInput = document.getElementById('amount');
+        var amountValue = amountInput.value.replace(/[^\d.]/g, '');
+        var numericValue = parseFloat(amountValue);
+        if (!isNaN(numericValue)) {
+            var formattedAmount = '₱' + numericValue.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+            amountInput.value = formattedAmount;
+        } else {
+            amountInput.value = '₱';
+        }
+    }
 
-document.addEventListener('keypress', function () {
-    clearTimeout(checkInactivity);
-    checkInactivity();
-});
+    document.getElementById('amount').value = '₱';
+
+    function updatePackage(packageId) {
+        const packageForm = document.getElementById('packageForm');
+        packageForm.action = '../backend/package.php';
+        packageForm.method = 'post';
+
+        // Add an input field to indicate the update action
+        const updateInput = document.createElement('input');
+        updateInput.type = 'hidden';
+        updateInput.name = 'updatePackage';
+        updateInput.value = '1';
+
+        // Add packageId to the form
+        const packageIdInput = document.createElement('input');
+        packageIdInput.type = 'hidden';
+        packageIdInput.name = 'packageId';
+        packageIdInput.value = packageId;
+
+        // Append the input fields to the form
+        packageForm.appendChild(updateInput);
+        packageForm.appendChild(packageIdInput);
+
+        // Submit the form
+        packageForm.submit();
+    }
+
+    function editPackage(packageId) {
+        showEditPopup();
+        
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "../backend/package.php", true);
+        xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                var packageDetails = JSON.parse(xhr.responseText);
+            
+                document.getElementById('details').value = packageDetails.packageDetails;
+                document.getElementById('category').value = packageDetails.packageCategory;
+                document.getElementById('packageName').value = packageDetails.packageName;
+                document.getElementById('amount').value = '₱' + parseFloat(packageDetails.packagePrice).toFixed(2);
+            
+                const submitButton = document.querySelector('.btn-save-event');
+                submitButton.textContent = 'Update Package Ratings';
+                submitButton.removeEventListener('click', addPackage);
+                submitButton.addEventListener('click', function () {
+                    updatePackage(packageId);
+                });
+            }
+        };
+        xhr.send("edit=1&packageId=" + packageId);
+    }
+
+    // Function to show the edit popup
+    function showEditPopup() {
+        const popup = document.getElementById('popup');
+        popup.style.display = 'block';
+    }
+
 </script>
+
 
 </html>

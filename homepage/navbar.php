@@ -7,9 +7,21 @@
         margin: 0;
     }
 
+    .cover-content-style {
+        background-color: transparent !important;
+    }
+
+    .cover-content-style .nav-item a {
+        color: #fcf6f6 !important;
+    }
+
+    .cover-content-style .logo img {
+        content: url('../picture/logoDark.png');
+    }
+
+
     .header-section {
         width: 100%;
-        background-color: white;
         display: flex;
         justify-content: space-between;
         align-items: center;

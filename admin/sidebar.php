@@ -2,6 +2,8 @@
 <link rel="stylesheet" href="../css/fonts.css">
 <style>
     /*****Sidebar*****/
+
+    /**Dark Mode**/
     body.dark-mode .side_bar {
         background-color: #444444; 
         color: #fff; 
@@ -11,14 +13,25 @@
         color: #fff; 
     } 
     body.dark-mode .wrapper{
-        background-color: #f9fcff;
-        background-image: linear-gradient(147deg, #f9fcff 0%, #dee4ea 74%);
+        background-color: #f6f6f6;
+        background-image: linear-gradient(315deg, #f6f6f6 0%, #e9e9e9 74%);
     }
     body.dark-mode .side_bar .side_bar_bottom ul .nav-link.active a{
-        background-color: #f9fcff;
-        background-image: linear-gradient(147deg, #f9fcff 0%, #dee4ea 74%);
+        background-color: #f6f6f6;
+        background-image: linear-gradient(315deg, #f6f6f6 0%, #e9e9e9 74%);
         color: #1c1c1c;
     }
+    body.dark-mode .side_bar .side_bar_bottom ul .nav-link a{
+        color: #FCF6F6;
+    }
+    body.dark-mode .side_bar .side_bar_bottom ul .nav-link:not(.active) a:hover {
+        background: #5B5A5A;
+        color: #fcfcfc;
+        border-radius: 30px 0px 0px 30px;
+    }
+    body.dark-mode .logo-sidebar img.logo-image {
+    content: url('../picture/logoDark.png');
+}
     .wrapper {
         height: 100%;
         display: flex;
@@ -30,8 +43,7 @@
         background-image: linear-gradient(147deg, #000000 0%, #434343 74%);
         z-index: 1001; 
     }
-
-
+    
     .side_bar {
         width: 98%;
         height: 100vh;
@@ -163,7 +175,7 @@
 <div class="wrapper">
     <nav class="side_bar">
             <div class="logo-sidebar">
-                <img src="../picture/logo.png">
+                <img class="logo-image" src="../picture/logo.png">
             </div> 
         <div class="side_bar_bottom">
             <ul>

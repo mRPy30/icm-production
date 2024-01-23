@@ -158,7 +158,7 @@ if ($result->num_rows > 0) {
             </div>
             <div class="graphs">
                 <h4>Total Project Finished</h4>
-                <canvas id="revenueChart"></canvas>
+                <canvas id="projectFinishedChart"></canvas>
             </div>
         </div>
     </div>
@@ -172,20 +172,20 @@ if ($result->num_rows > 0) {
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            const revenueData = [100, 150, 200, 180, 250, 220];
+            const revenueData = [0, 0, 4500, 6000, 2250, 9000, 2250];
 
             const ctx = document.getElementById('revenueChart').getContext('2d');
 
             const revenueChart = new Chart(ctx, {
                 type: 'line',
                 data: {
-                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+                    labels: ['May', 'June', 'July', 'Aug', 'Sept', 'Nov', 'Dec'],
                     datasets: [{
                         label: 'Monthly Revenue',
                         data: revenueData,
-                        borderColor: 'background-color: #0d0a0b;',
+                        borderColor: '#5B5A5A',
                         borderWidth: 3,
-                        pointBackgroundColor: 'background-color:  #7a7adb;',
+                        pointBackgroundColor: '#FCF6F6',
                         pointRadius: 5,
                         fill: false
                     }]
@@ -202,6 +202,33 @@ if ($result->num_rows > 0) {
             });
         });
 
+        document.addEventListener('DOMContentLoaded', function() {
+        const projectFinishedData = [0, 0, 0, 0, 0, 0, 0, 4, 3, 1, 2, 1]; // Replace with your actual data
+
+        const ctxProjectFinished = document.getElementById('projectFinishedChart').getContext('2d');
+
+        const projectFinishedChart = new Chart(ctxProjectFinished, {
+            type: 'bar',
+            data: {
+                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'July', 'Aug', 'Sept', 'Nov', 'Dec'],
+                datasets: [{
+                    label: 'Total Project Finished',
+                    data: projectFinishedData,
+                    backgroundColor: '#C2BE63',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    });
         function showSelectedMonth() {
             var monthHeader = document.getElementById("monthHeader");
             var selectedMonth = document.getElementById("monthSelect").value;

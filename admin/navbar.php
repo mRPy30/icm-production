@@ -24,6 +24,8 @@ $pageTitles = array(
     "booking.php" => "Booking Management",
     "calendar.php" => "Calendar Details",
     "client.php" => "Client Management",
+    "folders.php" => "Gallery Management",
+    "gallery.php" => "Client Name Gallery",
     "feedback.php" => "Feedback Management",
     "details.php" => "Feedback details",
     "analytics.php" => "Analytics / Records",
@@ -56,10 +58,6 @@ $pageTitle = isset($pageTitles[$currentPage]) ? $pageTitles[$currentPage] : "Adm
     body.dark-mode .navbar .profile_info {
         color: #FCF6F6;
     }
-    
-
-
-
 
     .navbar {
         width: 100%;
@@ -325,6 +323,7 @@ $pageTitle = isset($pageTitles[$currentPage]) ? $pageTitles[$currentPage] : "Adm
 </div>
     </body>
 <script>
+    //Logout Popup
     function openPopup() {
         document.getElementById("logoutPopup").style.display = "block";
     }
@@ -350,6 +349,7 @@ $pageTitle = isset($pageTitles[$currentPage]) ? $pageTitles[$currentPage] : "Adm
         document.getElementById("logoutYes").addEventListener("click", handleLogout);
     });
 
+    //Dark Mode
     function toggleDarkMode() {
         const body = document.body;
         const isDarkMode = body.classList.toggle('dark-mode');
@@ -358,16 +358,19 @@ $pageTitle = isset($pageTitles[$currentPage]) ? $pageTitles[$currentPage] : "Adm
         if (isDarkMode) {
             moonIcon.className = 'fas fa-sun';
 
-            // Add transition class for animation
             moonIcon.classList.add('sun-transition');
             setTimeout(() => {
                 moonIcon.classList.remove('sun-transition');
             }, 1000);
         } else {
             moonIcon.className = 'fas fa-moon';
+
+            moonIcon.classList.add('moon-transition');
+            setTimeout(() => {
+                moonIcon.classList.remove('moon-transition');
+            }, 1000);
         }
 
-        // Save the dark mode preference to local storage or cookies if needed
         localStorage.setItem('darkMode', isDarkMode);
     }
 
@@ -377,7 +380,7 @@ $pageTitle = isset($pageTitles[$currentPage]) ? $pageTitles[$currentPage] : "Adm
 
         if (savedDarkMode === 'true') {
             body.classList.add('dark-mode');
-            toggleDarkMode(); // Add this line to set the initial sun icon state
+            toggleDarkMode(); 
         }
     });
 

@@ -45,8 +45,19 @@ $page = $components[2];
     
 <body>
 
-    <section class="">
-        
+    <section class="folders">
+        <div class="folder-box">
+            <div class="top">
+                <h4>Client's name Album</h4>
+                <button class="add-button"><i class="fa-solid fa-plus"></i> Add Album</button>
+            </div>
+            <div class="folder-body">
+                <div class="album" onclick="window.location.href='../admin/gallery.php';" >
+                    <i class="fa-regular fa-folder-open"></i>
+                    <p>Album of client</p>
+                </div>
+            </div>               
+        </div>
     </section>
     <!----Navbar&Sidebar----->
     <?php 

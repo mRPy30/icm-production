@@ -12,21 +12,11 @@
         <?php echo "Online Event Booking"; ?>
     </title>
 
-
     <!---CSS--->
     <link rel="stylesheet" href="../css/homepage.css">
 
-    <!--CSS FRAMEWORK-->
-
-
     <!--ICON LINKS-->
-    <script src="https://kit.fontawesome.com/11a4f2cc62.js" crossorigin="anonymous"></script>
-
-    <!--FONT LINKS-->
-    <link
-        href="https://fonts.googleapis.com/css2?family=Abel&family=Inter:wght@400;800&family=Poppins:wght@400;500&display=swap"
-        rel="stylesheet"><!--ICON LINKS-->
-    <link rel="stylesheet" href="font-awesome-6/css/all.css">
+    <link rel="stylesheet" href="../font-awesome-6/css/all.css">
 
     <!--FONT LINKS-->
     <link rel="stylesheet" href="../css/fonts.css">
@@ -410,14 +400,36 @@
             document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE, and Opera
         }
 
+    document.addEventListener('DOMContentLoaded', function () {
+        const headerSection = document.querySelector('.header-section');
+        const coverContent = document.querySelector('.cover-content');
+        const portfolioSection = document.querySelector('.portfolio');
 
+        function handleScroll() {
+            const coverContentRect = coverContent.getBoundingClientRect();
+            const portfolioRect = portfolioSection.getBoundingClientRect();
 
-    </script>
-</body>
-<script>
+            if (coverContentRect.bottom > 0 && portfolioRect.top > 0) {
+                // If in cover-content, change navbar style
+                headerSection.classList.add('cover-content-style');
+            } else {
+                // If outside cover-content, revert navbar style
+                headerSection.classList.remove('cover-content-style');
+            }
+        }
+
+        // Initial check on page load
+        handleScroll();
+
+        // Listen for scroll events
+        window.addEventListener('scroll', handleScroll);
+    });
+
     document.querySelector(".button").addEventListener("click", function () {
         window.location.href = "../homepage/booking.php";
     });
-</script>
+
+    </script>
+</body>
 
 </html>

@@ -12,6 +12,9 @@ $page = $components[2];
 
 $sqlStaff = "SELECT staffID, name, email, role FROM staff";
 $resultStaff = $conn->query($sqlStaff);
+
+$sqlAdmin = "SELECT id, name, email FROM administrator";
+$resultAdmin = $conn->query($sqlAdmin);
 ?>
 
 <!DOCTYPE html>
@@ -47,10 +50,10 @@ $resultStaff = $conn->query($sqlStaff);
     
     <section class="production">
             <div class="prod-box">
-                    <button class="add-button"><i class="fa-solid fa-plus"></i> Add New</button>
+                    <button id="addButton" class="add-button"><i class="fa-solid fa-plus"></i> Add New</button>
                     <div class="search-bar">
-                        <input type="text" placeholder="Search staff name" id="client-search">
-                          <i class="fa-solid fa-magnifying-glass" type="button" onclick="searchClient()" title="Search"></i>
+                    <input type="text" placeholder="Search expenses " id="search">
+                  <i class="fa-solid fa-magnifying-glass" type="button" onclick="search()" title="Search"></i>
                     </div>
                 <div class="prod-tbl">
                     <table class="header-table">
@@ -66,25 +69,89 @@ $resultStaff = $conn->query($sqlStaff);
                     </table>
                     <div class="data-container">
                         <table class="data-table">
-                            <tbody>
+                        <tbody>
                             <?php
-                                while ($rowStaff = $resultStaff->fetch_assoc()) {
-                                    echo "<tr>";
-                                    echo "<td>" . $rowStaff['staffID'] . "</td>";
-                                    echo "<td>" . $rowStaff['name'] . "</td>";
-                                    echo "<td>" . $rowStaff['email'] . "</td>";
-                                    echo "<td>" . $rowStaff['role'] . "</td>";
-                                    echo "<td>";
-                                    echo "<button onclick='editStaff(" . $rowStaff['staffID'] . ")'>Edit</button>";
-                                    echo "<button onclick='deleteStaff(" . $rowStaff['staffID'] . ")'>Delete</button>";
-                                    echo "</td>";
-                                    echo "</tr>";
-                                }
+                            // Display data from the administrator table
+                            if ($resultAdmin->num_rows > 0) :
+                                while ($rowAdmin = $resultAdmin->fetch_assoc()) :
                             ?>
-                            </tbody>
+                                    <tr>
+                                        <td><?php echo $rowAdmin['id']; ?></td>
+                                        <td><?php echo $rowAdmin['name']; ?></td>
+                                        <td><?php echo $rowAdmin['email']; ?></td>
+                                        <td>Admin</td>
+                                        <td>
+                                            <form method="post" action="">
+                                                <button name="edit">Edit</button>
+                                                <button name="delete">Delete</button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                <?php endwhile;
+                            endif;
+
+                            // Display data from the staff table
+                            if ($resultStaff->num_rows > 0) :
+                                while ($rowStaff = $resultStaff->fetch_assoc()) :
+                                ?>
+                                    <tr>
+                                        <td><?php echo $rowStaff['staffID']; ?></td>
+                                        <td><?php echo $rowStaff['name']; ?></td>
+                                        <td><?php echo $rowStaff['email']; ?></td>
+                                        <td><?php echo $rowStaff['role']; ?></td>
+                                        <td>
+                                            <form method="post" action="">
+                                                <button name="edit">Edit</button>
+                                                <button name="delete">Delete</button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                <?php endwhile;
+                            endif;
+                            ?>
+                        </tbody>
                         </table>
                     </div>
-                </div>               
+                </div>
+                <!-- Popup -->
+                <div id="popup" class="modal">
+                    <div class="modal-content">
+                        <span class="close" onclick="hidePopup()">&times;</span>
+                        <div class="form-container">
+                            <form method="post" action="../backend/production.php" id="addMemberForm">
+                                <input type="hidden" name="tableName" value="package"> <!-- Specify the table name -->
+                                <div class="form-group">
+                                    <label for="details">Name</label>
+                                    <input type="text" name="username" id="" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label for="category">Select Role</label>
+                                    <select name="category" id="roleSelect" class="form-control" onchange="changeRole()">
+                                        <option value="Admin">Admin</option>
+                                        <option value="Staff">Staff</option>
+                                    </select>
+                                </div>
+                                <div class="form-group" id="emailField">
+                                    <label for="packageName">Email</label>
+                                    <input type="text" name="email" id="email" class="form-control">
+                                </div>
+                                <div class="form-group" id="roleField">
+                                    <label for="amount">Role</label>
+                                    <div class="input-group">
+                                        <input type="text" name="role" id="role" class="form-control" oninput="formatAmount()">
+                                    </div>
+                                </div>
+                                <div class="form-group" id="passwordFields" style="display:none;">
+                                    <label for="password">Password</label>
+                                    <input type="password" name="password" id="password" class="form-control">
+                                    <label for="confirmPassword">Confirm Password</label>
+                                    <input type="password" name="confirmPassword" id="confirmPassword" class="form-control">
+                                </div>
+                                <button type="submit" class="btn-save-event" id="submitBtn">Add Production Member</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>      
             </div>
     </section>
 
@@ -95,6 +162,55 @@ $resultStaff = $conn->query($sqlStaff);
     ?> 
 
     <script>
+
+        function showPopup() {
+                var popup = document.getElementById("popup");
+                popup.style.display = "block";
+            }
+        
+            function hidePopup() {
+                var popup = document.getElementById("popup");
+                popup.style.display = "none";
+            }
+        
+            document.getElementById("addButton").addEventListener("click", function() {
+                showPopup();
+        });
+
+        function search() {
+            var searchValue = document.getElementById("search").value.toLowerCase().trim();
+
+            var rows = document.querySelectorAll(".data-table tbody tr");
+
+            for (var i = 0; i < rows.length; i++) {
+                var nameColumn = (rows[i].querySelector("td:nth-child(2)").textContent + " " + rows[i].querySelector("td:nth-child(4)").textContent).toLowerCase();
+
+                if (nameColumn.includes(searchValue)) {
+                    rows[i].style.display = "";
+                } else {
+                    rows[i].style.display = "none";
+                }
+            }
+        }
+
+        function changeRole() {
+            var roleSelect = document.getElementById("roleSelect");
+            var emailField = document.getElementById("emailField");
+            var roleField = document.getElementById("roleField");
+            var passwordFields = document.getElementById("passwordFields");
+
+            if (roleSelect.value === "Admin") {
+                emailField.style.display = "block";
+                roleField.style.display = "none";
+                passwordFields.style.display = "block";
+            } else {
+                emailField.style.display = "block";
+                roleField.style.display = "block";
+                passwordFields.style.display = "none";
+            }
+        }
+
+
         // Add the following script to periodically check for inactivity and logout
         var inactivityTimeout = 900; // 15 minutes in seconds
 

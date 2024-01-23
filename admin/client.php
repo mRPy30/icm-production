@@ -101,8 +101,8 @@ if (isset($_POST['delete'])) {
                     <?php
                         foreach ($clientData as $client) {
                             echo '<tr>';
-                            echo '<td>' . $client['id'] . '</td>';
-                            echo '<td><img src="data:image/jpeg;base64,' . base64_encode($client['profile']) . '" class="profile-image"></td>';
+                            echo '<td onclick="window.location.href=\'../admin/folders.php\';" style="cursor: pointer;">' . $client['id'] . '</td>';
+                            echo '<td onclick="window.location.href=\'../admin/folders.php\';" style="cursor: pointer;"><img src="data:image/jpeg;base64,' . base64_encode($client['profile']) . '" class="profile-image"></td>';
                             echo '<td>' . $client['firstName'] . '</td>';
                             echo '<td>' . $client['lastName'] . '</td>';
                             echo '<td>

@@ -8,27 +8,13 @@ body {
     background-color: #dfdfdf;
     overflow-x: hidden;
 }
-
 body.dark-mode {
     background-color: #1c1c1c;
     color: #ffffff;
 }
 
-.navbar.dark-mode {
-    background-color: #333333;
-    color: #ffffff;
-}
 
-.dark-mode-toggle {
-    cursor: pointer;
-    color: #ffffff;
-    font-size: 20px;
-    margin-right: 10px;
-}
 
-.dashboard-item.dark-mode{
-    background-color: #444444;
-}
 /****Dashboard*****/
 
 .dashboard {
@@ -78,7 +64,7 @@ body.dark-mode {
 
 .dashboard-item.hovered h2,
 .dashboard-item.hovered p {
-    color: #FCF6F6;
+    color: #FCF6F6 !important;
 }
 
 .icon-container-client{
@@ -161,11 +147,102 @@ body.dark-mode {
     border-bottom: 1px solid #CCCCCC;
 }
 
+.prod-table .td-name {
+    padding: 0px;
+    text-align: start;
+    color: #1C1C1D;
+    font: normal 500 15px/normal 'Poppins';
+}
+
+.prod-table .td-name span {
+    font: normal 400 11px/normal 'Poppins'; 
+    color: #929292;
+}
+
 .prod-table tbody tr:hover {
     background-color: #e3e3e3;
     transition: all .3s ease;
 }
 
+.table-container::-webkit-scrollbar {
+    width: 8px;
+}
+
+.table-container::-webkit-scrollbar-thumb {
+    background-color: #CCCCCC;
+}
+
+.table-container::-webkit-scrollbar-track {
+    background-color: #FCF6F6;
+}
+/****Dark-mode dashboard*****/
+body.dark-mode .dashboard-item {
+    background-color: #444444;
+}
+body.dark-mode .dashboard-item h2{
+    color: #FCF6F6;
+}
+body.dark-mode .dashboard-item p{
+    color: #FCF6F6;
+}
+body.dark-mode .dashboard-item.hovered h2,
+.dashboard-item.hovered p {
+    color: #1c1c1c !important;
+}
+body.dark-mode .dashboard-item.hovered{
+    color: #1c1c1c;
+}
+body.dark-mode .dashboard-item.hovered {
+    background-color: #FCF6F6;
+    color: #1c1c1c;
+}
+
+body.dark-mode .tbl-prod{
+    background-color: #444444;
+}
+body.dark-mode .tbl-prod .title-bar {
+    background-color: #FCF6F6;
+    color: #1C1C1D;
+}
+
+body.dark-mode .tbl-prod .prod-table .header{
+    background-color: #5B5A5A;
+    color: #FCF6F6;
+}
+
+body.dark-mode .table-container::-webkit-scrollbar {
+    width: 8px;
+}
+
+body.dark-mode .table-container::-webkit-scrollbar-thumb {
+    background-color: #C2BE63;
+}
+
+body.dark-mode .table-container::-webkit-scrollbar-track {
+    background-color: #5B5A5A;
+}
+
+body.dark-mode .prod-table td {
+    border-bottom: 1px solid #5B5A5A;
+}
+
+body.dark-mode .prod-table tbody tr:hover {
+    background-color: #5B5A5A;
+    transition: all .3s ease;
+}
+body.dark-mode .prod-table .td-name{
+    color: #FCF6F6;
+}
+body.dark-mode .prod-table .td-name span{
+    color: #d3d3d3;
+}
+body.dark-mode .total-revenue{
+    background-color: #444444;
+    color: #FCF6F6;
+}
+body.dark-mode .total-revenue h4{
+    color: #FCF6F6;
+}
 
 /*****Booking & Client*****/
 
@@ -250,6 +327,17 @@ td form button[name="decline"]:hover{
     overflow-x: hidden;
     height: 53vh;
 }
+.data-table-container::-webkit-scrollbar {
+    width: 8px;
+}
+
+.data-table-container::-webkit-scrollbar-thumb {
+    background-color: #CCCCCC;
+}
+
+.data-table-container::-webkit-scrollbar-track {
+    background-color: #FCF6F6;
+}
 
 .data-table {
     border-collapse: collapse;
@@ -262,7 +350,6 @@ th, td {
     padding: 10px;
     border-bottom: 1px solid #CCCCCC;
 }
-
 
 th {
     position: sticky;
@@ -331,15 +418,31 @@ td .profile-image {
     margin-top: 7%;
 }
 
-.client td:nth-child(1),
-.client td:nth-child(2),
-.client td:nth-child(3),
-.client td:nth-child(4) {
-    border-right: 1px solid #CCCCCC;
+
+/**dark-mode booking & client**/
+body.dark-mode .booking-box {
+    background-color: #444444;
 }
+body.dark-mode .booking-box h4{
+    color: #FCF6F6;
+}
+body.dark-mode .data-table td  {
+    border: 1px solid #5B5A5A;
+}
+
+body.dark-mode .data-table tbody tr:hover {
+    background-color: #5B5A5A;
+    transition: all .3s ease;
+}
+body.dark-mode .header-table{
+    background-color: #bbbbbb;
+    color: #1C1C1D;
+}
+
+
 /*****Admin Calendar*****/
 .calendar {
-    margin: 3.5% 0 0 14%;
+    margin: 3% 0 0 14%;
     padding: 4%;
     display: flex;
     justify-content: space-between;
@@ -370,7 +473,7 @@ td .profile-image {
 
 #calendar {
     border: 1px solid #ccc;
-    height: 78.2vh; 
+    height: 82.2vh; 
     font: normal 600 16px/normal 'Poppins';
     flex-grow: 1; 
     
@@ -439,8 +542,8 @@ td .profile-image {
     font: normal 500 11px/normal 'Poppins';
     color: #FCF6F6;
 }
-#calendar .fc-unthemed td.fc-today{
-    background-color: #fff5c0;
+#calendar td.fc-today{
+    background-color: #f6f3ab;
 }
 
 .modal {
@@ -503,7 +606,7 @@ td .profile-image {
 
 .form-group input[type="text"],
 .form-group input[type="date"],
-.form-group input[type="color"],
+.form-group input[type="password"],
 .form-group select {
     width: 100%;
     padding: 8px;
@@ -516,7 +619,7 @@ td .profile-image {
 
 .form-group input[type="text"],
 .form-group input[type="date"],
-.form-group input[type="color"]:focus {
+.form-group input[type="password"]:focus {
     outline-color: #807f7f;
 }
 
@@ -536,6 +639,16 @@ td .profile-image {
 
 .btn-save-event:hover {
     background-color: #C2BE63;
+}
+/***dark-mode calendar**/
+body.dark-mode .event_management{
+    background-color: #444444;
+}
+body.dark-mode #calendar .fc-day-header{
+    color: #1C1C1D;
+}
+body.dark-mode #calendar td.fc-today{
+    color: #1c1c1c;
 }
 /******end****/
 
@@ -609,7 +722,7 @@ td .profile-image {
 .popup {
     display: none;
     position: fixed;
-    top: 50%;
+    top: 45%;
     left: 50%;
     transform: translate(-50%, -50%);
     padding: 20px;
@@ -1310,11 +1423,53 @@ form .profile-section p{
     position: absolute;
 }
 
+.search-bar #search {
+    width: 70%;
+    border: none;
+    border-bottom: 2px solid #9b9b9b;
+    outline: 0;
+    font-size: 17px;
+    color: #1C1C1D;
+    background: transparent;
+    transition: border-color 0.2s;
+}
+.search-bar #search::placeholder {
+    color: #9b9b9b;
+    font: normal 13px/normal 'Poppins';
+}
+
+.search-bar #search:focus{
+  font-weight: 700;
+  border-width: 3px;
+  border-image: linear-gradient(to right, #C2BE63, #c0b71a);
+  border-image-slice: 1;
+  font: normal 15px/normal 'Poppins';
+}
+.search-bar button{
+    margin-top: 7%;
+} 
 .form-group input#amount-exp{
     font: normal 500 13px/normal 'Poppins';
     margin-right: 3px;
 }
+td form button[name="edit"] {
+    background-color: #17A1FA;
+    border-radius: 6px;
+    font: normal 11px/normal 'Poppins';
+    height: 5%;
+    color: #FFF;
+    border: none;
+    padding: 5px 10px;
+    text-align: center;
+    display: inline-block;
+    cursor: pointer;
+    text-decoration: none;
+}
 
+td form button[name="edit"]:hover{
+    background-color: rgb(0, 62, 120);
+    transition: 0.4s;
+}
 /*****production****/
 .production{
     margin: 5% 0 0 13%;
@@ -1399,4 +1554,83 @@ form .profile-section p{
 }
 .content-box .add-button:hover {
     background-color: #C2BE63;
+}
+
+/******Gallery Folders********/
+.folders{
+    padding: 0px 0px 20px 0px;
+    margin: 9% 0% 0% 18.5%;
+    border-radius: 5px;
+    background-color: #FCF6F6;
+    height: 75%;
+    position: absolute;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25), 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    width: 77%;
+}
+
+.folder-box h4{
+    font: normal 600 16px/normal 'Poppins';
+    color: #1c1c1c;
+    text-align: start;
+    margin-left: 2%;
+}
+
+.folder-box .top{
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 0px 0px 0px;
+
+}
+
+.folder-box .add-button{
+    background-color: #E1DE8F;
+    font: normal 500 13px/normal 'Poppins';
+    color: #1c1c1c;
+    padding: 5px 15px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    transition: background-color 0.3s ease-in-out; 
+    box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.2);
+    margin-right: 5%;
+}
+.folder-box .add-button:hover {
+    background-color: #C2BE63;
+}
+
+.folder-body{
+    display: flex;
+    padding: 20px 0px 0px 50px;
+    cursor: pointer;
+}
+
+.folder-body i{
+    color: #C2BE63;
+    font-size: 120px;
+}
+
+.folder-body p{
+    font: normal 500 13px/normal 'Poppins';
+    color: #1c1c1c;
+}
+
+/*****Gallery****/
+.gallery{
+    padding: 0px 0px 20px 0px;
+    margin: 9% 0% 0% 18.5%;
+    border-radius: 10px;
+    background-color: #FCF6F6;
+    height: 75%;
+    position: absolute;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25), 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    width: 77%;
+}
+
+.gallery h4{
+    font: normal 600 16px/normal 'Poppins';
+    color: #1c1c1c;
+    text-align: center;
+    margin-left: 2%;
 }

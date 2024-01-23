@@ -12,6 +12,15 @@ $path = parse_url($directoryURI, PHP_URL_PATH);
 $components = explode('/', $path);
 $page = $components[2];
 
+// Fetch data from the content table
+$query = "SELECT pictureID, pictureName, datePosted FROM content";
+$result = mysqli_query($conn, $query);
+
+// Check if the query was successful
+if (!$result) {
+    die("Query failed: " . mysqli_error($conn));
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -64,6 +73,32 @@ $page = $components[2];
                                 <th>Actions</th>
                             </tr>
                         </thead>
+                        <tbody>
+                            <?php
+                            // Counter variable for numbering rows
+                            $counter = 1;
+
+                            // Loop through the fetched data and display it in the table
+                            while ($row = mysqli_fetch_assoc($result)) {
+                                echo "<tr>";
+                                echo "<td>" . $counter . "</td>";
+                                echo "<td>" . $row['pictureName'] . "</td>";
+                                echo "<td>" . date('F j, Y', strtotime($row['datePosted'])) . "</td>";
+                                echo "<td>" . '<form method="post" action="" id="">
+                                                <button type="button" name="edit" >Edit</button>
+                                                <button type="submit" name="delete">Delete</button>
+                                            </form>'. 
+                                        "</td>";
+                                echo "</tr>";
+
+                                // Increment the counter
+                                $counter++;
+                            }
+
+                            // Free the result set
+                            mysqli_free_result($result);
+                            ?>
+                        </tbody>
                     </table>
                 </div>               
             </div>
