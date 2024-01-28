@@ -1,0 +1,14 @@
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    background-color: #dfdfdf;
+    overflow-x: hidden;
+}
+body.dark-mode {
+    background-color: #1c1c1c;
+    color: #ffffff;
+}

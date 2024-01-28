@@ -278,7 +278,7 @@ body.dark-mode .total-revenue h4{
     border-right: 1px solid #CCCCCC;
 } 
 
-td form button[name="accept"]{
+.booking .accept{
     background-color: #00c72e;
     border-radius: 10px;
     font: normal 11px/normal 'Poppins';
@@ -291,12 +291,12 @@ td form button[name="accept"]{
     cursor: pointer;
     text-decoration: none;
 }
-td form button[name="accept"]:hover{
+.booking .accept:hover{
     background-color: #00861f;
     transition: 0.4s;
 }
 
-td form button[name="decline"] {
+.booking .decline {
     background-color: #ff3628;
     border-radius: 10px;
     font: normal 11px/normal 'Poppins';
@@ -309,7 +309,7 @@ td form button[name="decline"] {
     cursor: pointer;
     text-decoration: none;
 }
-td form button[name="decline"]:hover{
+.booking .decline:hover{
     background-color: rgb(172, 3, 0);
     transition: 0.4s;
 }
@@ -578,6 +578,15 @@ body.dark-mode .header-table{
     max-width: 600px;
 }
 
+@keyframes slideIn {
+    from {
+        top: -50%; 
+    }
+    to {
+        top: 35%; 
+    }
+}
+
 
 .close {
     color: #aaa;
@@ -619,9 +628,53 @@ body.dark-mode .header-table{
 
 .form-group input[type="text"],
 .form-group input[type="date"],
-.form-group input[type="password"]:focus {
+.form-group input[type="password"],
+.form-group input[type="reason"]:focus {
     outline-color: #807f7f;
 }
+
+.modal-content form h3{
+    font: normal 500 23px/normal 'Poppins';
+    margin-bottom: 15px;
+}
+
+.form-group#displayPic{
+    border: 1px solid #444444;
+    padding: 10px;
+    border-radius: 10px;
+}
+#displayPic {
+    display: flex;
+    justify-content: center;
+}
+
+#selectedImage {
+    max-width: 300%;
+    width: 55%;
+}
+
+.form-decline select{
+    width: 100%;
+    height: 50px;
+    padding: 8px;
+    border: 1px solid #FCF6F6;;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font: normal 400 13px/normal 'Poppins';
+    box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.25);
+    margin-bottom: 15px;
+
+}
+.form-decline{
+    margin-bottom: 15px;
+}
+.form-decline label {
+    display: block;
+    margin-bottom: 15px;
+    font: normal 500 17px/normal 'Poppins';
+}
+
+
 
 .btn-save-event {
     background-color: #E1DE8F;
@@ -775,6 +828,39 @@ button#deleteYes{
 
 button#deleteYes:hover {
     background: #D25A5A;
+}
+
+button#acceptYes{
+    padding: 10px 20px;
+    margin: 5px;
+    border: none;
+    background: #FF8787;
+    border-radius: 8px;
+    color: #1c1c1c;
+    font: normal 400 14px/15px 'Poppins';
+    cursor: pointer;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    transition: all 200ms linear;
+}
+
+button#acceptYes:hover {
+    background: #D25A5A;
+}
+button#acceptNo {
+    padding: 10px 20px;
+    margin: 5px;
+    border: none;
+    border-radius: 8px;
+    color: #1c1c1c;
+    font: normal 400 14px/15px 'Poppins';
+    cursor: pointer;
+    background: #DADADA;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    transition: all 200ms linear;
+}
+
+button#acceptNo:hover {
+    background: #9b9b9b;
 }
 
 #loadingOverlay {
@@ -1616,6 +1702,16 @@ td form button[name="edit"]:hover{
     color: #1c1c1c;
 }
 
+body.dark-mode .folders{
+    background-color: #444444;
+}
+body.dark-mode .folder-box h4{
+    color: #FCF6F6;
+}
+body.dark-mode .folder-body p{
+    color: #FCF6F6;
+}
+
 /*****Gallery****/
 .gallery{
     padding: 0px 0px 20px 0px;
@@ -1628,9 +1724,14 @@ td form button[name="edit"]:hover{
     width: 77%;
 }
 
+body.dark-mode .gallery{
+    background-color: #1c1c1c;
+}
+
 .gallery h4{
     font: normal 600 16px/normal 'Poppins';
     color: #1c1c1c;
     text-align: center;
     margin-left: 2%;
 }
+

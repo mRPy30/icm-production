@@ -92,11 +92,8 @@ if ($result->num_rows > 0) {
                         <?php if ($booking['status'] == 'Accepted' || $booking['status'] == 'Declined'): ?>
                             <?php echo $booking['status']; ?>
                         <?php elseif ($booking['status'] == 'Pending'): ?>
-                            <form method="POST" action="../backend/status.php">
-                                <input type="hidden" name="schedule_id" value="<?php echo $booking['bookingId']; ?>">
-                                <button type="submit" name="accept">Accept</button>
-                                <button type="submit" name="decline">Decline</button>
-                            </form>
+                                <button class="accept" onclick="openPopup('<?php echo $booking['bookingId']; ?>')">Accept</button>
+                                <button class="decline" onclick="openDeclinePopup('<?php echo $booking['bookingId']; ?>')">Decline</button>
                         <?php endif; ?>
                     </td>
                 </tr>
@@ -104,9 +101,103 @@ if ($result->num_rows > 0) {
                 </tbody>
             </table>
         </div>
+        <!-- Popup -->
+        <div id="customPopup" class="popup">
+            <div class="popup-content">
+                <p>Do you want to accept this booking request?</p>
+                <input type="hidden" id="bookingId">
+                <button id="acceptNo" onclick="closeAcceptPopup()">No</button>
+                <button id="acceptYes" onclick="acceptBooking()">Yes</button>
+            </div>
+        </div>
+
+        <div id="declinePopup" class="popup">
+    <span class="close" onclick="closeDeclinePopup()">&times;</span>
+    <div class="form-decline">
+        <label for="declineReason">Reason for declining booking request?</label>
+        <input type="hidden" id="declineBookingId">
+        <!-- Use a select dropdown for the reason -->
+        <select id="declineReason" name="declineReason">
+            <option value="" selected disabled>Select a reason</option>
+            <option value="Transport/Travel Distance Issue">Transport/Travel Distance Issue</option>
+            <option value="Fully booked schedule">Fully booked schedule</option>
+            <option value="Personal Commitment">Personal Commitment</option>
+            <option value="Equipment unavailability">Equipment unavailability</option>
+            <option value="Weather Conditions">Weather Conditions</option>
+        </select>
+        <button class="btn-save-event" onclick="declineBooking()">Submit</button>
+    </div>
+</div>
+    </div>
     </section>
 </body>
 <script>
+
+function openPopup(bookingId) {
+        document.getElementById('customPopup').style.display = 'block';
+        document.getElementById('bookingId').value = bookingId;
+    }
+
+    function closeAcceptPopup() {
+        document.getElementById('customPopup').style.display = 'none';
+    }
+
+
+    function acceptBooking() {
+        var bookingId = document.getElementById('bookingId').value;
+
+        // Perform the update to the status in the database using AJAX or form submission
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', '../backend/status.php', true);
+        xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                // Check the response from the server if needed
+                console.log(xhr.responseText);
+                // Close the popup
+                closePopup();
+                // Reload the page to update the displayed data
+                window.location.reload();
+            }
+        };
+
+        // Send the request with the bookingId and action (accept)
+        xhr.send('schedule_id=' + bookingId + '&accept=1');
+    }
+
+
+    function openDeclinePopup(bookingId) {
+    document.getElementById('declinePopup').style.display = 'block';
+    document.getElementById('declineBookingId').value = bookingId;
+}
+
+function closeDeclinePopup() {
+    document.getElementById('declinePopup').style.display = 'none';
+}
+
+function declineBooking() {
+    var bookingId = document.getElementById('declineBookingId').value;
+    var reasonSelect = document.getElementById('declineReason');
+    var reason = reasonSelect.options[reasonSelect.selectedIndex].value;
+
+    // Perform the update to the status and reason in the database using AJAX or form submission
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', '../backend/status.php', true);
+    xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+            // Check the response from the server if needed
+            console.log(xhr.responseText);
+            // Close the popup
+            closeDeclinePopup();
+            // Reload the page to update the displayed data
+            window.location.reload();
+        }
+    };
+
+    // Send the request with the bookingId, action (decline), and reason
+    xhr.send('schedule_id=' + bookingId + '&decline=1&reason=' + encodeURIComponent(reason));
+}
     // Add the following script to periodically check for inactivity and logout
     var inactivityTimeout = 900; // 15 minutes in seconds
 

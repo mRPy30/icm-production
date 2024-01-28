@@ -15,7 +15,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         // Query the client and coordinator tables for a matching email and password
         $query = "SELECT id, 'client' as role FROM client WHERE email = '$email' AND password = '$hashedPassword'
             UNION
-            SELECT id, 'admin' as role FROM administrator WHERE email = '$email' AND password = '$password'";
+            SELECT id, 'admin' as role FROM administrator WHERE email = '$email' AND password = '$password'
+            UNION
+            SELECT staffID, 'staff' as role FROM staff WHERE email = '$email' AND password = '$password'";
+
         $result = mysqli_query($conn, $query);
 
         if (!$result) {
@@ -72,8 +75,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         window.location.href = "admin/dashboard.php?id=' . $id . '";
                     } else if ("' . $role . '" === "client") {
                         window.location.href = "client/booking.php?id=' . $id . '";
+                    } else if ("' . $role . '" === "staff") {
+                        window.location.href = "staff/dashboard.php?id=' . $id . '";
                     }
-                }, 2000); // Delay for 2 seconds, you can adjust this value as needed
+                }, 2000);
             </script>';
             exit();
         } else {

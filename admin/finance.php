@@ -21,6 +21,16 @@ if ($resultRevenue->num_rows > 0) {
     $totalRevenue = 0;
 }
 
+$sqlExp = "SELECT SUM(amount) AS amount FROM expenses"; 
+$resultExp = $conn->query($sqlExp);
+
+if ($resultExp->num_rows > 0) {
+    $rowExp = $resultExp->fetch_assoc();
+    $totalExp = $rowExp['amount'];
+} else {
+    $totalExp = 0;
+}
+
 $sqlExpenses = "SELECT date, category FROM expenses";
 $resultExpenses = $conn->query($sqlExpenses);
 
@@ -65,7 +75,7 @@ $resultPackages = $conn->query($sqlPackages);
             <div class="left-finance">
                 <div class="top">
                     <div class="fin-box">
-                        <h4>₱40,000</h4>
+                    <h4>₱ <?php echo number_format($totalExp); ?></h4>
                         <p>Expenses</p>
                     </div>
                     <div class="fin-box">

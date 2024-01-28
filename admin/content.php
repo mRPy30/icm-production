@@ -61,7 +61,7 @@ if (!$result) {
             <div class="content-box">
                 <div class="top">
                     <h4>Upload Content Details</h4>
-                    <button class="add-button"><i class="fa-solid fa-plus"></i> Add New</button>
+                    <button id="addButton" class="add-button"><i class="fa-solid fa-plus"></i> Add New</button>
                 </div>
                 <div class="content-tbl">
                     <table class="header-table">
@@ -84,9 +84,10 @@ if (!$result) {
                                 echo "<td>" . $counter . "</td>";
                                 echo "<td>" . $row['pictureName'] . "</td>";
                                 echo "<td>" . date('F j, Y', strtotime($row['datePosted'])) . "</td>";
-                                echo "<td>" . '<form method="post" action="" id="">
+                                echo "<td>" . '<form method="post" action="" id="deleteForm">
+                                                <input type="hidden" name="pictureID" value="' . $row['pictureID'] . '">
                                                 <button type="button" name="edit" >Edit</button>
-                                                <button type="submit" name="delete">Delete</button>
+                                                <button type="button" name="delete" onclick="showDeleteConfirmationPopup()">Delete</button>
                                             </form>'. 
                                         "</td>";
                                 echo "</tr>";
@@ -102,6 +103,49 @@ if (!$result) {
                     </table>
                 </div>               
             </div>
+            <!-- Popup -->
+            <div id="popup" class="modal">
+                <div class="modal-content">
+                    <span class="close" onclick="hidePopup()">&times;</span>
+                    <div class="form-container">
+                    <form method="post" action="../backend/content.php" id="addMemberForm" enctype="multipart/form-data">
+                        <input type="hidden" name="tableName" value="content"> <!-- Specify the table name -->
+                        <div class="form-group">
+                            <label for="details">Title</label>
+                            <input type="text" name="pictureName" id="pictureName" class="form-control">
+                        </div>
+                        <div class="form-group">
+                        <label for="category">Page post</label>
+                        <select name="postedPage" id="pageSelect" class="form-control" onchange="changeRole()">
+                                    <option value="home">homepage</option>
+                                    <option value="portfolio">portfolio</option>
+                                    <option value="about">about</option>
+                                    <option value="service">service</option>
+                                    <option value="contacts">contacts</option>
+                                </select>
+                            </div>
+                            <div class="form-group" id="uploadImg">
+                                <label for="imageInput" id="uploadIconLabel">
+                                    <i class="fa-regular fa-image"></i>
+                                </label>
+                                <input type="file" name="image" id="imageInput" accept="image/*" style="display: none;" onchange="displaySelectedImage(this);">
+                            </div>
+                            <div class="form-group" id="displayPic">  
+                                <img id="selectedImage" alt="Uploaded Image">
+                            </div>
+                            <button type="submit" class="btn-save-event" id="submitBtn">Upload Coverpage</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div id="deleteConfirmationPopup" class="popup">
+                <div class="popup-content">
+                    <span class="close" onclick="closeDeleteConfirmationPopup()">&times;</span>
+                    <p>Do you want to delete posted content?</p>
+                    <button onclick="closeDeleteConfirmationPopup()">No</button>
+                    <button onclick="deleteContent()">Yes</button>
+                </div>
+            </div>
         </div>
     </section>
     
@@ -115,6 +159,83 @@ if (!$result) {
     
 </body>
 <script>
+
+function showDeleteConfirmationPopup() {
+    var popup = document.getElementById("deleteConfirmationPopup");
+    popup.style.display = "block";
+}
+
+// Function to close the delete confirmation popup
+function closeDeleteConfirmationPopup() {
+    var popup = document.getElementById("deleteConfirmationPopup");
+    popup.style.display = "none";
+}
+
+function deleteContent() {
+    var pictureID = document.getElementById('deleteForm').elements['pictureID'].value;
+
+    // Create a new XMLHttpRequest object
+    var xhr = new XMLHttpRequest();
+
+    // Configure it to send a POST request to your backend script
+    xhr.open('POST', '../backend/content.php', true);
+    xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+
+    // Define the callback function to handle the response
+    xhr.onload = function () {
+        if (xhr.status >= 200 && xhr.status < 300) {
+            // Successful response
+            var response = JSON.parse(xhr.responseText);
+            if (response.status === 'success') {
+                closeDeleteConfirmationPopup();
+                alert('Content deleted successfully.');
+                // You may want to update the table or perform other actions here
+            } else {
+                // Display an error message
+                alert('Error deleting content: ' + response.message);
+            }
+        } else {
+            // Error response
+            alert('Error deleting content. Please try again.');
+        }
+    };
+
+    // Send the request with the pictureID as data
+    xhr.send('deleteContent=true&pictureID=' + pictureID);
+}
+
+
+function displaySelectedImage(input) {
+    var selectedImage = document.getElementById('selectedImage');
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function(e) {
+            selectedImage.src = e.target.result;
+        };
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+
+document.getElementById('uploadIconLabel').addEventListener('click', function() {
+    document.getElementById('imageInput').click();
+});
+
+
+function showPopup() {
+                var popup = document.getElementById("popup");
+                popup.style.display = "block";
+            }
+        
+            function hidePopup() {
+                var popup = document.getElementById("popup");
+                popup.style.display = "none";
+            }
+        
+            document.getElementById("addButton").addEventListener("click", function() {
+                showPopup();
+        });
+
+    
     // Add the following script to periodically check for inactivity and logout
     var inactivityTimeout = 900; // 15 minutes in seconds
 

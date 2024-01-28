@@ -9,6 +9,7 @@
 
     .cover-content-style {
         background-color: transparent !important;
+        box-shadow: none !important;
     }
 
     .cover-content-style .nav-item a {
@@ -18,7 +19,15 @@
     .cover-content-style .logo img {
         content: url('../picture/logoDark.png');
     }
+    .cover-content-style .register button{
+        background-color: #fcf6f6;
+        color: #1c1c1d;
+    }
 
+    .cover-content-style .nav-item a:hover {
+        color: #C2BE63 !important;
+        transition: all 0.3s;
+    }
 
     .header-section {
         width: 100%;
@@ -27,8 +36,9 @@
         align-items: center;
         padding: 0px 5% 0px 5%;
         position: fixed;
-        background: #fff;
+        background: #fcf6f6;
         z-index: 9999;
+        box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.2);
     }
 
     .logo {
@@ -85,7 +95,7 @@
         width: 100px;
         height: 34px;
         left: 95vw;
-        font: normal 400 15px/normal 'Poppins';
+        font: normal 500 15px/normal 'Poppins';
         filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
         display: inline-block;
         cursor: pointer;
@@ -95,8 +105,6 @@
         transition: background-color 0.3s;
         color: #FCF6F6;
         border: none;
-        border: 1px solid #000;
-
     }
 
     .register button:hover {

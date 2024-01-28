@@ -103,8 +103,8 @@ if (isset($_POST['delete'])) {
                             echo '<tr>';
                             echo '<td onclick="window.location.href=\'../admin/folders.php\';" style="cursor: pointer;">' . $client['id'] . '</td>';
                             echo '<td onclick="window.location.href=\'../admin/folders.php\';" style="cursor: pointer;"><img src="data:image/jpeg;base64,' . base64_encode($client['profile']) . '" class="profile-image"></td>';
-                            echo '<td>' . $client['firstName'] . '</td>';
-                            echo '<td>' . $client['lastName'] . '</td>';
+                            echo '<td onclick="window.location.href=\'../admin/folders.php\';">' . $client['firstName'] . '</td>';
+                            echo '<td onclick="window.location.href=\'../admin/folders.php\';">' . $client['lastName'] . '</td>';
                             echo '<td>
                                     <form method="POST" action="../admin/client.php">
                                         <input type="hidden" name="client_id" value="' . $client['id'] . '">

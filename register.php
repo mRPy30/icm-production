@@ -1,6 +1,20 @@
 <?php
-//Connection
+// Connection
 include 'backend/dbcon.php';
+
+// Include PHPMailer autoloader
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
+
+//Load Composer's autoloader
+require 'vendor/autoload.php';
+
+// Function to generate a random 6-digit verification code
+function generateVerificationCode() {
+    return sprintf("%06d", mt_rand(1, 999999));
+}
 
 if (isset($_POST['submit'])) {
     $firstname = mysqli_real_escape_string($conn, $_POST["firstname"]);
@@ -24,19 +38,49 @@ if (isset($_POST['submit'])) {
     // Generate a 5-digit customer ID
     $clientID = sprintf("%05d", mt_rand(1, 99999));
 
+    // Generate a 6-digit verification code
+    $verificationCode = generateVerificationCode();
+
     // Insert customer data into the database
-    $sql = "INSERT INTO client (id, firstName, lastName, email, password, confirmPass)
-            VALUES ('$clientID', '$firstname', '$lastname', '$email', '$password', '$confirm_password')";
+    $sql = "INSERT INTO client (id, firstName, lastName, email, password, confirmPass, code)
+            VALUES ('$clientID', '$firstname', '$lastname', '$email', '$password', '$confirm_password', '$verificationCode')";
 
     if ($conn->query($sql) === TRUE) {
         // Registration was successful
-        echo '<script>alert("Register successfully!");</script>';
-        echo '<script>window.location.href = "login.php";</script>';
-        exit;
+
+        // Send verification code via email using PHPMailer
+        $mail = new PHPMailer(true); // Set to true for exceptions
+
+        try {
+            // Server settings
+            $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      //Enable verbose debug output
+            $mail->isSMTP();                                            //Send using SMTP
+            $mail->Host       = 'smtp.gmail.com';                     //Set the SMTP server to send through
+            $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
+            $mail->Username   = 'araquejanvier@gmail.com';                     //SMTP username
+            $mail->Password   = 'sgjg jidy dxpy xzzp';                               //SMTP password
+            $mail->SMTPSecure = 'ssl';            //Enable implicit TLS encryption
+            $mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+
+            //Recipients
+            $mail->setFrom('araquejanvier@gmail.com');
+            $mail->addAddress($email);
+
+            //Content
+            $mail->isHTML(true);                                  //Set email format to HTML
+            $mail->Subject = 'Hello new mr./ms '.$firstname.' '.$lastname.'!';
+            $mail->Body    = 'Here is the verification code:<b>' .$verificationCode.' </b>';
+
+            $mail->send();
+
+            echo '<script>alert("Register successfully! Verification code sent to your email.");</script>';
+            echo '<script>window.location.href = "login.php";</script>';
+            exit;
+        } catch (Exception $e) {
+            echo '<script>alert("Error sending email: ' . $mail->ErrorInfo . '");</script>';
+        }
     }
 }
-
-
 
 // Active Page
 
@@ -44,7 +88,6 @@ $directoryURI = $_SERVER['REQUEST_URI'];
 $path = parse_url($directoryURI, PHP_URL_PATH);
 $components = explode('/', $path);
 $page = $components[2];
-
 ?>
 
 

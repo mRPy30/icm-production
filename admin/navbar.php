@@ -106,6 +106,63 @@ $pageTitle = isset($pageTitles[$currentPage]) ? $pageTitles[$currentPage] : "Adm
         display: flex;
         flex-direction: row;
     }
+
+    .fa-bell:hover{
+        color: #C2BE63;
+        transition: all .3s ease;
+    }
+
+    .fa-comment-dots:hover{
+        color: #C2BE63;
+        transition: all .3s ease;
+    }
+
+    .fa-moon:hover{
+        color: #C2BE63;
+        transition: all .3s ease;
+    }
+
+    .notification-dropdown {
+        position: relative;
+        display: inline-block;
+    }   
+
+    .notification-dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #fcf6fc;
+        min-width: 280px;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        z-index: 1;
+        top: 30px;
+        right: 0;
+        height: 300px;
+    }
+
+    .notification-dropdown-content.show {
+        display: block;
+    }
+
+    .notification-dropdown-content .top_notif {
+        padding: 12px 16px;
+        font: normal 600 17px/20px 'Poppins';
+        color: #1c1c1c;
+        border-bottom: 1px solid #BCB4B5;
+        width: 100%;
+    }
+
+    .notification-dropdown-content .notification{
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+        font: normal 600 14px/20px 'Poppins';
+        color: #1c1c1c;
+    }
+
+    .notification-dropdown-content .notification:hover {
+        background-color: #f1f1f1;
+    }
+
     .profile_info {
         text-align: right;
         color: #1c1c1c;
@@ -290,10 +347,19 @@ $pageTitle = isset($pageTitles[$currentPage]) ? $pageTitles[$currentPage] : "Adm
     <div class="profile_dropdown">
         <div class="nav-right">
             <div class="icons">
-                <i class="far fa-bell"></i> 
-                <i class="far fa-envelope"></i>
                 <div class="dark-mode-toggle" onclick="toggleDarkMode()">
-                    <i class="fas fa-moon"></i>
+                    <i class="fas fa-moon" title="Switch to Darkmode"></i>
+                </div>
+                <i class="fa-regular fa-comment-dots" title="Message"></i>     
+                <div class="notification-dropdown">
+                    <i class="far fa-bell" onclick="toggleNotifications()" title="Notification"></i>
+                    <div class="notification-dropdown-content">
+                        <div class="top_notif">
+                            <h4>Notifications</h4>
+                        </div>
+                        <div class="notification">Notification 1</div> 
+                        <div class="notification">Notification 2</div>
+                    </div>
                 </div>
             </div>
             <div class="divider"></div>
@@ -323,6 +389,23 @@ $pageTitle = isset($pageTitles[$currentPage]) ? $pageTitles[$currentPage] : "Adm
 </div>
     </body>
 <script>
+
+    function toggleNotifications() {
+        const notificationDropdownContent = document.querySelector('.notification-dropdown-content');
+        notificationDropdownContent.classList.toggle('show');
+    }
+
+    document.addEventListener('click', function(event) {
+        const notificationDropdownContent = document.querySelector('.notification-dropdown-content');
+        const bellIcon = document.querySelector('.fa-bell');
+
+        if (!event.target.matches('.fa-bell') && !event.target.matches('.notification-dropdown-content')) {
+            if (notificationDropdownContent.classList.contains('show')) {
+                notificationDropdownContent.classList.remove('show');
+            }
+        }
+    });
+
     //Logout Popup
     function openPopup() {
         document.getElementById("logoutPopup").style.display = "block";
