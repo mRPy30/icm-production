@@ -232,7 +232,7 @@ if ($result->num_rows > 0) {
         function showSelectedMonth() {
             var monthHeader = document.getElementById("monthHeader");
             var selectedMonth = document.getElementById("monthSelect").value;
-            var currentYear = new Date().getFullYear(); // Get the current year
+            var currentYear = new Date().getFullYear(); 
             
             if (selectedMonth === "") {
                 monthHeader.textContent = "Month " + currentYear;
@@ -240,7 +240,6 @@ if ($result->num_rows > 0) {
                 monthHeader.textContent = selectedMonth + " " + currentYear;
             }
         }
-        // Function to automatically select the current month
         window.onload = function() {
             var currentMonth = new Date().toLocaleString('default', { month: 'long' });
             var selectElement = document.getElementById("monthSelect");
@@ -252,25 +251,21 @@ if ($result->num_rows > 0) {
                 }
             }
 
-            // Trigger the function to display the selected month
             showSelectedMonth();
         };
 
-        // Add the following script to periodically check for inactivity and logout
-        var inactivityTimeout = 900; // 15 minutes in seconds
+        var inactivityTimeout = 900; s
 
         function checkInactivity() {
             setTimeout(function () {
-                window.location.href = '../login.php'; // Replace 'logout.php' with the actual logout page
+                window.location.href = '../login.php'; 
             }, inactivityTimeout * 1000);
         }
 
-        // Start checking for inactivity when the page loads
         document.addEventListener('DOMContentLoaded', function () {
             checkInactivity();
         });
 
-        // Reset the inactivity timer when there's user activity
         document.addEventListener('mousemove', function () {
             clearTimeout(checkInactivity);
             checkInactivity();

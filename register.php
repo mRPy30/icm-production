@@ -34,7 +34,7 @@ if (isset($_POST['submit'])) {
         header("Location: register.php");
         exit;
     }
-
+    
     // Generate a 5-digit customer ID
     $clientID = sprintf("%05d", mt_rand(1, 99999));
 
@@ -43,37 +43,49 @@ if (isset($_POST['submit'])) {
 
     // Insert customer data into the database
     $sql = "INSERT INTO client (id, firstName, lastName, email, password, confirmPass, code)
-            VALUES ('$clientID', '$firstname', '$lastname', '$email', '$password', '$confirm_password', '$verificationCode')";
+        VALUES ('$clientID', '$firstname', '$lastname', '$email', '$password', '$confirm_password', '$verificationCode')";
 
-    if ($conn->query($sql) === TRUE) {
-        // Registration was successful
+if ($conn->query($sql) === TRUE) {
+    // Registration was successful
+    $defaultProfilePic = 'default_profile.jpg';
+    $profilePicPath = 'picture/' . $defaultProfilePic; // Adjust the path as per your folder structure
 
-        // Send verification code via email using PHPMailer
+    // Update the client record with the profile picture name
+    $updateProfilePicQuery = "UPDATE client SET profile = '$defaultProfilePic' WHERE email = '$email'";
+    $conn->query($updateProfilePicQuery);
         $mail = new PHPMailer(true); // Set to true for exceptions
 
         try {
             // Server settings
-            $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      //Enable verbose debug output
-            $mail->isSMTP();                                            //Send using SMTP
-            $mail->Host       = 'smtp.gmail.com';                     //Set the SMTP server to send through
-            $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
-            $mail->Username   = 'araquejanvier@gmail.com';                     //SMTP username
-            $mail->Password   = 'sgjg jidy dxpy xzzp';                               //SMTP password
-            $mail->SMTPSecure = 'ssl';            //Enable implicit TLS encryption
-            $mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
-
-            //Recipients
+            $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      // Enable verbose debug output
+            $mail->isSMTP();                                            // Send using SMTP
+            $mail->Host       = 'smtp.gmail.com';                     // Set the SMTP server to send through
+            $mail->SMTPAuth   = true;                                   // Enable SMTP authentication
+            $mail->Username   = 'icsmcreatives@gmail.com';                     // SMTP username
+            $mail->Password   = 'nbtf sqfa zpkf ucng';                               // SMTP password
+            $mail->SMTPSecure = 'ssl';            // Enable implicit TLS encryption
+            $mail->Port       = 465;                                    // TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+        
+            // Recipients
             $mail->setFrom('araquejanvier@gmail.com');
             $mail->addAddress($email);
-
-            //Content
-            $mail->isHTML(true);                                  //Set email format to HTML
-            $mail->Subject = 'Hello new mr./ms '.$firstname.' '.$lastname.'!';
-            $mail->Body    = 'Here is the verification code:<b>' .$verificationCode.' </b>';
-
+        
+            // Content
+            $mail->isHTML(true);                                  // Set email format to HTML
+            $mail->Subject = 'Hello Mr./Ms. ' . $firstname . ' ' . $lastname . '!';
+            $mail->Body    = $mail->Body    = 'Thank you for choosing ICSM Creatives!<br><br>'
+            . 'We look forward to capturing sweet memories for you!<br><br>'
+            . 'Best regards,<br>'
+            . 'ICSM Creatives Team'
+            .'Verify your account by clicking the button below:<br><br>'
+                . '<a href="http://localhost/icsm-production/login.php" style="display: inline-block; padding: 10px 20px; border-radius: 25px; background-color: #1C1C1D; color: white; text-decoration: none; font: normal 500 13px/normal "Poppins"; border-radius: 5px;">Verify Your Account</a><br><br>'
+                . 'Or you can use this link to verify your account: <a href="http://localhost/icsm-production/login.php">http://localhost/icsm-production/login.php</a>';
+        
             $mail->send();
-
-            echo '<script>alert("Register successfully! Verification code sent to your email.");</script>';
+        
+            $mail->send();
+        
+            echo '<script>alert("Register successfully! Verify your email.");</script>';
             echo '<script>window.location.href = "login.php";</script>';
             exit;
         } catch (Exception $e) {

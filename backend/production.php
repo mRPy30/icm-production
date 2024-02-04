@@ -29,4 +29,35 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 } else {
     echo "Invalid request method";
 }
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    if (isset($_POST['delete']) && isset($_POST['staff_id'])) {
+        $staffIdToDelete = $_POST['staff_id'];
+
+        if (isset($_POST['category']) && $_POST['category'] == 'Admin') {
+            // Delete from administrator table
+            $deleteSql = $conn->prepare("DELETE FROM administrator WHERE id = ?");
+            $deleteSql->bind_param("i", $staffIdToDelete);
+        } else {
+            // Delete from staff table
+            $deleteSql = $conn->prepare("DELETE FROM staff WHERE staffID = ?");
+            $deleteSql->bind_param("i", $staffIdToDelete);
+        }
+
+        if ($deleteSql->execute()) {
+            // Return a success message
+            echo "Record deleted successfully.";
+        } else {
+            // Return an error message
+            echo "Error deleting record: " . $deleteSql->error;
+        }
+
+        // Close the prepared statement
+        $deleteSql->close();
+    } else {
+        echo "Invalid data submitted for deletion.";
+    }
+} else {
+    echo "Invalid request method";
+}
 ?>

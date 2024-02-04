@@ -15,6 +15,8 @@ $resultStaff = $conn->query($sqlStaff);
 
 $sqlAdmin = "SELECT id, name, email FROM administrator";
 $resultAdmin = $conn->query($sqlAdmin);
+
+
 ?>
 
 <!DOCTYPE html>
@@ -83,7 +85,7 @@ $resultAdmin = $conn->query($sqlAdmin);
                                         <td>
                                             <form method="post" action="">
                                                 <button name="edit">Edit</button>
-                                                <button name="delete">Delete</button>
+                                                <button name="delete" onclick="confirmDelete('<?php echo $rowAdmin['name']; ?>')">Delete</button>
                                             </form>
                                         </td>
                                     </tr>
@@ -102,7 +104,7 @@ $resultAdmin = $conn->query($sqlAdmin);
                                         <td>
                                             <form method="post" action="">
                                                 <button name="edit">Edit</button>
-                                                <button name="delete">Delete</button>
+                                                <button name="delete" onclick="confirmDelete('<?php echo $rowAdmin['name']; ?>', <?php echo $rowAdmin['id']; ?>)">Delete</button>
                                             </form>
                                         </td>
                                     </tr>
@@ -132,7 +134,7 @@ $resultAdmin = $conn->query($sqlAdmin);
                                     </select>
                                 </div>
                                 <div class="form-group" id="emailField">
-                                    <label for="packageName">Email</label>
+                                    <label for="email">Email</label>
                                     <input type="text" name="email" id="email" class="form-control">
                                 </div>
                                 <div class="form-group" id="roleField">
@@ -141,9 +143,11 @@ $resultAdmin = $conn->query($sqlAdmin);
                                         <input type="text" name="role" id="role" class="form-control" oninput="formatAmount()">
                                     </div>
                                 </div>
-                                <div class="form-group" id="passwordFields" style="display:none;">
-                                    <label for="password">Password</label>
+                                <div class="form-group" id="password">
+                                <label for="password">Password</label>
                                     <input type="password" name="password" id="password" class="form-control">
+                                </div>
+                                <div class="form-group" id="passwordFields" style="display:none;">
                                     <label for="confirmPassword">Confirm Password</label>
                                     <input type="password" name="confirmPassword" id="confirmPassword" class="form-control">
                                 </div>
@@ -151,7 +155,15 @@ $resultAdmin = $conn->query($sqlAdmin);
                             </form>
                         </div>
                     </div>
-                </div>      
+                </div>  
+                <!-- Popup for confirmation -->
+                <div class="popup" id="deletePopup">
+                    <div class="popup-content">
+                        <p>Do you want to delete the account of <span id="staffName"></span>?</p>
+                        <button id="deleteNo">No</button>
+                        <button id="deleteYes">Yes</button>
+                    </div>
+                </div>
             </div>
     </section>
 
@@ -162,7 +174,56 @@ $resultAdmin = $conn->query($sqlAdmin);
     ?> 
 
     <script>
+        document.addEventListener("DOMContentLoaded", function () {
+        const editButtons = document.querySelectorAll(".data-table button[name='edit']");
 
+        editButtons.forEach(button => {
+            button.addEventListener("click", function (event) {
+                event.preventDefault();
+
+                // Fetch the data from the selected row
+                const selectedRow = this.closest("tr");
+                const name = selectedRow.querySelector("td:nth-child(2)").innerText;
+                const email = selectedRow.querySelector("td:nth-child(3)").innerText;
+                const role = selectedRow.querySelector("td:nth-child(4)").innerText;
+
+                // Open the modal and populate input fields with fetched data for editing
+                showPopup(name, role, email, true);
+            });
+        });
+        
+        function showPopup(name, role, email, isEdit) {
+    var popup = document.getElementById("popup");
+    popup.style.display = "block";
+
+    // Populate the input fields with the provided data
+    document.querySelector("#addMemberForm input[name='username']").value = name;
+    document.querySelector("#addMemberForm select[name='category']").value = role;
+    document.querySelector("#addMemberForm input[name='email']").value = email;
+
+    // Change modal title and submit button text for editing
+    var modalTitle = document.querySelector(".modal-title");
+    var submitBtn = document.querySelector("#submitBtn");
+
+    if (isEdit) {
+        modalTitle.textContent = "Update Admin/Staff Details";
+        submitBtn.textContent = "Update Admin/Staff Details"; // Modify button text here
+    } else {
+        modalTitle.textContent = "Add Production Member";
+        submitBtn.textContent = "Add Production Member";
+    }
+}
+
+        function hidePopup() {
+            var popup = document.getElementById("popup");
+            popup.style.display = "none";
+        }
+
+        document.getElementById("addButton").addEventListener("click", function () {
+            showPopup("", "", "", false); // For adding new entry, pass empty values
+        });
+    });
+    
         function showPopup() {
                 var popup = document.getElementById("popup");
                 popup.style.display = "block";
@@ -235,6 +296,81 @@ $resultAdmin = $conn->query($sqlAdmin);
             clearTimeout(checkInactivity);
             checkInactivity();
         });
+
+        
+        document.addEventListener("DOMContentLoaded", function () {
+    const deleteButtons = document.querySelectorAll(".data-table button[name='delete']");
+    const deletePopup = document.getElementById("deletePopup");
+    const deleteYesBtn = document.getElementById("deleteYes");
+    const deleteNoBtn = document.getElementById("deleteNo");
+    const loadingOverlay = document.getElementById("loadingOverlay");
+
+    let selectedRow; // Store the selected row
+
+    deleteYesBtn.addEventListener("click", function () {
+        // Check if a row is selected
+        if (selectedRow) {
+            // Fetch the staff ID from the selected row
+            const staffId = selectedRow.querySelector("td:first-child").innerText;
+
+            // Show loading overlay immediately
+            loadingOverlay.style.display = "flex";
+
+            // Perform the deletion after a 2-second delay
+            setTimeout(function () {
+                deleteStaff(staffId);
+            }, 2000);
+        }
+    });
+
+    deleteNoBtn.addEventListener("click", function () {
+        // Close the confirmation popup
+        deletePopup.style.display = "none";
+    });
+
+    deleteButtons.forEach(button => {
+        button.addEventListener("click", function (event) {
+            event.preventDefault();
+
+            // Fetch the name from the selected row
+            selectedRow = this.closest("tr");
+            const staffName = selectedRow.querySelector("td:nth-child(2)").innerText;
+
+            // Set the staff name in the confirmation popup
+            document.getElementById("staffName").innerText = staffName;
+
+            // Show the confirmation popup
+            deletePopup.style.display = "block";
+        });
+    });
+
+    function deleteStaff(staffId) {
+        // Make an AJAX request to delete the staff
+        const xhr = new XMLHttpRequest();
+        xhr.open("POST", "../backend/production.php", true);
+        xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                // Hide loading overlay
+                loadingOverlay.style.display = "none";
+
+                // Handle the response from the server
+                if (xhr.responseText.includes("successfully")) {
+                    // Display success message with the combined first and last name
+                    alert("Staff " + document.getElementById("staffName").innerText + " has been deleted successfully.");
+                } else {
+                    // Display error message
+                    alert("Error deleting staff.");
+                }
+
+                // Reload the page to reflect the changes
+                location.reload();
+            }
+        };
+        xhr.send("delete=true&staff_id=" + staffId);
+    }
+});
+
     </script>
 </body>
 </html>

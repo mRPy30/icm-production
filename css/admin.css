@@ -571,7 +571,7 @@ body.dark-mode .header-table{
 
 .modal-content {
     background: #EEEE;
-    margin: 15% auto;
+    margin: 10% auto;
     padding: 40px;
     box-shadow: 0px 0px 400px 900px rgba(0,0,0,0.28);
     width: 80%;
@@ -1002,6 +1002,9 @@ button#acceptNo:hover {
     color: #fff;
     cursor: pointer;
     font: normal 500 13px/normal 'Poppins';
+}
+.buttons #postedButton:hover {
+    background-color: #c0b71a; 
 }
 
 .buttons #backButton{
