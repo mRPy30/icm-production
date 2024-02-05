@@ -1202,7 +1202,7 @@ HEAD .receipt {
     color: #FCF6F6;
 }
 
-<<<<<<< HEAD
+
 .first-row{
     display: flex;
     flex-direction: row;
@@ -1213,8 +1213,6 @@ HEAD .receipt {
 }
 
 
-=======
->>>>>>> 6a26fdfedaa4f5c066c020dac45719ad3ea19e9b
 .featured_projects {
     width: 100%;
     display: flex;
