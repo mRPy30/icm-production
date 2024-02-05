@@ -79,7 +79,7 @@ $page = $components[2];
                       echo '<tr>';
                       echo '<td>' . $row['title_event'] . '</td>';
                       echo '<td>' . $row['eventLocation'] . '</td>';
-                      echo '<td>' . $row['eventDate'] . '</td>';
+                      echo '<td>' . date("F j, Y", strtotime($row['eventDate'])) . '</td>';
                       echo '<td>' . $row['status'] . '</td>';
                       echo '</tr>';
                 }
@@ -153,16 +153,16 @@ $page = $components[2];
             </div>
 
             <!-- Step 2 (Receipt) -->
-                    <div id="step2" class="form-step" style="display: none;">
-                        <div class="receipt">
-                             <h2>Receipt</h2>
-                        <div id="receiptDetails"></div>
-                        </div>               
-                    </div>
-                    <div class="buttons-book">
-                        <button id="prev">Prev</button>
-                        <button id="next">Next</button>
-                    </div>
+            <div id="step2" class="form-step" style="display: none;">
+                <div class="receipt">
+                     <h2>Receipt</h2>
+                <div id="receiptDetails"></div>
+                </div>               
+            </div>
+            <div class="buttons-book">
+                <button id="prev">Prev</button>
+                <button id="next">Next</button>
+            </div>
         </div>
     </div>
     <div id="popup-payment" class="popup-payment" style="display: none;">
@@ -197,6 +197,12 @@ $page = $components[2];
                                 </label>
                             </div>
                         </div>
+                        <div class="form-group">
+                            <label for="amount">Price Amount</label>
+                                <div class="input-group">
+                                    <input type="text" name="packagePrice" id="amount" class="form-control" oninput="formatAmount()">
+                                </div>
+                        </div>
                         <button type="submit" class="btn-booking ">Pay now</button>
                     </form>
                 </div>
@@ -219,7 +225,31 @@ prevButton.addEventListener('click', function () {
     }
 });
 
-nextButton.addEventListener('click', function () {
+nextButton.addEventListener('click', function (event) {
+    event.preventDefault();
+    if (currentStep < totalSteps) {
+        updateFormData(); // Update formData before moving to the next step
+        currentStep++;
+        setForm(currentStep);
+        if (currentStep === totalSteps) {
+            displayReceipt(); // Display receipt on the final step
+        }
+    } else {
+        // If it's the last step, show the payment popup only if the button text is "Pay Booking"
+        if (nextButton.innerText === 'Pay Booking') {
+            showPopup();
+        }
+    }
+});
+
+    // Handle the "Payment Booking" button click
+    document.getElementById('next').addEventListener('click', function () {
+    // Check if the current step is the last step and the button text is "Pay Booking"
+    if (currentStep === totalSteps && nextButton.textContent === 'Pay Booking') {
+        // If conditions are met, show the payment popup
+        showPaymentPopup();
+    } else {
+        // Otherwise, proceed with the regular next step functionality
         if (currentStep < totalSteps) {
             if (currentStep === totalSteps - 1) {
                 // If it's the last step (Step 2), change the button text to "Pay Booking"
@@ -227,20 +257,9 @@ nextButton.addEventListener('click', function () {
             }
             currentStep++;
             updateStepDisplay();
-        } else if (currentStep === totalSteps && nextButton.textContent === 'Pay Booking') {
-            // If the current step is already the last step and the button text is "Pay Booking"
-            // Handle the "Next" button click after changing the text
-            showPaymentPopup();
         }
-    });
-
-    // Handle the "Payment Booking" button click
-    document.getElementById('next').addEventListener('click', function () {
-        if (currentStep === totalSteps && nextButton.textContent === 'Pay Booking') {
-            // If the current step is the last step and the button text is "Pay Booking"
-            showPaymentPopup();
-        }
-    });
+    }
+});
 
     function showPaymentPopup() {
         // Display the payment popup
@@ -300,40 +319,43 @@ function closeForm() {
 }
 
 
-    document.querySelector('.btn-booking').addEventListener('click', function(event) {
-    event.preventDefault(); // Prevent the default form submission
+document.querySelector('.btn-booking').addEventListener('click', function(event) {
+        event.preventDefault(); // Prevent the default form submission
 
-    // Create a new FormData object
-    var formData = new FormData(document.getElementById('bookingForm'));
+        // Create a new FormData object
+        var formData = new FormData(document.getElementById('bookingForm'));
 
-    // Send an AJAX request to the server
-    var xhr = new XMLHttpRequest();
-    xhr.open('POST', '../backend/request.php', true);
-    xhr.onload = function () {
-        if (xhr.status === 200) {
-            // Redirect to a success page or handle the response
-            window.location.href = '../client/booking.php';
-        } else {
-            // Handle errors
-            console.error('Form submission failed. Status:', xhr.status);
+        // Send an AJAX request to the server
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', '../backend/request.php', true);
+        xhr.onload = function () {
+            if (xhr.status === 200) {
+                // Display an alert upon successful submission
+                alert("Booking request has been successfully submitted. Please wait for your pending request.");
+
+                // Redirect to the booking page
+                window.location.href = '../client/booking.php';
+            } else {
+                // Handle errors
+                console.error('Form submission failed. Status:', xhr.status);
+            }
+        };
+
+        // Set the appropriate headers for form data
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+
+        // Convert FormData to URL-encoded format
+        var urlEncodedData = '';
+        for (var pair of formData.entries()) {
+            if (urlEncodedData.length > 0) {
+                urlEncodedData += '&';
+            }
+            urlEncodedData += encodeURIComponent(pair[0]) + '=' + encodeURIComponent(pair[1]);
         }
-    };
 
-    // Set the appropriate headers for form data
-    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-
-    // Convert FormData to URL-encoded format
-    var urlEncodedData = '';
-    for (var pair of formData.entries()) {
-        if (urlEncodedData.length > 0) {
-            urlEncodedData += '&';
-        }
-        urlEncodedData += encodeURIComponent(pair[0]) + '=' + encodeURIComponent(pair[1]);
-    }
-
-    // Send the URL-encoded data
-    xhr.send(urlEncodedData);
-});
+        // Send the URL-encoded data
+        xhr.send(urlEncodedData);
+    });
     
 // Update the displayReceipt function
 function displayReceipt(data) {
@@ -380,6 +402,7 @@ document.getElementById('next').addEventListener('click', function () {
     displayReceipt(formData);
 
 });
+document.getElementById('amount').value = '₱' + parseFloat(paymentAmount.packagePrice).toFixed(2);
 
 
 

@@ -1,8 +1,9 @@
 <?php
-// logout Automatically
-include '../backend/logout.php';
 // Connection
 include '../backend/dbcon.php';
+
+session_start(); // Start the session
+$clientID = $_SESSION['id'];
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Check if the form data exists
