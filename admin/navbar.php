@@ -12,11 +12,10 @@ $result = $conn->query($sql);
 if ($result->num_rows > 0) {
     $row = $result->fetch_assoc();
     $name = $row["name"];
-    $profile = base64_encode($row["profile"]); // Corrected: Use base64_encode here
+    $profile = base64_encode($row["profile"]);
 } else {
-    // Handle the case where no data is found
     $name = "Name Not Found";
-    $profile = "default_profile.jpg"; // Provide a default profile image
+    $profile = "default_profile.jpg"; 
 }
 
 $pageTitles = array(
@@ -390,6 +389,14 @@ $pageTitle = isset($pageTitles[$currentPage]) ? $pageTitles[$currentPage] : "Adm
     </body>
 <script>
 
+document.addEventListener('DOMContentLoaded', function () {
+    const commentDotsIcon = document.querySelector('.fa-comment-dots');
+
+    commentDotsIcon.addEventListener('click', function () {
+        window.location.href = '../admin/message.php';
+    });
+});
+
     function toggleNotifications() {
         const notificationDropdownContent = document.querySelector('.notification-dropdown-content');
         notificationDropdownContent.classList.toggle('show');
@@ -432,6 +439,7 @@ $pageTitle = isset($pageTitles[$currentPage]) ? $pageTitles[$currentPage] : "Adm
         document.getElementById("logoutYes").addEventListener("click", handleLogout);
     });
 
+
     //Dark Mode
     function toggleDarkMode() {
         const body = document.body;
@@ -456,7 +464,7 @@ $pageTitle = isset($pageTitles[$currentPage]) ? $pageTitles[$currentPage] : "Adm
 
         localStorage.setItem('darkMode', isDarkMode);
     }
-
+    
     document.addEventListener('DOMContentLoaded', function () {
         const body = document.body;
         const savedDarkMode = localStorage.getItem('darkMode');
@@ -467,5 +475,5 @@ $pageTitle = isset($pageTitles[$currentPage]) ? $pageTitles[$currentPage] : "Adm
         }
     });
 
-
+    
 </script>

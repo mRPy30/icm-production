@@ -90,20 +90,80 @@
  }
  
  .form-popup {
-     display: none;
-     position: fixed;
-     top: 50%;
-     left: 53%;
-     height: 54%;
-     width: 50%;
-     transform: translate(-50%, -50%);
-     background-color: #fff;
-     padding: 20px;
-     border-radius: 5px;
-     box-shadow: 0px 0px 400px 900px rgba(0, 0, 0, 0.28);
-     z-index: 9999;
+    position: fixed;
+    top: 52%;
+    left: 53%;
+    height: 68%;
+    width: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 400px 900px rgba(0, 0, 0, 0.28);
+    z-index: 9999;
  }
- 
+
+ .top-book {
+    display: flex;
+    justify-content: space-between;
+    width: 105%;
+    margin-top: 5%;
+}
+
+.top-book h3{
+    font: normal 600 18px/normal 'Poppins';
+}
+
+.top-book .title-book{
+    margin: 0;
+}
+
+.steps {
+    display: flex;
+    align-items: center;
+}
+
+.circle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 30px;
+    width: 30px;
+    color: #999;
+    font-size: 14px;
+    font-weight: 500;
+    border-radius: 50%;
+    background: #fff;
+    border: 4px solid #e0e0e0;
+    transition: all 200ms ease;
+    transition-delay: 0s;
+    position: relative;
+    z-index: 2;
+    margin: 0 30px;
+}
+
+.circle.active {
+    transition-delay: 100ms;
+    background-color: #1C1C1D;
+    color: #FBF4F4;
+    border-color: #000000;
+}
+
+.circle i.fa-circle-check {
+    font-size: larger;
+    color: #D25A5A;
+}
+
+.steps .progress-line {
+    height: 4px;
+    background-color: #1c1c1c;
+    z-index: 1;
+    position: absolute;
+    border-radius: 2px;
+    margin: 0 10px;
+    right: 2%;
+} 
+
  .close-button {
      position: absolute;
      top: 10px;
@@ -111,107 +171,233 @@
      cursor: pointer;
  }
  
- .form-popup .form-step .package-box {
-     width: 20%;
-     height: 80px;
-     display: flex;
-     flex-direction: column;
-     border-radius: 10px;
-     border: 1px solid #B3B3B3;
-     background: linear-gradient(0deg, #FBF4F4 0%, #FBF4F4 100%), linear-gradient(0deg, #FBF4F4 0%, #FBF4F4 100%), #FBF4F4;
-     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25), 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
- }
- 
- .steps {
-     display: flex;
-     width: 100%;
-     align-items: center;
-     justify-content: space-between;
-     position: relative;
-     padding: 0% 10% 0% 10%;
- }
- 
- .steps .circle {
-     display: flex;
-     align-items: center;
-     justify-content: center;
-     height: 30px;
-     width: 30px;
-     color: #999;
-     font-size: 14px;
-     font-weight: 500;
-     border-radius: 50%;
-     background: #fff;
-     border: 4px solid #e0e0e0;
-     transition: all 200ms ease;
-     transition-delay: 0s;
-     position: relative;
-     z-index: 2;
- }
- 
- .steps .circle.active {
-     transition-delay: 100ms;
-     background-color: #1C1C1D;
-     color: #FBF4F4;
-     border-color: #000000;
- }
- 
- .steps .circle i.fa-circle-check {
-     font-size: larger;
-     color: #D25A5A;
- }
- 
- .steps .progress-line {
-     height: 4px;
-     background-color: #1c1c1c;
-     position: absolute;
-     top: 50%;
-     left: 0;
-     width: 0;
-     z-index: 1;
- }
- 
- .container .buttons {
-     display: flex;
-     gap: 20px;
- }
- 
- .buttons button {
-     padding: 8px 25px;
-     background: #D25A5A;
-     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.05);
-     transition: all 200ms linear;
- }
- 
- .buttons button:active {
-     transform: scale(0.97);
- }
- 
- .buttons button:disabled {
-     background: #B3B3B3;
-     cursor: not-allowed;
- }
- 
- @keyframes glow {
-     0% {
-         box-shadow: 0 0 10px rgba(0, 123, 255, 0.5);
-         /* Adjust the glow color and size as needed */
-         box-shadow: 0 0 10px rgba(0, 123, 255, 0.5);
-         /* Adjust the glow color and size as needed */
-     }
-     50% {
-         box-shadow: 0 0 20px rgba(0, 123, 255, 0.7);
-         /* Adjust the glow color and size as needed */
-         box-shadow: 0 0 20px rgba(0, 123, 255, 0.7);
-         /* Adjust the glow color and size as needed */
-     }
-     100% {
-         box-shadow: 0 0 10px rgba(0, 123, 255, 0.5);
-         /* Adjust the glow color and size as needed */
-         box-shadow: 0 0 10px rgba(0, 123, 255, 0.5);
-         /* Adjust the glow color and size as needed */
-     }
- }
+ .forms, .form-fillup{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding: 1.5% 2% 0 2%;
+}
+
+.form-step{
+    height: 20%;
+    display: flex;
+    width: 100%;
+    position: relative;
+}
+
+.form-group{
+    width: 100%;
+}
+
+.left-info {
+    width: 50%; 
+    float: left;
+    padding-right: 2%; 
+}
+
+.right-info {
+    width: 50%;
+    float: right;
+    padding-left: 2%; 
+}
+
+.right-info i{
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+}
+
+.form-group label{
+    font: normal 500 14px/normal 'Poppins';
+}
+
+.form-group input[type="text"],
+.form-group input[type="date"],
+.form-group input[type="time"],
+.form-group input[type="password"],
+.form-group select {
+    width: 100%;
+    height: 50px;
+    padding: 8px;
+    margin: 5px 0;
+    box-sizing: border-box;
+    border: 1px solid #FCF6F6;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font: normal 400 13px/normal 'Poppins';
+    box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.form-group input[type="text"],
+.form-group input[type="date"],
+.form-group input[type="time"],
+.form-group input[type="password"],
+.form-group select:focus {
+    outline-color: #807f7f;
+}
+
+.form-group .payment-icon img{
+    width: 15%;
+    position: absolute;
+}
+
+#package option {
+    color: #1c1c1c;
+}
+
+.receipt{
+    background-color: #FBF4F4;
+    width: 100%;
+    height: 340px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.2);
+    border: 1px solid #B3B3B3;
+    display: flex;
+    text-align: center;
+    flex-direction: column;
+    padding: 20px;
+}
+
+.receipt h2{
+    font: normal 600 20px/normal 'Poppins';
+}
+
+.receipt p {
+    display: flex;
+    margin-top: 10px;
+    font: normal 600 15px/normal 'Poppins';
+    color: #1C1C1D;
+}
+
+.receipt p strong {
+    flex: 1;
+    text-align: left;
+    margin-right: 10px;
+    color: #747473;
+    font: normal 600 15px/normal 'Poppins';
+}
+
+
+.buttons-book {
+    position: absolute;
+    bottom: 3%; 
+    right: 5%;
+}
+
+.buttons-book #next {
+    margin-left: 10px; 
+    font: normal 600 13px/normal 'Poppins';
+    color: #1c1c1c;
+    padding: 5px 30px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    background-color: #E1DE8F;
+    transition: background-color 0.3s ease-in-out; 
+    box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.2);
+}
+
+.buttons-book #next:hover {
+    background-color: #C2BE63;
+}
+
+.buttons-book #prev {
+    margin-left: 10px; 
+    font: normal 600 13px/normal 'Poppins';
+    color: #1c1c1c;
+    padding: 5px 30px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    background-color: #aeaeae;
+    transition: background-color 0.3s ease-in-out; 
+    box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.2);
+}
+
+.buttons-book #prev:hover {
+    background-color: #8f8f8f; 
+}
+
+.popup-payment {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 400px 900px rgba(0,0,0,0.28);
+    z-index: 10000;
+    background: #fff;
+}
+
+.popup-payment .popup-content {
+    padding: 20px;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.popup-payment .popup-content p {
+    font: normal 600 18px/18px 'Poppins';
+    color: #1C1C1D;
+    margin-bottom: 5%;
+}
+
+.popup-payment .close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+    font-size: medium;
+}
+
+.popup-payment .close:hover {
+    color: #FF8787;
+}
+
+.popup-payment .btn-booking {
+    padding: 10px 20px;
+    margin: 5px;
+    border: none;
+    border-radius: 8px;
+    font: normal 400 14px/15px 'Poppins';
+    cursor: pointer;
+    background-color: #E1DE8F;
+    color: #1c1c1c;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    transition: all 200ms linear;
+}
+
+.popup-payment .btn-booking:hover {
+    background: #C2BE63;
+}
+
+.popup-payment .payment-options{
+    display: flex;
+    flex-direction: column;
+}
+
+.popup-payment .payment-icon{
+    width: 100%;
+    border-radius: 10px;
+    border: 1px solid #807f7f;
+    display: flex;
+    justify-content: space-between;
+    margin: 5px;
+    padding: 10px;
+    flex-direction: column;
+}
+.form-group .payment-icon img{
+    width: 15%;
+    position: absolute;
+}
+
  /*****Admin Calendar*****/
  
  .calendar {

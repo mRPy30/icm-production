@@ -12,12 +12,20 @@ $result = $conn->query($sql);
 if ($result->num_rows > 0) {
     $row = $result->fetch_assoc();
     $name = $row["firstName"] . " " .$row["lastName"];
-    $profile = base64_encode($row["profile"]); // Corrected: Use base64_encode here
+    
+    if (!empty($row["profile"])) {
+        // If the profile column is not empty, use the profile image from the database
+        $profile = base64_encode($row["profile"]);
+    } else {
+        // If the profile column is empty, use the default profile image
+        $profile = "../picture/default_profile.jpg";
+    }
 } else {
     // Handle the case where no data is found
     $name = "Name Not Found";
-    $profile = "default_profile.jpg"; // Provide a default profile image
+    $profile = "../picture/default_profile.jpg"; // Provide a default profile image
 }
+
 
 $pageTitles = array(
     "booking.php" => "Booking Event",
@@ -239,7 +247,11 @@ $pageTitle = isset($pageTitles[$currentPage]) ? $pageTitles[$currentPage] : "Boo
                 <p>Client</p>
             </div>
             <div class="profile_pic">
-                <img src="data:image/jpeg;base64,<?php echo $profile; ?>" alt="client image">
+                <?php if (!empty($profile)): ?>
+                    <img src="data:image/jpeg;base64,<?php echo $profile; ?>" alt="client image">
+                <?php else: ?>
+                    <img src="picture/default_profile.jpg" alt="profile image">
+                <?php endif; ?>
             </div>
         </div>
         <div class="profile_dropdown-content">

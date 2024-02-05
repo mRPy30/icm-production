@@ -129,25 +129,26 @@ if (isset($_POST['delete'])) {
     
     <script>
        document.addEventListener("DOMContentLoaded", function () {
-            const deleteButtons = document.querySelectorAll(".data-table.client button[name='delete']");
-            const deletePopup = document.getElementById("deletePopup");
-            const deleteYesBtn = document.getElementById("deleteYes");
-            const deleteNoBtn = document.getElementById("deleteNo");
-            const loadingOverlay = document.getElementById("loadingOverlay");
+    const deleteButtons = document.querySelectorAll(".data-table.client button[name='delete']");
+    const deletePopup = document.getElementById("deletePopup");
+    const deleteYesBtn = document.getElementById("deleteYes");
+    const deleteNoBtn = document.getElementById("deleteNo");
+    const loadingOverlay = document.getElementById("loadingOverlay");
 
-            let selectedRow; // Store the selected row
+    let selectedRow; // Store the selected row
 
-            deleteYesBtn.addEventListener("click", function () {
+    deleteYesBtn.addEventListener("click", function () {
         // Check if a row is selected
         if (selectedRow) {
             // Fetch the client ID from the selected row
             const clientId = selectedRow.querySelector("td:first-child").innerText;
 
-            // Fetch the client name from the selected row
-            const userName = selectedRow.querySelector("td:nth-child(3)").innerText + " " + selectedRow.querySelector("td:nth-child(4)").innerText;
+            // Fetch the first and last name from the selected row
+            const firstName = selectedRow.querySelector("td:nth-child(3)").innerText;
+            const lastName = selectedRow.querySelector("td:nth-child(4)").innerText;
 
             // Set the client name in the confirmation popup
-            document.getElementById("clientName").innerText = userName;
+            document.getElementById("clientName").innerText = firstName + " " + lastName;
 
             // Show loading overlay immediately
             loadingOverlay.style.display = "flex";
@@ -170,19 +171,15 @@ if (isset($_POST['delete'])) {
 
             // Fetch the name from the selected row
             selectedRow = this.closest("tr");
-            const userName = selectedRow.querySelector("td:nth-child(3)").innerText + " " + selectedRow.querySelector("td:nth-child(4)").innerText;
+            const firstName = selectedRow.querySelector("td:nth-child(3)").innerText;
+            const lastName = selectedRow.querySelector("td:nth-child(4)").innerText;
 
             // Set the client name in the confirmation popup
-            document.getElementById("clientName").innerText = userName;
+            document.getElementById("clientName").innerText = firstName + " " + lastName;
 
             // Show the confirmation popup
             deletePopup.style.display = "block";
         });
-    });
-
-    deleteForm.addEventListener("submit", function () {
-        // Show loading overlay when the form is submitted
-        loadingOverlay.style.display = "flex";
     });
 
     function deleteClient(clientId) {
@@ -195,8 +192,15 @@ if (isset($_POST['delete'])) {
                 // Hide loading overlay
                 loadingOverlay.style.display = "none";
 
-                // Handle the response from the server (you can redirect or display a message)
-                console.log(xhr.responseText);
+                // Handle the response from the server
+                if (xhr.responseText.includes("successfully")) {
+                    // Display success message with the combined first and last name
+                    alert("Client " + document.getElementById("clientName").innerText + " has been deleted successfully.");
+                } else {
+                    // Display error message
+                    alert("Error deleting client.");
+                }
+
                 // Reload the page to reflect the changes
                 location.reload();
             }
@@ -204,6 +208,8 @@ if (isset($_POST['delete'])) {
         xhr.send("delete=true&client_id=" + clientId);
     }
 });
+
+
 
 
 
