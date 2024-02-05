@@ -1175,8 +1175,14 @@ padding: 15px 60px 0px 60px;
     color: #FCF6F6;
 }
 
-
-
+.first-row{
+    display: flex;
+    flex-direction: row;
+}
+.second-row{
+    display: flex;
+    flex-direction: row;
+}
 
 
 .featured_projects {

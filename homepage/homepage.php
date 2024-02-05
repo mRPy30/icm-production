@@ -179,7 +179,7 @@
                     </div>
                 </div>
             </div>
-            <button class="button-services-section">View More</button>
+            <button class="button-services-section" id="view-more-btn">View More</button>
         </section>
 
         <section class="review">
@@ -429,6 +429,10 @@
         window.location.href = "../homepage/booking.php";
     });
 
+    document.getElementById('view-more-btn').addEventListener('click', function () {
+        // Specify the URL you want to navigate to
+        window.location.href = '../homepage/services.php';
+    });
     </script>
 </body>
 
