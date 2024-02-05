@@ -237,6 +237,8 @@
                         <a href="../homepage/about.php"><button>About Us</button></a>
                     </div>
                 </div>
+
+                
                 <div class="about-right-content">
                     <div class="image1">
                         <img src="../picture/team.jpg" alt="Team-Picture">
