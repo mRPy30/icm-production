@@ -12,7 +12,8 @@ use PHPMailer\PHPMailer\Exception;
 require 'vendor/autoload.php';
 
 // Function to generate a random 6-digit verification code
-function generateVerificationCode() {
+function generateVerificationCode()
+{
     return sprintf("%06d", mt_rand(1, 999999));
 }
 
@@ -55,12 +56,12 @@ if (isset($_POST['submit'])) {
             // Server settings
             $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      //Enable verbose debug output
             $mail->isSMTP();                                            //Send using SMTP
-            $mail->Host       = 'smtp.gmail.com';                     //Set the SMTP server to send through
-            $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
-            $mail->Username   = 'araquejanvier@gmail.com';                     //SMTP username
-            $mail->Password   = 'sgjg jidy dxpy xzzp';                               //SMTP password
+            $mail->Host = 'smtp.gmail.com';                     //Set the SMTP server to send through
+            $mail->SMTPAuth = true;                                   //Enable SMTP authentication
+            $mail->Username = 'araquejanvier@gmail.com';                     //SMTP username
+            $mail->Password = 'sgjg jidy dxpy xzzp';                               //SMTP password
             $mail->SMTPSecure = 'ssl';            //Enable implicit TLS encryption
-            $mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+            $mail->Port = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
 
             //Recipients
             $mail->setFrom('araquejanvier@gmail.com');
@@ -68,8 +69,8 @@ if (isset($_POST['submit'])) {
 
             //Content
             $mail->isHTML(true);                                  //Set email format to HTML
-            $mail->Subject = 'Hello new mr./ms '.$firstname.' '.$lastname.'!';
-            $mail->Body    = 'Here is the verification code:<b>' .$verificationCode.' </b>';
+            $mail->Subject = 'Hello new mr./ms ' . $firstname . ' ' . $lastname . '!';
+            $mail->Body = 'Here is the verification code:<b>' . $verificationCode . ' </b>';
 
             $mail->send();
 

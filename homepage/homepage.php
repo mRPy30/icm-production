@@ -38,7 +38,7 @@
                     <img src="../picture/wedding.jpg" alt="coverpage">
                 </div>
                 <div class="text">
-                    <h2>Capture every precious moment through our lenses </h2>
+                    <h2>capture every precious moment through our lenses </h2>
                     <p>Get expert photographers and amazing photos, and <br>videos, starting from just PHP 2,500.</p>
                     <button class="button">Book Now</button>
                 </div>
@@ -400,34 +400,34 @@
             document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE, and Opera
         }
 
-    document.addEventListener('DOMContentLoaded', function () {
-        const headerSection = document.querySelector('.header-section');
-        const coverContent = document.querySelector('.cover-content');
-        const portfolioSection = document.querySelector('.portfolio');
+        document.addEventListener('DOMContentLoaded', function () {
+            const headerSection = document.querySelector('.header-section');
+            const coverContent = document.querySelector('.cover-content');
+            const portfolioSection = document.querySelector('.portfolio');
 
-        function handleScroll() {
-            const coverContentRect = coverContent.getBoundingClientRect();
-            const portfolioRect = portfolioSection.getBoundingClientRect();
+            function handleScroll() {
+                const coverContentRect = coverContent.getBoundingClientRect();
+                const portfolioRect = portfolioSection.getBoundingClientRect();
 
-            if (coverContentRect.bottom > 0 && portfolioRect.top > 0) {
-                // If in cover-content, change navbar style
-                headerSection.classList.add('cover-content-style');
-            } else {
-                // If outside cover-content, revert navbar style
-                headerSection.classList.remove('cover-content-style');
+                if (coverContentRect.bottom > 0 && portfolioRect.top > 0) {
+                    // If in cover-content, change navbar style
+                    headerSection.classList.add('cover-content-style');
+                } else {
+                    // If outside cover-content, revert navbar style
+                    headerSection.classList.remove('cover-content-style');
+                }
             }
-        }
 
-        // Initial check on page load
-        handleScroll();
+            // Initial check on page load
+            handleScroll();
 
-        // Listen for scroll events
-        window.addEventListener('scroll', handleScroll);
-    });
+            // Listen for scroll events
+            window.addEventListener('scroll', handleScroll);
+        });
 
-    document.querySelector(".button").addEventListener("click", function () {
-        window.location.href = "../homepage/booking.php";
-    });
+        document.querySelector(".button").addEventListener("click", function () {
+            window.location.href = "../homepage/booking.php";
+        });
 
     </script>
 </body>
