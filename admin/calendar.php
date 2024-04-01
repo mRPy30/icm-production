@@ -107,7 +107,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <label for="event_end_date">Event end</label>
                     <input type="date" name="event_end_date" id="event_end_date" class="form-control" placeholder="Event end date">
                 </div>
-                <button id="saveEventButton" class="btn-save-event">Save Event</button>
+                <button id="saveEventButton" class="btn-save-event">Save</button>
             </div>
         </div>
     </div>

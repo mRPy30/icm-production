@@ -142,8 +142,8 @@ if (!$result) {
                 <div class="popup-content">
                     <span class="close" onclick="closeDeleteConfirmationPopup()">&times;</span>
                     <p>Do you want to delete posted content?</p>
-                    <button onclick="closeDeleteConfirmationPopup()">No</button>
-                    <button onclick="deleteContent()">Yes</button>
+                    <button id="deleteNo" onclick="closeDeleteConfirmationPopup()">No</button>
+                    <button id="deleteYes" onclick="deleteContent()">Yes</button>
                 </div>
             </div>
         </div>

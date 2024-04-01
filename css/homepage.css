@@ -1,4 +1,4 @@
-*{
+* {
     box-sizing: border-box;
     padding: 0;
     margin: 0;
@@ -17,7 +17,6 @@
 .cover-content {
     position: relative;
     width: 100%;
-    
 }
 
 .carousel {
@@ -39,7 +38,7 @@
     display: block;
 }
 
-.carousel-page-numbers  {
+.carousel-page-numbers {
     display: flex;
     justify-content: center;
     z-index: 1;
@@ -48,12 +47,13 @@
     left: 90%;
     color: #FBF4F4;
 }
+
 .page-number-text {
     font: normal 13px/normal 'Poppins';
     letter-spacing: 5px;
-
 }
-.page-number span{
+
+.page-number span {
     margin: 0 5px;
     cursor: pointer;
     font-size: 18px;
@@ -75,7 +75,9 @@
     left: 4.5%;
 }
 
+
 /* Additional styles for the text content */
+
 .text {
     position: absolute;
     top: 28%;
@@ -83,13 +85,13 @@
     text-align: center;
     width: 55%;
     color: white;
-    z-index: 1; /* Ensure text is above the carousel */
+    z-index: 1;
+    /* Ensure text is above the carousel */
 }
 
 .text h2 {
     font: normal 700 45px/normal 'Poppins';
     letter-spacing: 3px;
-    
 }
 
 .text p {
@@ -118,22 +120,24 @@
 }
 
 
-/**** Portfolio Section *****/  
+/**** Portfolio Section *****/
 
-.portfolio .portfolio-title .horizontal-line1{
+.portfolio .portfolio-title .horizontal-line1 {
     position: absolute;
     width: 30%;
     height: 3px;
     background: black;
     left: 70px;
 }
-.portfolio .portfolio-title .horizontal-line2{
+
+.portfolio .portfolio-title .horizontal-line2 {
     position: absolute;
     width: 30%;
     height: 3px;
     background: black;
     left: 65%;
 }
+
 .portfolio {
     width: 100%;
     background-color: #FBF4F4;
@@ -146,7 +150,6 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-
 }
 
 .portfolio .portfolio-title h2 {
@@ -157,101 +160,112 @@
     top: 107%;
 }
 
-.portfolio .box-section{
+.portfolio .box-section {
     width: 100%;
     height: 30%;
-    background:#FBF4F4;
+    background: #FBF4F4;
     padding: 40px 120px 35px 50px;
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
-.portfolio .box1{
+
+.portfolio .box1 {
     background: #454548;
     width: 25%;
     height: 65vh;
     margin-left: 80px;
 }
-.portfolio .box2{
+
+.portfolio .box2 {
     background: #393e46;
     width: 25%;
     height: 65vh;
     margin-left: 80px;
 }
-.portfolio .box3{
+
+.portfolio .box3 {
     background: #454548;
     width: 25%;
     height: 65vh;
     margin-left: 80px;
 }
-.portfolio .box1 .box4{
-    background: white;
-    width: 100%;
-    height: 65vh;
-    margin-left:-10px;
-    margin-top: -9px;
-}
-.portfolio .box2 .box5{
-    background:white;
-    width: 100%;
-    height: 65vh;
-    margin-left: -9px;
-    margin-top: -9px;
 
-}
-.portfolio .box3 .box6{
+.portfolio .box1 .box4 {
     background: white;
     width: 100%;
     height: 65vh;
     margin-left: -10px;
     margin-top: -9px;
 }
-.box4 .portfolio-content1 img{
+
+.portfolio .box2 .box5 {
+    background: white;
+    width: 100%;
+    height: 65vh;
+    margin-left: -9px;
+    margin-top: -9px;
+}
+
+.portfolio .box3 .box6 {
+    background: white;
+    width: 100%;
+    height: 65vh;
+    margin-left: -10px;
+    margin-top: -9px;
+}
+
+.box4 .portfolio-content1 img {
     width: 85%;
     height: 46vh;
     margin: 30px 10px 30px 10px;
     filter: brightness(85%);
     opacity: 1;
-	-webkit-transition: .3s ease-in-out;
-	transition: .3s ease-in-out;
+    -webkit-transition: .3s ease-in-out;
+    transition: .3s ease-in-out;
 }
-.box5 .portfolio-content2 img{
+
+.box5 .portfolio-content2 img {
     width: 84%;
     height: 46vh;
     margin: 30px 10px 30px 10px;
     filter: brightness(85%);
     opacity: 1;
-	-webkit-transition: .3s ease-in-out;
-	transition: .3s ease-in-out;
+    -webkit-transition: .3s ease-in-out;
+    transition: .3s ease-in-out;
 }
-.box6 .portfolio-content3 img{
+
+.box6 .portfolio-content3 img {
     width: 85%;
     height: 46vh;
     margin: 30px 10px 30px 10px;
     filter: brightness(85%);
     opacity: 1;
-	-webkit-transition: .3s ease-in-out;
-	transition: .3s ease-in-out;
+    -webkit-transition: .3s ease-in-out;
+    transition: .3s ease-in-out;
 }
+
 .portfolio-content1:hover img,
 .portfolio-content2:hover img,
-.portfolio-content3:hover img{
-    opacity: .7 ;
+.portfolio-content3:hover img {
+    opacity: .7;
 }
-.box-section .box4 .portfolio-content1 h2{
+
+.box-section .box4 .portfolio-content1 h2 {
     font: normal 20px/normal 'Poppins';
 }
 
-.box5 .portfolio-content2 h2{
+.box5 .portfolio-content2 h2 {
     font: normal 20px/normal 'Poppins';
 }
 
-.box6 .portfolio-content3 h2{
+.box6 .portfolio-content3 h2 {
     font: normal 20px/normal 'Poppins';
 }
 
 
 /********booking page*******/
+
 .main-book {
     display: flex;
     flex-direction: column;
@@ -272,7 +286,7 @@
 .text-book {
     text-align: center;
     width: 45%;
-    z-index: 2; 
+    z-index: 2;
 }
 
 .text-book h4 {
@@ -306,11 +320,11 @@
 .top-book {
     display: flex;
     justify-content: space-between;
-    width: 90%; 
+    width: 90%;
     margin-top: 1.5%;
 }
 
-.top-book h3{
+.top-book h3 {
     font: normal 600 18px/normal 'Poppins';
     margin-left: 20px;
 }
@@ -359,39 +373,40 @@
     border-radius: 2px;
     margin: 0 10px;
     left: 20%;
-} 
+}
 
-.forms, .form-fillup{
+.forms,
+.form-fillup {
     display: flex;
     justify-content: space-between;
     width: 100%;
     padding: 1.5% 5% 0 5%;
 }
 
-.form-step{
+.form-step {
     height: 20%;
     display: flex;
     width: 100%;
     position: relative;
 }
 
-.form-group{
+.form-group {
     width: 100%;
 }
 
 .left-info {
-    width: 45%; 
+    width: 45%;
     float: left;
-    padding-right: 2%; 
+    padding-right: 2%;
 }
 
 .right-info {
     width: 45%;
     float: right;
-    padding-left: 2%; 
+    padding-left: 2%;
 }
 
-right-info i{
+right-info i {
     position: absolute;
     right: 10px;
     top: 50%;
@@ -399,7 +414,7 @@ right-info i{
     cursor: pointer;
 }
 
-.form-group label{
+.form-group label {
     font: normal 500 14px/normal 'Poppins';
 }
 
@@ -428,25 +443,56 @@ right-info i{
     outline-color: #807f7f;
 }
 
+.form-group .payment-icon img {
+    width: 15%;
+    position: absolute;
+}
+
 #package option {
     color: #1c1c1c;
 }
 
-.receipt{
-    background-color: #FCF6F6;
+HEAD .receipt {
+    background-color: #FBF4F4;
     width: 100%;
-    border: 1px solid #000;
-    height: 360px;
+    height: 340px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.2);
+    border: 1px solid #B3B3B3;
+    display: flex;
+    text-align: center;
+    flex-direction: column;
+    padding: 20px;
+}
+
+.receipt h2 {
+    font: normal 600 20px/normal 'Poppins';
+}
+
+.receipt p {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+    font: normal 600 15px/normal 'Poppins';
+    color: #1C1C1D;
+}
+
+.receipt p strong {
+    flex: 1;
+    text-align: left;
+    margin-right: 10px;
+    color: #747473;
+    font: normal 600 13px/normal 'Poppins';
 }
 
 .buttons-book {
     position: absolute;
-    bottom: 3%; 
+    bottom: 3%;
     right: 5%;
 }
 
 .buttons-book #next {
-    margin-left: 10px; 
+    margin-left: 10px;
     font: normal 600 13px/normal 'Poppins';
     color: #1c1c1c;
     padding: 5px 30px;
@@ -456,7 +502,7 @@ right-info i{
     text-align: center;
     text-decoration: none;
     background-color: #E1DE8F;
-    transition: background-color 0.3s ease-in-out; 
+    transition: background-color 0.3s ease-in-out;
     box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.2);
 }
 
@@ -465,7 +511,7 @@ right-info i{
 }
 
 .buttons-book #prev {
-    margin-left: 10px; 
+    margin-left: 10px;
     font: normal 600 13px/normal 'Poppins';
     color: #1c1c1c;
     padding: 5px 30px;
@@ -475,42 +521,112 @@ right-info i{
     text-align: center;
     text-decoration: none;
     background-color: #aeaeae;
-    transition: background-color 0.3s ease-in-out; 
+    transition: background-color 0.3s ease-in-out;
     box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.2);
 }
 
 .buttons-book #prev:hover {
-    background-color: #8f8f8f; 
+    background-color: #8f8f8f;
 }
 
+.popup {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 400px 900px rgba(0, 0, 0, 0.28);
+    z-index: 10000;
+    background: #fff;
+}
+
+.popup-content {
+    padding: 20px;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.popup-content p {
+    font: normal 600 18px/18px 'Poppins';
+    color: #1C1C1D;
+    margin-bottom: 5%;
+}
+
+.close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+    font-size: medium;
+}
+
+.close:hover {
+    color: #FF8787;
+}
+
+.btn-save-event {
+    padding: 10px 20px;
+    margin: 5px;
+    border: none;
+    border-radius: 8px;
+    font: normal 400 14px/15px 'Poppins';
+    cursor: pointer;
+    background-color: #E1DE8F;
+    color: #1c1c1c;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    transition: all 200ms linear;
+}
+
+.btn-save-event:hover {
+    background: #C2BE63;
+}
+
+.payment-options {
+    display: flex;
+    flex-direction: column;
+}
+
+.payment-icon {
+    width: 100%;
+    border-radius: 10px;
+    border: 1px solid #807f7f;
+    display: flex;
+    justify-content: space-between;
+    margin: 5px;
+    padding: 10px;
+    flex-direction: column;
+}
 
 
 /**** Services Price Section *****/
 
-.services{
+.services {
     width: 100%;
     background-color: #D9D9D9;
     padding: 50px 0px 25px 0px;
     text-align: start;
     margin-bottom: 29px;
-    align-items: center;    
+    align-items: center;
 }
-.services .services-title h2{   
+
+.services .services-title h2 {
     font: normal 700 25px/normal 'Poppins';
     letter-spacing: 1px;
     margin-left: 8%;
 }
-.services .services-title h6{
-    font: normal  17px/normal 'Poppins';
+
+.services .services-title h6 {
+    font: normal 17px/normal 'Poppins';
     letter-spacing: 1px;
     text-align: left;
     width: 70%;
     margin-left: 8%;
     margin-top: 10px;
-
 }
 
-.services .services-box-section{
+.services .services-box-section {
     width: 100%;
     height: 90%;
     background: #D9D9D9;
@@ -519,8 +635,7 @@ right-info i{
     align-items: center;
 }
 
-
-.services .service-box{
+.services .service-box {
     background: #FCF6F6;
     width: 50%;
     height: 60vh;
@@ -533,66 +648,75 @@ right-info i{
     transition: all .5s ease;
 }
 
-.services .service-box:hover{
+.services .service-box:hover {
     transform: scale(1.02);
 }
 
-.services .package-name{
+.services .package-name {
     text-align: center;
     height: 1px;
 }
-.services .package-name h6{
+
+.services .package-name h6 {
     text-align: center;
     font: normal 700 22px/normal 'Poppins';
     margin-bottom: 5px;
 }
-.services .package-name p{
+
+.services .package-name p {
     text-align: center;
     font: normal 500 14px/normal 'Poppins';
     height: 2%;
 }
-.services .price{
+
+.services .price {
     text-align: center;
     height: 5px;
 }
-.services .price h2{
+
+.services .price h2 {
     text-align: center;
     font: normal 700 40px/normal 'Poppins';
     margin-top: 10px;
 }
-.services .feature{
+
+.services .feature {
     height: 5px;
     list-style: none;
 }
-.services .feature h4{
+
+.services .feature h4 {
     font: normal 600 15px/normal 'Poppins';
     margin-top: 30px;
 }
 
 .services .price-details .top,
-.bottom{
+.bottom {
     display: flex;
-    margin: 10px 0px 5px 0px;   
+    margin: 10px 0px 5px 0px;
 }
-.services .price-details .top i, 
-.bottom i{  
+
+.services .price-details .top i,
+.bottom i {
     color: green;
     margin-right: 5%;
     font-size: 20px;
 }
-.services .price-details .top p, 
-.bottom p{  
+
+.services .price-details .top p,
+.bottom p {
     font: normal 400 15px/normal 'Poppins';
 }
 
-.services button{
+.services button {
     left: 60%;
 }
+
 .services .button-services-section {
     margin: 30px 0px 30px 670px;
     padding: 5px 0px 5px 0px;
     height: 40px;
-    width: 10%; 
+    width: 10%;
     font: normal 400 15px/normal 'Poppins';
     filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
     transition: background-color 0.3s;
@@ -600,62 +724,62 @@ right-info i{
     background-color: #FBF4F4;
     border-radius: 30px;
 }
+
 .services .button-services-section:hover {
     background-color: #454548;
     color: #fcfcfc;
 }
 
 
-
-
 /**** Review Page ****/
+
 .review {
     width: 100%;
-    height: auto; 
+    height: auto;
     background: white;
     display: flex;
-    justify-content: space-between; 
-    align-items: center; 
-    padding: 20px; 
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
     margin-bottom: 30px;
-    box-sizing: border-box; 
-  }
-  
-  .review-part {
+    box-sizing: border-box;
+}
+
+.review-part {
     display: flex;
     width: 100%;
-  }
-  
-  .review-left {    
+}
+
+.review-left {
     width: 30%;
-    flex: 1; 
-    padding: 10px 0px 0px 30px; 
-    box-sizing: border-box; 
-  }
-  
-  .review-left img {
+    flex: 1;
+    padding: 10px 0px 0px 30px;
+    box-sizing: border-box;
+}
+
+.review-left img {
     width: 80%;
     height: 85vh;
-    max-width: 100%; 
+    max-width: 100%;
     display: block;
     margin-left: 100px;
-  }
-  
-  .review-right {
-    flex: 1; 
-    padding: 50px 0px 0px 10px; 
-    box-sizing: border-box;
-  }
-  
+}
 
-.review .review-right .testimonial h5{
+.review-right {
+    flex: 1;
+    padding: 50px 0px 0px 10px;
+    box-sizing: border-box;
+}
+
+.review .review-right .testimonial h5 {
     color: #1C1C1D;
     font: normal 500 23px/normal 'Poppins';
     width: 232px;
     height: 59px;
     flex-shrink: 0;
 }
-.review .review-right .testimonial h4{
+
+.review .review-right .testimonial h4 {
     color: #1C1C1D;
     font-size: 35px;
     width: 85%;
@@ -665,7 +789,7 @@ right-info i{
     margin-left: 30px;
 }
 
-.review .review-right .testimonial p{
+.review .review-right .testimonial p {
     color: #1C1C1D;
     font-family: Poppins;
     font: normal 15px/normal 'Poppins';
@@ -677,47 +801,50 @@ right-info i{
     margin: 60px 0px 0px 10px;
     line-height: 30px;
 }
-.review .testimonial-arrow{
+
+.review .testimonial-arrow {
     margin: 200px 0px 0px 12px;
     font-size: 70px;
 }
-.review .testimonial-arrow i{
+
+.review .testimonial-arrow i {
     font-weight: 50px;
     font-size: 20px;
 }
 
 
-
-
-
-
-
 /****** About Section ******/
+
 .about {
     width: 100%;
     background-color: #FBF4F4;
     padding: 50px 0px 50px 0px;
 }
-.about .about-page{
+
+.about .about-page {
     display: flex;
     flex-direction: row;
     margin: 0px 0px 0px 100px;
 }
-.about-left-content{
+
+.about-left-content {
     width: 30%;
     display: flex;
     flex-direction: column;
     height: 50%;
     margin: 60px 0px 0px 50px;
 }
-.about-title h1{
+
+.about-title h1 {
     font: normal 400 70px/normal 'Qwigley';
 }
-.about-title h5{
+
+.about-title h5 {
     font: normal 500 20px/normal 'Poppins';
     margin-left: 150px;
 }
-.about-description p{
+
+.about-description p {
     color: #1C1C1D;
     font-family: Poppins;
     font: normal 15px/normal 'Poppins';
@@ -729,7 +856,7 @@ right-info i{
     letter-spacing: 0.5px;
 }
 
-.more-button a button{
+.more-button a button {
     margin-top: 50px;
     padding: 5px 0;
     height: 50%;
@@ -743,81 +870,87 @@ right-info i{
     border-radius: 30px;
 }
 
-
-.more-button  a button{
+.more-button a button {
     border-radius: 25px;
-	border: 1px solid #000;
-	background: #1C1C1D;
-	font: normal 400 15px/normal 'Poppins';
-	color: #FCF6F6;
+    border: 1px solid #000;
+    background: #1C1C1D;
+    font: normal 400 15px/normal 'Poppins';
+    color: #FCF6F6;
 }
 
-.more-button  a button:hover{
-	background-color: #454548;
+.more-button a button:hover {
+    background-color: #454548;
     color: #fcfcfc;
 }
-
 
 .about-right-content {
     height: 50%;
     width: 60%;
 }
 
-.about-right-content .image1{
-    width: 16%; 
+.about-right-content .image1 {
+    width: 16%;
     height: 28%;
-    z-index: 2;    
+    z-index: 2;
     position: absolute;
     margin-left: 14%;
 }
-.about-right-content .image1 img{
-    width: 140%; 
-    height: 215%;    
+
+.about-right-content .image1 img {
+    width: 140%;
+    height: 215%;
     filter: brightness(70%);
 }
-.about-right-content .image2{
-    width: 37%; 
-    height: 25%; 
+
+.about-right-content .image2 {
+    width: 37%;
+    height: 25%;
     margin: 19% 0% 0% 60%;
     z-index: 1;
 }
-.about-right-content .image2 img{
-    width: 100%; 
+
+.about-right-content .image2 img {
+    width: 100%;
     height: 400px;
     filter: brightness(70%);
 }
 
 
-
 /***CTA banner homepage****/
-.call-to-attention{
+
+.call-to-attention {
     width: 100%;
 }
-.banner-homepage{
+
+.banner-homepage {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
-.banner-image img{
+
+.banner-image img {
     width: 100%;
     height: 540px;
     filter: brightness(50%);
 }
-.banner-content{
+
+.banner-content {
     position: absolute;
     align-items: center;
 }
-.banner-inner-content h1{
+
+.banner-inner-content h1 {
     font: normal 400 100px/normal 'Qwigley';
     color: #FBF4F4;
     padding-top: 100px;
 }
-.banner-inner-content{
+
+.banner-inner-content {
     align-items: center;
     align-content: center;
 }
 
-.CTA-button button{
+.CTA-button button {
     margin-top: 20px;
     margin-left: 39%;
     padding: 10px 0;
@@ -831,21 +964,23 @@ right-info i{
     background-color: #FBF4F4;
     border-radius: 30px;
 }
-.CTA-button a button{
+
+.CTA-button a button {
     border-radius: 25px;
-	border: 1px solid #000;
-	background: #1C1C1D;
-	font: normal 400 15px/normal 'Poppins';
-	color: #FCF6F6;
+    border: 1px solid #000;
+    background: #1C1C1D;
+    font: normal 400 15px/normal 'Poppins';
+    color: #FCF6F6;
 }
 
-.CTA-button  a button:hover{
-	background-color: #454548;
+.CTA-button a button:hover {
+    background-color: #454548;
     color: #fcfcfc;
 }
 
 
 /**** arrow up button****/
+
 .going-back {
     width: 100%;
 }
@@ -854,7 +989,8 @@ right-info i{
     position: fixed;
     bottom: 70px;
     right: 25px;
-    background-color: #ccc; /* Gray background */
+    background-color: #ccc;
+    /* Gray background */
     border: none;
     cursor: pointer;
 }
@@ -869,76 +1005,86 @@ right-info i{
 }
 
 .arrow-up-button .back-to-top i {
-    color: #fff; /* White color for the arrow icon */
+    color: #fff;
+    /* White color for the arrow icon */
     font-weight: 1100;
-    font-size: 20px; /* Adjusted weight for the arrow icon */
+    font-size: 20px;
+    /* Adjusted weight for the arrow icon */
 }
 
 .back-to-top:hover {
     background-color: #454548;
     color: #fcfcfc;
-
 }
+
 .back-to-top-hidden {
     display: none;
 }
 
 
 /****** Footer *******/
-.footer-page{
+
+.footer-page {
     width: 100%;
     background-color: #FBF4F4;
     padding: 50px 10px 50px 0px;
 }
+
 .footer {
     display: flex;
     flex-direction: row;
     margin: 0px 30px 0px 90px;
 }
-.footer-row{ 
-display: flex;
-flex-wrap: wrap;
-justify-content: space-between;
-gap: 3.5rem;
-width: 33%;
-padding: 15px 60px 0px 60px;
+
+.footer-row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 3.5rem;
+    width: 33%;
+    padding: 15px 60px 0px 60px;
 }
 
 .footer-left-link {
     margin-top: 20px;
-  }
+}
+
 .footer-left-link li {
     list-style: none;
     margin-bottom: 10px;
-  }
+}
+
 .footer-left-link li a {
     text-decoration: none;
     color: #1C1C1D;
     font: normal 500 14px/normal 'Poppins';
     line-height: 30px;
-  }
-.footer-left-link li a:hover{
-        color: #C2BE63;
-    }
-.footer-left-link a:hover {
-        color: #C2BE63;
-        transition: all 0.3s;
-    }
+}
 
+.footer-left-link li a:hover {
+    color: #C2BE63;
+}
+
+.footer-left-link a:hover {
+    color: #C2BE63;
+    transition: all 0.3s;
+}
 
 .footer-center-content {
     padding: 30px 50px 50px 50px;
-  }
-
-.vertical-line-left{
-    border-left: 2px solid #000; 
-    height: 250px; 
 }
-.footer-center h6{
+
+.vertical-line-left {
+    border-left: 2px solid #000;
+    height: 250px;
+}
+
+.footer-center h6 {
     font: normal 700 18px/normal 'Poppins';
     margin: 0px 20px 15px 265px;
 }
-.footer-center p{
+
+.footer-center p {
     font: normal 700 18px/normal 'Poppins';
     color: #1C1C1D;
     font-family: Poppins;
@@ -946,12 +1092,11 @@ padding: 15px 60px 0px 60px;
     width: 90%;
     flex-shrink: 0;
     margin-top: 15px;
-    text-align:center;
+    text-align: center;
     line-height: 20px;
     letter-spacing: 0.3px;
     margin: 0px 0px 10px 40px;
 }
-
 
 .social-meadia-links h6 {
     font: normal 600 18px/normal 'Poppins';
@@ -975,107 +1120,97 @@ padding: 15px 60px 0px 60px;
     color: #454548;
 }
 
-
-.vertical-line-right{
-    border-left: 2px solid #000; 
-    height: 250px; 
+.vertical-line-right {
+    border-left: 2px solid #000;
+    height: 250px;
 }
-.footer-logo{
+
+.footer-logo {
     margin: 70px 50px 20px 60px;
 }
-.footer-logo img{
+
+.footer-logo img {
     width: 220px;
     height: 110px;
 }
 
-
-.container-credential{
-    width: 100%; 
+.container-credential {
+    width: 100%;
     background-color: #1C1C1D;
 }
-.rights-definition{
+
+.rights-definition {
     padding: 15px;
 }
 
-.rights-definition p{
+.rights-definition p {
     font: normal 14px/normal 'Poppins';
     color: #ccc;
     text-align: center;
 }
 
-
-
-
-
-
 .grid-container {
     display: grid;
-    grid-template-columns: repeat(4, 1fr); /* This will create 4 equal columns */
+    grid-template-columns: repeat(4, 1fr);
+    /* This will create 4 equal columns */
     grid-gap: 10px;
-  }
-  
-  .grid-item {
+}
+
+.grid-item {
     padding: 20px;
     background-color: #f1f1f1;
     text-align: center;
-  }
-  
-  .featured-project {
-    grid-column: 1 / -1; /* This will make the "Featured Projects" item span across all columns */
-  }
+}
+
+.featured-project {
+    grid-column: 1 / -1;
+    /* This will make the "Featured Projects" item span across all columns */
+}
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    /************** Portfolio Other Web Page *************/
-
+/************** Portfolio Other Web Page *************/
 
 .portfolio-page {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
+
 .portfolio-page .coverpage {
     width: 100%;
 }
 
 .portfolio-page .cover-content {
     position: relative;
-    width: 100%; 
+    width: 100%;
 }
-.portfolio-page .cover-content img{
+
+.portfolio-page .cover-content img {
     width: 100%;
     height: 500px;
     filter: brightness(50%);
 }
-.portfolio-page .text{
+
+.portfolio-page .text {
     align-content: center;
     margin-top: 6%;
 }
-.portfolio-page .text h2{
+
+.portfolio-page .text h2 {
     font: normal 500 90px/normal 'Qwigley';
     letter-spacing: 5px;
     color: #FCF6F6;
 }
 
 
-
+.first-row{
+    display: flex;
+    flex-direction: row;
+}
+.second-row{
+    display: flex;
+    flex-direction: row;
+}
 
 
 .featured_projects {
@@ -1089,7 +1224,8 @@ padding: 15px 60px 0px 60px;
     max-width: 33.33%;
     padding: 0 4px;
     box-sizing: border-box;
-    text-align: center; /* Center text */
+    text-align: center;
+    /* Center text */
     position: relative;
 }
 
@@ -1102,11 +1238,13 @@ padding: 15px 60px 0px 60px;
 
 .grind-portfolio:nth-child(1),
 .grind-portfolio:nth-child(2) {
-    flex-basis: 50%; /* First two items take up half the space each */
+    flex-basis: 50%;
+    /* First two items take up half the space each */
 }
 
 .grind-portfolio:nth-child(3) {
-    flex-basis: 100%; /* Third item takes up the full width */
+    flex-basis: 100%;
+    /* Third item takes up the full width */
 }
 
 .text-portfolio-title {
@@ -1114,90 +1252,56 @@ padding: 15px 60px 0px 60px;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    color: #fff; /* Change the text color to match your design */
+    color: #fff;
+    /* Change the text color to match your design */
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-  @media (max-width: 500px) {
+@media (max-width: 500px) {
     .featured_projects .im {
-      width: 100%;
+        width: 100%;
     }
-  
     .featured_projects .im {
-      margin-top: 0px;
-      margin-right: 0px;
-      margin-bottom: 0px;
-      margin-left: 0px;
+        margin-top: 0px;
+        margin-right: 0px;
+        margin-bottom: 0px;
+        margin-left: 0px;
     }
-  
     .featured_projects .responsive-container-block.img {
-      width: 100%;
+        width: 100%;
     }
-  
     .featured_projects .responsive-container-block.opt-cont {
-      flex-direction: column;
+        flex-direction: column;
     }
-  
     .featured_projects .responsive-container-block.img.hidden {
-      display: none;
+        display: none;
     }
-  
     .featured_projects .text-blk.info {
-      font-size: 17px;
-      line-height: 22px;
-      margin-top: 0px;
-      margin-right: 0px;
-      margin-bottom: 10px;
-      margin-left: 0px;
+        font-size: 17px;
+        line-height: 22px;
+        margin-top: 0px;
+        margin-right: 0px;
+        margin-bottom: 10px;
+        margin-left: 0px;
     }
-  
     .featured_projects .text-blk.title {
-      font-size: 17px;
-      line-height: 22px;
+        font-size: 17px;
+        line-height: 22px;
     }
-  
     .featured_projects .text-blk.title {
-      padding-top: 0px;
-      padding-right: 10px;
-      padding-bottom: 5px;
-      padding-left: 10px;
+        padding-top: 0px;
+        padding-right: 10px;
+        padding-bottom: 5px;
+        padding-left: 10px;
     }
-  
     .featured_projects .text-blk.info {
-      font-size: 20px;
-      line-height: 27.28px;
+        font-size: 20px;
+        line-height: 27.28px;
     }
-  
     .featured_projects .text-blk.title {
-      font-size: 20px;
-      line-height: 27.28px;
+        font-size: 20px;
+        line-height: 27.28px;
     }
-  }
-
-
-
-
-
+}
 
 
 /*****Responsive*
@@ -1208,3 +1312,119 @@ padding: 15px 60px 0px 60px;
 	}
 }
 ****/
+
+
+/* Services */
+
+.servicetext {
+    position: absolute;
+    top: 40%;
+    left: 24%;
+    text-align: center;
+    width: 52%;
+    color: white;
+    z-index: 1;
+    /* Ensure text is above the carousel */
+}
+
+.servicetext h2 {
+    font: normal 500 150px/normal 'Qwigley';
+    letter-spacing: 3px;
+}
+
+.servicetext2 h2 {
+    font: normal 500 50px/normal 'Poppins';
+    letter-spacing: 3px;
+    text-align: center;
+    padding-top: 45px;
+    padding-bottom: 20px;
+}
+
+.servicetext2 p {
+    font: normal 500 20px/normal 'Poppins';
+    letter-spacing: 3px;
+    text-align: center;
+}
+
+.servicetable {
+    width: 100%;
+    background-color: #FBF4F4;
+    padding: 70px 0px 50px 0px;
+    text-align: center;
+}
+
+.table-container {
+    left: 100px;
+    width: 100%;
+    height: 10%;
+    background: #FBF4F4;
+    padding: 100px;
+    display: flex;
+    align-items: center;
+    box-shadow: #000;
+}
+
+table {
+    margin: auto;
+    border-collapse: collapse;
+    width: 70%;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    /* Box shadow style */
+    /* Adjust the width as needed */
+}
+
+th,
+td {
+    background-color: #ffffff;
+    padding: 45px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+    /* Border only at the bottom */
+}
+
+.features__tick::after {
+    content: "\2714";
+    font-size: 1.5em;
+    color: green;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+    /* Use the color of the parent element */
+}
+
+.tdbutton {
+    display: inline-block;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 16px;
+    /* Control the smoothness of edges with border-radius */
+    cursor: pointer;
+    color: #000000;
+    background-color: #ffe6e6;
+}
+
+.button:hover {
+    background-color: #cac9c9;
+    /* Change the background color on hover */
+}
+
+.colorblack {
+    position: relative;
+    background-color: rgb(229, 186, 44);
+    height: 500px;
+    width: 100%;
+    margin-top: 100px;
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 1);
+}
+
+
+.half-box {
+    width: 100px;
+    /* Adjust the width as needed */
+    height: 50px;
+    /* Adjust the height as needed */
+    background-color: black;
+}

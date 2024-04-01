@@ -148,12 +148,52 @@ $packageResult = mysqli_query($conn, $packageQuery);
                         <button id="prev">Prev</button>
                         <button id="next">Next</button>
                     </div>
-                </form>
+                </div>
+        </div>
+        <div id="popup" class="popup" style="display: none;">
+            <div class="popup-content">
+                <span class="close" onclick="hidePopup()">&times;</span>
+                <div class="form-container">
+                        <input type="hidden" name="bookingId" value="123"> <!-- Add the actual booking ID here -->
+                        <div class="form-group">
+                            <label for="paymentOption">Select Payment Option:</label>
+                            <select name="paymentOption" id="paymentOption" class="form-control" required>
+                                <option value="downpayment">Downpayment</option>
+                                <option value="fullpayment">Full Payment</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Pay Via: </label>
+                            <div class="payment-options">
+                                <label class="payment-icon">
+                                    <span class="payment-label">GCash</span>
+                                    <img src="../picture/gcash.png" alt="GCash Logo" class="payment-logo">
+                                    <input type="radio" name="paymentOption" value="gcash" required>
+                                </label>
+                                <label class="payment-icon">
+                                    <span class="payment-label">Mastercard</span>
+                                    <img src="../picture/mc.png" alt="Mastercard Logo" class="payment-logo">
+                                    <input type="radio" name="paymentOption" value="mastercard" required>
+                                </label>
+                                <label class="payment-icon">
+                                    <span class="payment-label">BDO</span>
+                                    <img src="../picture/bdo.png" alt="BDO Logo" class="payment-logo">
+                                    <input type="radio" name="paymentOption" value="bdo" required>
+                                </label>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn-save-event">Pay now</button>
+                    </form>
+                </div>
             </div>
         </div>
     </main>
 </body>
+
+
 <script>
+    
+    
     var currentStep = 1;
     var totalSteps = 3; 
     var prevButton = document.getElementById('prev');
@@ -178,7 +218,7 @@ $packageResult = mysqli_query($conn, $packageQuery);
     
         // Update the "Next" button text to "Pay" in step 3
         if (step === totalSteps) {
-            nextButton.innerText = 'Pay';
+            nextButton.innerText = 'Pay Booking';
         } else {
             nextButton.innerText = 'Next';
         }
@@ -194,10 +234,26 @@ $packageResult = mysqli_query($conn, $packageQuery);
             displayReceipt(); // Display receipt on the final step
         }
     } else {
-        // If it's the last step, submit the form
-        submitForm();
+        // If it's the last step, show the payment popup
+        showPopup();
     }
 });
+
+// Function to show the payment popup
+function showPopup() {
+    var popup = document.getElementById('popup');
+    if (popup) {
+        popup.style.display = 'block';
+    }
+}
+
+// Function to hide the payment popup
+function hidePopup() {
+    var popup = document.getElementById('popup');
+    if (popup) {
+        popup.style.display = 'none';
+    }
+}
     
     prevButton.addEventListener('click', function (event) {
         event.preventDefault();
@@ -208,12 +264,9 @@ $packageResult = mysqli_query($conn, $packageQuery);
         }
     });
     
-    document.querySelector('.form-fillup').addEventListener('submit', function (event) {
-        event.preventDefault();
-        // Add any additional form submission handling here if needed
-    });
-
-    function submitForm() {
+    document.querySelector('.btn-save-event').addEventListener('click', function(event) {
+    event.preventDefault(); // Prevent the default form submission
+    
     // Create a new FormData object
     var formData = new FormData(document.getElementById('bookingForm'));
 
@@ -232,7 +285,8 @@ $packageResult = mysqli_query($conn, $packageQuery);
     
     // Send the FormData object
     xhr.send(formData);
-}
+});
+
     // Function to update the step display
     function updateStepDisplay() {
         // Update the circle indicators
@@ -281,12 +335,23 @@ $packageResult = mysqli_query($conn, $packageQuery);
     
     // Function to display receipt in step 3
     function displayReceipt() {
-        var receiptDiv = document.querySelector('#step3 .receipt');
-        receiptDiv.innerHTML = '<h2>Receipt</h2>';
-        for (var key in formData) {
-            receiptDiv.innerHTML += '<p><strong>' + key + ':</strong> ' + formData[key] + '</p>';
-        }
+    var receiptDiv = document.querySelector('#step3 .receipt');
+    receiptDiv.innerHTML = '<h2>Receipt</h2>';
+    
+    var receiptData = {
+        'Costumer Name': formData.firstname + ' ' + formData.lastname,
+        'Booking Date': formData.bookingDate,
+        'Booking Time': formData.bookingTime,
+        'Package Price': formData.package,
+        'Event Type': formData.eventType,
+        'Event Name': formData.eventTitle,
+        'Location': formData.eventLocation,
+    };
+
+    for (var key in receiptData) {
+        receiptDiv.innerHTML += '<p><strong>' + key + ':</strong> ' + receiptData[key] + '</p>';
     }
+}
 
     // Function to toggle password visibility
     function togglePasswordVisibility(inputId, eyeId) {

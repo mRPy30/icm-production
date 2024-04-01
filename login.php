@@ -175,6 +175,8 @@ $page = $components[2];
                         </div>
                     <button class="btn btn-lg btn-block btn-success" type="submit" name="submit" value="Submit"
                         style="height: 7vh;">Login</button>
+                        <br><br>
+                        <p><a href="#">Forget Password?</a><p>
                 </form>
         </div>
         <div id="popup" class="popup">

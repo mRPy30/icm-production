@@ -43,6 +43,7 @@
 
         <section class="featured_projects">
             <div class="container-portfolio">
+                <div class="first-row">
                 <div class="grind-portfolio">
                     <img src="../picture/portfolio-wedding.jpg" alt="coverpage">
                     <div class="text-portfolio-title">
@@ -61,6 +62,8 @@
                         <p>Birthday</p>
                     </div>
                 </div>
+                </div>
+                <div class="second-row">
                 <div class="grind-portfolio">
                     <img src="../picture/portfolio-family.jpg" alt="coverpage">
                     <div class="text-portfolio-title">
@@ -73,9 +76,70 @@
                         <p>Prenup</p>
                     </div>
                 </div>
+                </div>
+            </div>
+        </section>
+        <footer class="footer-page">
+            <div class="footer">
+                <div class="footer-row">
+                    <ul class="footer-left-link">
+                        <li><a href="../login.php">Login</a></li>
+                        <li><a href="../about.php">About</a></li>
+                        <li><a href="../portfolio.php">Portfolio</a></li>
+                        <li><a href="../review.php">Testimonial</a></li>
+                        <li><a href="../contact.php">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="vertical-line-left"></div>
+                <div class="footer-center-content">
+
+                    <div class="footer-center">
+                        <h6>About ICSM Creatives</h6>
+                        <p>We are dedicated to serving women of color in an underrepresented bridal market. All brides
+                            will find inspiration on our blog, in our digital publication, on our social circuit and at
+                            our national bridal events.</p>
+
+                        <div class="social-meadia-links">
+                            <h6>Connect with us</h6>
+                            <div class="icons">
+                                <a class="facebook" href="https://www.facebook.com/icsmcreatives" target="_blank"><i
+                                        class="fa-brands fa-facebook"></i>
+                                </a>
+                                <a class="mail" href="https://www.facebook.com/cvsuimusofficialpage" target="_blank"><i
+                                        class="fa-solid fa-envelope"></i>
+                                </a>
+                                <a class="instagram" href="https://www.instagram.com/icsmcreatives">
+                                    <i class=" fa-brands fa-instagram"></i>
+                                </a>
+                                <a class="tiktok" href="https://www.tiktok.com/@icsm.creatives">
+                                    <i class="fa-brands fa-tiktok"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="vertical-line-right"></div>
+                <div class="footer-logo">
+                    <a href="../homepage/homepage.php">
+                        <img src="../picture/logo.png" alt="logo">
+                    </a>
+                </div>
+            </div>
+        </footer>
+
+        <section class="going-back">
+            <div class="arrow-up-button back-to-top-hidden">
+                <button class="back-to-top" onclick="scrollToTop()"><i class="fas fa-arrow-up"></i></button>
             </div>
         </section>
 
+        <section class="container-credential">
+            <div class="credit-info">
+                <div class="rights-definition">
+                    <p>© 2023-2024 ICSMCREATIVES.COM ALL RIGHTS RESERVED. TERMS OF USE | PRIVACY POLICY</p>
+                </div>
+            </div>
+        </section>
 
 
     </main>

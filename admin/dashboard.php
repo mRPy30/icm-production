@@ -322,7 +322,6 @@ $page = $components[2];
                 moonIcon.classList.remove('sun-transition');
             }, 1000);
 
-            // Add dark-mode class to dashboard items
             dashboardItems.forEach(item => {
                 item.classList.add('dark-mode');
             });
@@ -334,7 +333,6 @@ $page = $components[2];
                 moonIcon.classList.remove('moon-transition');
             }, 1000);
 
-            // Remove dark-mode class from dashboard items
             dashboardItems.forEach(item => {
                 item.classList.remove('dark-mode');
             });

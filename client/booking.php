@@ -79,7 +79,7 @@ $page = $components[2];
                       echo '<tr>';
                       echo '<td>' . $row['title_event'] . '</td>';
                       echo '<td>' . $row['eventLocation'] . '</td>';
-                      echo '<td>' . $row['eventDate'] . '</td>';
+                      echo '<td>' . date("F j, Y", strtotime($row['eventDate'])) . '</td>';
                       echo '<td>' . $row['status'] . '</td>';
                       echo '</tr>';
                 }
@@ -94,10 +94,12 @@ $page = $components[2];
          include '../client/sidebar.php';
     ?>
         <!-- Set schedule form (hidden by default) -->
-        <div id="setForm" class="form-popup">
-            <span class="close-button" onclick="closeForm()" style="font-size: 20px; font-weight: 600;">&#10006;</span>
-            <form action="../backend/request.php" method="POST" class="" enctype="multipart/form-data">
-
+        <div id="setForm" class="form-popup" style="display: none;">
+        <span class="close-button" onclick="closeForm()" style="font-size: 20px; font-weight: 600;">&#10006;</span>
+            <div class="top-book">
+                <div class="title-book">
+                    <h3>Start an Event with us!</h3>
+                </div>
                 <div class="steps">
                     <div class="circle active">
                         <i class="fa-solid fa-check"></i>
@@ -106,396 +108,304 @@ $page = $components[2];
                     <div class="circle">
                         <i class="fa-solid fa-check"></i>
                     </div>
-                    <div class="progress-line"></div>
-                    <div class="circle">
-                        <i class="fa-solid fa-check"></i>
-                    </div>
-                    <div class="progress-line"></div>
-                    <div class="circle">
-                        <i class="fa-solid fa-check"></i>
-                    </div>
-                    <div class="progress-line"></div>
-                    <div class="circle">
-                        <i class="fas fa-check"></i>
-                    </div>
-                    <div class="progress-line"></div>
-                    <div class="circle">
-                        <i class="fas fa-check"></i>
-                    </div>
-                    <div class="progress-line"></div>
-                    <div class="circle">
-                        <i class="fas fa-check"></i>
-                    </div>
                 </div>
-
-                <!-- Step 1 -->
-                <p style="font-size: 15px; font-family: Poppins; padding: 20px; padding-left: 20px;">Set Date and Time Schedule</p>
-                <div id="step1" class="form-step">
-
-                    <form style="background-color: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
-                        <div class="form-group" style="padding: 10px;">
-                            <p>Date</p>
-                            <input type="date" name="bookingDate" id="bookingDate" class="form-input" required>
-
-                            <p>Time</p>
-                            <input type="time" name="bookingTime" class="form-input" required>
+            </div>
+            <!-- Step 1 -->
+            <div class="forms">
+            <form id="bookingForm" action="../backend/request.php" method="POST" class="form-fillup needs-validation" enctype="multipart/form-data">         
+                    <div id="step1" class="form-step">
+                        <div class="form-group">
+                            <div class="left-info">
+                                <label for="bookingDate">Date</label>
+                                <input type="date" name="bookingDate" id="formattedDateDisplay" class="form-input" onchange="formatDate()" required>
+                                <label for="bookingTime">Time</label>
+                                <input type="time" name="bookingTime" class="form-input" required>
+                                <label for="eventType">Type of Event</label>
+                                    <select name="eventType" id="eventType" required >
+                                        <?php
+                                        while ($event = mysqli_fetch_assoc($eventResult)) {
+                                            echo "<option value='" . $event['eventName'] . "'>" . $event['eventName'] . "</option>";
+                                        }
+                                        ?>
+                                    </select>
+                                <label for="eventTitle">Name of Event</label>
+                                <input type="text" id="eventTitle" name="eventTitle" required>
+                            </div>
+                                    
+                            <div class="right-info">
+                                <label for="eventLocation">Event Location</label>
+                                <input type="text" id="eventLocation" name="eventLocation" required>
+                                <label for="eventDescription">Booking Description</label>
+                                <input type="text" id="eventDescription" name="eventDescription" required>
+                                <label for="package">Select Package</label>
+                                    <select name="package" id="package" required>
+                                        <?php
+                                        while ($package = mysqli_fetch_assoc($packageResult)) {
+                                            echo "<option value='" . $package['packageName'] . "'>" . $package['packageCategory'] . " " 
+                                            . $package['packageName'] 
+                                            . " (₱" . number_format($package['packagePrice'] ). ")</option>";
+                                        }
+                                        ?>
+                                    </select>
+                            </div>
                         </div>
-                </div>
+                    </div>
+            </div>
 
-                <!-- Step 2 -->
-                <div id="step2" class="form-step">
-                    <p style="font-size: 25px; padding:20px; text-align:left;">Set Event Title and Type</p>
-                    <label for="eventType">Type of Event</label>
-                    <select name="eventType" id="eventType" required>
-                    <?php
-                    while ($event = mysqli_fetch_assoc($eventResult)) {
-                        echo "<option value='" . $event['eventName'] . "'>" . $event['eventName'] . "</option>";
-                    }
-                    ?>
-                </select>
-
-                    <label for="eventTitle">Title Event</label>
-                    <input type="text" id="eventTitle" name="eventTitle" required>
-                </div>
-
-                <!-- Step 3 -->
-                <div id="step3" class="form-step" style="display: none">
-                    <p>Where is your event?</p>
-                    <label for="eventLocation">Address of Event</label>
-                    <input type="text" id="eventLocation" name="eventLocation" required>
-                </div>
-
-                <!-- Step 4 -->
-                <div id="step4" class="form-step" style="display: none">
-                    <p>Choose your Packages</p>
-                    <?php
-                while ($package = mysqli_fetch_assoc($packageResult)) {
-                    echo "<div class='package-box' onclick='selectPackage(\"" . $package['packageName'] . "\", this)'>";
-                    echo "<h4>" . $package['packageName'] . "</h4>";
-                    echo "<p>Price: $" . $package['packagePrice'] . "</p>";
-                    echo "<p>" . $package['packageDetails'] . "</p>";
-                    echo "</div>";
-                }
-                ?>
-                </div>
-
-                <!-- Step 5 -->
-                <div id="step5" class="form-step" style="display: none">
-                    <p>Booking Description</p>
-                    <input type="text" id="eventDescription" name="eventDescription" required>
-                </div>
-
-                <!-- Step 6 -->
-                <div id="step6" class="form-step" style="display: none">
-                    <p>Receipt</p>
-                    <p>Date: <span id="receiptDate"></span></p>
-                    <p>Time: <span id="receiptTime"></span></p>
-                    <p>Type of Event: <span id="receiptEventType"></span></p>
-                    <p>Title Event: <span id="receiptEventTitle"></span></p>
-                    <p>Address of Event: <span id="receiptEventLocation"></span></p>
-                    <p>Description: <span id="receiptEventDescription"></span></p>
-                    <p>Selected Package: <span id="selectedPackage"></span></p>
-                </div>
-
-                <!--Step 7 -->
-                <div id="step7" class="form-step" style="display: none">
-                    <p>Payment</p>
-                    <label for="paymentAmount">Payment Amount:</label>
-                    <input type="number" name="paymentAmount" id="paymentAmount" required>
-
-                    <button id="payButton" onclick="closeFormAndShowConfirmation()">Pay</button>
-                </div>
-
-                <div id="showConfirmationPopup" class="confirmation-popup" style="display: none;">
-                    <p>Do you want to proceed with this booking event?</p>
-                    <button id="confirmWait" class="confirm-button" onclick="hideConfirmationPopup()">Wait</button>
-                    <button id="confirmYes" class="confirm-button" onclick="confirmBooking()">Yes</button>
-
-                </div>
-
-
-
-                <div class="buttons">
-                    <button id="prev">Prev</button>
-                    <button id="next">Next</button>
-                </div>
-                </form>
+            <!-- Step 2 (Receipt) -->
+            <div id="step2" class="form-step" style="display: none;">
+                <div class="receipt">
+                     <h2>Receipt</h2>
+                <div id="receiptDetails"></div>
+                </div>               
+            </div>
+            <div class="buttons-book">
+                <button id="prev">Prev</button>
+                <button id="next">Next</button>
+            </div>
         </div>
-
-
+    </div>
+    <div id="popup-payment" class="popup-payment" style="display: none;">
+            <div class="popup-content">
+                <span class="close" onclick="hidePopup()">&times;</span>
+                <div class="form-container">
+                        <input type="hidden" name="bookingId" value="123"> <!-- Add the actual booking ID here -->
+                        <div class="form-group">
+                            <label for="paymentOption">Select Payment Option:</label>
+                            <select name="paymentOption" id="paymentOption" class="form-control" required>
+                                <option value="downpayment">Downpayment</option>
+                                <option value="fullpayment">Full Payment</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Pay Via: </label>
+                            <div class="payment-options">
+                                <label class="payment-icon">
+                                    <span class="payment-label">GCash</span>
+                                    <img src="../picture/gcash.png" alt="GCash Logo" class="payment-logo">
+                                    <input type="radio" name="paymentOption" value="gcash" required>
+                                </label>
+                                <label class="payment-icon">
+                                    <span class="payment-label">Mastercard</span>
+                                    <img src="../picture/mc.png" alt="Mastercard Logo" class="payment-logo">
+                                    <input type="radio" name="paymentOption" value="mastercard" required>
+                                </label>
+                                <label class="payment-icon">
+                                    <span class="payment-label">BDO</span>
+                                    <img src="../picture/bdo.png" alt="BDO Logo" class="payment-logo">
+                                    <input type="radio" name="paymentOption" value="bdo" required>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="amount">Price Amount</label>
+                                <div class="input-group">
+                                    <input type="text" name="packagePrice" id="amount" class="form-control" oninput="formatAmount()">
+                                </div>
+                        </div>
+                        <button type="submit" class="btn-booking ">Pay now</button>
+                    </form>
+                </div>
+            </div>
+        </div>
     </body>
 
     <script>
-        // Get the button element
-        var addEvent = document.getElementById('addEvent');
+    var currentStep = 1;
+var totalSteps = 2; // Update this if you add more steps
 
-        // Get the popup form element
-        var addEventForm = document.getElementById('setForm');
+var circles = document.querySelectorAll('.circle');
+var prevButton = document.getElementById('prev');
+var nextButton = document.getElementById('next');
 
-        // Add an event listener to the button for the click event
-        addEvent.addEventListener('click', function(event) {
-            // Prevent the default form submission behavior
-            event.preventDefault();
+prevButton.addEventListener('click', function () {
+    if (currentStep > 1) {
+        currentStep--;
+        updateStepDisplay();
+    }
+});
 
-            // Show the popup form
-            addEventForm.style.display = 'block';
-
-            // Initialize the current step to 1 when the form is opened
-            currentStep = 1;
-            updateStepDisplay();
-        });
-
-        function closeForm() {
-            var addEventForm = document.getElementById('setForm');
-            addEventForm.style.display = 'none';
+nextButton.addEventListener('click', function (event) {
+    event.preventDefault();
+    if (currentStep < totalSteps) {
+        updateFormData(); // Update formData before moving to the next step
+        currentStep++;
+        setForm(currentStep);
+        if (currentStep === totalSteps) {
+            displayReceipt(); // Display receipt on the final step
         }
-        var selectedPackage = null;
-
-        function selectPackage(packageName, packageElement) {
-            selectedPackage = packageName;
-            updateStepDisplay();
-
-            // Remove the 'glowing' class from all package boxes
-            var packageBoxes = document.querySelectorAll('.package-box');
-            packageBoxes.forEach(function(box) {
-                box.classList.remove('glowing');
-            });
-
-            // Add the 'glowing' class to the clicked package box
-            packageElement.classList.add('glowing');
-        }
-        //alert after submit data in booking
-        document.addEventListener("DOMContentLoaded", function() {
-            <?php
-    if (isset($_SESSION['booking_success'])) {
-        if ($_SESSION['booking_success']) {
-            echo "alert('Booking data has been successfully inserted into the database.');";
-            header('Location: ../client/booking.php');
-            exit();
-        } else {
-            $errorMessage = isset($_SESSION['booking_error_message']) ? $_SESSION['booking_error_message'] : 'An error occurred while inserting booking data.';
-            echo "alert('$errorMessage');";
-            header('Location: ../client/booking.php');
-            exit();
+    } else {
+        // If it's the last step, show the payment popup only if the button text is "Pay Booking"
+        if (nextButton.innerText === 'Pay Booking') {
+            showPopup();
         }
     }
-    unset($_SESSION['booking_success']);
-    unset($_SESSION['booking_error_message']);
-    ?>
-        });
+});
 
-        // JavaScript to handle "Prev" and "Next" buttons
-
-        var currentStep = 1;
-        var totalSteps = 7;
-
-        // Get the "Next" and "Prev" buttons
-        var nextButton = document.getElementById('next');
-        var prevButton = document.getElementById('prev');
-
-        // Get the circle indicators
-        var circles = document.querySelectorAll('.circle');
-
-        // Add an event listener to the "Next" button
-        nextButton.addEventListener('click', function(event) {
-            event.preventDefault();
-            nextStep();
-        });
-
-        // Add an event listener to the "Prev" button
-        prevButton.addEventListener('click', function(event) {
-            event.preventDefault();
-            prevStep();
-        });
-
-        // Initialize the form, enabling or disabling "Next" and "Prev" buttons
-        updateStepDisplay();
-
-        function nextStep() {
-            if (currentStep < totalSteps) {
-                if (validateFields(currentStep)) {
-                    currentStep++;
-                    updateStepDisplay();
-                } else {
-                    // Validation failed, don't proceed to the next step
-                }
+    // Handle the "Payment Booking" button click
+    document.getElementById('next').addEventListener('click', function () {
+    // Check if the current step is the last step and the button text is "Pay Booking"
+    if (currentStep === totalSteps && nextButton.textContent === 'Pay Booking') {
+        // If conditions are met, show the payment popup
+        showPaymentPopup();
+    } else {
+        // Otherwise, proceed with the regular next step functionality
+        if (currentStep < totalSteps) {
+            if (currentStep === totalSteps - 1) {
+                // If it's the last step (Step 2), change the button text to "Pay Booking"
+                nextButton.textContent = 'Pay Booking';
             }
+            currentStep++;
+            updateStepDisplay();
         }
+    }
+});
 
-        function prevStep() {
-            if (currentStep > 1) {
-                currentStep--;
-                updateStepDisplay();
-            }
+    function showPaymentPopup() {
+        // Display the payment popup
+        document.getElementById('popup-payment').style.display = 'block';
+    }
+
+    function hidePopup() {
+        // Hide the payment popup
+        document.getElementById('popup-payment').style.display = 'none';
+    }
+
+
+function updateStepDisplay() {
+    // Update the step display
+    var formSteps = document.querySelectorAll('.form-step');
+    formSteps.forEach(function (stepElement) {
+        stepElement.style.display = 'none';
+    });
+
+    // Show the current step
+    var currentStepElement = document.getElementById('step' + currentStep);
+    if (currentStepElement) {
+        currentStepElement.style.display = 'block';
+    }
+
+    // Update the progress line and circles
+    circles.forEach(function (circle, index) {
+        if (index < currentStep) {
+            circle.classList.add('active');
+        } else {
+            circle.classList.remove('active');
         }
+    });
 
-        function updateStepDisplay() {
-            // Hide all form steps
-            var formSteps = document.querySelectorAll('.form-step');
-            formSteps.forEach(function(step) {
-                step.style.display = 'none';
-            });
+    // Update the progress line position
+    var progressLine = document.querySelector('.progress-line');
+    if (progressLine) {
+        var stepWidth = (12 / (totalSteps - 1)) * (currentStep - 1);
+        progressLine.style.width = stepWidth + '%';
+    }
 
-            // Show the current step
-            var currentStepElement = document.getElementById('step' + currentStep);
-            if (currentStepElement) {
-                currentStepElement.style.display = 'block';
-            }
+    // Update the "Next" button text to "Pay" in step 3
+    if (currentStep === totalSteps) {
+        nextButton.innerText = 'Pay Booking';
+    } else {
+        nextButton.innerText = 'Next';
+    }
+}
 
-            // Update the circle indicators
-            circles.forEach(function(circle, index) {
-                if (index < currentStep) {
-                    circle.classList.add('active');
-                } else {
-                    circle.classList.remove('active');
-                }
-            });
 
-            // Update the progress line position
-            var progressLine = document.querySelector('.progress-line');
-            if (progressLine) {
-                var stepWidth = (80 / (totalSteps - 1)) * (currentStep - 1);
-                progressLine.style.width = stepWidth + '%';
-                progressLine.style.left = '10%';
-            }
+document.getElementById('addEvent').addEventListener('click', function() {
+    document.getElementById('setForm').style.display = 'block';
+});
 
-            // Enable or disable "Next" and "Prev" buttons based on the current step
-            if (currentStep === 1) {
-                prevButton.disabled = true;
-                nextButton.disabled = false;
-            } else if (currentStep === totalSteps) {
-                prevButton.disabled = true;
-                nextButton.disabled = true;
+function closeForm() {
+    document.getElementById('setForm').style.display = 'none';
+}
+
+
+document.querySelector('.btn-booking').addEventListener('click', function(event) {
+        event.preventDefault(); // Prevent the default form submission
+
+        // Create a new FormData object
+        var formData = new FormData(document.getElementById('bookingForm'));
+
+        // Send an AJAX request to the server
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', '../backend/request.php', true);
+        xhr.onload = function () {
+            if (xhr.status === 200) {
+                // Display an alert upon successful submission
+                alert("Booking request has been successfully submitted. Please wait for your pending request.");
+
+                // Redirect to the booking page
+                window.location.href = '../client/booking.php';
             } else {
-                prevButton.disabled = false;
-                nextButton.disabled = false;
+                // Handle errors
+                console.error('Form submission failed. Status:', xhr.status);
             }
-        }
+        };
 
-        function validateFields(step) {
-            if (step === 1) {
-                const bookingDate = document.getElementById('bookingDate').value;
-                if (bookingDate === '') {
-                    alert('Please enter a booking date.');
-                    return false;
-                }
-            } else if (step === 2) {
-                const eventType = document.getElementsByName('eventType')[0].value;
-                const eventTitle = document.getElementsByName('eventTitle')[0].value;
-                if (eventType === '' || eventTitle === '') {
-                    alert('Please fill in all required fields.');
-                    return false;
-                }
-            } else if (step === 3) {
-                const eventLocation = document.getElementsByName('eventLocation')[0].value;
-                if (eventLocation === '') {
-                    alert('Please enter the event location.');
-                    return false;
-                }
-            } else if (step === 4) {
-                if (selectedPackage === null) {
-                    alert('Please choose a package.');
-                    return false;
-                }
-            } else if (step === 5) {
-                const eventDescription = document.getElementsByName('eventDescription')[0].value;
-                if (eventDescription === '') {
-                    alert('Please provide an event description.');
-                    return false;
-                }
-            } else if (step === 7) {
-                const paymentAmount = document.getElementById('paymentAmount').value;
-                if (paymentAmount === '') {
-                    alert('Please enter the payment amount.');
-                    return false;
-                }
+        // Set the appropriate headers for form data
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+
+        // Convert FormData to URL-encoded format
+        var urlEncodedData = '';
+        for (var pair of formData.entries()) {
+            if (urlEncodedData.length > 0) {
+                urlEncodedData += '&';
             }
-
-            // Add similar validation for other steps
-
-            return true;
+            urlEncodedData += encodeURIComponent(pair[0]) + '=' + encodeURIComponent(pair[1]);
         }
 
+        // Send the URL-encoded data
+        xhr.send(urlEncodedData);
+    });
+    
+// Update the displayReceipt function
+function displayReceipt(data) {
+    var receiptDiv = document.getElementById('receiptDetails');
+    receiptDiv.innerHTML = '';
 
-        function collectAndDisplayData() {
-            // Collect data from all steps
-            var formData = {
-                bookingDate: document.getElementById('bookingDate').value,
-                bookingTime: document.getElementById('bookingTime').value,
-                eventType: document.getElementsByName('eventType')[0].value,
-                eventTitle: document.getElementsByName('eventTitle')[0].value,
-                eventLocation: document.getElementsByName('eventLocation')[0].value,
-                eventDescription: document.getElementsByName('eventDescription')[0].value,
-                selectedPackage: selectedPackage || 'N/A',
-                paymentAmount: document.getElementById('paymentAmount').value,
-            };
+    var receiptData = {
+        'Booking Date': data.bookingDate,
+        'Booking Time': data.bookingTime,
+        'Package': data.package,
+        'Event Type': data.eventType,
+        'Event Title': data.eventTitle,
+        'Event Location': data.eventLocation,
+    };
 
-            // Display the collected data in the summary receipt
-            document.getElementById('receiptDate').textContent = formData.bookingDate;
-            document.getElementById('receiptTime').textContent = formData.bookingTime;
-            document.getElementById('receiptEventType').textContent = formData.eventType;
-            document.getElementById('receiptEventTitle').textContent = formData.eventTitle;
-            document.getElementById('receiptEventLocation').textContent = formData.eventLocation;
-            document.getElementById('receiptEventDescription').textContent = formData.eventDescription;
-            document.getElementById('selectedPackage').textContent = formData.selectedPackage;
+    for (var key in receiptData) {
+        receiptDiv.innerHTML += '<p><strong>' + key + ':</strong> ' + receiptData[key] + '</p>';
+    }
+}
 
-            // Show the summary section (Step 6)
-            document.getElementById('step6').style.display = 'block';
-            // Hide the "Next" button and show the "Previous" button
-            document.getElementById('next').style.display = 'none';
-            document.getElementById('prev').style.display = 'block';
-        }
+// In the "Next" button event listener
+document.getElementById('next').addEventListener('click', function () {
+    // Capture data from Step 1 form
+    var bookingDate = document.getElementById('formattedDateDisplay').value;
+    var bookingTime = document.getElementsByName('bookingTime')[0].value;
+    var eventType = document.getElementById('eventType').value;
+    var eventTitle = document.getElementById('eventTitle').value;
+    var eventLocation = document.getElementById('eventLocation').value;
+    var eventDescription = document.getElementById('eventDescription').value;
+    var package = document.getElementById('package').value;
 
-        /// Add an event listener to the "Submit" button
-        document.getElementById('next').addEventListener('click', function(event) {
-            event.preventDefault();
-            collectAndDisplayData();
-        });
+    // Create an object with the captured data
+    var formData = {
+        bookingDate: bookingDate,
+        bookingTime: bookingTime,
+        eventType: eventType,
+        eventTitle: eventTitle,
+        eventLocation: eventLocation,
+        eventDescription: eventDescription,
+        package: package
+    };
 
-        // Add an event listener to the "Previous" button
-        document.getElementById('prev').addEventListener('click', function(event) {
-            event.preventDefault();
-            // Hide the summary section (Step 6) and show the previous step
-            document.getElementById('step6').style.display = 'none';
-            document.getElementById('next').style.display = 'block';
-            document.getElementById('prev').style.display = 'none';
+    // Update the receipt details
+    displayReceipt(formData);
 
-        });
+});
+document.getElementById('amount').value = '₱' + parseFloat(paymentAmount.packagePrice).toFixed(2);
 
-        // Function to show the confirmation popup
-        function showConfirmationPopup() {
-            var confirmationPopup = document.getElementById('showConfirmationPopup');
-            confirmationPopup.style.display = 'block';
-        }
 
-        // Function to hide the confirmation popup
-        function hideConfirmationPopup() {
-            var confirmationPopup = document.getElementById('showConfirmationPopup');
-            confirmationPopup.style.display = 'none';
-        }
 
-        // Check if the "Wait" button was clicked in the confirmation popup
-        var waitButtonClicked = false;
-        document.getElementById('confirmWait').addEventListener('click', function(event) {
-            event.preventDefault();
-            waitButtonClicked = true;
-        });
-
-        // If "Wait" was clicked, close the confirmation popup
-        if (waitButtonClicked) {
-            hideConfirmationPopup();
-        }
-        // Function to confirm the booking (you can customize this part)
-        function confirmBooking() {
-            // Here you can submit the form to the database
-            document.querySelector('form').submit();
-        }
-
-        // Add an event listener to the "Pay" button
-        document.getElementById('payButton').addEventListener('click', function(event) {
-            event.preventDefault();
-            showConfirmationPopup();
-        });
     </script>
 
-    </html>
+</html>

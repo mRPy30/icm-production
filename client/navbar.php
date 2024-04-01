@@ -12,12 +12,20 @@ $result = $conn->query($sql);
 if ($result->num_rows > 0) {
     $row = $result->fetch_assoc();
     $name = $row["firstName"] . " " .$row["lastName"];
-    $profile = base64_encode($row["profile"]); // Corrected: Use base64_encode here
+    
+    if (!empty($row["profile"])) {
+        // If the profile column is not empty, use the profile image from the database
+        $profile = base64_encode($row["profile"]);
+    } else {
+        // If the profile column is empty, use the default profile image
+        $profile = "../picture/default_profile.jpg";
+    }
 } else {
     // Handle the case where no data is found
     $name = "Name Not Found";
-    $profile = "default_profile.jpg"; // Provide a default profile image
+    $profile = "../picture/default_profile.jpg"; // Provide a default profile image
 }
+
 
 $pageTitles = array(
     "booking.php" => "Booking Event",
@@ -77,6 +85,66 @@ $pageTitle = isset($pageTitles[$currentPage]) ? $pageTitles[$currentPage] : "Boo
         background: #BCB4B5;
         margin: 0 15px;
     }
+    .icons{
+        display: flex;
+        flex-direction: row;
+    }
+
+    .fa-bell:hover{
+        color: #C2BE63;
+        transition: all .3s ease;
+    }
+
+    .fa-comment-dots:hover{
+        color: #C2BE63;
+        transition: all .3s ease;
+    }
+
+    .fa-moon:hover{
+        color: #C2BE63;
+        transition: all .3s ease;
+    }
+
+    .notification-dropdown {
+        position: relative;
+        display: inline-block;
+    }   
+
+    .notification-dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #fcf6fc;
+        min-width: 280px;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        z-index: 1;
+        top: 30px;
+        right: 0;
+        height: 300px;
+    }
+
+    .notification-dropdown-content.show {
+        display: block;
+    }
+
+    .notification-dropdown-content .top_notif {
+        padding: 12px 16px;
+        font: normal 600 17px/20px 'Poppins';
+        color: #1c1c1c;
+        border-bottom: 1px solid #BCB4B5;
+        width: 100%;
+    }
+
+    .notification-dropdown-content .notification{
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+        font: normal 600 14px/20px 'Poppins';
+        color: #1c1c1c;
+    }
+
+    .notification-dropdown-content .notification:hover {
+        background-color: #f1f1f1;
+    }
 
     .profile_info {
         text-align: right;
@@ -112,11 +180,14 @@ $pageTitle = isset($pageTitles[$currentPage]) ? $pageTitles[$currentPage] : "Boo
         min-width: 160px;
         box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
         z-index: 1;
-        margin-left: 75px;
+        top: 100%;
+        text-align: start;
+        right: 0;
     }
 
-    .profile_dropdown:hover .profile_dropdown-content {
+    .profile_info:hover .profile_dropdown-content {
         display: block;
+        right: 0;
     }
 
     .profile_dropdown-content a {
@@ -230,25 +301,39 @@ $pageTitle = isset($pageTitles[$currentPage]) ? $pageTitles[$currentPage] : "Boo
         <h3><?php echo $pageTitle; ?></h3>
     </div>
     <div class="profile_dropdown">
-        <div class="nav-right">
-            <i class="far fa-bell"></i> 
-            <i class="far fa-envelope"></i>
+    <div class="nav-right">
+            <div class="icons">
+                <i class="fa-regular fa-comment-dots" title="Message"></i>     
+                <div class="notification-dropdown">
+                    <i class="far fa-bell" onclick="toggleNotifications()" title="Notification"></i>
+                    <div class="notification-dropdown-content">
+                        <div class="top_notif">
+                            <h4>Notifications</h4>
+                        </div>
+                        <div class="notification">Notification 1</div> 
+                        <div class="notification">Notification 2</div>
+                    </div>
+                </div>
+            </div>
             <div class="divider"></div>
             <div class="profile_info">
                 <h3><?php echo $name; ?></h3>
                 <p>Client</p>
+                <div class="profile_dropdown-content">
+                    <a href="profile.php">Profile</a>
+                    <a href="#" class="btn-logout">Logout</a>        
+                </div>
             </div>
             <div class="profile_pic">
-                <img src="data:image/jpeg;base64,<?php echo $profile; ?>" alt="client image">
+                <?php if (!empty($profile)): ?>
+                    <img src="data:image/jpeg;base64,<?php echo $profile; ?>" alt="client image">
+                <?php else: ?>
+                    <img src="picture/default_profile.jpg" alt="profile image">
+                <?php endif; ?>
             </div>
         </div>
-        <div class="profile_dropdown-content">
-            <a href="profile.php">Profile</a>
-            <a href="#" class="btn-logout">Logout</a>        
-        </div>
-    </div>
 </header>
-
+                
 <body>
     <!-----popup confirmation logout------>
     <div id="logoutPopup" class="popup">

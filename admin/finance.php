@@ -94,6 +94,16 @@ $resultPackages = $conn->query($sqlPackages);
                                 </tr>
                             </thread>
                         </table>
+                        <div class="data-container">
+                            <table class="data-table">
+                                <tbody>
+                                    <tr>
+                                        <td>2023</td>
+                                        <td>4</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -109,19 +119,19 @@ $resultPackages = $conn->query($sqlPackages);
                         </thread>
                     </table>
                     <div class="data-container">
-                            <table class="data-table">
-                                <tbody>
-                                    <?php
-                                    while ($rowExpense = $resultExpenses->fetch_assoc()) {
-                                        echo "<tr>";
-                                        echo "<td>" . date('F j, Y', strtotime($rowExpense['date'])); "</td>";
-                                        echo "<td>" . $rowExpense['category'] . "</td>";
-                                        echo "</tr>";
-                                    }
-                                    ?>
-                                </tbody>
-                            </table>
-                        </div>
+                        <table class="data-table">
+                            <tbody>
+                                <?php
+                                while ($rowExpense = $resultExpenses->fetch_assoc()) {
+                                    echo "<tr>";
+                                    echo "<td>" . date('F j, Y', strtotime($rowExpense['date'])); "</td>";
+                                    echo "<td>" . $rowExpense['category'] . "</td>";
+                                    echo "</tr>";
+                                }
+                                ?>
+                            </tbody>
+                        </table>
+                    </div>
                     <div class="bot-button">
                         <button>View More</button>
                     </div>    

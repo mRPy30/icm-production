@@ -40,14 +40,20 @@
     <main class="main-content">
         <section class="coverpage">
             <div class="cover-content">
-                <img src="../picture/coverpage1.jpg" alt="coverpage">
-                <div class="text">
+                <div class="carousel">
+                    <img src="../picture/ICM.png" alt="coverpage">
+                    <div class="servicetext">
                     <h2>Behind The Lense</h2>
-                    <button class="button">Book Now</button>
+</div>
                 </div>
-            </div>
+</div>
         </section>
-    </main>
+</main>
+
+
+
+
+
 </body>
 
 </html>
