@@ -1,3 +1,81 @@
+<?php
+// Connection
+include '../backend/dbcon.php';
+
+session_start(); // Start the session
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    if (isset($_POST['submit'])) {
+        $email = mysqli_real_escape_string($conn, $_POST['email']);
+        $password = mysqli_real_escape_string($conn, $_POST['password']);
+
+        $hashedPassword = md5($password);
+
+        $query = "SELECT id FROM client WHERE email = '$email' AND password = '$hashedPassword'";
+
+        $result = mysqli_query($conn, $query);
+
+        if (!$result) {
+            die("Query failed: " . mysqli_error($conn));
+        }
+
+        $matchedRows = mysqli_num_rows($result);
+
+        if ($matchedRows > 0) {
+            $row = mysqli_fetch_assoc($result);
+            $id = $row['id'];
+
+            $_SESSION['name'] = $email;
+            $_SESSION['id'] = $id;
+
+            $redirect_url = "../client/booking.php?id=$id";
+
+            echo '<style>
+                body { overflow: hidden; }
+                .loading-overlay {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    background: rgba(255, 255, 255, 0.8);
+                    z-index: 10000;
+                }
+                .loading-circle {
+                    display: inline-block;
+                    width: 40px;
+                    height: 40px;
+                    border: 7px solid #E1DE8F;
+                    border-radius: 50%;
+                    border-top: 5px solid transparent;
+                    animation: spin 1s linear infinite;
+                }
+                @keyframes spin {
+                    0% { transform: rotate(0deg); }
+                    100% { transform: rotate(360deg); }
+                }
+            </style>';
+            echo '<div class="loading-overlay">
+                    <div class="loading-circle"></div>
+                  </div>';
+
+            echo '<script>
+                setTimeout(function() {
+                    window.location.href = "' . $redirect_url . '";
+                }, 2000);
+            </script>';
+            exit();
+        } else {
+            header("Location: ../homepage.php?login_error=true");
+            exit();
+        }
+    }
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -40,7 +118,7 @@
                 <div class="text">
                     <h2>capture every precious moment through our lenses </h2>
                     <p>Get expert photographers and amazing photos, and <br>videos, starting from just PHP 2,500.</p>
-                    <button class="button">Book Now</button>
+                    <button class="btn-cover">Book Now</button>
                 </div>
                 <div class="carousel-page-numbers">
                     <span class="page-number-text">1/5</span>
@@ -48,6 +126,8 @@
                 <div class="horizontal-line"></div>
             </div>
         </section>
+
+        
 
         <section class="portfolio">
             <!-- Portfolio content here -->
@@ -329,8 +409,26 @@
             </div>
         </section>
 
-
+        <div id="login_modal" class="modal">
+            <div class="modal-content">
+                <i class="fa-solid fa-xmark"></i>                
+                <h2>Login</h2>
+                <form class="form-fillup" method="POST" onsubmit="return validateForm()">
+                    <input type="text" class="form" placeholder="Enter your Email" name="email" required>
+                    <input type="password" class="form" placeholder="Enter your Password" name="password" id="password" required oninput="checkPasswordStrength(this)">
+                        <div id="popup" class="popup">
+                            <p id="popup-message"></p>
+                        </div>
+                    <button class="btn btn-lg btn-block btn-success" type="submit" name="submit" value="Submit"
+                        style="height: 7vh;">Login</button>
+                    <a href="#">Forget Password?</a>
+                </form>
+                <p style="margin-top: 5%;">Don’t have any account? <span id="register">Register now</span></p>
+            </div>
+        </div>
     </main>
+
+    
 
     <script>
 
@@ -398,8 +496,8 @@
         });
 
         function scrollToTop() {
-            document.body.scrollTop = 0; // For Safari
-            document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE, and Opera
+            document.body.scrollTop = 0; 
+            document.documentElement.scrollTop = 0; 
         }
 
         document.addEventListener('DOMContentLoaded', function () {
@@ -427,14 +525,50 @@
             window.addEventListener('scroll', handleScroll);
         });
 
+<<<<<<< HEAD
+=======
         document.querySelector(".button").addEventListener("click", function () {
             window.location.href = "../homepage/booking.php";
         });
 
+>>>>>>> 710c690f421b35d615f9907888ec72f30700c357
     document.getElementById('view-more-btn').addEventListener('click', function () {
         // Specify the URL you want to navigate to
         window.location.href = '../homepage/services.php';
     });
+
+
+    // Get the modal
+    const modal = document.getElementById('login_modal');
+
+// Get the button that opens the modal
+const btnCover = document.querySelector('.btn-cover');
+
+// Get the <span> element that closes the modal
+const closeBtn = modal.querySelector('.fa-xmark');
+
+// When the user clicks the button, open the modal
+btnCover.addEventListener('click', function () {
+    modal.style.display = 'block';
+});
+
+// When the user clicks on <span> (x), close the modal
+closeBtn.addEventListener('click', function () {
+    modal.style.display = 'none';
+});
+
+// When the user clicks anywhere outside of the modal, close it
+window.addEventListener('click', function (event) {
+    if (event.target === modal) {
+        modal.style.display = 'none';
+    }
+});
+
+//register
+document.getElementById("register").addEventListener("click", function() {
+    window.location.href = "../register.php";
+});
+
     </script>
 </body>
 

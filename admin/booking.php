@@ -71,7 +71,7 @@ if ($result->num_rows > 0) {
                         <th>Title Event</th>
                         <th>Event Address</th>
                         <th>Date</th>
-                        <th>Packages</th>
+                        <th>Time</th>
                         <th>Status</th>
                     </tr>
                 </thead>
@@ -87,7 +87,7 @@ if ($result->num_rows > 0) {
                     <td><?php echo $booking['title_event']; ?></td>
                     <td><?php echo $booking['eventLocation']; ?></td>
                     <td><?php echo date('F d Y', strtotime($booking['eventDate'])); ?></td>
-                    <td><?php echo $booking['type_of_event']; ?></td>
+                    <td><?php echo date('g:i A', strtotime($booking['eventTime'])); ?></td>
                     <td>
                         <?php if ($booking['status'] == 'Accepted' || $booking['status'] == 'Declined'): ?>
                             <?php echo $booking['status']; ?>

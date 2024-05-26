@@ -76,7 +76,6 @@
 }
 
 
-/* Additional styles for the text content */
 
 .text {
     position: absolute;
@@ -86,11 +85,10 @@
     width: 55%;
     color: white;
     z-index: 1;
-    /* Ensure text is above the carousel */
 }
 
 .text h2 {
-    font: normal 700 45px/normal 'Poppins';
+    font: normal 700 clamp(2em, 5vw, 3.2em)/normal 'Poppins';
     letter-spacing: 3px;
 }
 
@@ -100,26 +98,143 @@
     margin-top: 20px;
 }
 
-.button {
-    margin: 30px 0px 0px 0px;
-    padding: 5px 0px 5px 0px;
+.btn-cover {
+    width: 100px;
+    margin-top: 30px;
     height: 40px;
     width: 15%;
+    left: 95vw;
     font: normal 500 15px/normal 'Poppins';
     filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
-    transition: background-color 0.3s;
-    border: none;
+    display: inline-block;
     cursor: pointer;
     background-color: #FBF4F4;
-    border-radius: 30px;
+    border-radius: 25px;
+    padding: 3px 17px;
+    transition: background-color 0.3s;
+    color: #1c1c1c;
+    border: none;
 }
 
-.button:hover {
+.btn-cover:hover {
     background-color: #454548;
     color: #fcfcfc;
 }
 
 
+.modal {
+    display: none;
+    position: fixed;
+    top: 35%;
+    left: 50%;
+    height: 100%;
+    width: 100%;
+    transform: translate(-50%, -50%);
+    border-radius: 5px;
+    z-index: 9999;
+    animation: slideIn 0.3s ease-in-out forwards;
+}
+
+@keyframes slideIn {
+    from {
+        top: -50%; 
+    }
+    to {
+        top: 55%; 
+    }
+}
+
+.modal-content {
+    background: #FCF6F6;
+    margin: 10% auto;
+    padding: 50px;
+    box-shadow: 0px 0px 400px 900px rgba(0,0,0,0.4);
+    width: 30%;
+    height: 50%;
+}
+
+.modal-content h2{
+    text-align: center;
+    font: normal 600 25px/normal 'Poppins';
+}
+
+.modal-content .fa-xmark {
+    float: right;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.modal-content .fa-xmark:hover::before,
+  .modal-content .fa-xmark:hover::after {
+    width: 100%;
+  }
+
+  .modal-content .fa-xmark:hover::before {
+    left: 0;
+  }
+
+  .modal-content .fa-xmark:hover::after {
+    left: 100%;
+  }
+
+  .modal-content .fa-xmark:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+  }
+
+.form-fillup {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    height: 80%;
+}
+
+.form-fillup input[type="text"] , [type="password"]{
+	width: 100%;
+	height: 6vh;
+	border-radius: 10px;
+	border: 1px solid #BCB4B5;
+	background: #FCF6F6;
+	padding: 3%;
+	font: normal 500 12px/normal 'Poppins';	
+	outline: none;
+	filter: drop-shadow(0px 0px 1px rgba(0, 0, 0, 0.25));
+    margin-top: 5%;
+}
+.form-fillup input::placeholder{ 
+	color: #747473;
+	font: normal 500 12px/normal 'Poppins';
+}
+
+.form-fillup a{
+	font: normal 500 13px/normal 'Poppins';
+	text-decoration: none;
+	color: #1C1C1D;
+    margin-top: 3%;
+}
+
+.form-fillup button{
+	border-radius: 25px;
+	border: 1px solid #000;
+	background: #1C1C1D;
+	width: 100%;
+	height: 6vh;
+	font: normal 500 13px/normal 'Poppins';
+	color: #FCF6F6;
+    margin-top: 3%;
+}
+
+.modal-content p {
+    text-align: center;
+    font: normal 500 13px/normal 'Poppins';
+	text-decoration: none;
+	color: #1C1C1D;
+}
+.modal-content p span{
+    font: normal 700 13px/normal 'Poppins';
+    text-decoration: underline;
+    cursor: pointer;
+}
 /**** Portfolio Section *****/
 
 .portfolio .portfolio-title .horizontal-line1 {
@@ -264,340 +379,6 @@
 }
 
 
-/********booking page*******/
-
-.main-book {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background: #FBF4F4;
-    padding-top: 8%;
-}
-
-.coverbook {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-}
-
-.text-book {
-    text-align: center;
-    width: 45%;
-    z-index: 2;
-}
-
-.text-book h4 {
-    color: #1C1C1D;
-    font: normal 700 35px/normal 'Poppins';
-}
-
-.text-book p {
-    color: #1C1C1D;
-    font: normal 500 15px/normal 'Poppins';
-}
-
-.line {
-    width: 90.5%;
-    height: 2px;
-    background-color: #B3B3B3;
-    z-index: 1;
-    bottom: 0;
-    margin-top: 20px;
-    position: relative;
-}
-
-.form-book {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-
-.top-book {
-    display: flex;
-    justify-content: space-between;
-    width: 90%;
-    margin-top: 1.5%;
-}
-
-.top-book h3 {
-    font: normal 600 18px/normal 'Poppins';
-    margin-left: 20px;
-}
-
-.steps {
-    display: flex;
-    align-items: center;
-}
-
-.circle {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 30px;
-    width: 30px;
-    color: #999;
-    font-size: 14px;
-    font-weight: 500;
-    border-radius: 50%;
-    background: #fff;
-    border: 4px solid #e0e0e0;
-    transition: all 200ms ease;
-    transition-delay: 0s;
-    position: relative;
-    z-index: 2;
-    margin: 0 30px;
-}
-
-.circle.active {
-    transition-delay: 100ms;
-    background-color: #1C1C1D;
-    color: #FBF4F4;
-    border-color: #000000;
-}
-
-.circle i.fa-circle-check {
-    font-size: larger;
-    color: #D25A5A;
-}
-
-.steps .progress-line {
-    height: 4px;
-    background-color: #1c1c1c;
-    z-index: 1;
-    position: absolute;
-    border-radius: 2px;
-    margin: 0 10px;
-    left: 20%;
-}
-
-.forms,
-.form-fillup {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-    padding: 1.5% 5% 0 5%;
-}
-
-.form-step {
-    height: 20%;
-    display: flex;
-    width: 100%;
-    position: relative;
-}
-
-.form-group {
-    width: 100%;
-}
-
-.left-info {
-    width: 45%;
-    float: left;
-    padding-right: 2%;
-}
-
-.right-info {
-    width: 45%;
-    float: right;
-    padding-left: 2%;
-}
-
-right-info i {
-    position: absolute;
-    right: 10px;
-    top: 50%;
-    transform: translateY(-50%);
-    cursor: pointer;
-}
-
-.form-group label {
-    font: normal 500 14px/normal 'Poppins';
-}
-
-.form-group input[type="text"],
-.form-group input[type="date"],
-.form-group input[type="time"],
-.form-group input[type="password"],
-.form-group select {
-    width: 100%;
-    height: 50px;
-    padding: 8px;
-    margin: 15px 0;
-    box-sizing: border-box;
-    border: 1px solid #FCF6F6;
-    border-radius: 5px;
-    box-sizing: border-box;
-    font: normal 400 13px/normal 'Poppins';
-    box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.25);
-}
-
-.form-group input[type="text"],
-.form-group input[type="date"],
-.form-group input[type="time"],
-.form-group input[type="password"],
-.form-group select:focus {
-    outline-color: #807f7f;
-}
-
-.form-group .payment-icon img {
-    width: 15%;
-    position: absolute;
-}
-
-#package option {
-    color: #1c1c1c;
-}
-
-HEAD .receipt {
-    background-color: #FBF4F4;
-    width: 100%;
-    height: 340px;
-    border-radius: 10px;
-    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.2);
-    border: 1px solid #B3B3B3;
-    display: flex;
-    text-align: center;
-    flex-direction: column;
-    padding: 20px;
-}
-
-.receipt h2 {
-    font: normal 600 20px/normal 'Poppins';
-}
-
-.receipt p {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 10px;
-    font: normal 600 15px/normal 'Poppins';
-    color: #1C1C1D;
-}
-
-.receipt p strong {
-    flex: 1;
-    text-align: left;
-    margin-right: 10px;
-    color: #747473;
-    font: normal 600 13px/normal 'Poppins';
-}
-
-.buttons-book {
-    position: absolute;
-    bottom: 3%;
-    right: 5%;
-}
-
-.buttons-book #next {
-    margin-left: 10px;
-    font: normal 600 13px/normal 'Poppins';
-    color: #1c1c1c;
-    padding: 5px 30px;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-    text-align: center;
-    text-decoration: none;
-    background-color: #E1DE8F;
-    transition: background-color 0.3s ease-in-out;
-    box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.2);
-}
-
-.buttons-book #next:hover {
-    background-color: #C2BE63;
-}
-
-.buttons-book #prev {
-    margin-left: 10px;
-    font: normal 600 13px/normal 'Poppins';
-    color: #1c1c1c;
-    padding: 5px 30px;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-    text-align: center;
-    text-decoration: none;
-    background-color: #aeaeae;
-    transition: background-color 0.3s ease-in-out;
-    box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.2);
-}
-
-.buttons-book #prev:hover {
-    background-color: #8f8f8f;
-}
-
-.popup {
-    display: none;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    padding: 20px;
-    border-radius: 5px;
-    box-shadow: 0px 0px 400px 900px rgba(0, 0, 0, 0.28);
-    z-index: 10000;
-    background: #fff;
-}
-
-.popup-content {
-    padding: 20px;
-    border-radius: 5px;
-    text-align: center;
-}
-
-.popup-content p {
-    font: normal 600 18px/18px 'Poppins';
-    color: #1C1C1D;
-    margin-bottom: 5%;
-}
-
-.close {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    cursor: pointer;
-    font-size: medium;
-}
-
-.close:hover {
-    color: #FF8787;
-}
-
-.btn-save-event {
-    padding: 10px 20px;
-    margin: 5px;
-    border: none;
-    border-radius: 8px;
-    font: normal 400 14px/15px 'Poppins';
-    cursor: pointer;
-    background-color: #E1DE8F;
-    color: #1c1c1c;
-    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-    transition: all 200ms linear;
-}
-
-.btn-save-event:hover {
-    background: #C2BE63;
-}
-
-.payment-options {
-    display: flex;
-    flex-direction: column;
-}
-
-.payment-icon {
-    width: 100%;
-    border-radius: 10px;
-    border: 1px solid #807f7f;
-    display: flex;
-    justify-content: space-between;
-    margin: 5px;
-    padding: 10px;
-    flex-direction: column;
-}
 
 
 /**** Services Price Section *****/
@@ -627,24 +408,21 @@ HEAD .receipt {
 }
 
 .services .services-box-section {
-    width: 100%;
-    height: 90%;
-    background: #D9D9D9;
-    padding: 30px 130px 20px 60px;
-    display: flex;
-    align-items: center;
+    display: grid;
+    gap: 1px;
+    margin: 15px;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    justify-items: center;
 }
 
 .services .service-box {
     background: #FCF6F6;
-    width: 50%;
+    width: 70%;
     height: 60vh;
-    margin-left: 70px;
     border-radius: 5px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    padding: 40px 50px 40px 50px;
     transition: all .5s ease;
 }
 

@@ -12,7 +12,7 @@
         box-shadow: none !important;
     }
 
-    .cover-content-style .nav-item a {
+    .cover-content-style .nav-links li a {
         color: #fcf6f6 !important;
     }
 
@@ -28,7 +28,7 @@
         color: #C2BE63 !important;
         transition: all 0.3s;
     }
-
+    
     .header-section {
         width: 100%;
         display: flex;
@@ -41,54 +41,48 @@
         box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.2);
     }
 
-    .logo {
+    .header-section .logo {
         width: 10%;
     }
 
     .header-section .logo img {
-        width: 80%;
+        width: clamp(100%, 5%, 20%);
         height: 11%;
         cursor: pointer;
         margin-top: 5px;
+    }
+
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 20px 50px; 
+    }
+  
+    .nav-links li {
+      padding: 0;
+      display: inline-block;
+    }
+
+    .nav-links li a {
+      color: #1c1c1c;
+      font: normal 600 17px/normal 'Poppins';
+      cursor: pointer;
+      letter-spacing: 1px;
+      text-decoration: none;
+    }
+    .nav-links li a.active {
+        color: #C2BE63;
+    }
+
+    .nav-links li a:hover {
+        color: #C2BE63;
+        transition: all 0.3s;
     }
 
     .nav-item {
         list-style: none;
         display: inline-block;
         margin: 5px 40px 5px 10px;
-    }
-
-    .nav-item ul {
-        display: flex;
-        list-style: none;
-        margin: 20px 100px;
-    }
-
-    .nav-item li {
-        display: inline-block;
-    }
-
-    .nav-item a {
-        text-decoration: none;
-        color: #1C1C1D;
-        font: normal 600 17px/normal 'Poppins';
-        cursor: pointer;
-        letter-spacing: 1px;
-        position: relative;
-    }
-
-    .nav-item a.active {
-        color: #C2BE63;
-    }
-
-    .nav-item a:hover {
-        color: #C2BE63;
-        transition: all 0.3s;
-    }
-
-    .nav-item .nav-link .header-section .register a:hover {
-        text-decoration: none;
-        cursor: pointer;
     }
 
     .register button {
@@ -112,84 +106,64 @@
         color: #fcfcfc;
     }
 
-    .nav-list {
-        display: flex;
-        list-style: none;
-        margin: 20px 100px;
-    }
-
-    .mobile-menu-button {
+    .hamburger-menu {
         display: none;
+        font-size: 24px;
+        cursor: pointer;
+        color: #1c1c1d;
     }
 
-    @media screen and (max-width: 768px) {
-        .header-section {
-            flex-direction: column;
-            align-items: flex-start;
-        }
-
-        .nav-list {
-            display: none;
-            flex-direction: column;
-            align-items: flex-start;
-            width: 100%;
-            position: absolute;
-            background-color: white;
-            padding: 10px;
-            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-            z-index: 1;
-        }
-
-        .nav-list.active {
-            display: flex;
-        }
-
-        .nav-item {
-            margin: 10px 0;
-        }
-
-        .mobile-menu-button {
-            display: block;
-        }
-
-        /* Add the following styles to the existing ones */
-        .nav-list li {
-            display: block;
-            margin: 10px 0;
-        }
-
-        /* Adjust the position of the register button */
-        .register {
-            margin-top: 10px;
-        }
-
-        /* Move the register button inside the mobile menu */
-        .nav-list .register {
-            margin-top: 0;
-        }
-
-        /* Adjust the styling of the register button */
-        .register button {
-            width: 100%;
-            height: 34px;
-            cursor: pointer;
-            padding: 3px 17px;
-            margin: 10px 0px 0px 0px;
-            border-radius: 25px;
-            border: 1px solid #000;
-            background: #1C1C1D;
-            width: 25%;
-            height: 6vh;
-            font: normal 500 13px/normal 'Poppins';
-            color: #FCF6F6;
-        }
-
+    .hamburger-menu:focus{
+        background: #1c1c1c;
     }
 
-    .register button:hover {
-        background-color: #454548;
-        color: #fcfcfc;
+    .rotate {
+        transform: rotate(90deg);
+        transition: transform 0.5s ease;
     }
+
+@media screen and (max-width: 768px) {
+    .nav-links {
+      display: none;
+    }
+  
+    .register {
+      display: none;
+    }
+  
+    .hamburger-menu {
+      display: block;
+      animation: rotateMenu 0.5s ease-in-out forwards;
+    }
+
+
+    .cover-content-style .nav-links li a {
+      color: #1c1c1c !important;
+    }
+
+    .cover-content-style .hamburger-menu{
+        color: #fbfbfb !important;
+    }
+
+    .nav-active {
+      display: flex;
+      flex-direction: column;
+      position: absolute;
+      background-color: #fbfbfb;
+      top: 30px;
+      left: 0;
+      right: 0;
+      text-align: center;
+    }
+  
+    .nav-active li {
+      margin: 10px 0;
+    }
+    
+    }
+
+
+    
 </style>
 
 <body>
@@ -199,45 +173,36 @@
                 <img src="../picture/logo.png" alt="logo">
             </a>
         </div>
-
-        <button class="mobile-menu-button">&#9776; Menu</button>
-
-        <ul class="nav-list">
-            <li class="nav-item">
-                <a class="nav-link" href="homepage.php">Home</a>
+        <ul class="nav-links">
+            <li>
+                <a href="homepage.php">Home</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="portfolio.php">Portfolio</a>
+            <li>
+                <a href="portfolio.php">Portfolio</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="services.php">Services</a>
+            <li>
+                <a href="services.php">Services</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="about.php">About</a>
+            <li>
+                <a href="about.php">About</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="contact.php">Contact</a>
+            <li>
+                <a href="contact.php">Contact</a>
             </li>
         </ul>
         <a class="register" href="../register.php"><button>Register</button></a>
+        <div class="hamburger-menu" onclick="toggleMenu()">&#9776;</div>
     </header>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const mobileMenuButton = document.querySelector('.mobile-menu-button');
-            const navList = document.querySelector('.nav-list');
+        const hamburgerMenu = document.querySelector('.hamburger-menu');
+        const navLinks = document.querySelector('.nav-links');
 
-            mobileMenuButton.addEventListener('click', function () {
-                navList.classList.toggle('active');
-
-                // Toggle the display property to fix the issue
-                if (navList.classList.contains('active')) {
-                    navList.style.display = 'flex';
-                } else {
-                    navList.style.display = 'none';
-                }
-            });
-        });
+        function toggleMenu() {
+            hamburgerMenu.classList.toggle('rotate');
+            navLinks.classList.toggle('nav-active');
+        }
+        
     </script>
 </body>
 
