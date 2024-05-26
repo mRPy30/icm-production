@@ -42,6 +42,32 @@ $pageTitle = isset($pageTitles[$currentPage]) ? $pageTitles[$currentPage] : "Boo
 ?>
 <style>
     
+    .transparent-background {
+        background-color: transparent !important;
+        box-shadow: none !important;
+    }
+
+    .transparent-background .logo img {
+        content: url('../picture/logoDark.png');
+    }
+
+    .transparent-background .nav-links li a {
+        color: #fcf6f6 !important;
+    }
+
+    .transparent-background .nav-right i{
+        color: #fbfbfb;
+    }
+
+    .transparent-background .profile_info p{
+        color: #fbfbfb;
+    }
+
+    .transparent-background .profile_info h3{
+        color: #fbfbfb;
+    }
+
+    
     .navbar {
         width: 100%;
         height: 10%;
@@ -59,13 +85,45 @@ $pageTitle = isset($pageTitles[$currentPage]) ? $pageTitles[$currentPage] : "Boo
     }
 
     .nav-left {
-        margin: 0% 0% 0% 15%;
+        margin: 0% 0% 0% 5%;
     }
 
-    .nav-left h3 {
-        color: #1c1c1c;
-        font: normal 600 100%/1.7 'Poppins';
-        
+    .nav-left{
+        width: 10%;
+    }
+
+    .nav-left .logo img {
+        width: clamp(80%, 5%, 20%);
+        height: 11%;
+        cursor: pointer;
+        margin-top: 5px;
+    }
+
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 20px 50px; 
+    }
+  
+    .nav-links li {
+      padding: 0;
+      display: inline-block;
+    }
+
+    .nav-links li a {
+      color: #1c1c1c;
+      font: normal 600 17px/normal 'Poppins';
+      cursor: pointer;
+      letter-spacing: 1px;
+      text-decoration: none;
+    }
+    .nav-links li a.active {
+        color: #C2BE63;
+    }
+
+    .nav-links li a:hover {
+        color: #C2BE63;
+        transition: all 0.3s;
     }
 
     .nav-right {
@@ -290,6 +348,55 @@ $pageTitle = isset($pageTitles[$currentPage]) ? $pageTitles[$currentPage] : "Boo
         100% { transform: rotate(360deg); }
     }
 
+    .dark-mode-toggle i {
+        transition: transform 0.5s ease-in-out;
+    }
+
+    .dark-mode-toggle i.sun-transition {
+        transform-origin: 50% 50%;
+        animation: rotateSun 0.5s ease-in-out forwards;
+    }
+
+    .dark-mode-toggle i.moon-transition {
+        transform-origin: 50% 50%;
+        animation: rotateMoon 0.5s ease-in-out forwards;
+    }
+
+    @keyframes rotateSun {
+        from {
+            transform: rotate(0deg);
+        }
+        to {
+            transform: rotate(180deg);
+        }
+    }
+
+    @keyframes rotateMoon {
+        from {
+            transform: rotate(180deg);
+        }
+        to {
+            transform: rotate(0deg);
+        }
+    }
+
+    .hamburger-menu {
+        display: none;
+        font-size: 24px;
+        cursor: pointer;
+        color: #1c1c1d;
+    }
+
+    .hamburger-menu:focus{
+        background: #1c1c1c;
+    }
+    
+    @media screen and (max-width: 768px){
+        .hamburger-menu {
+          display: block;
+          animation: rotateMenu 0.5s ease-in-out forwards;
+        }
+    }
 </style>
 
 
@@ -297,13 +404,30 @@ $pageTitle = isset($pageTitles[$currentPage]) ? $pageTitles[$currentPage] : "Boo
 
 
 <header class="navbar">
-<div class="nav-left">
-        <h3><?php echo $pageTitle; ?></h3>
+    <div class="nav-left">
+        <div class="logo">
+            <a href="../homepage/homepage.php">
+                <img src="../picture/logo.png" alt="logo">
+            </a>
+        </div>
     </div>
+        <ul class="nav-links">
+            <li>
+                <a href="#">Booking</a>
+            </li>
+            <li>
+                <a href="#">Feedback</a>
+            </li>
+            <li>
+                <a href="#">Gallery</a>
+            </li>
+        </ul>
     <div class="profile_dropdown">
     <div class="nav-right">
             <div class="icons">
-                <i class="fa-regular fa-comment-dots" title="Message"></i>     
+                <div class="dark-mode-toggle" onclick="toggleDarkMode()">
+                    <i class="fas fa-moon" title="Switch to Darkmode"></i>
+                </div>                
                 <div class="notification-dropdown">
                     <i class="far fa-bell" onclick="toggleNotifications()" title="Notification"></i>
                     <div class="notification-dropdown-content">
@@ -332,6 +456,7 @@ $pageTitle = isset($pageTitles[$currentPage]) ? $pageTitles[$currentPage] : "Boo
                 <?php endif; ?>
             </div>
         </div>
+    <div class="hamburger-menu" onclick="toggleMenu()">&#9776;</div>
 </header>
                 
 <body>
@@ -350,7 +475,39 @@ $pageTitle = isset($pageTitles[$currentPage]) ? $pageTitles[$currentPage] : "Boo
 </body>
 
 <script>
+    function toggleDarkMode() {
+        const body = document.body;
+        const isDarkMode = body.classList.toggle('dark-mode');
+        const moonIcon = document.querySelector('.dark-mode-toggle i');
+
+        if (isDarkMode) {
+            moonIcon.className = 'fas fa-sun';
+
+            moonIcon.classList.add('sun-transition');
+            setTimeout(() => {
+                moonIcon.classList.remove('sun-transition');
+            }, 1000);
+        } else {
+            moonIcon.className = 'fas fa-moon';
+
+            moonIcon.classList.add('moon-transition');
+            setTimeout(() => {
+                moonIcon.classList.remove('moon-transition');
+            }, 1000);
+        }
+
+        localStorage.setItem('darkMode', isDarkMode);
+    }
     
+    document.addEventListener('DOMContentLoaded', function () {
+        const body = document.body;
+        const savedDarkMode = localStorage.getItem('darkMode');
+
+        if (savedDarkMode === 'true') {
+            body.classList.add('dark-mode');
+            toggleDarkMode(); 
+        }
+    });
 
     document.addEventListener("DOMContentLoaded", function () {
             document.querySelectorAll(".btn-logout").forEach(function (btn) {
@@ -378,5 +535,12 @@ $pageTitle = isset($pageTitles[$currentPage]) ? $pageTitles[$currentPage] : "Boo
 
                 window.location.href = "../login.php";
             }, 3000);
+        }
+    
+    const hamburgerMenu = document.querySelector('.hamburger-menu');
+    const navLinks = document.querySelector('.nav-links');
+
+        function toggleMenu() {
+            navLinks.classList.toggle('nav-active');
         }
 </script>
