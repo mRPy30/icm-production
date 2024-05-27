@@ -525,13 +525,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             window.addEventListener('scroll', handleScroll);
         });
 
-<<<<<<< HEAD
-=======
+
         document.querySelector(".button").addEventListener("click", function () {
             window.location.href = "../homepage/booking.php";
         });
 
->>>>>>> 710c690f421b35d615f9907888ec72f30700c357
     document.getElementById('view-more-btn').addEventListener('click', function () {
         // Specify the URL you want to navigate to
         window.location.href = '../homepage/services.php';
