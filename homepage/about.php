@@ -41,9 +41,9 @@
         <section class="coverpage">
             <div class="cover-content">
                 <div class="carousel">
-                    <img src="../picture/ICM.png" alt="coverpage">
-                    <div class="servicetext">
-                    <h2>Behind The Lense</h2>
+                    <img src="../picture/wedding.jpg" alt="coverpage">
+                    <div class="about9text">
+                    <h2>Service Prices</h2>
 </div>
                 </div>
 </div>
