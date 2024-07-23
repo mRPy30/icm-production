@@ -2,118 +2,71 @@
 // Connection
 include 'backend/dbcon.php';
 
-// Include PHPMailer autoloader
+session_start();
 
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\SMTP;
-use PHPMailer\PHPMailer\Exception;
-
-//Load Composer's autoloader
 require 'vendor/autoload.php';
 
-// Function to generate a random 6-digit verification code
+use Facebook\Facebook;
+
+// Initialize the Facebook SDK
+$fb = new Facebook([
+    'app_id' => '1015239673328681', // Replace with your Facebook app id
+    'app_secret' => 'fff768c23626870c46c9d3b2d2e48cac', // Replace with your Facebook app secret
+    'default_graph_version' => 'v2.10',
+]);
+
+$helper = $fb->getRedirectLoginHelper();
+
+if (isset($_GET['state'])) {
+    $helper->getPersistentDataHandler()->set('state', $_GET['state']);
+}
+
+if (isset($_GET['code'])) {
+    try {
+        $accessToken = $helper->getAccessToken();
+        $response = $fb->get('/me?fields=id,first_name,last_name,email', $accessToken);
+        $user = $response->getGraphUser();
+
+        $facebookID = $user['id'];
+        $firstname = $user['first_name'];
+        $lastname = $user['last_name'];
+        $email = $user['email'];
+
+        // Check if the email already exists
+        $checkEmailQuery = "SELECT * FROM client WHERE email = '$email'";
+        $result = $conn->query($checkEmailQuery);
+
+        if ($result->num_rows > 0) {
+            // Email already exists, log in the user
+            $_SESSION['user_email'] = $email;
+            header("Location: client/booking.php"); // Redirect to client page
+            exit;
+        } else {
+            // Register the user
+            $clientID = sprintf("%05d", mt_rand(1, 99999));
+            $defaultProfilePic = 'default_profile.jpg';
+
+            $sql = "INSERT INTO client (id, firstName, lastName, email, profile)
+                    VALUES ('$clientID', '$firstname', '$lastname', '$email', '$defaultProfilePic')";
+
+            if ($conn->query($sql) === TRUE) {
+                $_SESSION['user_email'] = $email;
+                header("Location: client/booking.php"); // Redirect to client page
+                exit;
+            }
+        }
+    } catch (Facebook\Exceptions\FacebookResponseException $e) {
+        echo 'Graph returned an error: ' . $e->getMessage();
+    } catch (Facebook\Exceptions\FacebookSDKException $e) {
+        echo 'Facebook SDK returned an error: ' . $e->getMessage();
+    }
+}
+
+$loginUrl = $helper->getLoginUrl('http://localhost/icsm-production/client/booking.php'); // Replace with your actual URL
+
 function generateVerificationCode()
 {
     return sprintf("%06d", mt_rand(1, 999999));
-}
-
-if (isset($_POST['submit'])) {
-    $firstname = mysqli_real_escape_string($conn, $_POST["firstname"]);
-    $lastname = mysqli_real_escape_string($conn, $_POST["lastname"]);
-    $email = mysqli_real_escape_string($conn, $_POST["email"]);
-    $password = mysqli_real_escape_string($conn, md5($_POST["password"]));
-    $confirm_password = mysqli_real_escape_string($conn, md5($_POST["confirm-password"]));
-
-    // Check if the email already exists
-    $checkEmailQuery = "SELECT * FROM client WHERE email = '$email'";
-    $result = $conn->query($checkEmailQuery);
-
-    if ($result->num_rows > 0) {
-        // Email already exists
-        session_start();
-        $_SESSION['registration_status'] = 'failed';
-        header("Location: register.php");
-        exit;
-    }
-
-    // Generate a 5-digit customer ID
-    $clientID = sprintf("%05d", mt_rand(1, 99999));
-
-    // Generate a 6-digit verification code
-    $verificationCode = generateVerificationCode();
-
-    // Insert customer data into the database
-    $sql = "INSERT INTO client (id, firstName, lastName, email, password, confirmPass, code)
-        VALUES ('$clientID', '$firstname', '$lastname', '$email', '$password', '$confirm_password', '$verificationCode')";
-
-    if ($conn->query($sql) === TRUE) {
-        // Registration was successful
-        $defaultProfilePic = 'default_profile.jpg';
-        $profilePicPath = 'picture/' . $defaultProfilePic; // Adjust the path as per your folder structure
-
-        // Update the client record with the profile picture name
-        $updateProfilePicQuery = "UPDATE client SET profile = '$defaultProfilePic' WHERE email = '$email'";
-        $conn->query($updateProfilePicQuery);
-        $mail = new PHPMailer(true); // Set to true for exceptions
-
-        try {
-            // Server settings
-
-            $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      //Enable verbose debug output
-            $mail->isSMTP();                                            //Send using SMTP
-            $mail->Host = 'smtp.gmail.com';                     //Set the SMTP server to send through
-            $mail->SMTPAuth = true;                                   //Enable SMTP authentication
-            $mail->Username = 'araquejanvier@gmail.com';                     //SMTP username
-            $mail->Password = 'sgjg jidy dxpy xzzp';                               //SMTP password
-            $mail->SMTPSecure = 'ssl';            //Enable implicit TLS encryption
-            $mail->Port = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
-
-            //Recipients
-            $mail->setFrom('araquejanvier@gmail.com');
-            $mail->addAddress($email);
-
-            //Content
-            $mail->isHTML(true);                                  //Set email format to HTML
-            $mail->Subject = 'Hello new mr./ms ' . $firstname . ' ' . $lastname . '!';
-            $mail->Body = 'Here is the verification code:<b>' . $verificationCode . ' </b>';
-
-
-            $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      // Enable verbose debug output
-            $mail->isSMTP();                                            // Send using SMTP
-            $mail->Host = 'smtp.gmail.com';                     // Set the SMTP server to send through
-            $mail->SMTPAuth = true;                                   // Enable SMTP authentication
-            $mail->Username = 'icsmcreatives@gmail.com';                     // SMTP username
-            $mail->Password = 'nbtf sqfa zpkf ucng';                               // SMTP password
-            $mail->SMTPSecure = 'ssl';            // Enable implicit TLS encryption
-            $mail->Port = 465;                                    // TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
-
-            // Recipients
-            $mail->setFrom('araquejanvier@gmail.com');
-            $mail->addAddress($email);
-
-            // Content
-            $mail->isHTML(true);                                  // Set email format to HTML
-            $mail->Subject = 'Hello Mr./Ms. ' . $firstname . ' ' . $lastname . '!';
-            $mail->Body = $mail->Body = 'Thank you for choosing ICSM Creatives!<br><br>'
-                . 'We look forward to capturing sweet memories for you!<br><br>'
-                . 'Best regards,<br>'
-                . 'ICSM Creatives Team'
-                . 'Verify your account by clicking the button below:<br><br>'
-                . '<a href="http://localhost/icsm-production/login.php" style="display: inline-block; padding: 10px 20px; border-radius: 25px; background-color: #1C1C1D; color: white; text-decoration: none; font: normal 500 13px/normal "Poppins"; border-radius: 5px;">Verify Your Account</a><br><br>'
-                . 'Or you can use this link to verify your account: <a href="http://localhost/icsm-production/login.php">http://localhost/icsm-production/login.php</a>';
-
-
-            $mail->send();
-
-            $mail->send();
-
-            echo '<script>alert("Register successfully! Verify your email.");</script>';
-            echo '<script>window.location.href = "login.php";</script>';
-            exit;
-        } catch (Exception $e) {
-            echo '<script>alert("Error sending email: ' . $mail->ErrorInfo . '");</script>';
-        }
-    }
 }
 
 // Active Page
@@ -154,62 +107,78 @@ $page = $components[2];
 <body>
 
     <!--background-->
-    <main class="body_content">
-        <div class="logo">
-            <a href="homepage/homepage.php">
-                <img src="picture/logo.png" alt="logo">
-            </a>
-        </div>
-        <div class="text">
-            <h1>Welcome to <br>ICSM Creatives</h1>
-            <h4>We poured out our undying dedications In Capturing Sweet Memories. </h4>
-        </div>
-    </main>
+    <main>
+        <section class="container">
+            <div class="logo">
+                <a href="homepage/homepage.php">
+                    <img src="picture/logo.png" alt="logo">
+                </a>
+            </div>
+            <div class="text">
+                <h1>Welcome to <br>ICSM Creatives</h1>
+                <h4>We poured out our undying dedications In Capturing Sweet Memories. </h4>
+            </div>
+        </section>
 
     <!----FORM----->
     <section class="form-section">
-        <div class="container">
-            <div class="form_nav">
-                <ul class="nav">
-                    <li class="nav-item">
-                        <a href="login.php" class="<?php if ($page == "login.php") {
-                            echo "nav-link active";
-                        } else {
-                            echo "nav-link";
-                        } ?> " href="register.php">
-                            Login
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="register.php" class="<?php if ($page == "register.php") {
-                            echo "nav-link active";
-                        } else {
-                            echo "nav-link";
-                        } ?> " href="register.php">
-                            Register
-                        </a>
-                    </li>
-                </ul>
-            </div>
-            <form class="form-fillup needs-validation" method="POST" onsubmit="return validateForm()">
+        <div class="form_nav">
+            <ul class="nav">
+                <li class="nav-item">
+                    <a href="login.php" class="<?php if ($page == "login.php") {
+                        echo "nav-link active";
+                    } else {
+                        echo "nav-link";
+                    } ?> " href="register.php">
+                        Login
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="register.php" class="<?php if ($page == "register.php") {
+                        echo "nav-link active";
+                    } else {
+                        echo "nav-link";
+                    } ?> " href="register.php">
+                        Register
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <form class="form-fillup needs-validation" method="POST" onsubmit="return validateForm()">
+            <div class="fillup">
                 <input type="text" class="form" placeholder="Enter your First Name" name="firstname" required>
-                <br><br>
+            </div>
+            <div class="fillup">
                 <input type="text" class="form" placeholder="Enter your Last Name" name="lastname" required>
-                <br><br>
+            </div>
+            <div class="fillup">
                 <input type="text" class="form" placeholder="Enter your Email" name="email" required>
-                <br><br>
+            </div>
+            <div class="fillup">
                 <input type="password" class="form" placeholder="Enter your Password" name="password" id="password"
-                    required oninput="checkPasswordStrength(this)">
-                <i class="fa-solid fa-eye-slash" id="password-toggle" onclick="togglePassword()"
-                    style="right: 17%; top: 50.5%; position: fixed;"></i>
-                <br><br>
-                <input type="password" class="form" placeholder="Enter your Confirm Password" name="confirm-password"
-                    id="confirmpassword" required>
-                <br><br>
-                <div id="password-strength" class="alert"></div>
-                <button class="btn btn-lg btn-block btn-success" type="submit" name="submit"
-                    value="Register">Register</button>
-            </form>
+                required oninput="checkPasswordStrength(this)">
+            </div>
+            <div class="fillup">
+                <input type="password" class="form" placeholder="Enter your Confirm Password" name="confirm-password" id="confirmpassword" required>
+            </div>
+            <div id="password-strength" class="alert"></div>
+            <button class="btn btn-lg btn-block btn-success" type="submit" name="submit" value="Register">
+                Register
+            </button>
+        </form>
+        <div class="separator">
+                <div class="separator-line"></div>
+                <p>OR</p>
+                <div class="separator-line"></div>
+            </div>
+            <div class="auth-btn-container">
+                <a href="<?php echo htmlspecialchars($loginUrl); ?>" class="auth-button facebook">
+                    <img src="picture/fb_logo.png"> Register with Facebook
+                </a>
+                <button class="google">
+                    <img src="picture/google-logo.png"> Register with Google
+                </button>
+            </div>
         </div>
     </section>
 
@@ -231,17 +200,6 @@ $page = $components[2];
             unset($_SESSION['registration_status']);
         }
         ?>
-
-            // Eye view hide
-            let isPasswordVisible = false;
-        const passwordField = document.getElementById('password');
-        const passwordToggle = document.getElementById('password-toggle');
-
-        function togglePassword() {
-            isPasswordVisible = !isPasswordVisible;
-            passwordField.type = isPasswordVisible ? 'text' : 'password';
-            passwordToggle.className = isPasswordVisible ? 'fa-solid fa-eye' : 'fa-solid fa-eye-slash';
-        }
 
         //validity if password and confirm is match
         function passwordsMatch() {
