@@ -127,60 +127,72 @@ $page = $components[2];
 <body>
 
     <!--background-->
-    <main class="body_content">
-        <div class="logo">
-            <a href="homepage/homepage.php">
-                <img src="picture/logo.png" alt="logo">
-            </a>
-        </div>
-        <div class="text">
-            <h1>Welcome to <br>ICSM Creatives</h1>
-            <h4>We poured out our undying dedications In Capturing Sweet Memories. </h4>
-        </div>
-    </main>
+    <main class="main-container">
+        <section class="left-section">
+            <div class="logo">
+                <a href="homepage/homepage.php">
+                    <img src="picture/logo.png" alt="logo">
+                </a>
+            </div>
+            <div class="text">
+                <h1>Welcome to <br>ICSM Creatives</h1>
+                <h4>We poured out our undying dedications In Capturing Sweet Memories. </h4>
+            </div>
+        </section>
 
-    <!----FORM----->
-    <section class="form-section">
-        <div class="container">
+        <!----FORM----->
+        <section class="form-section">
             <div class="form_nav">
                 <ul class="nav">
                     <li class="nav-item">
-                        <a href="login.php" class="<?php if ($page == "login.php") {
-                            echo "nav-link active";
+                        <a href="login.php" class="<?php if ($page == 'login.php') {
+                            echo 'nav-link active';
                         } else {
-                            echo "nav-link";
-                        } ?> " href="register.php">
+                            echo 'nav-link';
+                        } ?>">
                             Login
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="register.php" class="<?php if ($page == "register.php") {
-                            echo "nav-link active";
+                        <a href="register.php" class="<?php if ($page == 'register.php') {
+                            echo 'nav-link active';
                         } else {
-                            echo "nav-link";
-                        } ?> " href="register.php">
+                            echo 'nav-link';
+                        } ?>">
                             Register
                         </a>
                     </li>
                 </ul>
             </div>
-                <form class="form-fillup needs-validation" method="POST" onsubmit="return validateForm()">
+            <form class="form-fillup needs-validation" method="POST" onsubmit="return validateForm()">
+                <div class="fillup">
                     <input type="text" class="form" placeholder="Enter your Email" name="email" required>
-                    <br><br>
+                </div>
+                <div class="fillup">
                     <input type="password" class="form" placeholder="Enter your Password" name="password" id="password" required oninput="checkPasswordStrength(this)">
-                        <i class="fa-solid fa-eye-slash" id="password-toggle" onclick="togglePassword()" style="right: 17%; top: 29.5%;"></i>
-                        <br><br>
-                        <div id="popup" class="popup">
-                            <p id="popup-message"></p>
-                        </div>
-                    <button class="btn btn-lg btn-block btn-success" type="submit" name="submit" value="Submit"
-                        style="height: 7vh;">Login</button>
-                        <br><br>
-                        <p><a href="forgotpassword.php">Forget Password?</a><p>
-                </form>
-        </div>
-        <div id="popup" class="popup">
-            <p id="popup-message"></p>
+                </div>
+                <p><a href="forgotpassword.php">Forget Password?</a><p>                <div id="popup" class="popup">
+                    <p id="popup-message"></p>
+                </div>
+                <button class="btn btn-lg btn-block btn-success" type="submit" name="submit" value="Submit" style="height: 7vh;">Login</button>
+                <br><br>
+            </form>
+            <div id="popup" class="popup">
+                <p id="popup-message"></p>
+            </div>
+            <div class="separator">
+                <div class="separator-line"></div>
+                <p>OR</p>
+                <div class="separator-line"></div>
+            </div>
+            <div class="auth-btn-container">
+                <a href="<?php echo htmlspecialchars($loginUrl); ?>" class="auth-button facebook">
+                    <img src="picture/fb_logo.png"> Register with Facebook
+                </a>
+                <button class="google">
+                    <img src="picture/google-logo.png"> Register with Google
+                </button>
+            </div>
         </div>
     </section>
 

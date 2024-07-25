@@ -116,9 +116,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <img src="../picture/wedding.jpg" alt="coverpage">
                 </div>
                 <div class="text">
-                    <h2>capture every precious moment through our lenses </h2>
+                    <h2>Capture every precious moment through our lenses </h2>
                     <p>Get expert photographers and amazing photos, and <br>videos, starting from just PHP 2,500.</p>
-                    <button class="btn-cover">Book Now</button>
+                    <button id="book-now-btn" class="btn-cover">Book Now</button>
                 </div>
                 <div class="carousel-page-numbers">
                     <span class="page-number-text">1/5</span>
@@ -526,46 +526,36 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         });
 
 
-        document.querySelector(".button").addEventListener("click", function () {
-            window.location.href = "../homepage/booking.php";
+        // Get the modal
+        const modal = document.getElementById('login_modal');
+
+        // Get the button that opens the modal
+        const btnCover = document.getElementById('book-now-btn');
+
+        // Get the <span> element that closes the modal
+        const closeBtn = modal.querySelector('.fa-xmark');
+
+        // When the user clicks the button, open the modal
+        btnCover.addEventListener('click', function () {
+            modal.style.display = 'block';
         });
 
-    document.getElementById('view-more-btn').addEventListener('click', function () {
-        // Specify the URL you want to navigate to
-        window.location.href = '../homepage/services.php';
-    });
+        // When the user clicks on <span> (x), close the modal
+        closeBtn.addEventListener('click', function () {
+            modal.style.display = 'none';
+        });
 
+        // When the user clicks anywhere outside of the modal, close it
+        window.addEventListener('click', function (event) {
+            if (event.target === modal) {
+                modal.style.display = 'none';
+            }
+        });
 
-    // Get the modal
-    const modal = document.getElementById('login_modal');
-
-// Get the button that opens the modal
-const btnCover = document.querySelector('.btn-cover');
-
-// Get the <span> element that closes the modal
-const closeBtn = modal.querySelector('.fa-xmark');
-
-// When the user clicks the button, open the modal
-btnCover.addEventListener('click', function () {
-    modal.style.display = 'block';
-});
-
-// When the user clicks on <span> (x), close the modal
-closeBtn.addEventListener('click', function () {
-    modal.style.display = 'none';
-});
-
-// When the user clicks anywhere outside of the modal, close it
-window.addEventListener('click', function (event) {
-    if (event.target === modal) {
-        modal.style.display = 'none';
-    }
-});
-
-//register
-document.getElementById("register").addEventListener("click", function() {
-    window.location.href = "../register.php";
-});
+        //register
+        document.getElementById("register").addEventListener("click", function() {
+            window.location.href = "../register.php";
+        });
 
     </script>
 </body>
