@@ -3,12 +3,11 @@
 include 'backend/dbcon.php';
 
 // Include PHPMailer autoloader
-
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 
-//Load Composer's autoloader
+// Load Composer's autoloader
 require 'vendor/autoload.php';
 
 // Function to generate a random 6-digit verification code
@@ -114,16 +113,18 @@ if (isset($_POST['submit'])) {
     }
 }
 
-
+session_start();
+if (isset($_SESSION['registration_status']) && $_SESSION['registration_status'] == 'failed') {
+    echo '<script>alert("Registration failed. Email already exists. Please try again.");</script>';
+    unset($_SESSION['registration_status']); // Clear the session variable
+}
 
 // Active Page
-
 $directoryURI = $_SERVER['REQUEST_URI'];
 $path = parse_url($directoryURI, PHP_URL_PATH);
 $components = explode('/', $path);
 $page = $components[2];
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -153,108 +154,107 @@ $page = $components[2];
 
 <body>
 
-    <!--background-->
-    <main class="main-container">
-        <section class="left-section">
-            <div class="logo">
-                <a href="homepage/homepage.php">
-                    <img src="picture/logo.png" alt="logo">
-                </a>
+<main class="main-container">
+        <div class="left-section">
+            <a href="homepage/homepage.php">
+                <img src="picture/logo.png" alt="Icsm Creatives logo" class="logo">
+            </a>
+            <div class="welcome-text">
+                <h1>Welcome to<br>ICSM Production</h1>
+                <p>We poured out our undying dedications In Capturing Sweet Memories.</p>
             </div>
-            <div class="text">
-                <h1>Welcome to <br>ICSM Creatives</h1>
-                <h4>We poured out our undying dedications In Capturing Sweet Memories. </h4>
-            </div>
-        </section>
-
-        <!----FORM----->
-        <section class="form-section">
-        <div class="form_nav">
-            <ul class="nav">
-                <li class="nav-item">
-                    <a href="login.php" class="<?php if ($page == "login.php") {
-                        echo "nav-link active";
-                    } else {
-                        echo "nav-link";
-                    } ?> " href="register.php">
-                        Login
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="register.php" class="<?php if ($page == "register.php") {
-                        echo "nav-link active";
-                    } else {
-                        echo "nav-link";
-                    } ?> " href="register.php">
-                        Register
-                    </a>
-                </li>
-            </ul>
         </div>
-        <form class="form-fillup needs-validation" method="POST" onsubmit="return validateForm()">
-            <div class="fillup">
-                <input type="text" class="form" placeholder="Enter your First Name" name="firstname" required>
+        <div class="right-section">
+            <div class="header-con">
+                <div class="form_nav">
+                    <ul class="nav">
+                        <li class="nav-item">
+                            <a href="login.php" class="<?php if ($page == 'login.php') {
+                                echo 'nav-link active';
+                            } else {
+                                echo 'nav-link';
+                            } ?>">
+                                Login
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="register.php" class="<?php if ($page == 'register.php') {
+                                echo 'nav-link active';
+                            } else {
+                                echo 'nav-link';
+                            } ?>">
+                                Register
+                            </a>
+                        </li>
+                    </ul>
+                </div>
             </div>
-            <div class="fillup">
-                <input type="text" class="form" placeholder="Enter your Last Name" name="lastname" required>
+            <div class="bottom-con">
+                <form class="login-form" method="POST" onsubmit="return validateForm()">
+                    <div class="fillup">
+                        <label>First Name</label>
+                        <input type="text" class="form" placeholder="Enter your First Name" name="firstname" required>
+                    </div>
+                    <div class="fillup">
+                        <label>Last Name</label>
+                        <input type="text" class="form" placeholder="Enter your Last Name" name="lastname" required>
+                    </div>
+                    <div class="fillup">
+                        <label>Email</label>
+                        <input type="text" class="form" placeholder="Enter your Email" name="email" required>
+                    </div>
+                    <div class="fillup">
+                        <label>Password</label>
+                        <input type="password" class="form" placeholder="Enter your Password" name="password" id="password" required oninput="checkPasswordStrength(this)">
+                    </div>
+                    <div class="fillup">
+                        <label>Confirm Password</label>
+                        <input type="password" class="form" placeholder="Enter your Confirm Password" name="confirm-password" id="confirmpassword" required>                    
+                    </div>
+                    <button class="btn" type="submit" name="submit" value="Register">
+                        Register
+                    </button>
+                    <div id="password-strength" class="alert"></div>
+                </form>
+                <div class="separator">
+                    <div class="separator-line"></div>
+                    <p>OR</p>
+                    <div class="separator-line"></div>
+                </div>
+                <div class="auth-btn-container">
+                    <a href="" class="auth-button facebook">
+                        <img src="picture/fb-logo.png"> Register with Facebook
+                    </a>
+                    <a href="" class="auth-button google">
+                        <img src="picture/google_logo.png" style="width: 10%;"> Register with Google
+                    </a>
+                </div>
             </div>
-            <div class="fillup">
-                <input type="text" class="form" placeholder="Enter your Email" name="email" required>
-            </div>
-            <div class="fillup">
-                <input type="password" class="form" placeholder="Enter your Password" name="password" id="password"
-                required oninput="checkPasswordStrength(this)">
-            </div>
-            <div class="fillup">
-                <input type="password" class="form" placeholder="Enter your Confirm Password" name="confirm-password" id="confirmpassword" required>
-            </div>
-            <div id="password-strength" class="alert"></div>
-            <button class="btn btn-lg btn-block btn-success" type="submit" name="submit" value="Register">
-                Register
-            </button>
-        </form>
-        <div class="separator">
-                <div class="separator-line"></div>
-                <p>OR</p>
-                <div class="separator-line"></div>
-            </div>
-            <div class="auth-btn-container">
-                <a href="<?php echo htmlspecialchars($loginUrl); ?>" class="auth-button facebook">
-                    <img src="picture/fb_logo.png"> Register with Facebook
-                </a>
-                <button class="google">
-                    <img src="picture/google-logo.png"> Register with Google
-                </button>
-            </div>
-    </section>
+        </div>
+    </main>
 
     <script>
 
-        // (alert) if successfully register
-        <?php
-        // Start the session
-        session_start();
 
-        // Check the registration status session variable and display an alert accordingly
-        if (isset($_SESSION['registration_status'])) {
-            $registrationStatus = $_SESSION['registration_status'];
-            if ($registrationStatus === 'failed') {
-                echo 'alert("Registration failed. Email already exists. Please try again.");';
-            }
+            // Eye view hide
+            let isPasswordVisible = false;
+        const passwordField = document.getElementById('password');
+        const passwordToggle = document.getElementById('password-toggle');
 
-            // Clear the session variable
-            unset($_SESSION['registration_status']);
+        function togglePassword() {
+            isPasswordVisible = !isPasswordVisible;
+            passwordField.type = isPasswordVisible ? 'text' : 'password';
+            passwordToggle.className = isPasswordVisible ? 'fa-solid fa-eye' : 'fa-solid fa-eye-slash';
         }
-        ?>
 
-        //validity if password and confirm is match
-        function passwordsMatch() {
+// Function to check if passwords match
+function passwordsMatch() {
             const password = document.getElementById('password').value;
             const confirmPassword = document.getElementsByName('confirm-password')[0].value;
             return password === confirmPassword;
         }
 
-        // Function to validate 
+        // Function to validate the form
         function validateForm() {
             if (!passwordsMatch()) {
                 const strength = document.getElementById('password-strength');
@@ -266,7 +266,8 @@ $page = $components[2];
             }
             return true; // Allow form submission
         }
-        // password stregnth
+
+        // Function to check password strength
         function checkPasswordStrength(input) {
             const password = input.value;
             const strength = document.getElementById('password-strength');

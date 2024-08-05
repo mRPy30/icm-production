@@ -4,7 +4,6 @@ include '../backend/dbcon.php';
 
 session_start(); // Start the session
 $clientID = $_SESSION['id'];
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -55,23 +54,65 @@ $clientID = $_SESSION['id'];
         <section class="booking-feed">
             <div class="content">
                 <div class="fillup-book">
-                    <form id="bookingForm" class="form-fillup needs-validation" method="POST" action="../backend/booking.php" onsubmit="return validateForm()">
-                            <div class="form-group">
-                                <div class="left-info">
-                                    <label for="bookingDate">Date</label>
-                                    <input type="date" name="bookingDate" id="formattedDateDisplay" class="form-input" onchange="formatDate()" required>
-                                    <br>
-                                    <label for="bookingTime">Time</label>
-                                    <input type="time" name="bookingTime" class="form-input" required>
-                                    <br>
-                                    <label for="eventType">Type of Event</label>
-                                    <label for="eventTitle">Name of Event</label>
-                                    <input type="text" id="eventTitle" name="eventTitle" required>
-                                </div>                   
-                            </div> 
+                    <div class="form-book">
+                        <div class="top-book">
+                            <div class="title">
+                                <h3>Start an Event with us!</h3>
+                            </div>
+                            <div class="steps">
+                                <div class="circle active">
+                                    <h4>1</h4>
+                                </div>
+                                <div class="progress-line"></div>
+                                <div class="circle">
+                                    <h4>2</h4>
+                                </div>
+                                <div class="progress-line"></div>
+                                <div class="circle">
+                                    <h4>3</h4>
+                                </div>
+                            </div>
                         </div>
-                    </form>
-                </div>      
+                        <form id="bookingForm" class="form-fillup needs-validation" method="POST" action="../backend/booking.php" onsubmit="return validateForm()">
+                            <div id="step1" class="form-step">
+                                <div class="form-group">
+                                    <div class="left-info">
+                                        <label for="bookingDate">Date</label>
+                                        <input type="date" name="bookingDate" id="formattedDateDisplay" class="form-input" onchange="formatDate()" required>
+                                        <br>
+                                        <label for="bookingTime">Time</label>
+                                        <input type="time" name="bookingTime" class="form-input" required>
+                                        <br>
+                                        <label for="eventType">Type of Event</label>
+                                            <select name="eventType" id="eventType">
+
+                                            </select>
+                                            <br>
+                                        <label for="eventTitle">Name of Event</label>
+                                        <input type="text" id="eventTitle" name="eventTitle" required>
+                                    </div>   
+                                    <div class="right-info">
+                                        <label for="eventLocation">Event Location</label>
+                                        <input type="text" id="eventLocation" name="eventLocation" required>
+                                        <br>
+                                        <label for="package">Select Package</label>
+                                        <select name="package" id="package">
+
+                                        </select>
+                                        <br>
+                                        <label for="eventDescription">Booking Description</label>
+                                        <input type="text" id="eventDescription" name="eventDescription" style="height: 75px;" required>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="buttons-book">
+                                <button id="prev">Prev</button>
+                                <button id="next">Next</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
                 <div class="mf">
                     <div class="calendar-section">
                         <div class="top">
@@ -82,21 +123,19 @@ $clientID = $_SESSION['id'];
                             </div>
                         </div>
                         <div class="calendar">
-                          <ul class="weeks">
-                            <li>Sun</li>
-                            <li>Mon</li>
-                            <li>Tue</li>
-                            <li>Wed</li>
-                            <li>Thu</li>
-                            <li>Fri</li>
-                            <li>Sat</li>
-                          </ul>
-                          <ul class="days"></ul>
+                            <ul class="weeks">
+                                <li>Sun</li>
+                                <li>Mon</li>
+                                <li>Tue</li>
+                                <li>Wed</li>
+                                <li>Thu</li>
+                                <li>Fri</li>
+                                <li>Sat</li>
+                            </ul>
+                            <ul class="days"></ul>
                         </div>
                     </div>
-                    <div class="pf">
-
-                    </div>
+                    <div class="pf"></div>
                 </div>
             </div>
         </section>
@@ -117,7 +156,6 @@ $clientID = $_SESSION['id'];
             </div>
         </section>
 
-
         <section class="footer-page">
             <div class="footer">
                 <div class="footer-row">
@@ -131,7 +169,6 @@ $clientID = $_SESSION['id'];
                 </div>
                 <div class="vertical-line-left"></div>
                 <div class="footer-center-content">
-
                     <div class="footer-center">
                         <h6>About ICSM Creatives</h6>
                         <p>We are dedicated to serving women of color in an underrepresented bridal market. All brides
@@ -180,7 +217,7 @@ $clientID = $_SESSION['id'];
             </div>
         </section>
     </main>
-        <script>
+    <script>
            document.addEventListener('DOMContentLoaded', function () {
         const navbar = document.querySelector('.navbar');
         const coverContent = document.querySelector('.text');
@@ -256,6 +293,30 @@ prevNextIcon.forEach(icon => { // getting prev and next icons
         renderCalendar(); // calling renderCalendar function
     });
 });
-        </script>
+
+        function formatDate() {
+            const dateInput = document.getElementById('bookingDate');
+            const formattedDateDisplay = document.getElementById('formattedDateDisplay');
+            const dateValue = new Date(dateInput.value);
+
+            const day = dateValue.getDate().toString().padStart(2, '0');
+            const month = (dateValue.getMonth() + 1).toString().padStart(2, '0'); // Adding 1 since getMonth() returns 0-based month
+            const year = dateValue.getFullYear();
+
+            const formattedDate = `${day}-${month}-${year}`;
+
+            formattedDateDisplay.value = formattedDate;
+        }
+
+        function validateForm() {
+            var description = document.getElementById("description").value;
+            if (description.length < 10) {
+                alert("Description must be at least 10 characters long.");
+                return false;
+            }
+            return true;
+        }
+    </script>
 </body>
+
 </html>

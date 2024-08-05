@@ -126,75 +126,76 @@ $page = $components[2];
 
 <body>
 
-    <!--background-->
     <main class="main-container">
-        <section class="left-section">
-            <div class="logo">
-                <a href="homepage/homepage.php">
-                    <img src="picture/logo.png" alt="logo">
-                </a>
-            </div>
-            <div class="text">
-                <h1>Welcome to <br>ICSM Creatives</h1>
-                <h4>We poured out our undying dedications In Capturing Sweet Memories. </h4>
-            </div>
-        </section>
-
-        <!----FORM----->
-        <section class="form-section">
-            <div class="form_nav">
-                <ul class="nav">
-                    <li class="nav-item">
-                        <a href="login.php" class="<?php if ($page == 'login.php') {
-                            echo 'nav-link active';
-                        } else {
-                            echo 'nav-link';
-                        } ?>">
-                            Login
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="register.php" class="<?php if ($page == 'register.php') {
-                            echo 'nav-link active';
-                        } else {
-                            echo 'nav-link';
-                        } ?>">
-                            Register
-                        </a>
-                    </li>
-                </ul>
-            </div>
-            <form class="form-fillup needs-validation" method="POST" onsubmit="return validateForm()">
-                <div class="fillup">
-                    <input type="text" class="form" placeholder="Enter your Email" name="email" required>
-                </div>
-                <div class="fillup">
-                    <input type="password" class="form" placeholder="Enter your Password" name="password" id="password" required oninput="checkPasswordStrength(this)">
-                </div>
-                <p><a href="forgotpassword.php">Forget Password?</a><p>                <div id="popup" class="popup">
-                    <p id="popup-message"></p>
-                </div>
-                <button class="btn btn-lg btn-block btn-success" type="submit" name="submit" value="Submit" style="height: 7vh;">Login</button>
-                <br><br>
-            </form>
-            <div id="popup" class="popup">
-                <p id="popup-message"></p>
-            </div>
-            <div class="separator">
-                <div class="separator-line"></div>
-                <p>OR</p>
-                <div class="separator-line"></div>
-            </div>
-            <div class="auth-btn-container">
-                <a href="<?php echo htmlspecialchars($loginUrl); ?>" class="auth-button facebook">
-                    <img src="picture/fb_logo.png"> Register with Facebook
-                </a>
-                <button class="google">
-                    <img src="picture/google-logo.png"> Register with Google
-                </button>
+        <div class="left-section">
+            <a href="homepage/homepage.php">
+                <img src="picture/logo.png" alt="Icsm Creatives logo" class="logo">
+            </a>
+            <div class="welcome-text">
+                <h1>Welcome to<br>ICSM Production</h1>
+                <p>We poured out our undying dedications In Capturing Sweet Memories.</p>
             </div>
         </div>
-    </section>
+        <div class="right-section">
+            <div class="header-con">
+                <div class="form_nav">
+                    <ul class="nav">
+                        <li class="nav-item">
+                            <a href="login.php" class="<?php if ($page == 'login.php') {
+                                echo 'nav-link active';
+                            } else {
+                                echo 'nav-link';
+                            } ?>">
+                                Login
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="register.php" class="<?php if ($page == 'register.php') {
+                                echo 'nav-link active';
+                            } else {
+                                echo 'nav-link';
+                            } ?>">
+                                Register
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="bottom-con">
+                <form class="login-form" method="POST" onsubmit="return validateForm()">
+                    <div class="fillup">
+                        <label>Email</label>
+                        <input type="text" class="form" placeholder="Enter your Email" name="email" required>
+                    </div>
+                    <div class="fillup">
+                        <label>Password</label>
+                        <input type="password" class="form" placeholder="Enter your Password" name="password" id="password" required oninput="checkPasswordStrength(this)">
+                    </div>
+                    <p><a href="forgotpassword.php">Forget Password?</a><p>                
+                    <div id="popup" class="popup">
+                        <p id="popup-message"></p>
+                    </div>
+                    <button class="btn" type="submit" name="submit" value="Submit">Login</button>
+                </form>
+                <div id="popup" class="popup">
+                    <p id="popup-message"></p>
+                </div>
+                <div class="separator">
+                    <div class="separator-line"></div>
+                    <p>OR</p>
+                    <div class="separator-line"></div>
+                </div>
+                <div class="auth-btn-container">
+                    <a href="" class="auth-button facebook">
+                        <img src="picture/fb-logo.png"> Login with Facebook
+                    </a>
+                    <a href="" class="auth-button google">
+                        <img src="picture/google_logo.png" style="width: 10%;"> Login with Google
+                    </a>
+                </div>
+            </div>
+        </div>
+    </main>
 
     <script>
         // Eye view hide
